@@ -12,14 +12,34 @@
   padding:0;
 }
 
-body{
-  font-family:Helvetica,Arial,sans-serif;
-  background:#f5f3ef;
-  color:#292724;
+:root{
+  --bg:#f5f5f2;
+  --card:#ffffff;
+  --text:#242424;
+  --muted:#777;
+  --border:#e8e8e3;
+  --accent:#6f705c;
+  --accent-dark:#595a49;
+  --soft:#eeeeea;
+  --danger:#b85c5c;
+  --warning:#b38a45;
+  --success:#5f8065;
+  --sidebar:#242521;
+  --sidebar-text:#d8d8d1;
 }
 
-button,input,select,textarea{
-  font-family:inherit;
+body{
+  font-family:Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
 }
 
 button{
@@ -30,7 +50,7 @@ button{
   display:none!important;
 }
 
-/* LOGIN */
+/* ================= LOGIN ================= */
 
 .login-page{
   min-height:100vh;
@@ -38,32 +58,48 @@ button{
   align-items:center;
   justify-content:center;
   padding:24px;
-  background:#eeeae3;
+  background:
+    radial-gradient(circle at top left,#e8e8df,transparent 35%),
+    var(--bg);
 }
 
 .login-card{
   width:100%;
-  max-width:430px;
-  background:white;
-  padding:42px;
+  max-width:420px;
+  background:#fff;
+  border:1px solid var(--border);
   border-radius:20px;
-  box-shadow:0 15px 45px rgba(0,0,0,.08);
+  padding:38px;
+  box-shadow:0 15px 50px rgba(0,0,0,.06);
 }
 
-.logo{
-  font-size:28px;
+.logo-mark{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:var(--sidebar);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
   font-weight:700;
-  margin-bottom:6px;
+  margin-bottom:22px;
 }
 
-.logo-sub{
-  color:#888;
-  margin-bottom:30px;
+.login-card h1{
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.login-card p{
+  color:var(--muted);
   font-size:14px;
+  margin-bottom:28px;
 }
 
 .form-group{
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
 .form-group label{
@@ -73,141 +109,201 @@ button{
   margin-bottom:7px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+.form-control{
   width:100%;
-  border:1px solid #ddd8d0;
-  border-radius:10px;
   padding:12px 13px;
-  background:#fff;
-  outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:#999;
-}
-
-.btn{
-  border:none;
+  border:1px solid var(--border);
   border-radius:10px;
-  padding:12px 17px;
-  font-weight:600;
+  outline:none;
+  background:#fff;
   transition:.2s;
 }
 
+.form-control:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(111,112,92,.08);
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  transition:.2s;
+  font-weight:600;
+}
+
 .btn-primary{
-  background:#292724;
+  background:var(--sidebar);
   color:white;
-  width:100%;
 }
 
 .btn-primary:hover{
-  opacity:.88;
+  background:#151613;
+  transform:translateY(-1px);
 }
 
-.demo-box{
-  margin-top:22px;
-  padding:14px;
-  background:#f7f5f1;
-  border-radius:10px;
+.btn-secondary{
+  background:var(--soft);
+  color:var(--text);
+}
+
+.btn-danger{
+  background:#f4e5e5;
+  color:var(--danger);
+}
+
+.btn-success{
+  background:#e6eee7;
+  color:var(--success);
+}
+
+.btn-small{
+  padding:7px 11px;
   font-size:12px;
-  line-height:1.7;
-  color:#777;
 }
 
-/* APP */
+.login-demo{
+  margin-top:20px;
+  padding:12px;
+  border-radius:10px;
+  background:#f7f7f4;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* ================= APP ================= */
 
 .app{
   min-height:100vh;
-  display:flex;
 }
 
 .sidebar{
-  width:245px;
-  background:#292724;
-  color:white;
-  padding:25px 16px;
+  width:250px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
+  background:var(--sidebar);
+  color:white;
+  padding:24px 15px;
+  z-index:100;
   overflow-y:auto;
 }
 
-.sidebar-logo{
-  font-size:21px;
-  font-weight:700;
-  padding:0 12px;
-  margin-bottom:30px;
+.brand{
+  padding:4px 10px 25px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:17px;
 }
 
-.sidebar-section{
+.brand-title{
+  font-size:17px;
+  font-weight:700;
+}
+
+.brand-sub{
+  font-size:11px;
+  color:#a9aaa3;
+  margin-top:5px;
+}
+
+.nav-label{
+  color:#85867f;
   font-size:10px;
-  color:#8f8b85;
   text-transform:uppercase;
-  letter-spacing:1px;
-  padding:0 12px;
-  margin:20px 0 8px;
+  letter-spacing:1.2px;
+  padding:12px 10px 7px;
 }
 
 .nav-btn{
   width:100%;
-  border:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:0;
   background:transparent;
-  color:#bdb9b3;
+  color:var(--sidebar-text);
   text-align:left;
-  padding:11px 12px;
+  padding:10px;
   border-radius:9px;
-  margin-bottom:3px;
+  margin:2px 0;
   font-size:13px;
 }
 
-.nav-btn:hover,
+.nav-btn:hover{
+  background:rgba(255,255,255,.06);
+}
+
 .nav-btn.active{
-  background:#3a3733;
+  background:#41423a;
   color:white;
 }
 
+.nav-icon{
+  width:21px;
+  text-align:center;
+  opacity:.8;
+}
+
+.sidebar-bottom{
+  margin-top:25px;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:16px;
+}
+
 .main{
-  margin-left:245px;
-  width:calc(100% - 245px);
+  margin-left:250px;
   min-height:100vh;
 }
 
 .topbar{
-  height:72px;
-  background:white;
-  border-bottom:1px solid #e5e1db;
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 32px;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
 
 .topbar-title{
-  font-size:18px;
+  font-size:17px;
   font-weight:700;
 }
 
-.user-mini{
+.topbar-right{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-size:13px;
+  gap:12px;
+}
+
+.date-text{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.user-pill{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:#f5f5f1;
+  border-radius:30px;
+  padding:6px 11px 6px 6px;
 }
 
 .avatar{
-  width:35px;
-  height:35px;
+  width:30px;
+  height:30px;
   border-radius:50%;
-  background:#ded9d0;
+  background:#d8d8ce;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
   overflow:hidden;
 }
@@ -218,86 +314,97 @@ button{
   object-fit:cover;
 }
 
+.user-pill span{
+  font-size:12px;
+  font-weight:600;
+}
+
 .content{
   padding:30px;
   max-width:1500px;
   margin:auto;
 }
 
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* GENERAL */
-
-.welcome{
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
   margin-bottom:25px;
 }
 
-.welcome h1{
-  font-size:27px;
-  margin-bottom:6px;
+.page-header h2{
+  font-size:25px;
+  margin-bottom:5px;
 }
 
-.welcome p{
-  color:#85817c;
-  font-size:14px;
+.page-header p{
+  color:var(--muted);
+  font-size:13px;
 }
 
-.stats-grid{
+/* ================= CARDS ================= */
+
+.stat-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:16px;
+  gap:15px;
   margin-bottom:22px;
 }
 
 .stat-card{
-  background:white;
-  border:1px solid #e8e4de;
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:15px;
-  padding:20px;
+  padding:19px;
+  position:relative;
+  overflow:hidden;
+}
+
+.stat-card:after{
+  content:"";
+  position:absolute;
+  right:-22px;
+  top:-22px;
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:#f1f1ec;
 }
 
 .stat-label{
   font-size:12px;
-  color:#888;
-  margin-bottom:12px;
+  color:var(--muted);
+  position:relative;
+  z-index:1;
 }
 
 .stat-number{
-  font-size:30px;
+  font-size:28px;
   font-weight:700;
+  margin-top:9px;
+  position:relative;
+  z-index:1;
 }
 
 .stat-note{
-  margin-top:7px;
   font-size:11px;
-  color:#999;
-}
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:1.35fr 1fr;
-  gap:18px;
-  margin-bottom:18px;
+  color:var(--muted);
+  margin-top:5px;
 }
 
 .card{
-  background:white;
-  border:1px solid #e8e4de;
+  background:#fff;
+  border:1px solid var(--border);
   border-radius:15px;
-  padding:21px;
+  padding:20px;
+  margin-bottom:18px;
 }
 
 .card-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .card-title{
@@ -305,159 +412,198 @@ button{
   font-weight:700;
 }
 
+.card-subtitle{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* ================= GRID ================= */
+
+.two-col{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:18px;
+}
+
+.three-col{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+/* ================= TABLE ================= */
+
 .table-wrap{
+  width:100%;
   overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
+  min-width:600px;
 }
 
 th{
   text-align:left;
-  font-size:11px;
+  font-size:10px;
   color:#888;
-  font-weight:600;
-  padding:10px;
-  border-bottom:1px solid #eee;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  padding:10px 9px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
 }
 
 td{
-  padding:11px 10px;
-  border-bottom:1px solid #f0ede8;
+  padding:13px 9px;
+  border-bottom:1px solid #f0f0ed;
   font-size:12px;
   vertical-align:middle;
 }
 
-td:last-child,
-th:last-child{
-  text-align:right;
+tbody tr{
+  transition:.15s;
 }
 
-.empty{
-  padding:25px 10px;
-  text-align:center;
-  color:#999;
-  font-size:13px;
+tbody tr:hover{
+  background:#fafaf8;
 }
+
+tbody tr:last-child td{
+  border-bottom:0;
+}
+
+/* ================= BADGES ================= */
 
 .badge{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
   padding:5px 8px;
   border-radius:20px;
   font-size:10px;
-  font-weight:600;
+  font-weight:700;
+  white-space:nowrap;
 }
 
-.badge-green{
-  background:#e9f3eb;
-  color:#47724e;
+.badge-pending{
+  background:#f4eee1;
+  color:#9a7939;
 }
 
-.badge-yellow{
-  background:#f7f0dc;
-  color:#8a7134;
+.badge-progress{
+  background:#e9edf0;
+  color:#596b78;
 }
 
-.badge-red{
-  background:#f6e7e5;
-  color:#96574f;
+.badge-completed{
+  background:#e5eee6;
+  color:#5e7c63;
 }
 
-.badge-grey{
-  background:#efede9;
+.badge-overdue{
+  background:#f4e4e4;
+  color:#a95252;
+}
+
+.badge-active{
+  background:#e5eee6;
+  color:#5e7c63;
+}
+
+.badge-inactive{
+  background:#eeeeee;
   color:#777;
 }
 
-/* PROGRESS */
+/* ================= PROGRESS ================= */
 
-.progress-wrap{
-  width:100%;
-}
-
-.progress-bar{
-  height:8px;
-  background:#ebe8e3;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:7px;
-}
-
-.progress-fill{
-  height:100%;
-  background:#292724;
-  border-radius:20px;
-  transition:.3s;
+.progress-row{
+  margin-bottom:17px;
 }
 
 .progress-info{
   display:flex;
   justify-content:space-between;
-  font-size:11px;
-  color:#888;
+  font-size:12px;
+  margin-bottom:7px;
 }
 
-.performance-card{
-  padding:15px 0;
-  border-bottom:1px solid #eee;
+.progress-info span:last-child{
+  color:var(--muted);
 }
 
-.performance-card:last-child{
-  border-bottom:none;
+.progress-track{
+  height:8px;
+  background:#ecece7;
+  border-radius:20px;
+  overflow:hidden;
 }
 
-/* PAGE HEADER */
+.progress-fill{
+  height:100%;
+  background:var(--accent);
+  border-radius:20px;
+  transition:width .4s;
+}
 
-.page-header{
+/* ================= LIST ================= */
+
+.list-item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:22px;
+  gap:15px;
+  padding:13px 0;
+  border-bottom:1px solid #f0f0ed;
 }
 
-.page-header h2{
-  font-size:22px;
+.list-item:last-child{
+  border-bottom:0;
 }
 
-.page-header p{
-  font-size:13px;
-  color:#888;
-  margin-top:5px;
+.list-main{
+  min-width:0;
 }
 
-/* BUTTONS */
-
-.btn-small{
-  border:none;
-  padding:8px 12px;
-  border-radius:8px;
-  font-size:11px;
+.list-title{
+  font-size:12px;
   font-weight:600;
+  margin-bottom:4px;
 }
 
-.btn-dark{
-  background:#292724;
-  color:white;
+.list-meta{
+  font-size:10px;
+  color:var(--muted);
 }
 
-.btn-light{
-  background:#efede9;
-  color:#444;
+/* ================= EMPTY ================= */
+
+.empty{
+  text-align:center;
+  padding:35px 15px;
+  color:var(--muted);
 }
 
-.btn-danger{
-  background:#f5e4e1;
-  color:#8b4b44;
+.empty-icon{
+  font-size:26px;
+  margin-bottom:9px;
+  opacity:.5;
 }
 
-.btn-outline{
-  background:white;
-  border:1px solid #ddd8d0;
-  color:#444;
+.empty-title{
+  color:#555;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:4px;
 }
 
-/* FORMS */
+.empty-text{
+  font-size:11px;
+}
+
+/* ================= FORMS ================= */
 
 .form-grid{
   display:grid;
@@ -465,5866 +611,3279 @@ th:last-child{
   gap:15px;
 }
 
-.full{
+.form-grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.form-full{
   grid-column:1/-1;
 }
 
+textarea.form-control{
+  min-height:100px;
+  resize:vertical;
+}
+
 .form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
   margin-top:17px;
-  display:flex;
-  gap:10px;
 }
 
-/* PROFILE */
+/* ================= MODAL ================= */
 
-.profile-grid{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  gap:20px;
-}
-
-.profile-photo-box{
-  text-align:center;
-}
-
-.profile-big-avatar{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  background:#e4dfd7;
-  margin:0 auto 15px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  font-weight:700;
-}
-
-.profile-big-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* MODAL */
-
-.modal{
+.modal-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.45);
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:1000;
+  z-index:500;
 }
 
-.modal-box{
+.modal{
+  background:white;
   width:100%;
-  max-width:700px;
+  max-width:650px;
   max-height:90vh;
   overflow-y:auto;
-  background:white;
   border-radius:18px;
   padding:25px;
+  box-shadow:0 25px 80px rgba(0,0,0,.15);
 }
 
 .modal-header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
-.modal-header h2{
-  font-size:21px;
+.modal-header h3{
+  font-size:18px;
 }
 
 .close-btn{
-  border:none;
-  background:#efede9;
-  width:32px;
-  height:32px;
+  border:0;
+  background:#f2f2ee;
+  width:30px;
+  height:30px;
   border-radius:50%;
-  font-size:16px;
 }
 
-/* MOBILE */
+/* ================= PROFILE ================= */
 
-@media(max-width:1000px){
+.profile-top{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:20px;
+}
 
-  .stats-grid{
+.profile-photo{
+  width:75px;
+  height:75px;
+  border-radius:18px;
+  background:#e2e2da;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:700;
+}
+
+.profile-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile-name{
+  font-size:19px;
+  font-weight:700;
+}
+
+.profile-position{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.profile-info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.info-box{
+  background:#f7f7f4;
+  padding:12px;
+  border-radius:10px;
+}
+
+.info-label{
+  color:#888;
+  font-size:10px;
+  margin-bottom:4px;
+}
+
+.info-value{
+  font-size:12px;
+  font-weight:600;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#292a26;
+  color:white;
+  padding:12px 17px;
+  border-radius:10px;
+  font-size:12px;
+  z-index:1000;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  animation:toastIn .25s ease;
+}
+
+@keyframes toastIn{
+  from{
+    transform:translateY(15px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:#f2f2ee;
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  font-size:18px;
+}
+
+.sidebar-overlay{
+  display:none;
+}
+
+@media(max-width:1100px){
+  .stat-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .dashboard-grid{
+  .two-col{
     grid-template-columns:1fr;
   }
 
+  .three-col{
+    grid-template-columns:1fr;
+  }
 }
 
-@media(max-width:700px){
-
+@media(max-width:750px){
   .sidebar{
-    width:210px;
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:90;
+  }
+
+  .sidebar-overlay.show{
+    display:block;
   }
 
   .main{
-    margin-left:210px;
-    width:calc(100% - 210px);
-  }
-
-  .content{
-    padding:20px;
+    margin-left:0;
   }
 
   .topbar{
-    padding:0 20px;
+    padding:0 16px;
   }
 
-  .stats-grid{
-    grid-template-columns:1fr;
+  .mobile-menu{
+    display:block;
+    margin-right:10px;
+  }
+
+  .topbar-left{
+    display:flex;
+    align-items:center;
+  }
+
+  .date-text{
+    display:none;
+  }
+
+  .content{
+    padding:20px 16px;
+  }
+
+  .page-header{
+    align-items:flex-start;
+  }
+
+  .page-header h2{
+    font-size:21px;
+  }
+
+  .stat-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .stat-card{
+    padding:15px;
+  }
+
+  .stat-number{
+    font-size:23px;
   }
 
   .form-grid,
-  .profile-grid{
+  .form-grid-3{
     grid-template-columns:1fr;
   }
 
+  .form-full{
+    grid-column:auto;
+  }
+
+  .profile-info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .user-pill span{
+    display:none;
+  }
+}
+
+@media(max-width:450px){
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+
+  .login-card{
+    padding:28px 22px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginPage" class="login-page">
-
   <div class="login-card">
+    <div class="logo-mark">NC</div>
 
-    <div class="logo">Nona Costex</div>
-    <div class="logo-sub">Staff Portal</div>
+    <h1>Nona Costex</h1>
+    <p>Staff Portal</p>
 
     <form id="loginForm">
-
       <div class="form-group">
         <label>Username</label>
-        <input
-          id="loginUsername"
-          type="text"
-          placeholder="Enter username"
-          required
-        >
+        <input id="loginUsername" class="form-control" required placeholder="Enter username">
       </div>
 
       <div class="form-group">
-        <label>Staff Code</label>
-        <input
-          id="loginCode"
-          type="password"
-          placeholder="Enter staff code"
-          required
-        >
+        <label>Password / Staff Code</label>
+        <input id="loginPassword" class="form-control" type="password" required placeholder="Enter password">
       </div>
 
-      <button class="btn btn-primary" type="submit">
+      <button class="btn btn-primary" style="width:100%">
         Sign In
       </button>
-
     </form>
 
-    <div class="demo-box">
-      <strong>Demo Login</strong><br>
+    <div class="login-demo">
+      <strong>Demo login</strong><br>
       Staff: Atikah / NC001<br>
       Admin: Admin / ADMIN001
     </div>
-
   </div>
-
 </div>
 
-
-<!-- APP -->
+<!-- ================= APP ================= -->
 
 <div id="app" class="app hidden">
 
-  <!-- SIDEBAR -->
+  <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <aside class="sidebar">
+  <aside id="sidebar" class="sidebar">
 
-    <div class="sidebar-logo">
-      Nona Costex
+    <div class="brand">
+      <div class="brand-title">Nona Costex</div>
+      <div class="brand-sub">Staff Portal</div>
     </div>
-
-
-    <!-- STAFF NAV -->
 
     <div id="staffNav">
 
-      <div class="sidebar-section">Staff</div>
+      <div class="nav-label">Workspace</div>
 
-      <button class="nav-btn active"
-        onclick="showPage('staffDashboard',this)">
+      <button class="nav-btn active" data-page="staffDashboard">
+        <span class="nav-icon">⌂</span>
         Overview
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('schedulePage',this)">
+      <button class="nav-btn" data-page="staffSchedule">
+        <span class="nav-icon">◷</span>
         My Schedule
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('workLogPage',this)">
+      <button class="nav-btn" data-page="staffLogs">
+        <span class="nav-icon">✓</span>
         Work Log
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('attendancePage',this)">
+      <button class="nav-btn" data-page="staffAttendance">
+        <span class="nav-icon">◉</span>
         Attendance
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('leavePage',this)">
+      <button class="nav-btn" data-page="staffLeave">
+        <span class="nav-icon">▣</span>
         Leave
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('announcementPage',this)">
+      <button class="nav-btn" data-page="staffAnnouncements">
+        <span class="nav-icon">●</span>
         Announcements
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('profilePage',this)">
+      <div class="nav-label">Account</div>
+
+      <button class="nav-btn" data-page="staffProfile">
+        <span class="nav-icon">○</span>
         My Profile
       </button>
 
     </div>
 
-
-    <!-- ADMIN NAV -->
-
     <div id="adminNav" class="hidden">
 
-      <div class="sidebar-section">Admin</div>
+      <div class="nav-label">Management</div>
 
-      <button class="nav-btn active"
-        onclick="showPage('adminDashboard',this)">
+      <button class="nav-btn active" data-page="adminDashboard">
+        <span class="nav-icon">⌂</span>
         Admin Dashboard
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('staffManagement',this)">
+      <button class="nav-btn" data-page="adminStaff">
+        <span class="nav-icon">♙</span>
         Staff Management
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('adminAttendance',this)">
+      <button class="nav-btn" data-page="adminAttendance">
+        <span class="nav-icon">◉</span>
         Attendance
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('adminWorkLogs',this)">
+      <button class="nav-btn" data-page="adminLogs">
+        <span class="nav-icon">✓</span>
         Work Logs
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('adminLeave',this)">
+      <button class="nav-btn" data-page="adminLeave">
+        <span class="nav-icon">▣</span>
         Leave Requests
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('adminSchedule',this)">
+      <button class="nav-btn" data-page="adminSchedule">
+        <span class="nav-icon">◷</span>
         Schedule Management
       </button>
 
-      <button class="nav-btn"
-        onclick="showPage('adminAnnouncements',this)">
+      <button class="nav-btn" data-page="adminAnnouncements">
+        <span class="nav-icon">●</span>
         Announcements
       </button>
 
     </div>
 
-
-    <div class="sidebar-section">Account</div>
-
-    <button class="nav-btn" onclick="signOut()">
-      Sign Out
-    </button>
+    <div class="sidebar-bottom">
+      <button class="nav-btn" onclick="logout()">
+        <span class="nav-icon">↪</span>
+        Sign Out
+      </button>
+    </div>
 
   </aside>
-
-
-  <!-- MAIN -->
 
   <main class="main">
 
     <header class="topbar">
 
-      <div id="topbarTitle" class="topbar-title">
-        Overview
+      <div class="topbar-left">
+        <button class="mobile-menu" onclick="openSidebar()">☰</button>
+        <div id="topbarTitle" class="topbar-title">Overview</div>
       </div>
 
-      <div class="user-mini">
+      <div class="topbar-right">
+        <div id="currentDate" class="date-text"></div>
 
-        <div id="topAvatar" class="avatar">
-          A
+        <div class="user-pill">
+          <div id="topAvatar" class="avatar">A</div>
+          <span id="topUsername">Atikah</span>
         </div>
-
-        <span id="topUserName">
-          Atikah
-        </span>
-
       </div>
 
     </header>
 
-
-    <div class="content">
-
-
-      <!-- ================= STAFF DASHBOARD ================= -->
-
-      <section id="staffDashboard" class="page active">
-
-        <div class="welcome">
-
-          <h1>
-            Welcome back,
-            <span id="staffWelcomeName">Atikah</span>
-          </h1>
-
-          <p>
-            Here's your work overview.
-          </p>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Total Tasks
-            </div>
-
-            <div id="staffTaskCount" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Your work logs
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Completed
-            </div>
-
-            <div id="staffCompletedCount" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Completed tasks
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              In Progress
-            </div>
-
-            <div id="staffProgressCount" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Current tasks
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Overdue
-            </div>
-
-            <div id="staffOverdueCount" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Tasks past due
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- MY PROGRESS -->
-
-        <div class="card" style="margin-bottom:18px;">
-
-          <div class="card-header">
-
-            <div class="card-title">
-              My Progress
-            </div>
-
-            <div id="staffCompletionRate">
-              0%
-            </div>
-
-          </div>
-
-          <div class="progress-wrap">
-
-            <div class="progress-info">
-
-              <span>
-                Task completion
-              </span>
-
-              <span id="staffProgressText">
-                0 / 0 completed
-              </span>
-
-            </div>
-
-            <div class="progress-bar">
-
-              <div
-                id="staffProgressBar"
-                class="progress-fill"
-                style="width:0%"
-              ></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Recent Work Logs
-              </div>
-
-            </div>
-
-            <div id="staffRecentLogs"></div>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Upcoming Schedule
-              </div>
-
-            </div>
-
-            <div id="staffUpcomingSchedule"></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN DASHBOARD ================= -->
-
-      <section id="adminDashboard" class="page">
-
-        <div class="welcome">
-
-          <h1>
-            Admin Dashboard
-          </h1>
-
-          <p>
-            Overview of Nona Costex staff activity and progress.
-          </p>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Total Staff
-            </div>
-
-            <div id="adminTotalStaff" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Registered staff
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Active Staff
-            </div>
-
-            <div id="adminActiveStaff" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Currently active
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Present Today
-            </div>
-
-            <div id="adminPresentToday" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Checked in today
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Pending Leave
-            </div>
-
-            <div id="adminPendingLeave" class="stat-number">
-              0
-            </div>
-
-            <div class="stat-note">
-              Need approval
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- STAFF PERFORMANCE -->
-
-        <div class="card" style="margin-bottom:18px;">
-
-          <div class="card-header">
-
-            <div class="card-title">
-              Staff Work Progress
-            </div>
-
-          </div>
-
-          <div id="dashboardPerformance"></div>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Today's Attendance
-              </div>
-
-            </div>
-
-            <div id="dashboardAttendance"></div>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Pending Leave Requests
-              </div>
-
-            </div>
-
-            <div id="dashboardLeave"></div>
-
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Recent Work Logs
-              </div>
-
-            </div>
-
-            <div id="dashboardLogs"></div>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="card-header">
-
-              <div class="card-title">
-                Overdue Tasks
-              </div>
-
-            </div>
-
-            <div id="dashboardOverdue"></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= SCHEDULE ================= -->
-
-      <section id="schedulePage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              My Schedule
-            </h2>
-
-            <p>
-              Your upcoming work schedule.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="staffScheduleList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= WORK LOG ================= -->
-
-      <section id="workLogPage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Work Log
-            </h2>
-
-            <p>
-              Record your daily work and progress.
-            </p>
-
-          </div>
-
-          <button
-            class="btn-small btn-dark"
-            onclick="toggleForm('workLogForm')"
-          >
-            + Add Work Log
-          </button>
-
-        </div>
-
-
-        <div
-          id="workLogForm"
-          class="card hidden"
-          style="margin-bottom:18px;"
-        >
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Task Title
-              </label>
-
-              <input
-                id="logTitle"
-                placeholder="e.g. Product shooting"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Work Date
-              </label>
-
-              <input
-                id="logDate"
-                type="date"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Start Time
-              </label>
-
-              <input
-                id="logStart"
-                type="time"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                End Time
-              </label>
-
-              <input
-                id="logEnd"
-                type="time"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Due Date
-              </label>
-
-              <input
-                id="logDueDate"
-                type="date"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Due Time
-              </label>
-
-              <input
-                id="logDueTime"
-                type="time"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Priority
-              </label>
-
-              <select id="logPriority">
-
-                <option>
-                  Low
-                </option>
-
-                <option selected>
-                  Medium
-                </option>
-
-                <option>
-                  High
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Status
-              </label>
-
-              <select id="logStatus">
-
-                <option>
-                  Pending
-                </option>
-
-                <option selected>
-                  In Progress
-                </option>
-
-                <option>
-                  Completed
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group full">
-
-              <label>
-                Description
-              </label>
-
-              <textarea
-                id="logDescription"
-                rows="4"
-                placeholder="Describe the work completed..."
-              ></textarea>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="saveWorkLog()"
-            >
-              Save Work Log
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="toggleForm('workLogForm')"
-            >
-              Cancel
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="myLogs"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ATTENDANCE ================= -->
-
-      <section id="attendancePage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Attendance
-            </h2>
-
-            <p>
-              Track your daily attendance.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div style="margin-bottom:18px;">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="checkIn()"
-            >
-              Check In
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="checkOut()"
-            >
-              Check Out
-            </button>
-
-          </div>
-
-
-          <div id="myAttendance"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= LEAVE ================= -->
-
-      <section id="leavePage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Leave
-            </h2>
-
-            <p>
-              Submit and track your leave requests.
-            </p>
-
-          </div>
-
-
-          <button
-            class="btn-small btn-dark"
-            onclick="toggleForm('leaveForm')"
-          >
-            + Apply Leave
-          </button>
-
-        </div>
-
-
-        <div
-          id="leaveForm"
-          class="card hidden"
-          style="margin-bottom:18px;"
-        >
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Leave Type
-              </label>
-
-              <select id="leaveType">
-
-                <option>
-                  Annual Leave
-                </option>
-
-                <option>
-                  Emergency Leave
-                </option>
-
-                <option>
-                  Medical Leave
-                </option>
-
-                <option>
-                  Unpaid Leave
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Start Date
-              </label>
-
-              <input
-                id="leaveStart"
-                type="date"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                End Date
-              </label>
-
-              <input
-                id="leaveEnd"
-                type="date"
-              >
-
-            </div>
-
-
-            <div class="form-group full">
-
-              <label>
-                Reason
-              </label>
-
-              <textarea
-                id="leaveReason"
-                rows="3"
-              ></textarea>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="saveLeave()"
-            >
-              Submit Request
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="toggleForm('leaveForm')"
-            >
-              Cancel
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="myLeaves"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ANNOUNCEMENTS ================= -->
-
-      <section id="announcementPage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Announcements
-            </h2>
-
-            <p>
-              Latest company announcements.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div id="staffAnnouncements"></div>
-
-      </section>
-
-
-      <!-- ================= PROFILE ================= -->
-
-      <section id="profilePage" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              My Profile
-            </h2>
-
-            <p>
-              Your staff information.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="profile-grid">
-
-          <div class="card profile-photo-box">
-
-            <div
-              id="profileAvatar"
-              class="profile-big-avatar"
-            >
-              A
-            </div>
-
-            <input
-              id="photoInput"
-              type="file"
-              accept="image/*"
-              onchange="uploadPhoto(event)"
-            >
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="form-grid">
-
-              <div class="form-group">
-
-                <label>
-                  Name
-                </label>
-
-                <input
-                  id="profileName"
-                  readonly
-                >
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label>
-                  Staff Code
-                </label>
-
-                <input
-                  id="profileCode"
-                  readonly
-                >
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label>
-                  Department
-                </label>
-
-                <input
-                  id="profileDepartment"
-                  readonly
-                >
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label>
-                  Position
-                </label>
-
-                <input
-                  id="profilePosition"
-                  readonly
-                >
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= STAFF MANAGEMENT ================= -->
-
-      <section id="staffManagement" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Staff Management
-            </h2>
-
-            <p>
-              Manage Nona Costex staff.
-            </p>
-
-          </div>
-
-
-          <button
-            class="btn-small btn-dark"
-            onclick="toggleForm('staffForm')"
-          >
-            + Add Staff
-          </button>
-
-        </div>
-
-
-        <div
-          id="staffForm"
-          class="card hidden"
-          style="margin-bottom:18px;"
-        >
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Name
-              </label>
-
-              <input id="newStaffName">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Staff Code
-              </label>
-
-              <input id="newStaffCode">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Department
-              </label>
-
-              <input id="newStaffDepartment">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Position
-              </label>
-
-              <input id="newStaffPosition">
-
-            </div>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="addStaff()"
-            >
-              Add Staff
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="toggleForm('staffForm')"
-            >
-              Cancel
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="staffList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN ATTENDANCE ================= -->
-
-      <section id="adminAttendance" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Attendance
-            </h2>
-
-            <p>
-              View staff attendance records.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="adminAttendanceList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN WORK LOGS ================= -->
-
-      <section id="adminWorkLogs" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Work Logs
-            </h2>
-
-            <p>
-              Monitor staff work progress.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="adminLogsList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN LEAVE ================= -->
-
-      <section id="adminLeave" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Leave Requests
-            </h2>
-
-            <p>
-              Review staff leave applications.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="adminLeaveList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN SCHEDULE ================= -->
-
-      <section id="adminSchedule" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Schedule Management
-            </h2>
-
-            <p>
-              Create and manage staff schedules.
-            </p>
-
-          </div>
-
-
-          <button
-            class="btn-small btn-dark"
-            onclick="toggleForm('scheduleForm')"
-          >
-            + Add Schedule
-          </button>
-
-        </div>
-
-
-        <div
-          id="scheduleForm"
-          class="card hidden"
-          style="margin-bottom:18px;"
-        >
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Staff Code
-              </label>
-
-              <input id="scheduleStaffCode">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Task
-              </label>
-
-              <input id="scheduleTask">
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Date
-              </label>
-
-              <input
-                id="scheduleDate"
-                type="date"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Time
-              </label>
-
-              <input
-                id="scheduleTime"
-                type="time"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Location
-              </label>
-
-              <input id="scheduleLocation">
-
-            </div>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="addSchedule()"
-            >
-              Add Schedule
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="toggleForm('scheduleForm')"
-            >
-              Cancel
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="adminScheduleList"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ADMIN ANNOUNCEMENTS ================= -->
-
-      <section id="adminAnnouncements" class="page">
-
-        <div class="page-header">
-
-          <div>
-
-            <h2>
-              Announcements
-            </h2>
-
-            <p>
-              Create announcements for staff.
-            </p>
-
-          </div>
-
-
-          <button
-            class="btn-small btn-dark"
-            onclick="toggleForm('announcementForm')"
-          >
-            + New Announcement
-          </button>
-
-        </div>
-
-
-        <div
-          id="announcementForm"
-          class="card hidden"
-          style="margin-bottom:18px;"
-        >
-
-          <div class="form-group">
-
-            <label>
-              Title
-            </label>
-
-            <input id="announcementTitle">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Message
-            </label>
-
-            <textarea
-              id="announcementMessage"
-              rows="4"
-            ></textarea>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button
-              class="btn-small btn-dark"
-              onclick="addAnnouncement()"
-            >
-              Publish
-            </button>
-
-            <button
-              class="btn-small btn-light"
-              onclick="toggleForm('announcementForm')"
-            >
-              Cancel
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div id="adminAnnouncementList"></div>
-
-        </div>
-
-      </section>
-
-    </div>
+    <div id="content" class="content"></div>
 
   </main>
-
 </div>
 
+<div id="modalContainer"></div>
 
-<!-- STAFF PROFILE MODAL -->
+<script>
 
-<div
-  id="staffProfileModal"
-  class="modal hidden"
->
+/* =========================================================
+   DATA
+========================================================= */
 
-  <div class="modal-box">
+const defaultStaff = [
+  {
+    id:1,
+    name:"Atikah",
+    code:"NC001",
+    department:"Digital",
+    position:"Live Host Online & Offline",
+    status:"Active",
+    joiningDate:"2026-09-02"
+  },
+  {
+    id:2,
+    name:"Temporary Staff 1",
+    code:"NC002",
+    department:"Support",
+    position:"Temporary Staff",
+    status:"Active",
+    joiningDate:"2026-09-01"
+  },
+  {
+    id:3,
+    name:"Temporary Staff 2",
+    code:"NC003",
+    department:"Support",
+    position:"Temporary Staff",
+    status:"Active",
+    joiningDate:"2026-09-01"
+  }
+];
 
-    <div class="modal-header">
+const defaultLogs = [
+  {
+    id:1,
+    staffCode:"NC001",
+    task:"Budget quotation completed and presented to team + Flite product shoot",
+    date:"2026-09-07",
+    startTime:"",
+    endTime:"",
+    dueDate:"",
+    dueTime:"",
+    priority:"High",
+    status:"Completed",
+    description:"Prepared budget quotation, presented to team and completed Flite product shooting."
+  },
+  {
+    id:2,
+    staffCode:"NC001",
+    task:"Product shooting + content brainstorming",
+    date:"2026-09-08",
+    startTime:"",
+    endTime:"",
+    dueDate:"",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Continued product shooting and brainstormed social media content ideas."
+  },
+  {
+    id:3,
+    staffCode:"NC001",
+    task:"Presented budget quotation for live setup + social media content shooting",
+    date:"2026-09-09",
+    startTime:"",
+    endTime:"",
+    dueDate:"",
+    dueTime:"",
+    priority:"High",
+    status:"Completed",
+    description:"Presented budget quotation for live setup and produced social media content."
+  },
+  {
+    id:4,
+    staffCode:"NC001",
+    task:"Content shooting and video editing",
+    date:"2026-09-10",
+    startTime:"",
+    endTime:"",
+    dueDate:"",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Shot content and edited social media videos."
+  }
+];
 
+const defaultAttendance = [];
+
+const defaultLeaves = [];
+
+const defaultSchedules = [
+  {
+    id:1,
+    staffCode:"NC001",
+    date:"2026-09-15",
+    title:"Content Planning",
+    time:"10:00",
+    location:"Office"
+  },
+  {
+    id:2,
+    staffCode:"NC001",
+    date:"2026-09-16",
+    title:"Product Shooting",
+    time:"11:00",
+    location:"Studio"
+  },
+  {
+    id:3,
+    staffCode:"NC001",
+    date:"2026-09-17",
+    title:"Video Editing",
+    time:"14:00",
+    location:"Office"
+  }
+];
+
+const defaultAnnouncements = [
+  {
+    id:1,
+    title:"Welcome to Nona Costex Staff Portal",
+    message:"Welcome to the new internal staff management portal.",
+    date:"2026-09-01"
+  },
+  {
+    id:2,
+    title:"Digital Team Content Planning",
+    message:"Please keep the weekly content planning and production schedule updated.",
+    date:"2026-09-08"
+  }
+];
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function getData(key, fallback){
+  const saved = localStorage.getItem(key);
+
+  if(saved){
+    try{
+      return JSON.parse(saved);
+    }catch(e){
+      return fallback;
+    }
+  }
+
+  localStorage.setItem(key, JSON.stringify(fallback));
+  return fallback;
+}
+
+let staff = getData("nona_staff", defaultStaff);
+let logs = getData("nona_logs", defaultLogs);
+let attendance = getData("nona_attendance", defaultAttendance);
+let leaves = getData("nona_leaves", defaultLeaves);
+let schedules = getData("nona_schedules", defaultSchedules);
+let announcements = getData("nona_announcements", defaultAnnouncements);
+
+function saveData(){
+  localStorage.setItem("nona_staff", JSON.stringify(staff));
+  localStorage.setItem("nona_logs", JSON.stringify(logs));
+  localStorage.setItem("nona_attendance", JSON.stringify(attendance));
+  localStorage.setItem("nona_leaves", JSON.stringify(leaves));
+  localStorage.setItem("nona_schedules", JSON.stringify(schedules));
+  localStorage.setItem("nona_announcements", JSON.stringify(announcements));
+}
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+let currentUser = null;
+let currentRole = null;
+
+const pageTitles = {
+  staffDashboard:"Overview",
+  staffSchedule:"My Schedule",
+  staffLogs:"Work Log",
+  staffAttendance:"Attendance",
+  staffLeave:"Leave",
+  staffAnnouncements:"Announcements",
+  staffProfile:"My Profile",
+
+  adminDashboard:"Admin Dashboard",
+  adminStaff:"Staff Management",
+  adminAttendance:"Attendance",
+  adminLogs:"Work Logs",
+  adminLeave:"Leave Requests",
+  adminSchedule:"Schedule Management",
+  adminAnnouncements:"Announcements"
+};
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function today(){
+  return new Date().toISOString().split("T")[0];
+}
+
+function formatDate(date){
+  if(!date) return "-";
+
+  const d = new Date(date + "T00:00:00");
+
+  return d.toLocaleDateString("en-GB",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function escapeHTML(value){
+  if(value === undefined || value === null) return "";
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function initials(name){
+  if(!name) return "?";
+
+  return name
+    .split(" ")
+    .map(x => x[0])
+    .join("")
+    .substring(0,2)
+    .toUpperCase();
+}
+
+function showToast(message){
+  const old = document.querySelector(".toast");
+
+  if(old) old.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(()=>{
+    toast.remove();
+  },2500);
+}
+
+function getStaff(code){
+  return staff.find(s => s.code === code);
+}
+
+function getMyLogs(){
+  return logs.filter(l => l.staffCode === currentUser.code);
+}
+
+function isOverdue(log){
+  if(log.status === "Completed") return false;
+  if(!log.dueDate) return false;
+
+  let deadline;
+
+  if(log.dueTime){
+    deadline = new Date(`${log.dueDate}T${log.dueTime}`);
+  }else{
+    deadline = new Date(`${log.dueDate}T23:59`);
+  }
+
+  return new Date() > deadline;
+}
+
+function getStats(code){
+  const data = logs.filter(l => l.staffCode === code);
+
+  const total = data.length;
+  const completed = data.filter(l => l.status === "Completed").length;
+  const progress = data.filter(l => l.status === "In Progress").length;
+  const pending = data.filter(l => l.status === "Pending").length;
+  const overdue = data.filter(l => isOverdue(l)).length;
+
+  const rate = total ? Math.round((completed / total) * 100) : 0;
+
+  return {
+    total,
+    completed,
+    progress,
+    pending,
+    overdue,
+    rate
+  };
+}
+
+function statusBadge(status, overdue=false){
+  if(overdue){
+    return `<span class="badge badge-overdue">Overdue</span>`;
+  }
+
+  if(status === "Completed"){
+    return `<span class="badge badge-completed">Completed</span>`;
+  }
+
+  if(status === "In Progress"){
+    return `<span class="badge badge-progress">In Progress</span>`;
+  }
+
+  return `<span class="badge badge-pending">Pending</span>`;
+}
+
+function activeBadge(status){
+  return status === "Active"
+    ? `<span class="badge badge-active">Active</span>`
+    : `<span class="badge badge-inactive">Inactive</span>`;
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const username =
+    document.getElementById("loginUsername").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value.trim();
+
+  if(
+    username.toLowerCase() === "admin" &&
+    password === "ADMIN001"
+  ){
+
+    currentRole = "admin";
+    currentUser = {
+      name:"Admin",
+      code:"ADMIN001"
+    };
+
+    startApp("adminDashboard");
+    return;
+  }
+
+  const found = staff.find(s =>
+    s.name.toLowerCase() === username.toLowerCase() &&
+    s.code === password
+  );
+
+  if(found){
+
+    currentRole = "staff";
+    currentUser = found;
+
+    startApp("staffDashboard");
+    return;
+  }
+
+  alert("Invalid username or password.");
+});
+
+function startApp(page){
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  document.getElementById("staffNav").classList.toggle(
+    "hidden",
+    currentRole !== "staff"
+  );
+
+  document.getElementById("adminNav").classList.toggle(
+    "hidden",
+    currentRole !== "admin"
+  );
+
+  updateUserHeader();
+  updateDate();
+
+  navigate(page);
+}
+
+function logout(){
+
+  currentUser = null;
+  currentRole = null;
+
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("loginPage").classList.remove("hidden");
+
+  document.getElementById("loginForm").reset();
+}
+
+/* =========================================================
+   HEADER / NAV
+========================================================= */
+
+function updateUserHeader(){
+
+  document.getElementById("topUsername").textContent =
+    currentUser.name;
+
+  const avatar =
+    document.getElementById("topAvatar");
+
+  const photo =
+    localStorage.getItem(`nona_photo_${currentUser.code}`);
+
+  if(photo){
+    avatar.innerHTML = `<img src="${photo}">`;
+  }else{
+    avatar.textContent = initials(currentUser.name);
+  }
+}
+
+function updateDate(){
+
+  document.getElementById("currentDate").textContent =
+    new Date().toLocaleDateString("en-GB",{
+      weekday:"short",
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    });
+}
+
+document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
+
+  btn.addEventListener("click",function(){
+
+    navigate(this.dataset.page);
+    closeSidebar();
+
+  });
+
+});
+
+function navigate(page){
+
+  document.querySelectorAll(".nav-btn[data-page]")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+    });
+
+  document.getElementById("topbarTitle").textContent =
+    pageTitles[page] || "Staff Portal";
+
+  renderPage(page);
+}
+
+function openSidebar(){
+  document.getElementById("sidebar").classList.add("open");
+  document.getElementById("sidebarOverlay").classList.add("show");
+}
+
+function closeSidebar(){
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("sidebarOverlay").classList.remove("show");
+}
+
+/* =========================================================
+   STAFF DASHBOARD
+========================================================= */
+
+function renderStaffDashboard(){
+
+  const stats = getStats(currentUser.code);
+
+  const recent =
+    getMyLogs()
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date))
+      .slice(0,5);
+
+  const upcoming =
+    schedules
+      .filter(s => s.staffCode === currentUser.code)
+      .filter(s => s.date >= today())
+      .sort((a,b)=>a.date.localeCompare(b.date))
+      .slice(0,4);
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
       <div>
-
-        <h2 id="modalStaffName">
-          Staff Profile
-        </h2>
-
-        <div
-          id="modalStaffInfo"
-          style="font-size:12px;color:#888;margin-top:5px;"
-        ></div>
-
+        <h2>Good day, ${escapeHTML(currentUser.name)}</h2>
+        <p>Here's your work overview.</p>
       </div>
-
-      <button
-        class="close-btn"
-        onclick="closeStaffProfile()"
-      >
-        ×
-      </button>
-
     </div>
 
-
-    <div class="stats-grid">
+    <div class="stat-grid">
 
       <div class="stat-card">
-
-        <div class="stat-label">
-          Total Tasks
-        </div>
-
-        <div
-          id="modalTotal"
-          class="stat-number"
-        >
-          0
-        </div>
-
+        <div class="stat-label">Total Tasks</div>
+        <div class="stat-number">${stats.total}</div>
+        <div class="stat-note">All recorded tasks</div>
       </div>
 
-
       <div class="stat-card">
-
-        <div class="stat-label">
-          Completed
-        </div>
-
-        <div
-          id="modalCompleted"
-          class="stat-number"
-        >
-          0
-        </div>
-
+        <div class="stat-label">Completed</div>
+        <div class="stat-number">${stats.completed}</div>
+        <div class="stat-note">Finished tasks</div>
       </div>
 
-
       <div class="stat-card">
-
-        <div class="stat-label">
-          In Progress
-        </div>
-
-        <div
-          id="modalProgress"
-          class="stat-number"
-        >
-          0
-        </div>
-
+        <div class="stat-label">In Progress</div>
+        <div class="stat-number">${stats.progress}</div>
+        <div class="stat-note">Currently working</div>
       </div>
 
-
       <div class="stat-card">
-
-        <div class="stat-label">
-          Overdue
-        </div>
-
-        <div
-          id="modalOverdue"
-          class="stat-number"
-        >
-          0
-        </div>
-
+        <div class="stat-label">Overdue</div>
+        <div class="stat-number">${stats.overdue}</div>
+        <div class="stat-note">Needs attention</div>
       </div>
 
     </div>
 
+    <div class="two-col">
+
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">My Progress</div>
+            <div class="card-subtitle">
+              Overall task completion
+            </div>
+          </div>
+
+          <strong>${stats.rate}%</strong>
+        </div>
+
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            style="width:${stats.rate}%">
+          </div>
+        </div>
+
+        <div style="margin-top:12px;font-size:12px;color:#777">
+          ${stats.completed} of ${stats.total} tasks completed
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">Upcoming Schedule</div>
+            <div class="card-subtitle">
+              Your next activities
+            </div>
+          </div>
+        </div>
+
+        ${upcoming.length
+          ? upcoming.map(s=>`
+            <div class="list-item">
+              <div class="list-main">
+                <div class="list-title">
+                  ${escapeHTML(s.title)}
+                </div>
+                <div class="list-meta">
+                  ${formatDate(s.date)} · ${escapeHTML(s.time)} · ${escapeHTML(s.location)}
+                </div>
+              </div>
+            </div>
+          `).join("")
+          : emptyState("◷","No upcoming schedule","Your schedule will appear here.")
+        }
+
+      </div>
+
+    </div>
 
     <div class="card">
 
       <div class="card-header">
-
-        <div class="card-title">
-          Task Completion
-        </div>
-
-        <div id="modalRate">
-          0%
-        </div>
-
-      </div>
-
-
-      <div class="progress-wrap">
-
-        <div class="progress-bar">
-
-          <div
-            id="modalProgressBar"
-            class="progress-fill"
-            style="width:0%"
-          ></div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card" style="margin-top:15px;">
-
-      <div class="card-header">
-
-        <div class="card-title">
-          Recent Tasks
-        </div>
-
-      </div>
-
-      <div id="modalRecentTasks"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-/* ================= DATA ================= */
-
-const today =
-  new Date().toISOString().split("T")[0];
-
-let currentUser = null;
-
-
-/* STAFF */
-
-let staff =
-  JSON.parse(
-    localStorage.getItem("nona_staff")
-  ) || [
-
-    {
-      name:"Atikah",
-      code:"NC001",
-      department:"Digital",
-      position:"Live Host Online & Offline",
-      status:"Active",
-      joining:"2026-09-02"
-    },
-
-    {
-      name:"Temporary Staff 1",
-      code:"NC002",
-      department:"Digital",
-      position:"Temporary Staff",
-      status:"Active",
-      joining:"2026-09-02"
-    },
-
-    {
-      name:"Temporary Staff 2",
-      code:"NC003",
-      department:"Digital",
-      position:"Temporary Staff",
-      status:"Active",
-      joining:"2026-09-02"
-    }
-
-  ];
-
-
-/* WORK LOGS */
-
-let logs =
-  JSON.parse(
-    localStorage.getItem("nona_logs")
-  ) || [
-
-    {
-      name:"Atikah",
-      code:"NC001",
-      title:"Budget quotation completed and presented to team + Flite product shoot",
-      date:"2026-09-07",
-      start:"",
-      end:"",
-      dueDate:"",
-      dueTime:"",
-      priority:"Medium",
-      status:"Completed",
-      description:"Completed budget quotation, presented it to the team and conducted Flite product shooting."
-    },
-
-    {
-      name:"Atikah",
-      code:"NC001",
-      title:"Product shooting + content brainstorming",
-      date:"2026-09-08",
-      start:"",
-      end:"",
-      dueDate:"",
-      dueTime:"",
-      priority:"Medium",
-      status:"Completed",
-      description:"Continued product shooting and brainstormed social media content ideas."
-    },
-
-    {
-      name:"Atikah",
-      code:"NC001",
-      title:"Presented budget quotation for live setup + social media content shooting",
-      date:"2026-09-09",
-      start:"",
-      end:"",
-      dueDate:"",
-      dueTime:"",
-      priority:"High",
-      status:"Completed",
-      description:"Presented budget quotation for live setup and shot content for social media."
-    },
-
-    {
-      name:"Atikah",
-      code:"NC001",
-      title:"Content shooting and video editing",
-      date:"2026-09-10",
-      start:"",
-      end:"",
-      dueDate:"",
-      dueTime:"",
-      priority:"Medium",
-      status:"Completed",
-      description:"Conducted content shooting and video editing."
-    }
-
-  ];
-
-
-/* ATTENDANCE */
-
-let attendance =
-  JSON.parse(
-    localStorage.getItem("nona_attendance")
-  ) || [];
-
-
-/* LEAVE */
-
-let leaves =
-  JSON.parse(
-    localStorage.getItem("nona_leaves")
-  ) || [];
-
-
-/* SCHEDULES */
-
-let schedules =
-  JSON.parse(
-    localStorage.getItem("nona_schedules")
-  ) || [
-
-    {
-      staffCode:"NC001",
-      task:"Content Planning",
-      date:"2026-09-15",
-      time:"10:00",
-      location:"Office"
-    },
-
-    {
-      staffCode:"NC001",
-      task:"Product Shooting",
-      date:"2026-09-16",
-      time:"11:00",
-      location:"Studio"
-    },
-
-    {
-      staffCode:"NC001",
-      task:"Video Editing",
-      date:"2026-09-17",
-      time:"14:00",
-      location:"Office"
-    }
-
-  ];
-
-
-/* ANNOUNCEMENTS */
-
-let announcements =
-  JSON.parse(
-    localStorage.getItem("nona_announcements")
-  ) || [
-
-    {
-      title:"Welcome to Nona Costex Staff Portal",
-      message:"Welcome to the new staff portal.",
-      date:"2026-09-02"
-    },
-
-    {
-      title:"Digital Team Content Planning",
-      message:"Please keep your content planning and work logs updated.",
-      date:"2026-09-08"
-    }
-
-  ];
-
-
-/* ================= SAVE ================= */
-
-function saveData(){
-
-  localStorage.setItem(
-    "nona_staff",
-    JSON.stringify(staff)
-  );
-
-  localStorage.setItem(
-    "nona_logs",
-    JSON.stringify(logs)
-  );
-
-  localStorage.setItem(
-    "nona_attendance",
-    JSON.stringify(attendance)
-  );
-
-  localStorage.setItem(
-    "nona_leaves",
-    JSON.stringify(leaves)
-  );
-
-  localStorage.setItem(
-    "nona_schedules",
-    JSON.stringify(schedules)
-  );
-
-  localStorage.setItem(
-    "nona_announcements",
-    JSON.stringify(announcements)
-  );
-
-}
-
-
-/* ================= LOGIN ================= */
-
-document
-.getElementById("loginForm")
-.addEventListener(
-  "submit",
-  function(e){
-
-    e.preventDefault();
-
-
-    const username =
-      document
-      .getElementById("loginUsername")
-      .value
-      .trim();
-
-
-    const code =
-      document
-      .getElementById("loginCode")
-      .value
-      .trim();
-
-
-    /* ADMIN */
-
-    if(
-      username === "Admin" &&
-      code === "ADMIN001"
-    ){
-
-      currentUser = {
-
-        name:"Admin",
-        code:"ADMIN001",
-        role:"admin"
-
-      };
-
-      enterApp();
-
-      return;
-
-    }
-
-
-    /* STAFF */
-
-    const found =
-      staff.find(
-        s =>
-          s.name.toLowerCase()
-          ===
-          username.toLowerCase()
-          &&
-          s.code.toLowerCase()
-          ===
-          code.toLowerCase()
-      );
-
-
-    if(found){
-
-      currentUser = {
-
-        ...found,
-        role:"staff"
-
-      };
-
-      enterApp();
-
-    }else{
-
-      alert(
-        "Invalid username or staff code."
-      );
-
-    }
-
-  }
-);
-
-
-/* ================= ENTER APP ================= */
-
-function enterApp(){
-
-  document
-  .getElementById("loginPage")
-  .classList
-  .add("hidden");
-
-
-  document
-  .getElementById("app")
-  .classList
-  .remove("hidden");
-
-
-  if(
-    currentUser.role === "admin"
-  ){
-
-    document
-    .getElementById("staffNav")
-    .classList
-    .add("hidden");
-
-
-    document
-    .getElementById("adminNav")
-    .classList
-    .remove("hidden");
-
-
-    showPage("adminDashboard");
-
-  }else{
-
-    document
-    .getElementById("staffNav")
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById("adminNav")
-    .classList
-    .add("hidden");
-
-
-    showPage("staffDashboard");
-
-  }
-
-
-  updateTopbar();
-
-  renderAll();
-
-}
-
-
-/* ================= SIGN OUT ================= */
-
-function signOut(){
-
-  currentUser = null;
-
-
-  document
-  .getElementById("app")
-  .classList
-  .add("hidden");
-
-
-  document
-  .getElementById("loginPage")
-  .classList
-  .remove("hidden");
-
-
-  document
-  .getElementById("loginUsername")
-  .value = "";
-
-
-  document
-  .getElementById("loginCode")
-  .value = "";
-
-}
-
-
-/* ================= NAVIGATION ================= */
-
-function showPage(
-  pageId,
-  button
-){
-
-  document
-  .querySelectorAll(".page")
-  .forEach(
-    p =>
-      p.classList
-      .remove("active")
-  );
-
-
-  const page =
-    document.getElementById(pageId);
-
-
-  if(page){
-
-    page.classList
-    .add("active");
-
-  }
-
-
-  document
-  .querySelectorAll(".nav-btn")
-  .forEach(
-    b =>
-      b.classList
-      .remove("active")
-  );
-
-
-  if(button){
-
-    button.classList
-    .add("active");
-
-  }
-
-
-  const titles = {
-
-    staffDashboard:"Overview",
-    schedulePage:"My Schedule",
-    workLogPage:"Work Log",
-    attendancePage:"Attendance",
-    leavePage:"Leave",
-    announcementPage:"Announcements",
-    profilePage:"My Profile",
-
-    adminDashboard:"Admin Dashboard",
-    staffManagement:"Staff Management",
-    adminAttendance:"Attendance",
-    adminWorkLogs:"Work Logs",
-    adminLeave:"Leave Requests",
-    adminSchedule:"Schedule Management",
-    adminAnnouncements:"Announcements"
-
-  };
-
-
-  document
-  .getElementById("topbarTitle")
-  .textContent =
-    titles[pageId]
-    ||
-    "Nona Costex";
-
-}
-
-
-/* ================= TOPBAR ================= */
-
-function updateTopbar(){
-
-  document
-  .getElementById("topUserName")
-  .textContent =
-    currentUser.name;
-
-
-  const avatar =
-    document
-    .getElementById("topAvatar");
-
-
-  const savedPhoto =
-    localStorage.getItem(
-      "nona_photo_"
-      +
-      currentUser.code
-    );
-
-
-  if(savedPhoto){
-
-    avatar.innerHTML =
-      `<img src="${savedPhoto}">`;
-
-  }else{
-
-    avatar.textContent =
-      currentUser.name
-      .charAt(0)
-      .toUpperCase();
-
-  }
-
-}
-
-
-/* ================= UTILITY ================= */
-
-function toggleForm(id){
-
-  document
-  .getElementById(id)
-  .classList
-  .toggle("hidden");
-
-}
-
-
-function formatDate(date){
-
-  if(!date) return "-";
-
-
-  const d =
-    new Date(
-      date+"T00:00:00"
-    );
-
-
-  return d.toLocaleDateString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    }
-  );
-
-}
-
-
-function formatTime(time){
-
-  if(!time) return "-";
-
-
-  const [h,m] =
-    time.split(":");
-
-
-  const d =
-    new Date();
-
-
-  d.setHours(h,m);
-
-
-  return d.toLocaleTimeString(
-    "en-US",
-    {
-      hour:"numeric",
-      minute:"2-digit"
-    }
-  );
-
-}
-
-
-function statusBadge(status){
-
-  let cls =
-    "badge-grey";
-
-
-  if(
-    status === "Completed" ||
-    status === "Approved" ||
-    status === "Active" ||
-    status === "Present"
-  ){
-
-    cls =
-      "badge-green";
-
-  }
-
-
-  if(
-    status === "Pending" ||
-    status === "In Progress"
-  ){
-
-    cls =
-      "badge-yellow";
-
-  }
-
-
-  if(
-    status === "Rejected" ||
-    status === "Inactive" ||
-    status === "Overdue"
-  ){
-
-    cls =
-      "badge-red";
-
-  }
-
-
-  return `
-    <span class="badge ${cls}">
-      ${status}
-    </span>
-  `;
-
-}
-
-
-/* ================= OVERDUE LOGIC ================= */
-
-function isOverdue(log){
-
-  if(
-    !log.dueDate ||
-    log.status === "Completed"
-  ){
-
-    return false;
-
-  }
-
-
-  let dueString =
-    log.dueDate;
-
-
-  if(log.dueTime){
-
-    dueString +=
-      "T"
-      +
-      log.dueTime;
-
-  }else{
-
-    dueString +=
-      "T23:59";
-
-  }
-
-
-  const due =
-    new Date(dueString);
-
-
-  return new Date() > due;
-
-}
-
-
-function getStaffStats(code){
-
-  const staffLogs =
-    logs.filter(
-      l => l.code === code
-    );
-
-
-  const total =
-    staffLogs.length;
-
-
-  const completed =
-    staffLogs.filter(
-      l =>
-        l.status === "Completed"
-    ).length;
-
-
-  const inProgress =
-    staffLogs.filter(
-      l =>
-        l.status === "In Progress"
-    ).length;
-
-
-  const pending =
-    staffLogs.filter(
-      l =>
-        l.status === "Pending"
-    ).length;
-
-
-  const overdue =
-    staffLogs.filter(
-      l =>
-        isOverdue(l)
-    ).length;
-
-
-  const rate =
-    total > 0
-      ? Math.round(
-          completed / total * 100
-        )
-      : 0;
-
-
-  return {
-
-    total,
-    completed,
-    inProgress,
-    pending,
-    overdue,
-    rate
-
-  };
-
-}
-
-
-/* ================= STAFF DASHBOARD ================= */
-
-function renderStaffDashboard(){
-
-  if(
-    currentUser.role !== "staff"
-  ) return;
-
-
-  const stats =
-    getStaffStats(
-      currentUser.code
-    );
-
-
-  const myLogs =
-    logs.filter(
-      l =>
-        l.code ===
-        currentUser.code
-    );
-
-
-  const myAttendance =
-    attendance.filter(
-      a =>
-        a.code ===
-        currentUser.code
-    );
-
-
-  const myLeaves =
-    leaves.filter(
-      l =>
-        l.code ===
-        currentUser.code
-    );
-
-
-  const mySchedules =
-    schedules.filter(
-      s =>
-        s.staffCode ===
-        currentUser.code
-    );
-
-
-  document
-  .getElementById(
-    "staffWelcomeName"
-  )
-  .textContent =
-    currentUser.name;
-
-
-  document
-  .getElementById(
-    "staffTaskCount"
-  )
-  .textContent =
-    stats.total;
-
-
-  document
-  .getElementById(
-    "staffCompletedCount"
-  )
-  .textContent =
-    stats.completed;
-
-
-  document
-  .getElementById(
-    "staffProgressCount"
-  )
-  .textContent =
-    stats.inProgress;
-
-
-  document
-  .getElementById(
-    "staffOverdueCount"
-  )
-  .textContent =
-    stats.overdue;
-
-
-  document
-  .getElementById(
-    "staffCompletionRate"
-  )
-  .textContent =
-    stats.rate + "%";
-
-
-  document
-  .getElementById(
-    "staffProgressText"
-  )
-  .textContent =
-    stats.completed
-    +
-    " / "
-    +
-    stats.total
-    +
-    " completed";
-
-
-  document
-  .getElementById(
-    "staffProgressBar"
-  )
-  .style
-  .width =
-    stats.rate + "%";
-
-
-  /* RECENT LOGS */
-
-  const recent =
-    [...myLogs]
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    )
-    .slice(0,5);
-
-
-  if(!recent.length){
-
-    document
-    .getElementById(
-      "staffRecentLogs"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No work logs yet.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "staffRecentLogs"
-    )
-    .innerHTML = `
-
-      <div class="table-wrap">
-
-        <table>
-
-          <tr>
-
-            <th>Date</th>
-            <th>Task</th>
-            <th>Status</th>
-
-          </tr>
-
-
-          ${recent.map(
-            l => `
-
-              <tr>
-
-                <td>
-                  ${formatDate(l.date)}
-                </td>
-
-                <td>
-                  ${l.title}
-                </td>
-
-                <td>
-                  ${
-                    isOverdue(l)
-                    ?
-                    statusBadge(
-                      "Overdue"
-                    )
-                    :
-                    statusBadge(
-                      l.status
-                    )
-                  }
-                </td>
-
-              </tr>
-
-            `
-          ).join("")}
-
-        </table>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* SCHEDULE */
-
-  const upcoming =
-    [...mySchedules]
-    .sort(
-      (a,b) =>
-        a.date.localeCompare(
-          b.date
-        )
-    )
-    .slice(0,5);
-
-
-  if(!upcoming.length){
-
-    document
-    .getElementById(
-      "staffUpcomingSchedule"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No upcoming schedule.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "staffUpcomingSchedule"
-    )
-    .innerHTML =
-
-      upcoming.map(
-        s => `
-
-          <div
-            style="
-              padding:12px 0;
-              border-bottom:1px solid #eee;
-            "
-          >
-
-            <div
-              style="
-                font-weight:600;
-                font-size:13px;
-              "
-            >
-              ${s.task}
-            </div>
-
-            <div
-              style="
-                font-size:11px;
-                color:#888;
-                margin-top:4px;
-              "
-            >
-              ${formatDate(s.date)}
-              ·
-              ${formatTime(s.time)}
-              ·
-              ${s.location || "-"}
-            </div>
-
+        <div>
+          <div class="card-title">Recent Work Logs</div>
+          <div class="card-subtitle">
+            Latest recorded activities
           </div>
-
-        `
-      ).join("");
-
-  }
-
-}
-
-
-/* ================= ADMIN DASHBOARD ================= */
-
-function renderAdminDashboard(){
-
-  if(
-    currentUser.role !== "admin"
-  ) return;
-
-
-  const activeStaff =
-    staff.filter(
-      s =>
-        s.status === "Active"
-    );
-
-
-  const todayAttendance =
-    attendance.filter(
-      a =>
-        a.date === today
-    );
-
-
-  const pendingLeave =
-    leaves.filter(
-      l =>
-        l.status === "Pending"
-    );
-
-
-  document
-  .getElementById(
-    "adminTotalStaff"
-  )
-  .textContent =
-    staff.length;
-
-
-  document
-  .getElementById(
-    "adminActiveStaff"
-  )
-  .textContent =
-    activeStaff.length;
-
-
-  document
-  .getElementById(
-    "adminPresentToday"
-  )
-  .textContent =
-    todayAttendance.length;
-
-
-  document
-  .getElementById(
-    "adminPendingLeave"
-  )
-  .textContent =
-    pendingLeave.length;
-
-
-  /* PERFORMANCE */
-
-  const performanceContainer =
-    document
-    .getElementById(
-      "dashboardPerformance"
-    );
-
-
-  if(!staff.length){
-
-    performanceContainer.innerHTML =
-      `<div class="empty">
-        No staff available.
-      </div>`;
-
-  }else{
-
-    performanceContainer.innerHTML =
-
-      staff.map(
-        s => {
-
-          const stats =
-            getStaffStats(
-              s.code
-            );
-
-
-          return `
-
-            <div
-              class="performance-card"
-            >
-
-              <div
-                style="
-                  display:flex;
-                  justify-content:space-between;
-                  align-items:center;
-                  margin-bottom:8px;
-                "
-              >
-
-                <div>
-
-                  <div
-                    style="
-                      font-weight:600;
-                      font-size:13px;
-                    "
-                  >
-                    ${s.name}
-                  </div>
-
-                  <div
-                    style="
-                      font-size:10px;
-                      color:#999;
-                      margin-top:3px;
-                    "
-                  >
-                    ${s.department}
-                    ·
-                    ${s.position}
-                  </div>
-
-                </div>
-
-
-                <div
-                  style="
-                    font-size:13px;
-                    font-weight:700;
-                  "
-                >
-                  ${stats.rate}%
-                </div>
-
-              </div>
-
-
-              <div class="progress-wrap">
-
-                <div
-                  class="progress-info"
-                >
-
-                  <span>
-                    ${stats.completed}
-                    completed
-                  </span>
-
-                  <span>
-                    ${stats.total}
-                    total
-                  </span>
-
-                </div>
-
-
-                <div
-                  class="progress-bar"
-                >
-
-                  <div
-                    class="progress-fill"
-                    style="
-                      width:${stats.rate}%;
-                    "
-                  ></div>
-
-                </div>
-
-              </div>
-
-
-              <div
-                style="
-                  margin-top:8px;
-                  font-size:10px;
-                  color:#999;
-                "
-              >
-
-                ${stats.inProgress}
-                in progress
-                ·
-                ${stats.pending}
-                pending
-                ·
-                ${stats.overdue}
-                overdue
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-  /* ATTENDANCE */
-
-  if(!todayAttendance.length){
-
-    document
-    .getElementById(
-      "dashboardAttendance"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No attendance recorded today.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "dashboardAttendance"
-    )
-    .innerHTML = `
-
-      <div class="table-wrap">
-
-        <table>
-
-          <tr>
-
-            <th>
-              Staff
-            </th>
-
-            <th>
-              Check In
-            </th>
-
-            <th>
-              Status
-            </th>
-
-          </tr>
-
-
-          ${todayAttendance.map(
-            a => `
-
-              <tr>
-
-                <td>
-                  ${a.name}
-                </td>
-
-                <td>
-                  ${formatTime(
-                    a.checkIn
-                  )}
-                </td>
-
-                <td>
-                  ${statusBadge(
-                    "Present"
-                  )}
-                </td>
-
-              </tr>
-
-            `
-          ).join("")}
-
-        </table>
-
+        </div>
+
+        <button class="btn btn-secondary btn-small"
+          onclick="navigate('staffLogs')">
+          View all
+        </button>
       </div>
 
-    `;
+      ${recent.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-  }
-
-
-  /* LEAVE */
-
-  if(!pendingLeave.length){
-
-    document
-    .getElementById(
-      "dashboardLeave"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No pending leave requests.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "dashboardLeave"
-    )
-    .innerHTML = `
-
-      <div class="table-wrap">
-
-        <table>
-
-          <tr>
-
-            <th>
-              Staff
-            </th>
-
-            <th>
-              Type
-            </th>
-
-            <th>
-              Status
-            </th>
-
-          </tr>
-
-
-          ${pendingLeave
-            .slice(0,5)
-            .map(
-              l => `
-
+            <tbody>
+              ${recent.map(l=>`
                 <tr>
-
-                  <td>
-                    ${l.name}
-                  </td>
-
-                  <td>
-                    ${l.type}
-                  </td>
-
-                  <td>
-                    ${statusBadge(
-                      l.status
-                    )}
-                  </td>
-
+                  <td>${escapeHTML(l.task)}</td>
+                  <td>${formatDate(l.date)}</td>
+                  <td>${escapeHTML(l.priority)}</td>
+                  <td>${statusBadge(l.status,isOverdue(l))}</td>
                 </tr>
-
-              `
-            ).join("")}
-
-        </table>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* RECENT LOGS */
-
-  const recentLogs =
-    [...logs]
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    )
-    .slice(0,7);
-
-
-  if(!recentLogs.length){
-
-    document
-    .getElementById(
-      "dashboardLogs"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No work logs yet.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "dashboardLogs"
-    )
-    .innerHTML = `
-
-      <div class="table-wrap">
-
-        <table>
-
-          <tr>
-
-            <th>
-              Staff
-            </th>
-
-            <th>
-              Date
-            </th>
-
-            <th>
-              Task
-            </th>
-
-            <th>
-              Status
-            </th>
-
-          </tr>
-
-
-          ${recentLogs.map(
-            l => `
-
-              <tr>
-
-                <td>
-                  ${l.name}
-                </td>
-
-                <td>
-                  ${formatDate(
-                    l.date
-                  )}
-                </td>
-
-                <td>
-                  ${l.title}
-                </td>
-
-                <td>
-                  ${
-                    isOverdue(l)
-                    ?
-                    statusBadge(
-                      "Overdue"
-                    )
-                    :
-                    statusBadge(
-                      l.status
-                    )
-                  }
-                </td>
-
-              </tr>
-
-            `
-          ).join("")}
-
-        </table>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* OVERDUE */
-
-  const overdue =
-    logs
-    .filter(
-      l =>
-        isOverdue(l)
-    )
-    .sort(
-      (a,b) =>
-        a.dueDate.localeCompare(
-          b.dueDate
-        )
-    )
-    .slice(0,7);
-
-
-  if(!overdue.length){
-
-    document
-    .getElementById(
-      "dashboardOverdue"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No overdue tasks. Nice.
-      </div>`;
-
-  }else{
-
-    document
-    .getElementById(
-      "dashboardOverdue"
-    )
-    .innerHTML = `
-
-      <div class="table-wrap">
-
-        <table>
-
-          <tr>
-
-            <th>
-              Staff
-            </th>
-
-            <th>
-              Task
-            </th>
-
-            <th>
-              Due
-            </th>
-
-          </tr>
-
-
-          ${overdue.map(
-            l => `
-
-              <tr>
-
-                <td>
-                  ${l.name}
-                </td>
-
-                <td>
-                  ${l.title}
-                </td>
-
-                <td>
-
-                  <div>
-                    ${formatDate(
-                      l.dueDate
-                    )}
-                  </div>
-
-                  <div
-                    style="
-                      font-size:10px;
-                      color:#999;
-                      margin-top:3px;
-                    "
-                  >
-                    ${
-                      l.dueTime
-                      ?
-                      formatTime(
-                        l.dueTime
-                      )
-                      :
-                      ""
-                    }
-                  </div>
-
-                </td>
-
-              </tr>
-
-            `
-          ).join("")}
-
-        </table>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* ================= WORK LOG ================= */
-
-function saveWorkLog(){
-
-  const title =
-    document
-    .getElementById(
-      "logTitle"
-    )
-    .value
-    .trim();
-
-
-  const date =
-    document
-    .getElementById(
-      "logDate"
-    )
-    .value;
-
-
-  if(
-    !title ||
-    !date
-  ){
-
-    alert(
-      "Please enter task title and work date."
-    );
-
-    return;
-
-  }
-
-
-  logs.push({
-
-    name:
-      currentUser.name,
-
-    code:
-      currentUser.code,
-
-    title,
-
-    date,
-
-    start:
-      document
-      .getElementById(
-        "logStart"
-      )
-      .value,
-
-    end:
-      document
-      .getElementById(
-        "logEnd"
-      )
-      .value,
-
-    dueDate:
-      document
-      .getElementById(
-        "logDueDate"
-      )
-      .value,
-
-    dueTime:
-      document
-      .getElementById(
-        "logDueTime"
-      )
-      .value,
-
-    priority:
-      document
-      .getElementById(
-        "logPriority"
-      )
-      .value,
-
-    status:
-      document
-      .getElementById(
-        "logStatus"
-      )
-      .value,
-
-    description:
-      document
-      .getElementById(
-        "logDescription"
-      )
-      .value
-
-  });
-
-
-  saveData();
-
-
-  alert(
-    "Work log saved."
-  );
-
-
-  document
-  .getElementById(
-    "workLogForm"
-  )
-  .classList
-  .add("hidden");
-
-
-  document
-  .querySelectorAll(
-    "#workLogForm input, #workLogForm textarea"
-  )
-  .forEach(
-    el =>
-      el.value=""
-  );
-
-
-  renderAll();
-
-}
-
-
-function renderMyLogs(){
-
-  if(
-    currentUser.role !== "staff"
-  ) return;
-
-
-  const myLogs =
-    [...logs]
-    .filter(
-      l =>
-        l.code ===
-        currentUser.code
-    )
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    );
-
-
-  if(!myLogs.length){
-
-    document
-    .getElementById(
-      "myLogs"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No work logs yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "myLogs"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Task
-          </th>
-
-          <th>
-            Priority
-          </th>
-
-          <th>
-            Status
-          </th>
-
-          <th>
-            Due
-          </th>
-
-        </tr>
-
-
-        ${myLogs.map(
-          l => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  l.date
-                )}
-              </td>
-
-              <td>
-
-                <div
-                  style="
-                    font-weight:600;
-                  "
-                >
-                  ${l.title}
-                </div>
-
-                <div
-                  style="
-                    font-size:10px;
-                    color:#999;
-                    margin-top:4px;
-                  "
-                >
-                  ${
-                    l.description || ""
-                  }
-                </div>
-
-              </td>
-
-              <td>
-                ${l.priority}
-              </td>
-
-              <td>
-
-                ${
-                  isOverdue(l)
-                  ?
-                  statusBadge(
-                    "Overdue"
-                  )
-                  :
-                  statusBadge(
-                    l.status
-                  )
-                }
-
-              </td>
-
-              <td>
-
-                ${
-                  l.dueDate
-                  ?
-                  formatDate(
-                    l.dueDate
-                  )
-                  :
-                  "-"
-                }
-
-                ${
-                  l.dueTime
-                  ?
-                  " · "
-                  +
-                  formatTime(
-                    l.dueTime
-                  )
-                  :
-                  ""
-                }
-
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("✓","No work logs yet","Add your first work log to get started.")}
 
     </div>
-
   `;
-
 }
 
-
-/* ================= ATTENDANCE ================= */
-
-function checkIn(){
-
-  const existing =
-    attendance.find(
-      a =>
-        a.code ===
-        currentUser.code
-        &&
-        a.date ===
-        today
-    );
-
-
-  if(existing){
-
-    alert(
-      "You have already checked in today."
-    );
-
-    return;
-
-  }
-
-
-  attendance.push({
-
-    name:
-      currentUser.name,
-
-    code:
-      currentUser.code,
-
-    date:
-      today,
-
-    checkIn:
-      new Date()
-      .toTimeString()
-      .slice(0,5),
-
-    checkOut:""
-
-  });
-
-
-  saveData();
-
-
-  alert(
-    "Checked in successfully."
-  );
-
-
-  renderAll();
-
-}
-
-
-function checkOut(){
-
-  const existing =
-    attendance.find(
-      a =>
-        a.code ===
-        currentUser.code
-        &&
-        a.date ===
-        today
-    );
-
-
-  if(!existing){
-
-    alert(
-      "Please check in first."
-    );
-
-    return;
-
-  }
-
-
-  existing.checkOut =
-    new Date()
-    .toTimeString()
-    .slice(0,5);
-
-
-  saveData();
-
-
-  alert(
-    "Checked out successfully."
-  );
-
-
-  renderAll();
-
-}
-
-
-function renderMyAttendance(){
-
-  if(
-    currentUser.role !== "staff"
-  ) return;
-
-
-  const records =
-    [...attendance]
-    .filter(
-      a =>
-        a.code ===
-        currentUser.code
-    )
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    );
-
-
-  if(!records.length){
-
-    document
-    .getElementById(
-      "myAttendance"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No attendance records yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "myAttendance"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Check In
-          </th>
-
-          <th>
-            Check Out
-          </th>
-
-          <th>
-            Status
-          </th>
-
-        </tr>
-
-
-        ${records.map(
-          a => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  a.date
-                )}
-              </td>
-
-              <td>
-                ${formatTime(
-                  a.checkIn
-                )}
-              </td>
-
-              <td>
-                ${formatTime(
-                  a.checkOut
-                )}
-              </td>
-
-              <td>
-                ${statusBadge(
-                  "Present"
-                )}
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ================= LEAVE ================= */
-
-function saveLeave(){
-
-  const start =
-    document
-    .getElementById(
-      "leaveStart"
-    )
-    .value;
-
-
-  const end =
-    document
-    .getElementById(
-      "leaveEnd"
-    )
-    .value;
-
-
-  if(
-    !start ||
-    !end
-  ){
-
-    alert(
-      "Please select leave dates."
-    );
-
-    return;
-
-  }
-
-
-  leaves.push({
-
-    name:
-      currentUser.name,
-
-    code:
-      currentUser.code,
-
-    type:
-      document
-      .getElementById(
-        "leaveType"
-      )
-      .value,
-
-    start,
-
-    end,
-
-    reason:
-      document
-      .getElementById(
-        "leaveReason"
-      )
-      .value,
-
-    status:
-      "Pending"
-
-  });
-
-
-  saveData();
-
-
-  alert(
-    "Leave request submitted."
-  );
-
-
-  document
-  .getElementById(
-    "leaveForm"
-  )
-  .classList
-  .add("hidden");
-
-
-  renderAll();
-
-}
-
-
-function renderMyLeaves(){
-
-  if(
-    currentUser.role !== "staff"
-  ) return;
-
-
-  const myLeaves =
-    leaves.filter(
-      l =>
-        l.code ===
-        currentUser.code
-    );
-
-
-  if(!myLeaves.length){
-
-    document
-    .getElementById(
-      "myLeaves"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No leave requests yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "myLeaves"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Type
-          </th>
-
-          <th>
-            Start
-          </th>
-
-          <th>
-            End
-          </th>
-
-          <th>
-            Reason
-          </th>
-
-          <th>
-            Status
-          </th>
-
-        </tr>
-
-
-        ${myLeaves.map(
-          l => `
-
-            <tr>
-
-              <td>
-                ${l.type}
-              </td>
-
-              <td>
-                ${formatDate(
-                  l.start
-                )}
-              </td>
-
-              <td>
-                ${formatDate(
-                  l.end
-                )}
-              </td>
-
-              <td>
-                ${
-                  l.reason || "-"
-                }
-              </td>
-
-              <td>
-                ${statusBadge(
-                  l.status
-                )}
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ================= SCHEDULE ================= */
+/* =========================================================
+   STAFF SCHEDULE
+========================================================= */
 
 function renderStaffSchedule(){
 
-  if(
-    currentUser.role !== "staff"
-  ) return;
-
-
-  const list =
+  const data =
     schedules
-    .filter(
-      s =>
-        s.staffCode ===
-        currentUser.code
-    )
-    .sort(
-      (a,b) =>
-        a.date.localeCompare(
-          b.date
-        )
-    );
+      .filter(s=>s.staffCode === currentUser.code)
+      .sort((a,b)=>a.date.localeCompare(b.date));
 
+  document.getElementById("content").innerHTML = `
 
-  if(!list.length){
-
-    document
-    .getElementById(
-      "staffScheduleList"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No schedules available.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "staffScheduleList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Task
-          </th>
-
-          <th>
-            Time
-          </th>
-
-          <th>
-            Location
-          </th>
-
-        </tr>
-
-
-        ${list.map(
-          s => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  s.date
-                )}
-              </td>
-
-              <td>
-                ${s.task}
-              </td>
-
-              <td>
-                ${formatTime(
-                  s.time
-                )}
-              </td>
-
-              <td>
-                ${
-                  s.location || "-"
-                }
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
+    <div class="page-header">
+      <div>
+        <h2>My Schedule</h2>
+        <p>View your upcoming work activities.</p>
+      </div>
     </div>
 
+    <div class="card">
+
+      ${data.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Activity</th>
+                <th>Time</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              ${data.map(s=>`
+                <tr>
+                  <td>${formatDate(s.date)}</td>
+                  <td>${escapeHTML(s.title)}</td>
+                  <td>${escapeHTML(s.time)}</td>
+                  <td>${escapeHTML(s.location)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("◷","No schedule","There are no schedules assigned to you yet.")}
+    </div>
   `;
-
 }
 
+/* =========================================================
+   STAFF WORK LOG
+========================================================= */
 
-/* ================= PROFILE ================= */
+function renderStaffLogs(){
 
-function renderProfile(){
+  const data =
+    getMyLogs()
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date));
 
-  if(
-    currentUser.role !== "staff"
-  ) return;
+  document.getElementById("content").innerHTML = `
 
+    <div class="page-header">
+      <div>
+        <h2>Work Log</h2>
+        <p>Record and track your daily work.</p>
+      </div>
 
-  document
-  .getElementById(
-    "profileName"
-  )
-  .value =
-    currentUser.name;
+      <button class="btn btn-primary"
+        onclick="openLogModal()">
+        + Add Work Log
+      </button>
+    </div>
 
+    <div class="card">
 
-  document
-  .getElementById(
-    "profileCode"
-  )
-  .value =
-    currentUser.code;
+      ${data.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Due</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
 
+            <tbody>
+              ${data.map(l=>`
+                <tr>
+                  <td>
+                    <div style="font-weight:600">
+                      ${escapeHTML(l.task)}
+                    </div>
+                    <div style="font-size:10px;color:#888;margin-top:3px">
+                      ${escapeHTML(l.description || "")}
+                    </div>
+                  </td>
 
-  document
-  .getElementById(
-    "profileDepartment"
-  )
-  .value =
-    currentUser.department;
+                  <td>${formatDate(l.date)}</td>
 
+                  <td>
+                    ${l.dueDate
+                      ? formatDate(l.dueDate)
+                        + (l.dueTime ? " · "+escapeHTML(l.dueTime) : "")
+                      : "-"}
+                  </td>
 
-  document
-  .getElementById(
-    "profilePosition"
-  )
-  .value =
-    currentUser.position;
+                  <td>${escapeHTML(l.priority)}</td>
 
+                  <td>${statusBadge(l.status,isOverdue(l))}</td>
 
-  const savedPhoto =
-    localStorage.getItem(
-      "nona_photo_"
-      +
-      currentUser.code
-    );
-
-
-  if(savedPhoto){
-
-    document
-    .getElementById(
-      "profileAvatar"
-    )
-    .innerHTML =
-      `<img src="${savedPhoto}">`;
-
-  }else{
-
-    document
-    .getElementById(
-      "profileAvatar"
-    )
-    .textContent =
-      currentUser.name
-      .charAt(0)
-      .toUpperCase();
-
-  }
-
+                  <td>
+                    <button
+                      class="btn btn-secondary btn-small"
+                      onclick="deleteLog(${l.id})">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("✓","No work logs","Start recording your work activities.")}
+    </div>
+  `;
 }
 
+function openLogModal(){
 
-function uploadPhoto(event){
+  document.getElementById("modalContainer").innerHTML = `
 
-  const file =
-    event.target.files[0];
+    <div class="modal-overlay" onclick="closeModal(event)">
 
+      <div class="modal" onclick="event.stopPropagation()">
 
-  if(!file) return;
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload =
-    function(e){
-
-      localStorage.setItem(
-
-        "nona_photo_"
-        +
-        currentUser.code,
-
-        e.target.result
-
-      );
-
-
-      renderProfile();
-
-      updateTopbar();
-
-    };
-
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* ================= ANNOUNCEMENTS ================= */
-
-function renderStaffAnnouncements(){
-
-  const container =
-    document
-    .getElementById(
-      "staffAnnouncements"
-    );
-
-
-  container.innerHTML =
-
-    announcements
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    )
-    .map(
-      a => `
-
-        <div
-          class="card"
-          style="
-            margin-bottom:14px;
-          "
-        >
-
-          <div
-            style="
-              font-weight:700;
-              font-size:15px;
-            "
-          >
-            ${a.title}
+        <div class="modal-header">
+          <div>
+            <h3>Add Work Log</h3>
+            <div class="card-subtitle">
+              Record your work activity.
+            </div>
           </div>
 
+          <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
 
-          <div
-            style="
-              font-size:11px;
-              color:#999;
-              margin:7px 0 12px;
-            "
-          >
-            ${formatDate(
-              a.date
-            )}
+        <form onsubmit="addWorkLog(event)">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Task Title</label>
+              <input id="logTask" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label>Work Date</label>
+              <input id="logDate" type="date"
+                class="form-control"
+                value="${today()}"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Start Time</label>
+              <input id="logStart" type="time"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>End Time</label>
+              <input id="logEnd" type="time"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Due Date</label>
+              <input id="logDueDate" type="date"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Due Time</label>
+              <input id="logDueTime" type="time"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Priority</label>
+              <select id="logPriority" class="form-control">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Status</label>
+              <select id="logStatus" class="form-control">
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+              </select>
+            </div>
+
+            <div class="form-group form-full">
+              <label>Description</label>
+              <textarea id="logDescription"
+                class="form-control"
+                placeholder="Describe your work..."></textarea>
+            </div>
+
           </div>
 
+          <div class="form-actions">
+            <button type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()">
+              Cancel
+            </button>
 
-          <div
-            style="
-              font-size:13px;
-              line-height:1.6;
-              color:#666;
-            "
-          >
-            ${a.message}
+            <button class="btn btn-primary">
+              Save Work Log
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function addWorkLog(e){
+
+  e.preventDefault();
+
+  logs.push({
+    id:Date.now(),
+    staffCode:currentUser.code,
+    task:document.getElementById("logTask").value,
+    date:document.getElementById("logDate").value,
+    startTime:document.getElementById("logStart").value,
+    endTime:document.getElementById("logEnd").value,
+    dueDate:document.getElementById("logDueDate").value,
+    dueTime:document.getElementById("logDueTime").value,
+    priority:document.getElementById("logPriority").value,
+    status:document.getElementById("logStatus").value,
+    description:document.getElementById("logDescription").value
+  });
+
+  saveData();
+  closeModal();
+  showToast("Work log added successfully.");
+  navigate("staffLogs");
+}
+
+function deleteLog(id){
+
+  if(!confirm("Delete this work log?")) return;
+
+  logs = logs.filter(l=>l.id !== id);
+
+  saveData();
+  showToast("Work log deleted.");
+  navigate("staffLogs");
+}
+
+/* =========================================================
+   STAFF ATTENDANCE
+========================================================= */
+
+function renderStaffAttendance(){
+
+  const data =
+    attendance
+      .filter(a=>a.staffCode === currentUser.code)
+      .sort((a,b)=>b.date.localeCompare(a.date));
+
+  const todayRecord =
+    attendance.find(a =>
+      a.staffCode === currentUser.code &&
+      a.date === today()
+    );
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+      <div>
+        <h2>Attendance</h2>
+        <p>Manage your daily attendance.</p>
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="card-header">
+        <div>
+          <div class="card-title">Today's Attendance</div>
+          <div class="card-subtitle">${formatDate(today())}</div>
+        </div>
+
+        ${todayRecord
+          ? `<span class="badge badge-completed">Recorded</span>`
+          : ""}
+      </div>
+
+      ${todayRecord ? `
+        <div class="three-col">
+
+          <div class="info-box">
+            <div class="info-label">Clock In</div>
+            <div class="info-value">${todayRecord.clockIn || "-"}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Clock Out</div>
+            <div class="info-value">${todayRecord.clockOut || "-"}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Status</div>
+            <div class="info-value">${todayRecord.status || "Present"}</div>
           </div>
 
         </div>
+      ` : `
 
-      `
-    )
-    .join("");
+        <button class="btn btn-primary"
+          onclick="recordAttendance()">
+          Clock In
+        </button>
 
-}
-
-
-/* ================= ADMIN STAFF ================= */
-
-function renderStaffList(){
-
-  document
-  .getElementById(
-    "staffList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Name
-          </th>
-
-          <th>
-            Code
-          </th>
-
-          <th>
-            Department
-          </th>
-
-          <th>
-            Position
-          </th>
-
-          <th>
-            Progress
-          </th>
-
-          <th>
-            Status
-          </th>
-
-          <th>
-            Action
-          </th>
-
-        </tr>
-
-
-        ${staff.map(
-          (s,i) => {
-
-            const stats =
-              getStaffStats(
-                s.code
-              );
-
-
-            return `
-
-              <tr>
-
-                <td>
-                  ${s.name}
-                </td>
-
-                <td>
-                  ${s.code}
-                </td>
-
-                <td>
-                  ${s.department}
-                </td>
-
-                <td>
-                  ${s.position}
-                </td>
-
-                <td>
-
-                  <div
-                    style="
-                      min-width:100px;
-                    "
-                  >
-
-                    <div
-                      style="
-                        font-size:10px;
-                        margin-bottom:4px;
-                      "
-                    >
-                      ${stats.rate}%
-                    </div>
-
-                    <div
-                      class="progress-bar"
-                    >
-
-                      <div
-                        class="progress-fill"
-                        style="
-                          width:${stats.rate}%;
-                        "
-                      ></div>
-
-                    </div>
-
-                  </div>
-
-                </td>
-
-                <td>
-                  ${statusBadge(
-                    s.status
-                  )}
-                </td>
-
-                <td>
-
-                  <button
-                    class="btn-small btn-outline"
-                    onclick="
-                      viewStaffProfile(
-                        '${s.code}'
-                      )
-                    "
-                  >
-                    View
-                  </button>
-
-
-                  <button
-                    class="btn-small btn-light"
-                    onclick="
-                      toggleStaffStatus(
-                        ${i}
-                      )
-                    "
-                  >
-                    ${
-                      s.status ===
-                      "Active"
-                      ?
-                      "Deactivate"
-                      :
-                      "Activate"
-                    }
-                  </button>
-
-                </td>
-
-              </tr>
-
-            `;
-
-          }
-        ).join("")}
-
-      </table>
+      `}
 
     </div>
 
-  `;
+    <div class="card">
 
+      <div class="card-header">
+        <div class="card-title">Attendance History</div>
+      </div>
+
+      ${data.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Clock In</th>
+                <th>Clock Out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              ${data.map(a=>`
+                <tr>
+                  <td>${formatDate(a.date)}</td>
+                  <td>${a.clockIn || "-"}</td>
+                  <td>${a.clockOut || "-"}</td>
+                  <td>${escapeHTML(a.status || "Present")}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("◉","No attendance records","Your attendance history will appear here.")}
+    </div>
+  `;
 }
 
+function recordAttendance(){
 
-function addStaff(){
-
-  const name =
-    document
-    .getElementById(
-      "newStaffName"
-    )
-    .value
-    .trim();
-
-
-  const code =
-    document
-    .getElementById(
-      "newStaffCode"
-    )
-    .value
-    .trim();
-
-
-  if(
-    !name ||
-    !code
-  ){
-
-    alert(
-      "Please enter staff name and code."
+  const existing =
+    attendance.find(a =>
+      a.staffCode === currentUser.code &&
+      a.date === today()
     );
 
+  if(existing){
+    showToast("Attendance already recorded.");
     return;
-
   }
 
+  const now =
+    new Date().toLocaleTimeString("en-MY",{
+      hour:"2-digit",
+      minute:"2-digit"
+    });
 
-  if(
-    staff.some(
-      s =>
-        s.code === code
-    )
-  ){
-
-    alert(
-      "Staff code already exists."
-    );
-
-    return;
-
-  }
-
-
-  staff.push({
-
-    name,
-
-    code,
-
-    department:
-      document
-      .getElementById(
-        "newStaffDepartment"
-      )
-      .value,
-
-    position:
-      document
-      .getElementById(
-        "newStaffPosition"
-      )
-      .value,
-
-    status:
-      "Active",
-
-    joining:
-      today
-
+  attendance.push({
+    id:Date.now(),
+    staffCode:currentUser.code,
+    date:today(),
+    clockIn:now,
+    clockOut:"",
+    status:"Present"
   });
 
+  saveData();
+
+  showToast("Clock in recorded.");
+  navigate("staffAttendance");
+}
+
+/* =========================================================
+   STAFF LEAVE
+========================================================= */
+
+function renderStaffLeave(){
+
+  const data =
+    leaves
+      .filter(l=>l.staffCode === currentUser.code)
+      .sort((a,b)=>b.startDate.localeCompare(a.startDate));
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+      <div>
+        <h2>Leave</h2>
+        <p>Submit and track your leave requests.</p>
+      </div>
+
+      <button class="btn btn-primary"
+        onclick="openLeaveModal()">
+        + Apply Leave
+      </button>
+    </div>
+
+    <div class="card">
+
+      ${data.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Reason</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              ${data.map(l=>`
+                <tr>
+                  <td>${escapeHTML(l.type)}</td>
+                  <td>${formatDate(l.startDate)}</td>
+                  <td>${formatDate(l.endDate)}</td>
+                  <td>${escapeHTML(l.reason)}</td>
+                  <td>
+                    <span class="badge ${
+                      l.status === "Approved"
+                        ? "badge-completed"
+                        : l.status === "Rejected"
+                          ? "badge-overdue"
+                          : "badge-pending"
+                    }">
+                      ${escapeHTML(l.status)}
+                    </span>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("▣","No leave requests","Your leave requests will appear here.")}
+    </div>
+  `;
+}
+
+function openLeaveModal(){
+
+  document.getElementById("modalContainer").innerHTML = `
+
+    <div class="modal-overlay" onclick="closeModal(event)">
+
+      <div class="modal" onclick="event.stopPropagation()">
+
+        <div class="modal-header">
+          <div>
+            <h3>Apply Leave</h3>
+            <div class="card-subtitle">
+              Submit a new leave request.
+            </div>
+          </div>
+
+          <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+
+        <form onsubmit="addLeave(event)">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Leave Type</label>
+              <select id="leaveType" class="form-control">
+                <option>Annual Leave</option>
+                <option>Emergency Leave</option>
+                <option>Medical Leave</option>
+                <option>Unpaid Leave</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Start Date</label>
+              <input id="leaveStart"
+                type="date"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>End Date</label>
+              <input id="leaveEnd"
+                type="date"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group form-full">
+              <label>Reason</label>
+              <textarea id="leaveReason"
+                class="form-control"
+                required></textarea>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+
+            <button type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()">
+              Cancel
+            </button>
+
+            <button class="btn btn-primary">
+              Submit Request
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function addLeave(e){
+
+  e.preventDefault();
+
+  leaves.push({
+    id:Date.now(),
+    staffCode:currentUser.code,
+    type:document.getElementById("leaveType").value,
+    startDate:document.getElementById("leaveStart").value,
+    endDate:document.getElementById("leaveEnd").value,
+    reason:document.getElementById("leaveReason").value,
+    status:"Pending"
+  });
 
   saveData();
 
-
-  alert(
-    "Staff added successfully."
-  );
-
-
-  document
-  .getElementById(
-    "staffForm"
-  )
-  .classList
-  .add("hidden");
-
-
-  renderAll();
-
+  closeModal();
+  showToast("Leave request submitted.");
+  navigate("staffLeave");
 }
 
+/* =========================================================
+   STAFF ANNOUNCEMENTS
+========================================================= */
 
-function toggleStaffStatus(index){
+function renderStaffAnnouncements(){
 
-  staff[index].status =
-    staff[index].status ===
-    "Active"
-    ?
-    "Inactive"
-    :
-    "Active";
+  const data =
+    announcements
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date));
 
+  document.getElementById("content").innerHTML = `
 
-  saveData();
+    <div class="page-header">
+      <div>
+        <h2>Announcements</h2>
+        <p>Company and team updates.</p>
+      </div>
+    </div>
 
-  renderAll();
+    ${data.length ? data.map(a=>`
 
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              ${escapeHTML(a.title)}
+            </div>
+
+            <div class="card-subtitle">
+              ${formatDate(a.date)}
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size:13px;line-height:1.7;color:#555">
+          ${escapeHTML(a.message)}
+        </div>
+
+      </div>
+
+    `).join("") : emptyState("●","No announcements","There are no announcements at the moment.")}
+  `;
 }
 
+/* =========================================================
+   STAFF PROFILE
+========================================================= */
 
-/* ================= STAFF PROFILE MODAL ================= */
+function renderStaffProfile(){
 
-function viewStaffProfile(code){
+  const photo =
+    localStorage.getItem(`nona_photo_${currentUser.code}`);
 
-  const member =
-    staff.find(
-      s =>
-        s.code === code
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+      <div>
+        <h2>My Profile</h2>
+        <p>Your staff information.</p>
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="profile-top">
+
+        <div class="profile-photo">
+          ${
+            photo
+              ? `<img src="${photo}">`
+              : initials(currentUser.name)
+          }
+        </div>
+
+        <div>
+          <div class="profile-name">
+            ${escapeHTML(currentUser.name)}
+          </div>
+
+          <div class="profile-position">
+            ${escapeHTML(currentUser.position)}
+          </div>
+
+          <div style="margin-top:8px">
+            ${activeBadge(currentUser.status)}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="profile-info-grid">
+
+        <div class="info-box">
+          <div class="info-label">Staff Code</div>
+          <div class="info-value">${escapeHTML(currentUser.code)}</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Department</div>
+          <div class="info-value">${escapeHTML(currentUser.department)}</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Position</div>
+          <div class="info-value">${escapeHTML(currentUser.position)}</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Joining Date</div>
+          <div class="info-value">${formatDate(currentUser.joiningDate)}</div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:20px">
+
+        <label class="btn btn-secondary">
+          Change Profile Photo
+          <input
+            type="file"
+            accept="image/*"
+            style="display:none"
+            onchange="changePhoto(event)">
+        </label>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function changePhoto(e){
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+
+    localStorage.setItem(
+      `nona_photo_${currentUser.code}`,
+      reader.result
     );
 
+    updateUserHeader();
+    showToast("Profile photo updated.");
+    renderStaffProfile();
+  };
 
-  if(!member) return;
+  reader.readAsDataURL(file);
+}
 
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
 
-  const stats =
-    getStaffStats(code);
+function renderAdminDashboard(){
 
+  const activeStaff =
+    staff.filter(s=>s.status === "Active").length;
 
-  document
-  .getElementById(
-    "modalStaffName"
-  )
-  .textContent =
-    member.name;
+  const todayAttendance =
+    attendance.filter(a=>a.date === today());
 
+  const pendingLeave =
+    leaves.filter(l=>l.status === "Pending");
 
-  document
-  .getElementById(
-    "modalStaffInfo"
-  )
-  .textContent =
-    member.code
-    +
-    " · "
-    +
-    member.department
-    +
-    " · "
-    +
-    member.position;
+  const overdue =
+    logs.filter(l=>isOverdue(l));
 
+  document.getElementById("content").innerHTML = `
 
-  document
-  .getElementById(
-    "modalTotal"
-  )
-  .textContent =
-    stats.total;
+    <div class="page-header">
+      <div>
+        <h2>Admin Dashboard</h2>
+        <p>Overview of staff activity and performance.</p>
+      </div>
+    </div>
 
+    <div class="stat-grid">
 
-  document
-  .getElementById(
-    "modalCompleted"
-  )
-  .textContent =
-    stats.completed;
+      <div class="stat-card">
+        <div class="stat-label">Total Staff</div>
+        <div class="stat-number">${staff.length}</div>
+        <div class="stat-note">Registered staff</div>
+      </div>
 
+      <div class="stat-card">
+        <div class="stat-label">Active Staff</div>
+        <div class="stat-number">${activeStaff}</div>
+        <div class="stat-note">Currently active</div>
+      </div>
 
-  document
-  .getElementById(
-    "modalProgress"
-  )
-  .textContent =
-    stats.inProgress;
+      <div class="stat-card">
+        <div class="stat-label">Present Today</div>
+        <div class="stat-number">${todayAttendance.length}</div>
+        <div class="stat-note">${formatDate(today())}</div>
+      </div>
 
+      <div class="stat-card">
+        <div class="stat-label">Pending Leave</div>
+        <div class="stat-number">${pendingLeave.length}</div>
+        <div class="stat-note">Needs review</div>
+      </div>
 
-  document
-  .getElementById(
-    "modalOverdue"
-  )
-  .textContent =
-    stats.overdue;
+    </div>
 
+    <div class="two-col">
 
-  document
-  .getElementById(
-    "modalRate"
-  )
-  .textContent =
-    stats.rate + "%";
+      <div class="card">
 
+        <div class="card-header">
+          <div>
+            <div class="card-title">Staff Work Progress</div>
+            <div class="card-subtitle">
+              Individual task completion
+            </div>
+          </div>
+        </div>
 
-  document
-  .getElementById(
-    "modalProgressBar"
-  )
-  .style
-  .width =
-    stats.rate + "%";
+        ${staff.map(s=>{
 
+          const st = getStats(s.code);
 
-  const recent =
-    logs
-    .filter(
-      l =>
-        l.code === code
-    )
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    )
-    .slice(0,7);
+          return `
+            <div class="progress-row">
 
+              <div class="progress-info">
 
-  if(!recent.length){
+                <span>
+                  ${escapeHTML(s.name)}
+                </span>
 
-    document
-    .getElementById(
-      "modalRecentTasks"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No tasks recorded yet.
-      </div>`;
+                <span>
+                  ${st.completed}/${st.total} · ${st.rate}%
+                </span>
 
-  }else{
+              </div>
 
-    document
-    .getElementById(
-      "modalRecentTasks"
-    )
-    .innerHTML = `
+              <div class="progress-track">
+                <div
+                  class="progress-fill"
+                  style="width:${st.rate}%">
+                </div>
+              </div>
+
+            </div>
+          `;
+
+        }).join("")}
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">Overdue Tasks</div>
+            <div class="card-subtitle">
+              Tasks that need attention
+            </div>
+          </div>
+        </div>
+
+        ${overdue.length ? overdue.slice(0,6).map(l=>{
+
+          const s = getStaff(l.staffCode);
+
+          return `
+            <div class="list-item">
+
+              <div class="list-main">
+
+                <div class="list-title">
+                  ${escapeHTML(l.task)}
+                </div>
+
+                <div class="list-meta">
+                  ${s ? escapeHTML(s.name) : ""}
+                  · Due ${formatDate(l.dueDate)}
+                </div>
+
+              </div>
+
+              ${statusBadge(l.status,true)}
+
+            </div>
+          `;
+
+        }).join("") : emptyState("✓","No overdue tasks","Everything is on track.")}
+
+      </div>
+
+    </div>
+
+    <div class="two-col">
+
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">Today's Attendance</div>
+            <div class="card-subtitle">
+              Staff attendance
+            </div>
+          </div>
+
+          <button class="btn btn-secondary btn-small"
+            onclick="navigate('adminAttendance')">
+            View all
+          </button>
+        </div>
+
+        ${todayAttendance.length ? `
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Staff</th>
+                  <th>Clock In</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${todayAttendance.map(a=>{
+                  const s = getStaff(a.staffCode);
+
+                  return `
+                    <tr>
+                      <td>${s ? escapeHTML(s.name) : "-"}</td>
+                      <td>${a.clockIn || "-"}</td>
+                      <td>${escapeHTML(a.status || "Present")}</td>
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
+          </div>
+        ` : emptyState("◉","No attendance yet","No staff attendance recorded today.")}
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">
+          <div>
+            <div class="card-title">Pending Leave Requests</div>
+            <div class="card-subtitle">
+              Requests waiting for approval
+            </div>
+          </div>
+
+          <button class="btn btn-secondary btn-small"
+            onclick="navigate('adminLeave')">
+            Review
+          </button>
+        </div>
+
+        ${pendingLeave.length
+          ? pendingLeave.slice(0,5).map(l=>{
+
+            const s = getStaff(l.staffCode);
+
+            return `
+              <div class="list-item">
+
+                <div class="list-main">
+
+                  <div class="list-title">
+                    ${s ? escapeHTML(s.name) : "-"}
+                  </div>
+
+                  <div class="list-meta">
+                    ${escapeHTML(l.type)}
+                    · ${formatDate(l.startDate)}
+                  </div>
+
+                </div>
+
+                <span class="badge badge-pending">
+                  Pending
+                </span>
+
+              </div>
+            `;
+
+          }).join("")
+          : emptyState("✓","No pending requests","All leave requests are reviewed.")
+        }
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-header">
+        <div>
+          <div class="card-title">Recent Work Logs</div>
+          <div class="card-subtitle">
+            Latest activity from staff
+          </div>
+        </div>
+      </div>
+
+      ${logs.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Staff</th>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              ${logs
+                .slice()
+                .sort((a,b)=>b.date.localeCompare(a.date))
+                .slice(0,8)
+                .map(l=>{
+
+                  const s = getStaff(l.staffCode);
+
+                  return `
+                    <tr>
+                      <td>${s ? escapeHTML(s.name) : "-"}</td>
+                      <td>${escapeHTML(l.task)}</td>
+                      <td>${formatDate(l.date)}</td>
+                      <td>${statusBadge(l.status,isOverdue(l))}</td>
+                    </tr>
+                  `;
+
+                }).join("")}
+
+            </tbody>
+          </table>
+        </div>
+      ` : emptyState("✓","No work logs","No work activity has been recorded.")}
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   ADMIN STAFF
+========================================================= */
+
+function renderAdminStaff(){
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2>Staff Management</h2>
+        <p>Manage staff information and performance.</p>
+      </div>
+
+      <button class="btn btn-primary"
+        onclick="openStaffModal()">
+        + Add Staff
+      </button>
+
+    </div>
+
+    <div class="card">
 
       <div class="table-wrap">
 
         <table>
 
-          <tr>
+          <thead>
+            <tr>
+              <th>Staff</th>
+              <th>Code</th>
+              <th>Department</th>
+              <th>Position</th>
+              <th>Progress</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
 
-            <th>
-              Date
-            </th>
+          <tbody>
 
-            <th>
-              Task
-            </th>
+            ${staff.map(s=>{
 
-            <th>
-              Status
-            </th>
+              const stats = getStats(s.code);
 
-          </tr>
+              return `
+                <tr>
 
+                  <td>
+                    <div style="display:flex;align-items:center;gap:9px">
 
-          ${recent.map(
-            l => `
+                      <div class="avatar">
+                        ${
+                          localStorage.getItem(`nona_photo_${s.code}`)
+                            ? `<img src="${localStorage.getItem(`nona_photo_${s.code}`)}">`
+                            : initials(s.name)
+                        }
+                      </div>
 
-              <tr>
+                      <div>
+                        <div style="font-weight:600">
+                          ${escapeHTML(s.name)}
+                        </div>
 
-                <td>
-                  ${formatDate(
-                    l.date
-                  )}
-                </td>
+                        <div style="font-size:10px;color:#888">
+                          Joined ${formatDate(s.joiningDate)}
+                        </div>
+                      </div>
 
-                <td>
-                  ${l.title}
-                </td>
+                    </div>
+                  </td>
 
-                <td>
+                  <td>${escapeHTML(s.code)}</td>
 
-                  ${
-                    isOverdue(l)
-                    ?
-                    statusBadge(
-                      "Overdue"
-                    )
-                    :
-                    statusBadge(
-                      l.status
-                    )
-                  }
+                  <td>${escapeHTML(s.department)}</td>
 
-                </td>
+                  <td>${escapeHTML(s.position)}</td>
 
-              </tr>
+                  <td style="min-width:130px">
 
-            `
-          ).join("")}
+                    <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:5px">
+                      <span>${stats.rate}%</span>
+                      <span>${stats.completed}/${stats.total}</span>
+                    </div>
+
+                    <div class="progress-track">
+                      <div
+                        class="progress-fill"
+                        style="width:${stats.rate}%">
+                      </div>
+                    </div>
+
+                  </td>
+
+                  <td>${activeBadge(s.status)}</td>
+
+                  <td>
+                    <div style="display:flex;gap:5px">
+
+                      <button
+                        class="btn btn-secondary btn-small"
+                        onclick="viewStaff(${s.id})">
+                        View
+                      </button>
+
+                      <button
+                        class="btn ${s.status==="Active" ? "btn-danger" : "btn-success"} btn-small"
+                        onclick="toggleStaff(${s.id})">
+                        ${s.status==="Active" ? "Disable" : "Activate"}
+                      </button>
+
+                    </div>
+                  </td>
+
+                </tr>
+              `;
+
+            }).join("")}
+
+          </tbody>
 
         </table>
 
       </div>
 
-    `;
-
-  }
-
-
-  document
-  .getElementById(
-    "staffProfileModal"
-  )
-  .classList
-  .remove("hidden");
-
-}
-
-
-function closeStaffProfile(){
-
-  document
-  .getElementById(
-    "staffProfileModal"
-  )
-  .classList
-  .add("hidden");
-
-}
-
-
-/* ================= ADMIN ATTENDANCE ================= */
-
-function renderAdminAttendance(){
-
-  const list =
-    [...attendance]
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    );
-
-
-  if(!list.length){
-
-    document
-    .getElementById(
-      "adminAttendanceList"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No attendance records yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "adminAttendanceList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Staff
-          </th>
-
-          <th>
-            Code
-          </th>
-
-          <th>
-            Check In
-          </th>
-
-          <th>
-            Check Out
-          </th>
-
-        </tr>
-
-
-        ${list.map(
-          a => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  a.date
-                )}
-              </td>
-
-              <td>
-                ${a.name}
-              </td>
-
-              <td>
-                ${a.code}
-              </td>
-
-              <td>
-                ${formatTime(
-                  a.checkIn
-                )}
-              </td>
-
-              <td>
-                ${formatTime(
-                  a.checkOut
-                )}
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
     </div>
-
   `;
-
 }
 
+function openStaffModal(){
 
-/* ================= ADMIN WORK LOGS ================= */
+  document.getElementById("modalContainer").innerHTML = `
 
-function renderAdminLogs(){
+    <div class="modal-overlay" onclick="closeModal(event)">
 
-  const list =
-    [...logs]
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    );
+      <div class="modal" onclick="event.stopPropagation()">
 
-
-  if(!list.length){
-
-    document
-    .getElementById(
-      "adminLogsList"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No work logs yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "adminLogsList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Staff
-          </th>
-
-          <th>
-            Task
-          </th>
-
-          <th>
-            Priority
-          </th>
-
-          <th>
-            Status
-          </th>
-
-          <th>
-            Due
-          </th>
-
-        </tr>
-
-
-        ${list.map(
-          l => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  l.date
-                )}
-              </td>
-
-              <td>
-                ${l.name}
-              </td>
-
-              <td>
-
-                <div
-                  style="
-                    font-weight:600;
-                  "
-                >
-                  ${l.title}
-                </div>
-
-                <div
-                  style="
-                    font-size:10px;
-                    color:#999;
-                    margin-top:4px;
-                  "
-                >
-                  ${
-                    l.description || ""
-                  }
-                </div>
-
-              </td>
-
-              <td>
-                ${l.priority}
-              </td>
-
-              <td>
-
-                ${
-                  isOverdue(l)
-                  ?
-                  statusBadge(
-                    "Overdue"
-                  )
-                  :
-                  statusBadge(
-                    l.status
-                  )
-                }
-
-              </td>
-
-              <td>
-
-                ${
-                  l.dueDate
-                  ?
-                  formatDate(
-                    l.dueDate
-                  )
-                  :
-                  "-"
-                }
-
-                ${
-                  l.dueTime
-                  ?
-                  " · "
-                  +
-                  formatTime(
-                    l.dueTime
-                  )
-                  :
-                  ""
-                }
-
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ================= ADMIN LEAVE ================= */
-
-function renderAdminLeave(){
-
-  if(!leaves.length){
-
-    document
-    .getElementById(
-      "adminLeaveList"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No leave requests yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "adminLeaveList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Staff
-          </th>
-
-          <th>
-            Type
-          </th>
-
-          <th>
-            Dates
-          </th>
-
-          <th>
-            Reason
-          </th>
-
-          <th>
-            Status
-          </th>
-
-          <th>
-            Action
-          </th>
-
-        </tr>
-
-
-        ${leaves.map(
-          (l,i) => `
-
-            <tr>
-
-              <td>
-                ${l.name}
-              </td>
-
-              <td>
-                ${l.type}
-              </td>
-
-              <td>
-
-                ${formatDate(
-                  l.start
-                )}
-
-                -
-
-                ${formatDate(
-                  l.end
-                )}
-
-              </td>
-
-              <td>
-                ${
-                  l.reason || "-"
-                }
-              </td>
-
-              <td>
-                ${statusBadge(
-                  l.status
-                )}
-              </td>
-
-              <td>
-
-                ${
-                  l.status ===
-                  "Pending"
-
-                  ?
-
-                  `
-
-                    <button
-                      class="btn-small btn-dark"
-                      onclick="
-                        updateLeave(
-                          ${i},
-                          'Approved'
-                        )
-                      "
-                    >
-                      Approve
-                    </button>
-
-                    <button
-                      class="btn-small btn-danger"
-                      onclick="
-                        updateLeave(
-                          ${i},
-                          'Rejected'
-                        )
-                      "
-                    >
-                      Reject
-                    </button>
-
-                  `
-
-                  :
-
-                  "-"
-
-                }
-
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-function updateLeave(
-  index,
-  status
-){
-
-  leaves[index].status =
-    status;
-
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* ================= ADMIN SCHEDULE ================= */
-
-function renderAdminSchedule(){
-
-  const list =
-    [...schedules]
-    .sort(
-      (a,b) =>
-        a.date.localeCompare(
-          b.date
-        )
-    );
-
-
-  if(!list.length){
-
-    document
-    .getElementById(
-      "adminScheduleList"
-    )
-    .innerHTML =
-      `<div class="empty">
-        No schedules yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  document
-  .getElementById(
-    "adminScheduleList"
-  )
-  .innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <tr>
-
-          <th>
-            Date
-          </th>
-
-          <th>
-            Staff
-          </th>
-
-          <th>
-            Task
-          </th>
-
-          <th>
-            Time
-          </th>
-
-          <th>
-            Location
-          </th>
-
-          <th>
-            Action
-          </th>
-
-        </tr>
-
-
-        ${list.map(
-          (s,i) => `
-
-            <tr>
-
-              <td>
-                ${formatDate(
-                  s.date
-                )}
-              </td>
-
-              <td>
-                ${s.staffCode}
-              </td>
-
-              <td>
-                ${s.task}
-              </td>
-
-              <td>
-                ${formatTime(
-                  s.time
-                )}
-              </td>
-
-              <td>
-                ${
-                  s.location || "-"
-                }
-              </td>
-
-              <td>
-
-                <button
-                  class="btn-small btn-danger"
-                  onclick="
-                    deleteSchedule(
-                      ${i}
-                    )
-                  "
-                >
-                  Delete
-                </button>
-
-              </td>
-
-            </tr>
-
-          `
-        ).join("")}
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-function addSchedule(){
-
-  const staffCode =
-    document
-    .getElementById(
-      "scheduleStaffCode"
-    )
-    .value
-    .trim();
-
-
-  const task =
-    document
-    .getElementById(
-      "scheduleTask"
-    )
-    .value
-    .trim();
-
-
-  const date =
-    document
-    .getElementById(
-      "scheduleDate"
-    )
-    .value;
-
-
-  if(
-    !staffCode ||
-    !task ||
-    !date
-  ){
-
-    alert(
-      "Please complete staff code, task and date."
-    );
-
-    return;
-
-  }
-
-
-  schedules.push({
-
-    staffCode,
-
-    task,
-
-    date,
-
-    time:
-      document
-      .getElementById(
-        "scheduleTime"
-      )
-      .value,
-
-    location:
-      document
-      .getElementById(
-        "scheduleLocation"
-      )
-      .value
-
-  });
-
-
-  saveData();
-
-
-  alert(
-    "Schedule added."
-  );
-
-
-  document
-  .getElementById(
-    "scheduleForm"
-  )
-  .classList
-  .add("hidden");
-
-
-  renderAll();
-
-}
-
-
-function deleteSchedule(index){
-
-  if(
-    !confirm(
-      "Delete this schedule?"
-    )
-  ) return;
-
-
-  schedules.splice(
-    index,
-    1
-  );
-
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* ================= ADMIN ANNOUNCEMENTS ================= */
-
-function renderAdminAnnouncements(){
-
-  document
-  .getElementById(
-    "adminAnnouncementList"
-  )
-  .innerHTML =
-
-    announcements
-    .sort(
-      (a,b) =>
-        b.date.localeCompare(
-          a.date
-        )
-    )
-    .map(
-      (a,i) => `
-
-        <div
-          style="
-            padding:15px 0;
-            border-bottom:1px solid #eee;
-            display:flex;
-            justify-content:space-between;
-            gap:20px;
-          "
-        >
-
+        <div class="modal-header">
           <div>
+            <h3>Add Staff</h3>
+            <div class="card-subtitle">
+              Create a new staff account.
+            </div>
+          </div>
 
-            <div
-              style="
-                font-weight:700;
-                font-size:14px;
-              "
-            >
-              ${a.title}
+          <button class="close-btn"
+            onclick="closeModal()">×</button>
+        </div>
+
+        <form onsubmit="addStaff(event)">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Staff Name</label>
+              <input id="staffName"
+                class="form-control"
+                required>
             </div>
 
-
-            <div
-              style="
-                font-size:11px;
-                color:#999;
-                margin:5px 0;
-              "
-            >
-              ${formatDate(
-                a.date
-              )}
+            <div class="form-group">
+              <label>Staff Code</label>
+              <input id="staffCode"
+                class="form-control"
+                required>
             </div>
 
+            <div class="form-group">
+              <label>Department</label>
+              <input id="staffDepartment"
+                class="form-control"
+                required>
+            </div>
 
-            <div
-              style="
-                font-size:12px;
-                color:#666;
-              "
-            >
-              ${a.message}
+            <div class="form-group">
+              <label>Position</label>
+              <input id="staffPosition"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Joining Date</label>
+              <input id="staffJoining"
+                type="date"
+                class="form-control"
+                value="${today()}"
+                required>
             </div>
 
           </div>
 
+          <div class="form-actions">
 
-          <button
-            class="btn-small btn-danger"
-            onclick="
-              deleteAnnouncement(
-                ${i}
-              )
-            "
-          >
-            Delete
-          </button>
+            <button type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()">
+              Cancel
+            </button>
+
+            <button class="btn btn-primary">
+              Add Staff
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function addStaff(e){
+
+  e.preventDefault();
+
+  const code =
+    document.getElementById("staffCode").value.trim();
+
+  if(staff.some(s=>s.code === code)){
+    alert("Staff code already exists.");
+    return;
+  }
+
+  staff.push({
+    id:Date.now(),
+    name:document.getElementById("staffName").value,
+    code,
+    department:document.getElementById("staffDepartment").value,
+    position:document.getElementById("staffPosition").value,
+    status:"Active",
+    joiningDate:document.getElementById("staffJoining").value
+  });
+
+  saveData();
+  closeModal();
+  showToast("Staff added successfully.");
+  navigate("adminStaff");
+}
+
+function toggleStaff(id){
+
+  const s = staff.find(x=>x.id === id);
+
+  if(!s) return;
+
+  s.status =
+    s.status === "Active"
+      ? "Inactive"
+      : "Active";
+
+  saveData();
+
+  showToast("Staff status updated.");
+  navigate("adminStaff");
+}
+
+function viewStaff(id){
+
+  const s = staff.find(x=>x.id === id);
+
+  if(!s) return;
+
+  const stats = getStats(s.code);
+
+  const photo =
+    localStorage.getItem(`nona_photo_${s.code}`);
+
+  document.getElementById("modalContainer").innerHTML = `
+
+    <div class="modal-overlay" onclick="closeModal(event)">
+
+      <div class="modal" onclick="event.stopPropagation()">
+
+        <div class="modal-header">
+
+          <div>
+            <h3>Staff Profile</h3>
+          </div>
+
+          <button class="close-btn"
+            onclick="closeModal()">×</button>
 
         </div>
 
-      `
-    )
-    .join("");
+        <div class="profile-top">
 
+          <div class="profile-photo">
+            ${
+              photo
+                ? `<img src="${photo}">`
+                : initials(s.name)
+            }
+          </div>
+
+          <div>
+
+            <div class="profile-name">
+              ${escapeHTML(s.name)}
+            </div>
+
+            <div class="profile-position">
+              ${escapeHTML(s.position)}
+            </div>
+
+            <div style="margin-top:8px">
+              ${activeBadge(s.status)}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="profile-info-grid">
+
+          <div class="info-box">
+            <div class="info-label">Staff Code</div>
+            <div class="info-value">${escapeHTML(s.code)}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Department</div>
+            <div class="info-value">${escapeHTML(s.department)}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Joining Date</div>
+            <div class="info-value">${formatDate(s.joiningDate)}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Total Tasks</div>
+            <div class="info-value">${stats.total}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Completed</div>
+            <div class="info-value">${stats.completed}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">In Progress</div>
+            <div class="info-value">${stats.progress}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Pending</div>
+            <div class="info-value">${stats.pending}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Overdue</div>
+            <div class="info-value">${stats.overdue}</div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:20px">
+
+          <div class="progress-info">
+            <span>Completion Rate</span>
+            <span>${stats.rate}%</span>
+          </div>
+
+          <div class="progress-track">
+            <div
+              class="progress-fill"
+              style="width:${stats.rate}%">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
 }
 
+/* =========================================================
+   ADMIN ATTENDANCE
+========================================================= */
 
-function addAnnouncement(){
+function renderAdminAttendance(){
 
-  const title =
-    document
-    .getElementById(
-      "announcementTitle"
-    )
-    .value
-    .trim();
+  const data =
+    attendance
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date));
 
+  document.getElementById("content").innerHTML = `
 
-  const message =
-    document
-    .getElementById(
-      "announcementMessage"
-    )
-    .value
-    .trim();
+    <div class="page-header">
 
+      <div>
+        <h2>Attendance</h2>
+        <p>Monitor staff attendance records.</p>
+      </div>
 
-  if(
-    !title ||
-    !message
-  ){
+    </div>
 
-    alert(
-      "Please enter title and message."
-    );
+    <div class="card">
 
-    return;
+      ${data.length ? `
 
-  }
+        <div class="table-wrap">
 
+          <table>
 
-  announcements.push({
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Staff</th>
+                <th>Clock In</th>
+                <th>Clock Out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-    title,
+            <tbody>
 
-    message,
+              ${data.map(a=>{
 
-    date:
-      today
+                const s = getStaff(a.staffCode);
 
+                return `
+                  <tr>
+
+                    <td>${formatDate(a.date)}</td>
+
+                    <td>${s ? escapeHTML(s.name) : "-"}</td>
+
+                    <td>${a.clockIn || "-"}</td>
+
+                    <td>${a.clockOut || "-"}</td>
+
+                    <td>${escapeHTML(a.status || "Present")}</td>
+
+                  </tr>
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      ` : emptyState("◉","No attendance records","Attendance records will appear here.")}
+    </div>
+  `;
+}
+
+/* =========================================================
+   ADMIN WORK LOGS
+========================================================= */
+
+function renderAdminLogs(){
+
+  const data =
+    logs
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date));
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2>Work Logs</h2>
+        <p>View staff work activity and progress.</p>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      ${data.length ? `
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Staff</th>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Due</th>
+                <th>Priority</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              ${data.map(l=>{
+
+                const s = getStaff(l.staffCode);
+
+                return `
+                  <tr>
+
+                    <td>${s ? escapeHTML(s.name) : "-"}</td>
+
+                    <td>${escapeHTML(l.task)}</td>
+
+                    <td>${formatDate(l.date)}</td>
+
+                    <td>
+                      ${
+                        l.dueDate
+                          ? formatDate(l.dueDate)
+                          + (l.dueTime ? " · "+escapeHTML(l.dueTime) : "")
+                          : "-"
+                      }
+                    </td>
+
+                    <td>${escapeHTML(l.priority)}</td>
+
+                    <td>${statusBadge(l.status,isOverdue(l))}</td>
+
+                  </tr>
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      ` : emptyState("✓","No work logs","There are no staff work logs yet.")}
+    </div>
+  `;
+}
+
+/* =========================================================
+   ADMIN LEAVE
+========================================================= */
+
+function renderAdminLeave(){
+
+  const data =
+    leaves
+      .slice()
+      .sort((a,b)=>{
+
+        if(a.status === "Pending" && b.status !== "Pending") return -1;
+        if(a.status !== "Pending" && b.status === "Pending") return 1;
+
+        return b.startDate.localeCompare(a.startDate);
+      });
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2>Leave Requests</h2>
+        <p>Review staff leave applications.</p>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      ${data.length ? `
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Staff</th>
+                <th>Type</th>
+                <th>Period</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              ${data.map(l=>{
+
+                const s = getStaff(l.staffCode);
+
+                return `
+                  <tr>
+
+                    <td>
+                      ${s ? escapeHTML(s.name) : "-"}
+                    </td>
+
+                    <td>${escapeHTML(l.type)}</td>
+
+                    <td>
+                      ${formatDate(l.startDate)}
+                      →
+                      ${formatDate(l.endDate)}
+                    </td>
+
+                    <td>${escapeHTML(l.reason)}</td>
+
+                    <td>
+                      <span class="badge ${
+                        l.status === "Approved"
+                          ? "badge-completed"
+                          : l.status === "Rejected"
+                            ? "badge-overdue"
+                            : "badge-pending"
+                      }">
+                        ${escapeHTML(l.status)}
+                      </span>
+                    </td>
+
+                    <td>
+
+                      ${
+                        l.status === "Pending"
+                          ? `
+                            <div style="display:flex;gap:5px">
+
+                              <button
+                                class="btn btn-success btn-small"
+                                onclick="updateLeave(${l.id},'Approved')">
+                                Approve
+                              </button>
+
+                              <button
+                                class="btn btn-danger btn-small"
+                                onclick="updateLeave(${l.id},'Rejected')">
+                                Reject
+                              </button>
+
+                            </div>
+                          `
+                          : "-"
+                      }
+
+                    </td>
+
+                  </tr>
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      ` : emptyState("▣","No leave requests","No leave requests have been submitted.")}
+    </div>
+  `;
+}
+
+function updateLeave(id,status){
+
+  const leave = leaves.find(l=>l.id === id);
+
+  if(!leave) return;
+
+  leave.status = status;
+
+  saveData();
+
+  showToast(`Leave request ${status.toLowerCase()}.`);
+  navigate("adminLeave");
+}
+
+/* =========================================================
+   ADMIN SCHEDULE
+========================================================= */
+
+function renderAdminSchedule(){
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2>Schedule Management</h2>
+        <p>Create and manage staff schedules.</p>
+      </div>
+
+      <button class="btn btn-primary"
+        onclick="openScheduleModal()">
+        + Add Schedule
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      ${schedules.length ? `
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Staff</th>
+                <th>Activity</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              ${schedules
+                .slice()
+                .sort((a,b)=>a.date.localeCompare(b.date))
+                .map(s=>{
+
+                  const person = getStaff(s.staffCode);
+
+                  return `
+                    <tr>
+
+                      <td>${formatDate(s.date)}</td>
+
+                      <td>
+                        ${person ? escapeHTML(person.name) : "-"}
+                      </td>
+
+                      <td>${escapeHTML(s.title)}</td>
+
+                      <td>${escapeHTML(s.time)}</td>
+
+                      <td>${escapeHTML(s.location)}</td>
+
+                      <td>
+
+                        <button
+                          class="btn btn-danger btn-small"
+                          onclick="deleteSchedule(${s.id})">
+                          Delete
+                        </button>
+
+                      </td>
+
+                    </tr>
+                  `;
+
+                }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      ` : emptyState("◷","No schedules","Create a schedule for your staff.")}
+    </div>
+  `;
+}
+
+function openScheduleModal(){
+
+  document.getElementById("modalContainer").innerHTML = `
+
+    <div class="modal-overlay" onclick="closeModal(event)">
+
+      <div class="modal" onclick="event.stopPropagation()">
+
+        <div class="modal-header">
+
+          <div>
+            <h3>Add Schedule</h3>
+            <div class="card-subtitle">
+              Assign a new activity to staff.
+            </div>
+          </div>
+
+          <button class="close-btn"
+            onclick="closeModal()">×</button>
+
+        </div>
+
+        <form onsubmit="addSchedule(event)">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Staff</label>
+
+              <select id="scheduleStaff"
+                class="form-control"
+                required>
+
+                ${staff
+                  .filter(s=>s.status==="Active")
+                  .map(s=>`
+                    <option value="${s.code}">
+                      ${escapeHTML(s.name)} (${escapeHTML(s.code)})
+                    </option>
+                  `).join("")}
+
+              </select>
+
+            </div>
+
+            <div class="form-group">
+              <label>Date</label>
+              <input
+                id="scheduleDate"
+                type="date"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Activity</label>
+              <input
+                id="scheduleTitle"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Time</label>
+              <input
+                id="scheduleTime"
+                type="time"
+                class="form-control"
+                required>
+            </div>
+
+            <div class="form-group form-full">
+              <label>Location</label>
+              <input
+                id="scheduleLocation"
+                class="form-control"
+                placeholder="Office, Studio, etc."
+                required>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()">
+              Cancel
+            </button>
+
+            <button class="btn btn-primary">
+              Save Schedule
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function addSchedule(e){
+
+  e.preventDefault();
+
+  schedules.push({
+    id:Date.now(),
+    staffCode:document.getElementById("scheduleStaff").value,
+    date:document.getElementById("scheduleDate").value,
+    title:document.getElementById("scheduleTitle").value,
+    time:document.getElementById("scheduleTime").value,
+    location:document.getElementById("scheduleLocation").value
   });
 
+  saveData();
+
+  closeModal();
+  showToast("Schedule added.");
+  navigate("adminSchedule");
+}
+
+function deleteSchedule(id){
+
+  if(!confirm("Delete this schedule?")) return;
+
+  schedules =
+    schedules.filter(s=>s.id !== id);
 
   saveData();
 
-
-  alert(
-    "Announcement published."
-  );
-
-
-  document
-  .getElementById(
-    "announcementForm"
-  )
-  .classList
-  .add("hidden");
-
-
-  document
-  .getElementById(
-    "announcementTitle"
-  )
-  .value = "";
-
-
-  document
-  .getElementById(
-    "announcementMessage"
-  )
-  .value = "";
-
-
-  renderAll();
-
+  showToast("Schedule deleted.");
+  navigate("adminSchedule");
 }
 
+/* =========================================================
+   ADMIN ANNOUNCEMENTS
+========================================================= */
 
-function deleteAnnouncement(index){
+function renderAdminAnnouncements(){
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2>Announcements</h2>
+        <p>Create company and team announcements.</p>
+      </div>
+
+      <button class="btn btn-primary"
+        onclick="openAnnouncementModal()">
+        + New Announcement
+      </button>
+
+    </div>
+
+    ${announcements
+      .slice()
+      .sort((a,b)=>b.date.localeCompare(a.date))
+      .map(a=>`
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                ${escapeHTML(a.title)}
+              </div>
+
+              <div class="card-subtitle">
+                ${formatDate(a.date)}
+              </div>
+
+            </div>
+
+            <button
+              class="btn btn-danger btn-small"
+              onclick="deleteAnnouncement(${a.id})">
+              Delete
+            </button>
+
+          </div>
+
+          <div style="font-size:13px;line-height:1.7;color:#555">
+            ${escapeHTML(a.message)}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+  `;
+}
+
+function openAnnouncementModal(){
+
+  document.getElementById("modalContainer").innerHTML = `
+
+    <div class="modal-overlay" onclick="closeModal(event)">
+
+      <div class="modal" onclick="event.stopPropagation()">
+
+        <div class="modal-header">
+
+          <div>
+            <h3>New Announcement</h3>
+            <div class="card-subtitle">
+              Publish an update for staff.
+            </div>
+          </div>
+
+          <button class="close-btn"
+            onclick="closeModal()">×</button>
+
+        </div>
+
+        <form onsubmit="addAnnouncement(event)">
+
+          <div class="form-group">
+
+            <label>Title</label>
+
+            <input
+              id="announcementTitle"
+              class="form-control"
+              required>
+
+          </div>
+
+          <div class="form-group">
+
+            <label>Message</label>
+
+            <textarea
+              id="announcementMessage"
+              class="form-control"
+              required></textarea>
+
+          </div>
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()">
+              Cancel
+            </button>
+
+            <button class="btn btn-primary">
+              Publish
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function addAnnouncement(e){
+
+  e.preventDefault();
+
+  announcements.push({
+    id:Date.now(),
+    title:document.getElementById("announcementTitle").value,
+    message:document.getElementById("announcementMessage").value,
+    date:today()
+  });
+
+  saveData();
+
+  closeModal();
+  showToast("Announcement published.");
+  navigate("adminAnnouncements");
+}
+
+function deleteAnnouncement(id){
+
+  if(!confirm("Delete this announcement?")) return;
+
+  announcements =
+    announcements.filter(a=>a.id !== id);
+
+  saveData();
+
+  showToast("Announcement deleted.");
+  navigate("adminAnnouncements");
+}
+
+/* =========================================================
+   PAGE ROUTER
+========================================================= */
+
+function renderPage(page){
+
+  const content =
+    document.getElementById("content");
+
+  content.innerHTML = "";
+
+  if(currentRole === "staff"){
+
+    if(page === "staffDashboard") renderStaffDashboard();
+    else if(page === "staffSchedule") renderStaffSchedule();
+    else if(page === "staffLogs") renderStaffLogs();
+    else if(page === "staffAttendance") renderStaffAttendance();
+    else if(page === "staffLeave") renderStaffLeave();
+    else if(page === "staffAnnouncements") renderStaffAnnouncements();
+    else if(page === "staffProfile") renderStaffProfile();
+
+  }
+
+  if(currentRole === "admin"){
+
+    if(page === "adminDashboard") renderAdminDashboard();
+    else if(page === "adminStaff") renderAdminStaff();
+    else if(page === "adminAttendance") renderAdminAttendance();
+    else if(page === "adminLogs") renderAdminLogs();
+    else if(page === "adminLeave") renderAdminLeave();
+    else if(page === "adminSchedule") renderAdminSchedule();
+    else if(page === "adminAnnouncements") renderAdminAnnouncements();
+
+  }
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(e){
 
   if(
-    !confirm(
-      "Delete this announcement?"
-    )
-  ) return;
-
-
-  announcements.splice(
-    index,
-    1
-  );
-
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* ================= RENDER ALL ================= */
-
-function renderAll(){
-
-  saveData();
-
-
-  if(!currentUser)
+    e &&
+    e.target &&
+    !e.target.classList.contains("modal-overlay")
+  ){
     return;
-
-
-  updateTopbar();
-
-
-  if(
-    currentUser.role ===
-    "staff"
-  ){
-
-    renderStaffDashboard();
-
-    renderMyLogs();
-
-    renderMyAttendance();
-
-    renderMyLeaves();
-
-    renderStaffSchedule();
-
-    renderProfile();
-
-    renderStaffAnnouncements();
-
   }
 
-
-  if(
-    currentUser.role ===
-    "admin"
-  ){
-
-    renderAdminDashboard();
-
-    renderStaffList();
-
-    renderAdminAttendance();
-
-    renderAdminLogs();
-
-    renderAdminLeave();
-
-    renderAdminSchedule();
-
-    renderAdminAnnouncements();
-
-  }
-
+  document.getElementById("modalContainer").innerHTML = "";
 }
 
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
-/* INITIAL SAVE */
+function emptyState(icon,title,text){
 
-saveData();
+  return `
+    <div class="empty">
+
+      <div class="empty-icon">
+        ${icon}
+      </div>
+
+      <div class="empty-title">
+        ${title}
+      </div>
+
+      <div class="empty-text">
+        ${text}
+      </div>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+
+updateDate();
 
 </script>
 
