@@ -220,7 +220,7 @@ button{
 
 .content{
   padding:30px;
-  max-width:1450px;
+  max-width:1500px;
   margin:auto;
 }
 
@@ -232,7 +232,7 @@ button{
   display:block;
 }
 
-/* DASHBOARD */
+/* GENERAL */
 
 .welcome{
   margin-bottom:25px;
@@ -327,6 +327,7 @@ td{
   padding:11px 10px;
   border-bottom:1px solid #f0ede8;
   font-size:12px;
+  vertical-align:middle;
 }
 
 td:last-child,
@@ -367,6 +368,43 @@ th:last-child{
 .badge-grey{
   background:#efede9;
   color:#777;
+}
+
+/* PROGRESS */
+
+.progress-wrap{
+  width:100%;
+}
+
+.progress-bar{
+  height:8px;
+  background:#ebe8e3;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:7px;
+}
+
+.progress-fill{
+  height:100%;
+  background:#292724;
+  border-radius:20px;
+  transition:.3s;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:#888;
+}
+
+.performance-card{
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.performance-card:last-child{
+  border-bottom:none;
 }
 
 /* PAGE HEADER */
@@ -411,6 +449,12 @@ th:last-child{
 .btn-danger{
   background:#f5e4e1;
   color:#8b4b44;
+}
+
+.btn-outline{
+  background:white;
+  border:1px solid #ddd8d0;
+  color:#444;
 }
 
 /* FORMS */
@@ -463,9 +507,53 @@ th:last-child{
   object-fit:cover;
 }
 
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+
+.modal-box{
+  width:100%;
+  max-width:700px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:18px;
+  padding:25px;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+.modal-header h2{
+  font-size:21px;
+}
+
+.close-btn{
+  border:none;
+  background:#efede9;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:16px;
+}
+
 /* MOBILE */
 
 @media(max-width:1000px){
+
   .stats-grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -473,9 +561,11 @@ th:last-child{
   .dashboard-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:700px){
+
   .sidebar{
     width:210px;
   }
@@ -501,6 +591,7 @@ th:last-child{
   .profile-grid{
     grid-template-columns:1fr;
   }
+
 }
 </style>
 </head>
@@ -510,6 +601,7 @@ th:last-child{
 <!-- LOGIN -->
 
 <div id="loginPage" class="login-page">
+
   <div class="login-card">
 
     <div class="logo">Nona Costex</div>
@@ -519,12 +611,22 @@ th:last-child{
 
       <div class="form-group">
         <label>Username</label>
-        <input id="loginUsername" type="text" placeholder="Enter username" required>
+        <input
+          id="loginUsername"
+          type="text"
+          placeholder="Enter username"
+          required
+        >
       </div>
 
       <div class="form-group">
         <label>Staff Code</label>
-        <input id="loginCode" type="password" placeholder="Enter staff code" required>
+        <input
+          id="loginCode"
+          type="password"
+          placeholder="Enter staff code"
+          required
+        >
       </div>
 
       <button class="btn btn-primary" type="submit">
@@ -540,6 +642,7 @@ th:last-child{
     </div>
 
   </div>
+
 </div>
 
 
@@ -555,37 +658,45 @@ th:last-child{
       Nona Costex
     </div>
 
+
     <!-- STAFF NAV -->
 
     <div id="staffNav">
 
       <div class="sidebar-section">Staff</div>
 
-      <button class="nav-btn active" onclick="showPage('staffDashboard',this)">
+      <button class="nav-btn active"
+        onclick="showPage('staffDashboard',this)">
         Overview
       </button>
 
-      <button class="nav-btn" onclick="showPage('schedulePage',this)">
+      <button class="nav-btn"
+        onclick="showPage('schedulePage',this)">
         My Schedule
       </button>
 
-      <button class="nav-btn" onclick="showPage('workLogPage',this)">
+      <button class="nav-btn"
+        onclick="showPage('workLogPage',this)">
         Work Log
       </button>
 
-      <button class="nav-btn" onclick="showPage('attendancePage',this)">
+      <button class="nav-btn"
+        onclick="showPage('attendancePage',this)">
         Attendance
       </button>
 
-      <button class="nav-btn" onclick="showPage('leavePage',this)">
+      <button class="nav-btn"
+        onclick="showPage('leavePage',this)">
         Leave
       </button>
 
-      <button class="nav-btn" onclick="showPage('announcementPage',this)">
+      <button class="nav-btn"
+        onclick="showPage('announcementPage',this)">
         Announcements
       </button>
 
-      <button class="nav-btn" onclick="showPage('profilePage',this)">
+      <button class="nav-btn"
+        onclick="showPage('profilePage',this)">
         My Profile
       </button>
 
@@ -598,31 +709,38 @@ th:last-child{
 
       <div class="sidebar-section">Admin</div>
 
-      <button class="nav-btn active" onclick="showPage('adminDashboard',this)">
+      <button class="nav-btn active"
+        onclick="showPage('adminDashboard',this)">
         Admin Dashboard
       </button>
 
-      <button class="nav-btn" onclick="showPage('staffManagement',this)">
+      <button class="nav-btn"
+        onclick="showPage('staffManagement',this)">
         Staff Management
       </button>
 
-      <button class="nav-btn" onclick="showPage('adminAttendance',this)">
+      <button class="nav-btn"
+        onclick="showPage('adminAttendance',this)">
         Attendance
       </button>
 
-      <button class="nav-btn" onclick="showPage('adminWorkLogs',this)">
+      <button class="nav-btn"
+        onclick="showPage('adminWorkLogs',this)">
         Work Logs
       </button>
 
-      <button class="nav-btn" onclick="showPage('adminLeave',this)">
+      <button class="nav-btn"
+        onclick="showPage('adminLeave',this)">
         Leave Requests
       </button>
 
-      <button class="nav-btn" onclick="showPage('adminSchedule',this)">
+      <button class="nav-btn"
+        onclick="showPage('adminSchedule',this)">
         Schedule Management
       </button>
 
-      <button class="nav-btn" onclick="showPage('adminAnnouncements',this)">
+      <button class="nav-btn"
+        onclick="showPage('adminAnnouncements',this)">
         Announcements
       </button>
 
@@ -671,52 +789,165 @@ th:last-child{
       <section id="staffDashboard" class="page active">
 
         <div class="welcome">
-          <h1>Welcome back, <span id="staffWelcomeName">Atikah</span></h1>
-          <p>Here's your work overview.</p>
+
+          <h1>
+            Welcome back,
+            <span id="staffWelcomeName">Atikah</span>
+          </h1>
+
+          <p>
+            Here's your work overview.
+          </p>
+
         </div>
+
 
         <div class="stats-grid">
 
           <div class="stat-card">
-            <div class="stat-label">Work Logs</div>
-            <div id="staffLogCount" class="stat-number">0</div>
-            <div class="stat-note">Your submitted logs</div>
+
+            <div class="stat-label">
+              Total Tasks
+            </div>
+
+            <div id="staffTaskCount" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Your work logs
+            </div>
+
           </div>
 
-          <div class="stat-card">
-            <div class="stat-label">Attendance</div>
-            <div id="staffAttendanceCount" class="stat-number">0</div>
-            <div class="stat-note">Attendance records</div>
-          </div>
 
           <div class="stat-card">
-            <div class="stat-label">Leave Requests</div>
-            <div id="staffLeaveCount" class="stat-number">0</div>
-            <div class="stat-note">Your applications</div>
+
+            <div class="stat-label">
+              Completed
+            </div>
+
+            <div id="staffCompletedCount" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Completed tasks
+            </div>
+
           </div>
 
+
           <div class="stat-card">
-            <div class="stat-label">Upcoming Schedule</div>
-            <div id="staffScheduleCount" class="stat-number">0</div>
-            <div class="stat-note">Upcoming items</div>
+
+            <div class="stat-label">
+              In Progress
+            </div>
+
+            <div id="staffProgressCount" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Current tasks
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Overdue
+            </div>
+
+            <div id="staffOverdueCount" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Tasks past due
+            </div>
+
           </div>
 
         </div>
 
+
+        <!-- MY PROGRESS -->
+
+        <div class="card" style="margin-bottom:18px;">
+
+          <div class="card-header">
+
+            <div class="card-title">
+              My Progress
+            </div>
+
+            <div id="staffCompletionRate">
+              0%
+            </div>
+
+          </div>
+
+          <div class="progress-wrap">
+
+            <div class="progress-info">
+
+              <span>
+                Task completion
+              </span>
+
+              <span id="staffProgressText">
+                0 / 0 completed
+              </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                id="staffProgressBar"
+                class="progress-fill"
+                style="width:0%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
         <div class="dashboard-grid">
 
           <div class="card">
+
             <div class="card-header">
-              <div class="card-title">Recent Work Logs</div>
+
+              <div class="card-title">
+                Recent Work Logs
+              </div>
+
             </div>
+
             <div id="staffRecentLogs"></div>
+
           </div>
 
+
           <div class="card">
+
             <div class="card-header">
-              <div class="card-title">Upcoming Schedule</div>
+
+              <div class="card-title">
+                Upcoming Schedule
+              </div>
+
             </div>
+
             <div id="staffUpcomingSchedule"></div>
+
           </div>
 
         </div>
@@ -729,48 +960,117 @@ th:last-child{
       <section id="adminDashboard" class="page">
 
         <div class="welcome">
-          <h1>Admin Dashboard</h1>
-          <p>Overview of Nona Costex staff activity and progress.</p>
+
+          <h1>
+            Admin Dashboard
+          </h1>
+
+          <p>
+            Overview of Nona Costex staff activity and progress.
+          </p>
+
         </div>
 
 
         <div class="stats-grid">
 
           <div class="stat-card">
-            <div class="stat-label">Total Staff</div>
-            <div id="adminTotalStaff" class="stat-number">0</div>
-            <div class="stat-note">Registered staff</div>
+
+            <div class="stat-label">
+              Total Staff
+            </div>
+
+            <div id="adminTotalStaff" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Registered staff
+            </div>
+
           </div>
 
-          <div class="stat-card">
-            <div class="stat-label">Active Staff</div>
-            <div id="adminActiveStaff" class="stat-number">0</div>
-            <div class="stat-note">Currently active</div>
-          </div>
 
           <div class="stat-card">
-            <div class="stat-label">Present Today</div>
-            <div id="adminPresentToday" class="stat-number">0</div>
-            <div class="stat-note">Checked in today</div>
+
+            <div class="stat-label">
+              Active Staff
+            </div>
+
+            <div id="adminActiveStaff" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Currently active
+            </div>
+
           </div>
 
+
           <div class="stat-card">
-            <div class="stat-label">Pending Leave</div>
-            <div id="adminPendingLeave" class="stat-number">0</div>
-            <div class="stat-note">Need approval</div>
+
+            <div class="stat-label">
+              Present Today
+            </div>
+
+            <div id="adminPresentToday" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Checked in today
+            </div>
+
           </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Pending Leave
+            </div>
+
+            <div id="adminPendingLeave" class="stat-number">
+              0
+            </div>
+
+            <div class="stat-note">
+              Need approval
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- STAFF PERFORMANCE -->
+
+        <div class="card" style="margin-bottom:18px;">
+
+          <div class="card-header">
+
+            <div class="card-title">
+              Staff Work Progress
+            </div>
+
+          </div>
+
+          <div id="dashboardPerformance"></div>
 
         </div>
 
 
         <div class="dashboard-grid">
 
-          <!-- ATTENDANCE -->
-
           <div class="card">
 
             <div class="card-header">
-              <div class="card-title">Today's Attendance</div>
+
+              <div class="card-title">
+                Today's Attendance
+              </div>
+
             </div>
 
             <div id="dashboardAttendance"></div>
@@ -778,12 +1078,14 @@ th:last-child{
           </div>
 
 
-          <!-- LEAVE -->
-
           <div class="card">
 
             <div class="card-header">
-              <div class="card-title">Pending Leave Requests</div>
+
+              <div class="card-title">
+                Pending Leave Requests
+              </div>
+
             </div>
 
             <div id="dashboardLeave"></div>
@@ -795,12 +1097,14 @@ th:last-child{
 
         <div class="dashboard-grid">
 
-          <!-- WORK LOGS -->
-
           <div class="card">
 
             <div class="card-header">
-              <div class="card-title">Recent Work Logs</div>
+
+              <div class="card-title">
+                Recent Work Logs
+              </div>
+
             </div>
 
             <div id="dashboardLogs"></div>
@@ -808,15 +1112,17 @@ th:last-child{
           </div>
 
 
-          <!-- ACTIVITY -->
-
           <div class="card">
 
             <div class="card-header">
-              <div class="card-title">Staff Overview</div>
+
+              <div class="card-title">
+                Overdue Tasks
+              </div>
+
             </div>
 
-            <div id="dashboardStaff"></div>
+            <div id="dashboardOverdue"></div>
 
           </div>
 
@@ -830,14 +1136,26 @@ th:last-child{
       <section id="schedulePage" class="page">
 
         <div class="page-header">
+
           <div>
-            <h2>My Schedule</h2>
-            <p>Your upcoming work schedule.</p>
+
+            <h2>
+              My Schedule
+            </h2>
+
+            <p>
+              Your upcoming work schedule.
+            </p>
+
           </div>
+
         </div>
 
+
         <div class="card">
+
           <div id="staffScheduleList"></div>
+
         </div>
 
       </section>
@@ -848,83 +1166,201 @@ th:last-child{
       <section id="workLogPage" class="page">
 
         <div class="page-header">
+
           <div>
-            <h2>Work Log</h2>
-            <p>Record your daily work and progress.</p>
+
+            <h2>
+              Work Log
+            </h2>
+
+            <p>
+              Record your daily work and progress.
+            </p>
+
           </div>
 
-          <button class="btn-small btn-dark" onclick="toggleForm('workLogForm')">
+          <button
+            class="btn-small btn-dark"
+            onclick="toggleForm('workLogForm')"
+          >
             + Add Work Log
           </button>
+
         </div>
 
 
-        <div id="workLogForm" class="card hidden" style="margin-bottom:18px;">
+        <div
+          id="workLogForm"
+          class="card hidden"
+          style="margin-bottom:18px;"
+        >
 
           <div class="form-grid">
 
             <div class="form-group">
-              <label>Task Title</label>
-              <input id="logTitle" placeholder="e.g. Product shooting">
+
+              <label>
+                Task Title
+              </label>
+
+              <input
+                id="logTitle"
+                placeholder="e.g. Product shooting"
+              >
+
             </div>
 
-            <div class="form-group">
-              <label>Work Date</label>
-              <input id="logDate" type="date">
-            </div>
 
             <div class="form-group">
-              <label>Start Time</label>
-              <input id="logStart" type="time">
+
+              <label>
+                Work Date
+              </label>
+
+              <input
+                id="logDate"
+                type="date"
+              >
+
             </div>
 
-            <div class="form-group">
-              <label>End Time</label>
-              <input id="logEnd" type="time">
-            </div>
 
             <div class="form-group">
-              <label>Due Date</label>
-              <input id="logDueDate" type="date">
+
+              <label>
+                Start Time
+              </label>
+
+              <input
+                id="logStart"
+                type="time"
+              >
+
             </div>
 
-            <div class="form-group">
-              <label>Due Time</label>
-              <input id="logDueTime" type="time">
-            </div>
 
             <div class="form-group">
-              <label>Priority</label>
+
+              <label>
+                End Time
+              </label>
+
+              <input
+                id="logEnd"
+                type="time"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Due Date
+              </label>
+
+              <input
+                id="logDueDate"
+                type="date"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Due Time
+              </label>
+
+              <input
+                id="logDueTime"
+                type="time"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Priority
+              </label>
+
               <select id="logPriority">
-                <option>Low</option>
-                <option selected>Medium</option>
-                <option>High</option>
+
+                <option>
+                  Low
+                </option>
+
+                <option selected>
+                  Medium
+                </option>
+
+                <option>
+                  High
+                </option>
+
               </select>
+
             </div>
 
+
             <div class="form-group">
-              <label>Status</label>
+
+              <label>
+                Status
+              </label>
+
               <select id="logStatus">
-                <option>Pending</option>
-                <option selected>In Progress</option>
-                <option>Completed</option>
+
+                <option>
+                  Pending
+                </option>
+
+                <option selected>
+                  In Progress
+                </option>
+
+                <option>
+                  Completed
+                </option>
+
               </select>
+
             </div>
+
 
             <div class="form-group full">
-              <label>Description</label>
-              <textarea id="logDescription" rows="4" placeholder="Describe the work completed..."></textarea>
+
+              <label>
+                Description
+              </label>
+
+              <textarea
+                id="logDescription"
+                rows="4"
+                placeholder="Describe the work completed..."
+              ></textarea>
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
 
-            <button class="btn-small btn-dark" onclick="saveWorkLog()">
+            <button
+              class="btn-small btn-dark"
+              onclick="saveWorkLog()"
+            >
               Save Work Log
             </button>
 
-            <button class="btn-small btn-light" onclick="toggleForm('workLogForm')">
+            <button
+              class="btn-small btn-light"
+              onclick="toggleForm('workLogForm')"
+            >
               Cancel
             </button>
 
@@ -934,7 +1370,9 @@ th:last-child{
 
 
         <div class="card">
+
           <div id="myLogs"></div>
+
         </div>
 
       </section>
@@ -945,23 +1383,42 @@ th:last-child{
       <section id="attendancePage" class="page">
 
         <div class="page-header">
+
           <div>
-            <h2>Attendance</h2>
-            <p>Track your daily attendance.</p>
+
+            <h2>
+              Attendance
+            </h2>
+
+            <p>
+              Track your daily attendance.
+            </p>
+
           </div>
+
         </div>
+
 
         <div class="card">
 
           <div style="margin-bottom:18px;">
-            <button class="btn-small btn-dark" onclick="checkIn()">
+
+            <button
+              class="btn-small btn-dark"
+              onclick="checkIn()"
+            >
               Check In
             </button>
 
-            <button class="btn-small btn-light" onclick="checkOut()">
+            <button
+              class="btn-small btn-light"
+              onclick="checkOut()"
+            >
               Check Out
             </button>
+
           </div>
+
 
           <div id="myAttendance"></div>
 
@@ -977,57 +1434,122 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Leave</h2>
-            <p>Submit and track your leave requests.</p>
+
+            <h2>
+              Leave
+            </h2>
+
+            <p>
+              Submit and track your leave requests.
+            </p>
+
           </div>
 
-          <button class="btn-small btn-dark" onclick="toggleForm('leaveForm')">
+
+          <button
+            class="btn-small btn-dark"
+            onclick="toggleForm('leaveForm')"
+          >
             + Apply Leave
           </button>
 
         </div>
 
 
-        <div id="leaveForm" class="card hidden" style="margin-bottom:18px;">
+        <div
+          id="leaveForm"
+          class="card hidden"
+          style="margin-bottom:18px;"
+        >
 
           <div class="form-grid">
 
             <div class="form-group">
-              <label>Leave Type</label>
+
+              <label>
+                Leave Type
+              </label>
 
               <select id="leaveType">
-                <option>Annual Leave</option>
-                <option>Emergency Leave</option>
-                <option>Medical Leave</option>
-                <option>Unpaid Leave</option>
+
+                <option>
+                  Annual Leave
+                </option>
+
+                <option>
+                  Emergency Leave
+                </option>
+
+                <option>
+                  Medical Leave
+                </option>
+
+                <option>
+                  Unpaid Leave
+                </option>
+
               </select>
 
             </div>
 
-            <div class="form-group">
-              <label>Start Date</label>
-              <input id="leaveStart" type="date">
-            </div>
 
             <div class="form-group">
-              <label>End Date</label>
-              <input id="leaveEnd" type="date">
+
+              <label>
+                Start Date
+              </label>
+
+              <input
+                id="leaveStart"
+                type="date"
+              >
+
             </div>
+
+
+            <div class="form-group">
+
+              <label>
+                End Date
+              </label>
+
+              <input
+                id="leaveEnd"
+                type="date"
+              >
+
+            </div>
+
 
             <div class="form-group full">
-              <label>Reason</label>
-              <textarea id="leaveReason" rows="3"></textarea>
+
+              <label>
+                Reason
+              </label>
+
+              <textarea
+                id="leaveReason"
+                rows="3"
+              ></textarea>
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
 
-            <button class="btn-small btn-dark" onclick="saveLeave()">
+            <button
+              class="btn-small btn-dark"
+              onclick="saveLeave()"
+            >
               Submit Request
             </button>
 
-            <button class="btn-small btn-light" onclick="toggleForm('leaveForm')">
+            <button
+              class="btn-small btn-light"
+              onclick="toggleForm('leaveForm')"
+            >
               Cancel
             </button>
 
@@ -1037,22 +1559,34 @@ th:last-child{
 
 
         <div class="card">
+
           <div id="myLeaves"></div>
+
         </div>
 
       </section>
 
 
-      <!-- ================= ANNOUNCEMENT ================= -->
+      <!-- ================= ANNOUNCEMENTS ================= -->
 
       <section id="announcementPage" class="page">
 
         <div class="page-header">
+
           <div>
-            <h2>Announcements</h2>
-            <p>Latest company announcements.</p>
+
+            <h2>
+              Announcements
+            </h2>
+
+            <p>
+              Latest company announcements.
+            </p>
+
           </div>
+
         </div>
+
 
         <div id="staffAnnouncements"></div>
 
@@ -1066,8 +1600,15 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>My Profile</h2>
-            <p>Your staff information.</p>
+
+            <h2>
+              My Profile
+            </h2>
+
+            <p>
+              Your staff information.
+            </p>
+
           </div>
 
         </div>
@@ -1077,7 +1618,10 @@ th:last-child{
 
           <div class="card profile-photo-box">
 
-            <div id="profileAvatar" class="profile-big-avatar">
+            <div
+              id="profileAvatar"
+              class="profile-big-avatar"
+            >
               A
             </div>
 
@@ -1096,23 +1640,58 @@ th:last-child{
             <div class="form-grid">
 
               <div class="form-group">
-                <label>Name</label>
-                <input id="profileName" readonly>
+
+                <label>
+                  Name
+                </label>
+
+                <input
+                  id="profileName"
+                  readonly
+                >
+
               </div>
 
-              <div class="form-group">
-                <label>Staff Code</label>
-                <input id="profileCode" readonly>
-              </div>
 
               <div class="form-group">
-                <label>Department</label>
-                <input id="profileDepartment" readonly>
+
+                <label>
+                  Staff Code
+                </label>
+
+                <input
+                  id="profileCode"
+                  readonly
+                >
+
               </div>
 
+
               <div class="form-group">
-                <label>Position</label>
-                <input id="profilePosition" readonly>
+
+                <label>
+                  Department
+                </label>
+
+                <input
+                  id="profileDepartment"
+                  readonly
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label>
+                  Position
+                </label>
+
+                <input
+                  id="profilePosition"
+                  readonly
+                >
+
               </div>
 
             </div>
@@ -1131,50 +1710,95 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Staff Management</h2>
-            <p>Manage Nona Costex staff.</p>
+
+            <h2>
+              Staff Management
+            </h2>
+
+            <p>
+              Manage Nona Costex staff.
+            </p>
+
           </div>
 
-          <button class="btn-small btn-dark" onclick="toggleForm('staffForm')">
+
+          <button
+            class="btn-small btn-dark"
+            onclick="toggleForm('staffForm')"
+          >
             + Add Staff
           </button>
 
         </div>
 
 
-        <div id="staffForm" class="card hidden" style="margin-bottom:18px;">
+        <div
+          id="staffForm"
+          class="card hidden"
+          style="margin-bottom:18px;"
+        >
 
           <div class="form-grid">
 
             <div class="form-group">
-              <label>Name</label>
+
+              <label>
+                Name
+              </label>
+
               <input id="newStaffName">
+
             </div>
 
+
             <div class="form-group">
-              <label>Staff Code</label>
+
+              <label>
+                Staff Code
+              </label>
+
               <input id="newStaffCode">
+
             </div>
 
+
             <div class="form-group">
-              <label>Department</label>
+
+              <label>
+                Department
+              </label>
+
               <input id="newStaffDepartment">
+
             </div>
 
+
             <div class="form-group">
-              <label>Position</label>
+
+              <label>
+                Position
+              </label>
+
               <input id="newStaffPosition">
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
 
-            <button class="btn-small btn-dark" onclick="addStaff()">
+            <button
+              class="btn-small btn-dark"
+              onclick="addStaff()"
+            >
               Add Staff
             </button>
 
-            <button class="btn-small btn-light" onclick="toggleForm('staffForm')">
+            <button
+              class="btn-small btn-light"
+              onclick="toggleForm('staffForm')"
+            >
               Cancel
             </button>
 
@@ -1199,14 +1823,24 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Attendance</h2>
-            <p>View staff attendance records.</p>
+
+            <h2>
+              Attendance
+            </h2>
+
+            <p>
+              View staff attendance records.
+            </p>
+
           </div>
 
         </div>
 
+
         <div class="card">
+
           <div id="adminAttendanceList"></div>
+
         </div>
 
       </section>
@@ -1219,14 +1853,24 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Work Logs</h2>
-            <p>Monitor staff work progress.</p>
+
+            <h2>
+              Work Logs
+            </h2>
+
+            <p>
+              Monitor staff work progress.
+            </p>
+
           </div>
 
         </div>
 
+
         <div class="card">
+
           <div id="adminLogsList"></div>
+
         </div>
 
       </section>
@@ -1239,14 +1883,24 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Leave Requests</h2>
-            <p>Review staff leave applications.</p>
+
+            <h2>
+              Leave Requests
+            </h2>
+
+            <p>
+              Review staff leave applications.
+            </p>
+
           </div>
 
         </div>
 
+
         <div class="card">
+
           <div id="adminLeaveList"></div>
+
         </div>
 
       </section>
@@ -1259,55 +1913,112 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Schedule Management</h2>
-            <p>Create and manage staff schedules.</p>
+
+            <h2>
+              Schedule Management
+            </h2>
+
+            <p>
+              Create and manage staff schedules.
+            </p>
+
           </div>
 
-          <button class="btn-small btn-dark" onclick="toggleForm('scheduleForm')">
+
+          <button
+            class="btn-small btn-dark"
+            onclick="toggleForm('scheduleForm')"
+          >
             + Add Schedule
           </button>
 
         </div>
 
 
-        <div id="scheduleForm" class="card hidden" style="margin-bottom:18px;">
+        <div
+          id="scheduleForm"
+          class="card hidden"
+          style="margin-bottom:18px;"
+        >
 
           <div class="form-grid">
 
             <div class="form-group">
-              <label>Staff Code</label>
+
+              <label>
+                Staff Code
+              </label>
+
               <input id="scheduleStaffCode">
+
             </div>
 
+
             <div class="form-group">
-              <label>Task</label>
+
+              <label>
+                Task
+              </label>
+
               <input id="scheduleTask">
+
             </div>
 
-            <div class="form-group">
-              <label>Date</label>
-              <input id="scheduleDate" type="date">
-            </div>
 
             <div class="form-group">
-              <label>Time</label>
-              <input id="scheduleTime" type="time">
+
+              <label>
+                Date
+              </label>
+
+              <input
+                id="scheduleDate"
+                type="date"
+              >
+
             </div>
 
+
             <div class="form-group">
-              <label>Location</label>
+
+              <label>
+                Time
+              </label>
+
+              <input
+                id="scheduleTime"
+                type="time"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Location
+              </label>
+
               <input id="scheduleLocation">
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
 
-            <button class="btn-small btn-dark" onclick="addSchedule()">
+            <button
+              class="btn-small btn-dark"
+              onclick="addSchedule()"
+            >
               Add Schedule
             </button>
 
-            <button class="btn-small btn-light" onclick="toggleForm('scheduleForm')">
+            <button
+              class="btn-small btn-light"
+              onclick="toggleForm('scheduleForm')"
+            >
               Cancel
             </button>
 
@@ -1317,7 +2028,9 @@ th:last-child{
 
 
         <div class="card">
+
           <div id="adminScheduleList"></div>
+
         </div>
 
       </section>
@@ -1330,36 +2043,72 @@ th:last-child{
         <div class="page-header">
 
           <div>
-            <h2>Announcements</h2>
-            <p>Create announcements for staff.</p>
+
+            <h2>
+              Announcements
+            </h2>
+
+            <p>
+              Create announcements for staff.
+            </p>
+
           </div>
 
-          <button class="btn-small btn-dark" onclick="toggleForm('announcementForm')">
+
+          <button
+            class="btn-small btn-dark"
+            onclick="toggleForm('announcementForm')"
+          >
             + New Announcement
           </button>
 
         </div>
 
 
-        <div id="announcementForm" class="card hidden" style="margin-bottom:18px;">
+        <div
+          id="announcementForm"
+          class="card hidden"
+          style="margin-bottom:18px;"
+        >
 
           <div class="form-group">
-            <label>Title</label>
+
+            <label>
+              Title
+            </label>
+
             <input id="announcementTitle">
+
           </div>
 
+
           <div class="form-group">
-            <label>Message</label>
-            <textarea id="announcementMessage" rows="4"></textarea>
+
+            <label>
+              Message
+            </label>
+
+            <textarea
+              id="announcementMessage"
+              rows="4"
+            ></textarea>
+
           </div>
+
 
           <div class="form-actions">
 
-            <button class="btn-small btn-dark" onclick="addAnnouncement()">
+            <button
+              class="btn-small btn-dark"
+              onclick="addAnnouncement()"
+            >
               Publish
             </button>
 
-            <button class="btn-small btn-light" onclick="toggleForm('announcementForm')">
+            <button
+              class="btn-small btn-light"
+              onclick="toggleForm('announcementForm')"
+            >
               Cancel
             </button>
 
@@ -1369,14 +2118,169 @@ th:last-child{
 
 
         <div class="card">
+
           <div id="adminAnnouncementList"></div>
+
         </div>
 
       </section>
 
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- STAFF PROFILE MODAL -->
+
+<div
+  id="staffProfileModal"
+  class="modal hidden"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2 id="modalStaffName">
+          Staff Profile
+        </h2>
+
+        <div
+          id="modalStaffInfo"
+          style="font-size:12px;color:#888;margin-top:5px;"
+        ></div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeStaffProfile()"
+      >
+        ×
+      </button>
 
     </div>
-  </main>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Total Tasks
+        </div>
+
+        <div
+          id="modalTotal"
+          class="stat-number"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Completed
+        </div>
+
+        <div
+          id="modalCompleted"
+          class="stat-number"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          In Progress
+        </div>
+
+        <div
+          id="modalProgress"
+          class="stat-number"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-label">
+          Overdue
+        </div>
+
+        <div
+          id="modalOverdue"
+          class="stat-number"
+        >
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-header">
+
+        <div class="card-title">
+          Task Completion
+        </div>
+
+        <div id="modalRate">
+          0%
+        </div>
+
+      </div>
+
+
+      <div class="progress-wrap">
+
+        <div class="progress-bar">
+
+          <div
+            id="modalProgressBar"
+            class="progress-fill"
+            style="width:0%"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:15px;">
+
+      <div class="card-header">
+
+        <div class="card-title">
+          Recent Tasks
+        </div>
+
+      </div>
+
+      <div id="modalRecentTasks"></div>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -1385,256 +2289,356 @@ th:last-child{
 
 /* ================= DATA ================= */
 
-const today = new Date().toISOString().split("T")[0];
+const today =
+  new Date().toISOString().split("T")[0];
 
 let currentUser = null;
 
 
 /* STAFF */
 
-let staff = JSON.parse(localStorage.getItem("nona_staff")) || [
+let staff =
+  JSON.parse(
+    localStorage.getItem("nona_staff")
+  ) || [
 
-  {
-    name:"Atikah",
-    code:"NC001",
-    department:"Digital",
-    position:"Live Host Online & Offline",
-    status:"Active",
-    joining:"2026-09-02"
-  },
+    {
+      name:"Atikah",
+      code:"NC001",
+      department:"Digital",
+      position:"Live Host Online & Offline",
+      status:"Active",
+      joining:"2026-09-02"
+    },
 
-  {
-    name:"Temporary Staff 1",
-    code:"NC002",
-    department:"Digital",
-    position:"Temporary Staff",
-    status:"Active",
-    joining:"2026-09-02"
-  },
+    {
+      name:"Temporary Staff 1",
+      code:"NC002",
+      department:"Digital",
+      position:"Temporary Staff",
+      status:"Active",
+      joining:"2026-09-02"
+    },
 
-  {
-    name:"Temporary Staff 2",
-    code:"NC003",
-    department:"Digital",
-    position:"Temporary Staff",
-    status:"Active",
-    joining:"2026-09-02"
-  }
+    {
+      name:"Temporary Staff 2",
+      code:"NC003",
+      department:"Digital",
+      position:"Temporary Staff",
+      status:"Active",
+      joining:"2026-09-02"
+    }
 
-];
+  ];
 
 
 /* WORK LOGS */
 
-let logs = JSON.parse(localStorage.getItem("nona_logs")) || [
+let logs =
+  JSON.parse(
+    localStorage.getItem("nona_logs")
+  ) || [
 
-  {
-    name:"Atikah",
-    code:"NC001",
-    title:"Budget quotation completed and presented to team + Flite product shoot",
-    date:"2026-09-07",
-    start:"",
-    end:"",
-    dueDate:"",
-    dueTime:"",
-    priority:"Medium",
-    status:"Completed",
-    description:"Completed budget quotation, presented it to the team and conducted Flite product shooting."
-  },
+    {
+      name:"Atikah",
+      code:"NC001",
+      title:"Budget quotation completed and presented to team + Flite product shoot",
+      date:"2026-09-07",
+      start:"",
+      end:"",
+      dueDate:"",
+      dueTime:"",
+      priority:"Medium",
+      status:"Completed",
+      description:"Completed budget quotation, presented it to the team and conducted Flite product shooting."
+    },
 
-  {
-    name:"Atikah",
-    code:"NC001",
-    title:"Product shooting + content brainstorming",
-    date:"2026-09-08",
-    start:"",
-    end:"",
-    dueDate:"",
-    dueTime:"",
-    priority:"Medium",
-    status:"Completed",
-    description:"Continued product shooting and brainstormed social media content ideas."
-  },
+    {
+      name:"Atikah",
+      code:"NC001",
+      title:"Product shooting + content brainstorming",
+      date:"2026-09-08",
+      start:"",
+      end:"",
+      dueDate:"",
+      dueTime:"",
+      priority:"Medium",
+      status:"Completed",
+      description:"Continued product shooting and brainstormed social media content ideas."
+    },
 
-  {
-    name:"Atikah",
-    code:"NC001",
-    title:"Presented budget quotation for live setup + social media content shooting",
-    date:"2026-09-09",
-    start:"",
-    end:"",
-    dueDate:"",
-    dueTime:"",
-    priority:"High",
-    status:"Completed",
-    description:"Presented budget quotation for live setup and shot content for social media."
-  },
+    {
+      name:"Atikah",
+      code:"NC001",
+      title:"Presented budget quotation for live setup + social media content shooting",
+      date:"2026-09-09",
+      start:"",
+      end:"",
+      dueDate:"",
+      dueTime:"",
+      priority:"High",
+      status:"Completed",
+      description:"Presented budget quotation for live setup and shot content for social media."
+    },
 
-  {
-    name:"Atikah",
-    code:"NC001",
-    title:"Content shooting and video editing",
-    date:"2026-09-10",
-    start:"",
-    end:"",
-    dueDate:"",
-    dueTime:"",
-    priority:"Medium",
-    status:"Completed",
-    description:"Conducted content shooting and video editing."
-  }
+    {
+      name:"Atikah",
+      code:"NC001",
+      title:"Content shooting and video editing",
+      date:"2026-09-10",
+      start:"",
+      end:"",
+      dueDate:"",
+      dueTime:"",
+      priority:"Medium",
+      status:"Completed",
+      description:"Conducted content shooting and video editing."
+    }
 
-];
+  ];
 
 
 /* ATTENDANCE */
 
-let attendance = JSON.parse(localStorage.getItem("nona_attendance")) || [];
+let attendance =
+  JSON.parse(
+    localStorage.getItem("nona_attendance")
+  ) || [];
 
 
 /* LEAVE */
 
-let leaves = JSON.parse(localStorage.getItem("nona_leaves")) || [];
+let leaves =
+  JSON.parse(
+    localStorage.getItem("nona_leaves")
+  ) || [];
 
 
 /* SCHEDULES */
 
-let schedules = JSON.parse(localStorage.getItem("nona_schedules")) || [
+let schedules =
+  JSON.parse(
+    localStorage.getItem("nona_schedules")
+  ) || [
 
-  {
-    staffCode:"NC001",
-    task:"Content Planning",
-    date:"2026-09-15",
-    time:"10:00",
-    location:"Office"
-  },
+    {
+      staffCode:"NC001",
+      task:"Content Planning",
+      date:"2026-09-15",
+      time:"10:00",
+      location:"Office"
+    },
 
-  {
-    staffCode:"NC001",
-    task:"Product Shooting",
-    date:"2026-09-16",
-    time:"11:00",
-    location:"Studio"
-  },
+    {
+      staffCode:"NC001",
+      task:"Product Shooting",
+      date:"2026-09-16",
+      time:"11:00",
+      location:"Studio"
+    },
 
-  {
-    staffCode:"NC001",
-    task:"Video Editing",
-    date:"2026-09-17",
-    time:"14:00",
-    location:"Office"
-  }
+    {
+      staffCode:"NC001",
+      task:"Video Editing",
+      date:"2026-09-17",
+      time:"14:00",
+      location:"Office"
+    }
 
-];
+  ];
 
 
 /* ANNOUNCEMENTS */
 
-let announcements = JSON.parse(localStorage.getItem("nona_announcements")) || [
+let announcements =
+  JSON.parse(
+    localStorage.getItem("nona_announcements")
+  ) || [
 
-  {
-    title:"Welcome to Nona Costex Staff Portal",
-    message:"Welcome to the new staff portal.",
-    date:"2026-09-02"
-  },
+    {
+      title:"Welcome to Nona Costex Staff Portal",
+      message:"Welcome to the new staff portal.",
+      date:"2026-09-02"
+    },
 
-  {
-    title:"Digital Team Content Planning",
-    message:"Please keep your content planning and work logs updated.",
-    date:"2026-09-08"
-  }
+    {
+      title:"Digital Team Content Planning",
+      message:"Please keep your content planning and work logs updated.",
+      date:"2026-09-08"
+    }
 
-];
+  ];
 
 
-/* SAVE */
+/* ================= SAVE ================= */
 
 function saveData(){
 
-  localStorage.setItem("nona_staff",JSON.stringify(staff));
-  localStorage.setItem("nona_logs",JSON.stringify(logs));
-  localStorage.setItem("nona_attendance",JSON.stringify(attendance));
-  localStorage.setItem("nona_leaves",JSON.stringify(leaves));
-  localStorage.setItem("nona_schedules",JSON.stringify(schedules));
-  localStorage.setItem("nona_announcements",JSON.stringify(announcements));
+  localStorage.setItem(
+    "nona_staff",
+    JSON.stringify(staff)
+  );
+
+  localStorage.setItem(
+    "nona_logs",
+    JSON.stringify(logs)
+  );
+
+  localStorage.setItem(
+    "nona_attendance",
+    JSON.stringify(attendance)
+  );
+
+  localStorage.setItem(
+    "nona_leaves",
+    JSON.stringify(leaves)
+  );
+
+  localStorage.setItem(
+    "nona_schedules",
+    JSON.stringify(schedules)
+  );
+
+  localStorage.setItem(
+    "nona_announcements",
+    JSON.stringify(announcements)
+  );
 
 }
 
 
 /* ================= LOGIN ================= */
 
-document.getElementById("loginForm").addEventListener("submit",function(e){
+document
+.getElementById("loginForm")
+.addEventListener(
+  "submit",
+  function(e){
 
-  e.preventDefault();
-
-  const username = document.getElementById("loginUsername").value.trim();
-  const code = document.getElementById("loginCode").value.trim();
+    e.preventDefault();
 
 
-  /* ADMIN */
+    const username =
+      document
+      .getElementById("loginUsername")
+      .value
+      .trim();
 
-  if(username === "Admin" && code === "ADMIN001"){
 
-    currentUser = {
-      name:"Admin",
-      code:"ADMIN001",
-      role:"admin"
-    };
+    const code =
+      document
+      .getElementById("loginCode")
+      .value
+      .trim();
 
-    enterApp();
 
-    return;
+    /* ADMIN */
+
+    if(
+      username === "Admin" &&
+      code === "ADMIN001"
+    ){
+
+      currentUser = {
+
+        name:"Admin",
+        code:"ADMIN001",
+        role:"admin"
+
+      };
+
+      enterApp();
+
+      return;
+
+    }
+
+
+    /* STAFF */
+
+    const found =
+      staff.find(
+        s =>
+          s.name.toLowerCase()
+          ===
+          username.toLowerCase()
+          &&
+          s.code.toLowerCase()
+          ===
+          code.toLowerCase()
+      );
+
+
+    if(found){
+
+      currentUser = {
+
+        ...found,
+        role:"staff"
+
+      };
+
+      enterApp();
+
+    }else{
+
+      alert(
+        "Invalid username or staff code."
+      );
+
+    }
 
   }
-
-
-  /* STAFF */
-
-  const found = staff.find(
-    s =>
-      s.name.toLowerCase() === username.toLowerCase() &&
-      s.code.toLowerCase() === code.toLowerCase()
-  );
-
-
-  if(found){
-
-    currentUser = {
-      ...found,
-      role:"staff"
-    };
-
-    enterApp();
-
-  }else{
-
-    alert("Invalid username or staff code.");
-
-  }
-
-});
+);
 
 
 /* ================= ENTER APP ================= */
 
 function enterApp(){
 
-  document.getElementById("loginPage").classList.add("hidden");
+  document
+  .getElementById("loginPage")
+  .classList
+  .add("hidden");
 
-  document.getElementById("app").classList.remove("hidden");
+
+  document
+  .getElementById("app")
+  .classList
+  .remove("hidden");
 
 
-  if(currentUser.role === "admin"){
+  if(
+    currentUser.role === "admin"
+  ){
 
-    document.getElementById("staffNav").classList.add("hidden");
-    document.getElementById("adminNav").classList.remove("hidden");
+    document
+    .getElementById("staffNav")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("adminNav")
+    .classList
+    .remove("hidden");
+
 
     showPage("adminDashboard");
 
   }else{
 
-    document.getElementById("staffNav").classList.remove("hidden");
-    document.getElementById("adminNav").classList.add("hidden");
+    document
+    .getElementById("staffNav")
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById("adminNav")
+    .classList
+    .add("hidden");
+
 
     showPage("staffDashboard");
 
@@ -1642,6 +2646,7 @@ function enterApp(){
 
 
   updateTopbar();
+
   renderAll();
 
 }
@@ -1653,37 +2658,73 @@ function signOut(){
 
   currentUser = null;
 
-  document.getElementById("app").classList.add("hidden");
-  document.getElementById("loginPage").classList.remove("hidden");
 
-  document.getElementById("loginUsername").value = "";
-  document.getElementById("loginCode").value = "";
+  document
+  .getElementById("app")
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById("loginPage")
+  .classList
+  .remove("hidden");
+
+
+  document
+  .getElementById("loginUsername")
+  .value = "";
+
+
+  document
+  .getElementById("loginCode")
+  .value = "";
 
 }
 
 
 /* ================= NAVIGATION ================= */
 
-function showPage(pageId,button){
+function showPage(
+  pageId,
+  button
+){
 
-  document.querySelectorAll(".page").forEach(
-    p => p.classList.remove("active")
+  document
+  .querySelectorAll(".page")
+  .forEach(
+    p =>
+      p.classList
+      .remove("active")
   );
 
-  const page = document.getElementById(pageId);
+
+  const page =
+    document.getElementById(pageId);
+
 
   if(page){
-    page.classList.add("active");
+
+    page.classList
+    .add("active");
+
   }
 
 
-  document.querySelectorAll(".nav-btn").forEach(
-    b => b.classList.remove("active")
+  document
+  .querySelectorAll(".nav-btn")
+  .forEach(
+    b =>
+      b.classList
+      .remove("active")
   );
 
 
   if(button){
-    button.classList.add("active");
+
+    button.classList
+    .add("active");
+
   }
 
 
@@ -1708,8 +2749,12 @@ function showPage(pageId,button){
   };
 
 
-  document.getElementById("topbarTitle").textContent =
-    titles[pageId] || "Nona Costex";
+  document
+  .getElementById("topbarTitle")
+  .textContent =
+    titles[pageId]
+    ||
+    "Nona Costex";
 
 }
 
@@ -1718,13 +2763,24 @@ function showPage(pageId,button){
 
 function updateTopbar(){
 
-  document.getElementById("topUserName").textContent =
+  document
+  .getElementById("topUserName")
+  .textContent =
     currentUser.name;
 
-  const avatar = document.getElementById("topAvatar");
+
+  const avatar =
+    document
+    .getElementById("topAvatar");
+
 
   const savedPhoto =
-    localStorage.getItem("nona_photo_"+currentUser.code);
+    localStorage.getItem(
+      "nona_photo_"
+      +
+      currentUser.code
+    );
+
 
   if(savedPhoto){
 
@@ -1734,7 +2790,9 @@ function updateTopbar(){
   }else{
 
     avatar.textContent =
-      currentUser.name.charAt(0).toUpperCase();
+      currentUser.name
+      .charAt(0)
+      .toUpperCase();
 
   }
 
@@ -1745,7 +2803,10 @@ function updateTopbar(){
 
 function toggleForm(id){
 
-  document.getElementById(id).classList.toggle("hidden");
+  document
+  .getElementById(id)
+  .classList
+  .toggle("hidden");
 
 }
 
@@ -1754,7 +2815,12 @@ function formatDate(date){
 
   if(!date) return "-";
 
-  const d = new Date(date+"T00:00:00");
+
+  const d =
+    new Date(
+      date+"T00:00:00"
+    );
+
 
   return d.toLocaleDateString(
     "en-GB",
@@ -1772,11 +2838,17 @@ function formatTime(time){
 
   if(!time) return "-";
 
-  const [h,m] = time.split(":");
 
-  const d = new Date();
+  const [h,m] =
+    time.split(":");
+
+
+  const d =
+    new Date();
+
 
   d.setHours(h,m);
+
 
   return d.toLocaleTimeString(
     "en-US",
@@ -1791,32 +2863,155 @@ function formatTime(time){
 
 function statusBadge(status){
 
-  let cls = "badge-grey";
+  let cls =
+    "badge-grey";
 
-  if(status === "Completed" ||
-     status === "Approved" ||
-     status === "Active" ||
-     status === "Present"){
 
-    cls = "badge-green";
+  if(
+    status === "Completed" ||
+    status === "Approved" ||
+    status === "Active" ||
+    status === "Present"
+  ){
 
-  }
-
-  if(status === "Pending" ||
-     status === "In Progress"){
-
-    cls = "badge-yellow";
+    cls =
+      "badge-green";
 
   }
 
-  if(status === "Rejected" ||
-     status === "Inactive"){
 
-    cls = "badge-red";
+  if(
+    status === "Pending" ||
+    status === "In Progress"
+  ){
+
+    cls =
+      "badge-yellow";
 
   }
 
-  return `<span class="badge ${cls}">${status}</span>`;
+
+  if(
+    status === "Rejected" ||
+    status === "Inactive" ||
+    status === "Overdue"
+  ){
+
+    cls =
+      "badge-red";
+
+  }
+
+
+  return `
+    <span class="badge ${cls}">
+      ${status}
+    </span>
+  `;
+
+}
+
+
+/* ================= OVERDUE LOGIC ================= */
+
+function isOverdue(log){
+
+  if(
+    !log.dueDate ||
+    log.status === "Completed"
+  ){
+
+    return false;
+
+  }
+
+
+  let dueString =
+    log.dueDate;
+
+
+  if(log.dueTime){
+
+    dueString +=
+      "T"
+      +
+      log.dueTime;
+
+  }else{
+
+    dueString +=
+      "T23:59";
+
+  }
+
+
+  const due =
+    new Date(dueString);
+
+
+  return new Date() > due;
+
+}
+
+
+function getStaffStats(code){
+
+  const staffLogs =
+    logs.filter(
+      l => l.code === code
+    );
+
+
+  const total =
+    staffLogs.length;
+
+
+  const completed =
+    staffLogs.filter(
+      l =>
+        l.status === "Completed"
+    ).length;
+
+
+  const inProgress =
+    staffLogs.filter(
+      l =>
+        l.status === "In Progress"
+    ).length;
+
+
+  const pending =
+    staffLogs.filter(
+      l =>
+        l.status === "Pending"
+    ).length;
+
+
+  const overdue =
+    staffLogs.filter(
+      l =>
+        isOverdue(l)
+    ).length;
+
+
+  const rate =
+    total > 0
+      ? Math.round(
+          completed / total * 100
+        )
+      : 0;
+
+
+  return {
+
+    total,
+    completed,
+    inProgress,
+    pending,
+    overdue,
+    rate
+
+  };
 
 }
 
@@ -1825,76 +3020,196 @@ function statusBadge(status){
 
 function renderStaffDashboard(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
+
+
+  const stats =
+    getStaffStats(
+      currentUser.code
+    );
 
 
   const myLogs =
-    logs.filter(l => l.code === currentUser.code);
+    logs.filter(
+      l =>
+        l.code ===
+        currentUser.code
+    );
+
 
   const myAttendance =
-    attendance.filter(a => a.code === currentUser.code);
+    attendance.filter(
+      a =>
+        a.code ===
+        currentUser.code
+    );
+
 
   const myLeaves =
-    leaves.filter(l => l.code === currentUser.code);
+    leaves.filter(
+      l =>
+        l.code ===
+        currentUser.code
+    );
+
 
   const mySchedules =
-    schedules.filter(s => s.staffCode === currentUser.code);
+    schedules.filter(
+      s =>
+        s.staffCode ===
+        currentUser.code
+    );
 
 
-  document.getElementById("staffWelcomeName").textContent =
+  document
+  .getElementById(
+    "staffWelcomeName"
+  )
+  .textContent =
     currentUser.name;
 
-  document.getElementById("staffLogCount").textContent =
-    myLogs.length;
 
-  document.getElementById("staffAttendanceCount").textContent =
-    myAttendance.length;
+  document
+  .getElementById(
+    "staffTaskCount"
+  )
+  .textContent =
+    stats.total;
 
-  document.getElementById("staffLeaveCount").textContent =
-    myLeaves.length;
 
-  document.getElementById("staffScheduleCount").textContent =
-    mySchedules.length;
+  document
+  .getElementById(
+    "staffCompletedCount"
+  )
+  .textContent =
+    stats.completed;
 
+
+  document
+  .getElementById(
+    "staffProgressCount"
+  )
+  .textContent =
+    stats.inProgress;
+
+
+  document
+  .getElementById(
+    "staffOverdueCount"
+  )
+  .textContent =
+    stats.overdue;
+
+
+  document
+  .getElementById(
+    "staffCompletionRate"
+  )
+  .textContent =
+    stats.rate + "%";
+
+
+  document
+  .getElementById(
+    "staffProgressText"
+  )
+  .textContent =
+    stats.completed
+    +
+    " / "
+    +
+    stats.total
+    +
+    " completed";
+
+
+  document
+  .getElementById(
+    "staffProgressBar"
+  )
+  .style
+  .width =
+    stats.rate + "%";
+
+
+  /* RECENT LOGS */
 
   const recent =
     [...myLogs]
-    .sort((a,b)=>b.date.localeCompare(a.date))
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    )
     .slice(0,5);
 
 
   if(!recent.length){
 
-    document.getElementById("staffRecentLogs").innerHTML =
-      `<div class="empty">No work logs yet.</div>`;
+    document
+    .getElementById(
+      "staffRecentLogs"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No work logs yet.
+      </div>`;
 
   }else{
 
-    document.getElementById("staffRecentLogs").innerHTML = `
+    document
+    .getElementById(
+      "staffRecentLogs"
+    )
+    .innerHTML = `
 
       <div class="table-wrap">
 
         <table>
 
           <tr>
+
             <th>Date</th>
             <th>Task</th>
             <th>Status</th>
+
           </tr>
 
-          ${recent.map(l=>`
 
-            <tr>
+          ${recent.map(
+            l => `
 
-              <td>${formatDate(l.date)}</td>
+              <tr>
 
-              <td>${l.title}</td>
+                <td>
+                  ${formatDate(l.date)}
+                </td>
 
-              <td>${statusBadge(l.status)}</td>
+                <td>
+                  ${l.title}
+                </td>
 
-            </tr>
+                <td>
+                  ${
+                    isOverdue(l)
+                    ?
+                    statusBadge(
+                      "Overdue"
+                    )
+                    :
+                    statusBadge(
+                      l.status
+                    )
+                  }
+                </td>
 
-          `).join("")}
+              </tr>
+
+            `
+          ).join("")}
 
         </table>
 
@@ -1905,35 +3220,75 @@ function renderStaffDashboard(){
   }
 
 
+  /* SCHEDULE */
+
   const upcoming =
     [...mySchedules]
-    .sort((a,b)=>a.date.localeCompare(b.date))
+    .sort(
+      (a,b) =>
+        a.date.localeCompare(
+          b.date
+        )
+    )
     .slice(0,5);
 
 
   if(!upcoming.length){
 
-    document.getElementById("staffUpcomingSchedule").innerHTML =
-      `<div class="empty">No upcoming schedule.</div>`;
+    document
+    .getElementById(
+      "staffUpcomingSchedule"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No upcoming schedule.
+      </div>`;
 
   }else{
 
-    document.getElementById("staffUpcomingSchedule").innerHTML =
-      upcoming.map(s=>`
+    document
+    .getElementById(
+      "staffUpcomingSchedule"
+    )
+    .innerHTML =
 
-        <div style="padding:12px 0;border-bottom:1px solid #eee;">
+      upcoming.map(
+        s => `
 
-          <div style="font-weight:600;font-size:13px;">
-            ${s.task}
+          <div
+            style="
+              padding:12px 0;
+              border-bottom:1px solid #eee;
+            "
+          >
+
+            <div
+              style="
+                font-weight:600;
+                font-size:13px;
+              "
+            >
+              ${s.task}
+            </div>
+
+            <div
+              style="
+                font-size:11px;
+                color:#888;
+                margin-top:4px;
+              "
+            >
+              ${formatDate(s.date)}
+              ·
+              ${formatTime(s.time)}
+              ·
+              ${s.location || "-"}
+            </div>
+
           </div>
 
-          <div style="font-size:11px;color:#888;margin-top:4px;">
-            ${formatDate(s.date)} · ${formatTime(s.time)} · ${s.location || "-"}
-          </div>
-
-        </div>
-
-      `).join("");
+        `
+      ).join("");
 
   }
 
@@ -1944,82 +3299,277 @@ function renderStaffDashboard(){
 
 function renderAdminDashboard(){
 
-  if(currentUser.role !== "admin") return;
+  if(
+    currentUser.role !== "admin"
+  ) return;
 
 
   const activeStaff =
-    staff.filter(s=>s.status === "Active");
+    staff.filter(
+      s =>
+        s.status === "Active"
+    );
 
 
   const todayAttendance =
-    attendance.filter(a=>a.date === today);
+    attendance.filter(
+      a =>
+        a.date === today
+    );
 
 
   const pendingLeave =
-    leaves.filter(l=>l.status === "Pending");
+    leaves.filter(
+      l =>
+        l.status === "Pending"
+    );
 
 
-  const thisWeek =
-    logs.filter(l=>{
-
-      const d = new Date(l.date+"T00:00:00");
-      const now = new Date();
-
-      const diff =
-        (now-d)/(1000*60*60*24);
-
-      return diff >= 0 && diff <= 7;
-
-    });
-
-
-  document.getElementById("adminTotalStaff").textContent =
+  document
+  .getElementById(
+    "adminTotalStaff"
+  )
+  .textContent =
     staff.length;
 
-  document.getElementById("adminActiveStaff").textContent =
+
+  document
+  .getElementById(
+    "adminActiveStaff"
+  )
+  .textContent =
     activeStaff.length;
 
-  document.getElementById("adminPresentToday").textContent =
+
+  document
+  .getElementById(
+    "adminPresentToday"
+  )
+  .textContent =
     todayAttendance.length;
 
-  document.getElementById("adminPendingLeave").textContent =
+
+  document
+  .getElementById(
+    "adminPendingLeave"
+  )
+  .textContent =
     pendingLeave.length;
+
+
+  /* PERFORMANCE */
+
+  const performanceContainer =
+    document
+    .getElementById(
+      "dashboardPerformance"
+    );
+
+
+  if(!staff.length){
+
+    performanceContainer.innerHTML =
+      `<div class="empty">
+        No staff available.
+      </div>`;
+
+  }else{
+
+    performanceContainer.innerHTML =
+
+      staff.map(
+        s => {
+
+          const stats =
+            getStaffStats(
+              s.code
+            );
+
+
+          return `
+
+            <div
+              class="performance-card"
+            >
+
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  margin-bottom:8px;
+                "
+              >
+
+                <div>
+
+                  <div
+                    style="
+                      font-weight:600;
+                      font-size:13px;
+                    "
+                  >
+                    ${s.name}
+                  </div>
+
+                  <div
+                    style="
+                      font-size:10px;
+                      color:#999;
+                      margin-top:3px;
+                    "
+                  >
+                    ${s.department}
+                    ·
+                    ${s.position}
+                  </div>
+
+                </div>
+
+
+                <div
+                  style="
+                    font-size:13px;
+                    font-weight:700;
+                  "
+                >
+                  ${stats.rate}%
+                </div>
+
+              </div>
+
+
+              <div class="progress-wrap">
+
+                <div
+                  class="progress-info"
+                >
+
+                  <span>
+                    ${stats.completed}
+                    completed
+                  </span>
+
+                  <span>
+                    ${stats.total}
+                    total
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="progress-bar"
+                >
+
+                  <div
+                    class="progress-fill"
+                    style="
+                      width:${stats.rate}%;
+                    "
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div
+                style="
+                  margin-top:8px;
+                  font-size:10px;
+                  color:#999;
+                "
+              >
+
+                ${stats.inProgress}
+                in progress
+                ·
+                ${stats.pending}
+                pending
+                ·
+                ${stats.overdue}
+                overdue
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
 
 
   /* ATTENDANCE */
 
   if(!todayAttendance.length){
 
-    document.getElementById("dashboardAttendance").innerHTML =
-      `<div class="empty">No attendance recorded today.</div>`;
+    document
+    .getElementById(
+      "dashboardAttendance"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No attendance recorded today.
+      </div>`;
 
   }else{
 
-    document.getElementById("dashboardAttendance").innerHTML = `
+    document
+    .getElementById(
+      "dashboardAttendance"
+    )
+    .innerHTML = `
 
       <div class="table-wrap">
 
         <table>
 
           <tr>
-            <th>Staff</th>
-            <th>Check In</th>
-            <th>Status</th>
+
+            <th>
+              Staff
+            </th>
+
+            <th>
+              Check In
+            </th>
+
+            <th>
+              Status
+            </th>
+
           </tr>
 
-          ${todayAttendance.map(a=>`
 
-            <tr>
+          ${todayAttendance.map(
+            a => `
 
-              <td>${a.name}</td>
+              <tr>
 
-              <td>${formatTime(a.checkIn)}</td>
+                <td>
+                  ${a.name}
+                </td>
 
-              <td>${statusBadge("Present")}</td>
+                <td>
+                  ${formatTime(
+                    a.checkIn
+                  )}
+                </td>
 
-            </tr>
+                <td>
+                  ${statusBadge(
+                    "Present"
+                  )}
+                </td>
 
-          `).join("")}
+              </tr>
+
+            `
+          ).join("")}
 
         </table>
 
@@ -2034,36 +3584,69 @@ function renderAdminDashboard(){
 
   if(!pendingLeave.length){
 
-    document.getElementById("dashboardLeave").innerHTML =
-      `<div class="empty">No pending leave requests.</div>`;
+    document
+    .getElementById(
+      "dashboardLeave"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No pending leave requests.
+      </div>`;
 
   }else{
 
-    document.getElementById("dashboardLeave").innerHTML = `
+    document
+    .getElementById(
+      "dashboardLeave"
+    )
+    .innerHTML = `
 
       <div class="table-wrap">
 
         <table>
 
           <tr>
-            <th>Staff</th>
-            <th>Type</th>
-            <th>Status</th>
+
+            <th>
+              Staff
+            </th>
+
+            <th>
+              Type
+            </th>
+
+            <th>
+              Status
+            </th>
+
           </tr>
 
-          ${pendingLeave.slice(0,5).map(l=>`
 
-            <tr>
+          ${pendingLeave
+            .slice(0,5)
+            .map(
+              l => `
 
-              <td>${l.name}</td>
+                <tr>
 
-              <td>${l.type}</td>
+                  <td>
+                    ${l.name}
+                  </td>
 
-              <td>${statusBadge(l.status)}</td>
+                  <td>
+                    ${l.type}
+                  </td>
 
-            </tr>
+                  <td>
+                    ${statusBadge(
+                      l.status
+                    )}
+                  </td>
 
-          `).join("")}
+                </tr>
+
+              `
+            ).join("")}
 
         </table>
 
@@ -2074,53 +3657,100 @@ function renderAdminDashboard(){
   }
 
 
-  /* LOGS */
+  /* RECENT LOGS */
 
   const recentLogs =
     [...logs]
-    .sort((a,b)=>{
-
-      return b.date.localeCompare(a.date);
-
-    })
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    )
     .slice(0,7);
 
 
   if(!recentLogs.length){
 
-    document.getElementById("dashboardLogs").innerHTML =
-      `<div class="empty">No work logs yet.</div>`;
+    document
+    .getElementById(
+      "dashboardLogs"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No work logs yet.
+      </div>`;
 
   }else{
 
-    document.getElementById("dashboardLogs").innerHTML = `
+    document
+    .getElementById(
+      "dashboardLogs"
+    )
+    .innerHTML = `
 
       <div class="table-wrap">
 
         <table>
 
           <tr>
-            <th>Staff</th>
-            <th>Date</th>
-            <th>Task</th>
-            <th>Status</th>
+
+            <th>
+              Staff
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Task
+            </th>
+
+            <th>
+              Status
+            </th>
+
           </tr>
 
-          ${recentLogs.map(l=>`
 
-            <tr>
+          ${recentLogs.map(
+            l => `
 
-              <td>${l.name}</td>
+              <tr>
 
-              <td>${formatDate(l.date)}</td>
+                <td>
+                  ${l.name}
+                </td>
 
-              <td>${l.title}</td>
+                <td>
+                  ${formatDate(
+                    l.date
+                  )}
+                </td>
 
-              <td>${statusBadge(l.status)}</td>
+                <td>
+                  ${l.title}
+                </td>
 
-            </tr>
+                <td>
+                  ${
+                    isOverdue(l)
+                    ?
+                    statusBadge(
+                      "Overdue"
+                    )
+                    :
+                    statusBadge(
+                      l.status
+                    )
+                  }
+                </td>
 
-          `).join("")}
+              </tr>
+
+            `
+          ).join("")}
 
         </table>
 
@@ -2131,39 +3761,116 @@ function renderAdminDashboard(){
   }
 
 
-  /* STAFF OVERVIEW */
+  /* OVERDUE */
 
-  document.getElementById("dashboardStaff").innerHTML = `
+  const overdue =
+    logs
+    .filter(
+      l =>
+        isOverdue(l)
+    )
+    .sort(
+      (a,b) =>
+        a.dueDate.localeCompare(
+          b.dueDate
+        )
+    )
+    .slice(0,7);
 
-    <div class="table-wrap">
 
-      <table>
+  if(!overdue.length){
 
-        <tr>
-          <th>Staff</th>
-          <th>Department</th>
-          <th>Status</th>
-        </tr>
+    document
+    .getElementById(
+      "dashboardOverdue"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No overdue tasks. Nice.
+      </div>`;
 
-        ${staff.map(s=>`
+  }else{
+
+    document
+    .getElementById(
+      "dashboardOverdue"
+    )
+    .innerHTML = `
+
+      <div class="table-wrap">
+
+        <table>
 
           <tr>
 
-            <td>${s.name}</td>
+            <th>
+              Staff
+            </th>
 
-            <td>${s.department}</td>
+            <th>
+              Task
+            </th>
 
-            <td>${statusBadge(s.status)}</td>
+            <th>
+              Due
+            </th>
 
           </tr>
 
-        `).join("")}
 
-      </table>
+          ${overdue.map(
+            l => `
 
-    </div>
+              <tr>
 
-  `;
+                <td>
+                  ${l.name}
+                </td>
+
+                <td>
+                  ${l.title}
+                </td>
+
+                <td>
+
+                  <div>
+                    ${formatDate(
+                      l.dueDate
+                    )}
+                  </div>
+
+                  <div
+                    style="
+                      font-size:10px;
+                      color:#999;
+                      margin-top:3px;
+                    "
+                  >
+                    ${
+                      l.dueTime
+                      ?
+                      formatTime(
+                        l.dueTime
+                      )
+                      :
+                      ""
+                    }
+                  </div>
+
+                </td>
+
+              </tr>
+
+            `
+          ).join("")}
+
+        </table>
+
+      </div>
+
+    `;
+
+  }
 
 }
 
@@ -2173,14 +3880,30 @@ function renderAdminDashboard(){
 function saveWorkLog(){
 
   const title =
-    document.getElementById("logTitle").value.trim();
+    document
+    .getElementById(
+      "logTitle"
+    )
+    .value
+    .trim();
+
 
   const date =
-    document.getElementById("logDate").value;
+    document
+    .getElementById(
+      "logDate"
+    )
+    .value;
 
-  if(!title || !date){
 
-    alert("Please enter task title and work date.");
+  if(
+    !title ||
+    !date
+  ){
+
+    alert(
+      "Please enter task title and work date."
+    );
 
     return;
 
@@ -2189,36 +3912,93 @@ function saveWorkLog(){
 
   logs.push({
 
-    name:currentUser.name,
-    code:currentUser.code,
+    name:
+      currentUser.name,
+
+    code:
+      currentUser.code,
 
     title,
 
     date,
 
-    start:document.getElementById("logStart").value,
-    end:document.getElementById("logEnd").value,
+    start:
+      document
+      .getElementById(
+        "logStart"
+      )
+      .value,
 
-    dueDate:document.getElementById("logDueDate").value,
-    dueTime:document.getElementById("logDueTime").value,
+    end:
+      document
+      .getElementById(
+        "logEnd"
+      )
+      .value,
 
-    priority:document.getElementById("logPriority").value,
-    status:document.getElementById("logStatus").value,
+    dueDate:
+      document
+      .getElementById(
+        "logDueDate"
+      )
+      .value,
+
+    dueTime:
+      document
+      .getElementById(
+        "logDueTime"
+      )
+      .value,
+
+    priority:
+      document
+      .getElementById(
+        "logPriority"
+      )
+      .value,
+
+    status:
+      document
+      .getElementById(
+        "logStatus"
+      )
+      .value,
 
     description:
-      document.getElementById("logDescription").value
+      document
+      .getElementById(
+        "logDescription"
+      )
+      .value
 
   });
 
 
   saveData();
 
-  alert("Work log saved.");
 
-  document.getElementById("workLogForm").classList.add("hidden");
+  alert(
+    "Work log saved."
+  );
 
-  document.querySelectorAll("#workLogForm input, #workLogForm textarea")
-    .forEach(el=>el.value="");
+
+  document
+  .getElementById(
+    "workLogForm"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .querySelectorAll(
+    "#workLogForm input, #workLogForm textarea"
+  )
+  .forEach(
+    el =>
+      el.value=""
+  );
+
 
   renderAll();
 
@@ -2227,26 +4007,47 @@ function saveWorkLog(){
 
 function renderMyLogs(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
 
 
   const myLogs =
     [...logs]
-    .filter(l=>l.code === currentUser.code)
-    .sort((a,b)=>b.date.localeCompare(a.date));
+    .filter(
+      l =>
+        l.code ===
+        currentUser.code
+    )
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    );
 
 
   if(!myLogs.length){
 
-    document.getElementById("myLogs").innerHTML =
-      `<div class="empty">No work logs yet.</div>`;
+    document
+    .getElementById(
+      "myLogs"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No work logs yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("myLogs").innerHTML = `
+  document
+  .getElementById(
+    "myLogs"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2254,44 +4055,114 @@ function renderMyLogs(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Task</th>
-          <th>Priority</th>
-          <th>Status</th>
-          <th>Due</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Task
+          </th>
+
+          <th>
+            Priority
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Due
+          </th>
 
         </tr>
 
-        ${myLogs.map(l=>`
 
-          <tr>
+        ${myLogs.map(
+          l => `
 
-            <td>${formatDate(l.date)}</td>
+            <tr>
 
-            <td>
+              <td>
+                ${formatDate(
+                  l.date
+                )}
+              </td>
 
-              <div style="font-weight:600;">
-                ${l.title}
-              </div>
+              <td>
 
-              <div style="font-size:10px;color:#999;margin-top:4px;">
-                ${l.description || ""}
-              </div>
+                <div
+                  style="
+                    font-weight:600;
+                  "
+                >
+                  ${l.title}
+                </div>
 
-            </td>
+                <div
+                  style="
+                    font-size:10px;
+                    color:#999;
+                    margin-top:4px;
+                  "
+                >
+                  ${
+                    l.description || ""
+                  }
+                </div>
 
-            <td>${l.priority}</td>
+              </td>
 
-            <td>${statusBadge(l.status)}</td>
+              <td>
+                ${l.priority}
+              </td>
 
-            <td>
-              ${l.dueDate ? formatDate(l.dueDate) : "-"}
-              ${l.dueTime ? " · "+formatTime(l.dueTime) : ""}
-            </td>
+              <td>
 
-          </tr>
+                ${
+                  isOverdue(l)
+                  ?
+                  statusBadge(
+                    "Overdue"
+                  )
+                  :
+                  statusBadge(
+                    l.status
+                  )
+                }
 
-        `).join("")}
+              </td>
+
+              <td>
+
+                ${
+                  l.dueDate
+                  ?
+                  formatDate(
+                    l.dueDate
+                  )
+                  :
+                  "-"
+                }
+
+                ${
+                  l.dueTime
+                  ?
+                  " · "
+                  +
+                  formatTime(
+                    l.dueTime
+                  )
+                  :
+                  ""
+                }
+
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2309,14 +4180,19 @@ function checkIn(){
   const existing =
     attendance.find(
       a =>
-        a.code === currentUser.code &&
-        a.date === today
+        a.code ===
+        currentUser.code
+        &&
+        a.date ===
+        today
     );
 
 
   if(existing){
 
-    alert("You have already checked in today.");
+    alert(
+      "You have already checked in today."
+    );
 
     return;
 
@@ -2325,10 +4201,20 @@ function checkIn(){
 
   attendance.push({
 
-    name:currentUser.name,
-    code:currentUser.code,
-    date:today,
-    checkIn:new Date().toTimeString().slice(0,5),
+    name:
+      currentUser.name,
+
+    code:
+      currentUser.code,
+
+    date:
+      today,
+
+    checkIn:
+      new Date()
+      .toTimeString()
+      .slice(0,5),
+
     checkOut:""
 
   });
@@ -2336,7 +4222,11 @@ function checkIn(){
 
   saveData();
 
-  alert("Checked in successfully.");
+
+  alert(
+    "Checked in successfully."
+  );
+
 
   renderAll();
 
@@ -2348,14 +4238,19 @@ function checkOut(){
   const existing =
     attendance.find(
       a =>
-        a.code === currentUser.code &&
-        a.date === today
+        a.code ===
+        currentUser.code
+        &&
+        a.date ===
+        today
     );
 
 
   if(!existing){
 
-    alert("Please check in first.");
+    alert(
+      "Please check in first."
+    );
 
     return;
 
@@ -2363,12 +4258,18 @@ function checkOut(){
 
 
   existing.checkOut =
-    new Date().toTimeString().slice(0,5);
+    new Date()
+    .toTimeString()
+    .slice(0,5);
 
 
   saveData();
 
-  alert("Checked out successfully.");
+
+  alert(
+    "Checked out successfully."
+  );
+
 
   renderAll();
 
@@ -2377,26 +4278,47 @@ function checkOut(){
 
 function renderMyAttendance(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
 
 
   const records =
     [...attendance]
-    .filter(a=>a.code === currentUser.code)
-    .sort((a,b)=>b.date.localeCompare(a.date));
+    .filter(
+      a =>
+        a.code ===
+        currentUser.code
+    )
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    );
 
 
   if(!records.length){
 
-    document.getElementById("myAttendance").innerHTML =
-      `<div class="empty">No attendance records yet.</div>`;
+    document
+    .getElementById(
+      "myAttendance"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No attendance records yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("myAttendance").innerHTML = `
+  document
+  .getElementById(
+    "myAttendance"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2404,28 +4326,58 @@ function renderMyAttendance(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Check In</th>
-          <th>Check Out</th>
-          <th>Status</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Check In
+          </th>
+
+          <th>
+            Check Out
+          </th>
+
+          <th>
+            Status
+          </th>
 
         </tr>
 
-        ${records.map(a=>`
 
-          <tr>
+        ${records.map(
+          a => `
 
-            <td>${formatDate(a.date)}</td>
+            <tr>
 
-            <td>${formatTime(a.checkIn)}</td>
+              <td>
+                ${formatDate(
+                  a.date
+                )}
+              </td>
 
-            <td>${formatTime(a.checkOut)}</td>
+              <td>
+                ${formatTime(
+                  a.checkIn
+                )}
+              </td>
 
-            <td>${statusBadge("Present")}</td>
+              <td>
+                ${formatTime(
+                  a.checkOut
+                )}
+              </td>
 
-          </tr>
+              <td>
+                ${statusBadge(
+                  "Present"
+                )}
+              </td>
 
-        `).join("")}
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2441,15 +4393,29 @@ function renderMyAttendance(){
 function saveLeave(){
 
   const start =
-    document.getElementById("leaveStart").value;
+    document
+    .getElementById(
+      "leaveStart"
+    )
+    .value;
+
 
   const end =
-    document.getElementById("leaveEnd").value;
+    document
+    .getElementById(
+      "leaveEnd"
+    )
+    .value;
 
 
-  if(!start || !end){
+  if(
+    !start ||
+    !end
+  ){
 
-    alert("Please select leave dates.");
+    alert(
+      "Please select leave dates."
+    );
 
     return;
 
@@ -2458,28 +4424,51 @@ function saveLeave(){
 
   leaves.push({
 
-    name:currentUser.name,
-    code:currentUser.code,
+    name:
+      currentUser.name,
+
+    code:
+      currentUser.code,
 
     type:
-      document.getElementById("leaveType").value,
+      document
+      .getElementById(
+        "leaveType"
+      )
+      .value,
 
     start,
+
     end,
 
     reason:
-      document.getElementById("leaveReason").value,
+      document
+      .getElementById(
+        "leaveReason"
+      )
+      .value,
 
-    status:"Pending"
+    status:
+      "Pending"
 
   });
 
 
   saveData();
 
-  alert("Leave request submitted.");
 
-  document.getElementById("leaveForm").classList.add("hidden");
+  alert(
+    "Leave request submitted."
+  );
+
+
+  document
+  .getElementById(
+    "leaveForm"
+  )
+  .classList
+  .add("hidden");
+
 
   renderAll();
 
@@ -2488,24 +4477,40 @@ function saveLeave(){
 
 function renderMyLeaves(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
 
 
   const myLeaves =
-    leaves.filter(l=>l.code === currentUser.code);
+    leaves.filter(
+      l =>
+        l.code ===
+        currentUser.code
+    );
 
 
   if(!myLeaves.length){
 
-    document.getElementById("myLeaves").innerHTML =
-      `<div class="empty">No leave requests yet.</div>`;
+    document
+    .getElementById(
+      "myLeaves"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No leave requests yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("myLeaves").innerHTML = `
+  document
+  .getElementById(
+    "myLeaves"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2513,27 +4518,66 @@ function renderMyLeaves(){
 
         <tr>
 
-          <th>Type</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Reason</th>
-          <th>Status</th>
+          <th>
+            Type
+          </th>
+
+          <th>
+            Start
+          </th>
+
+          <th>
+            End
+          </th>
+
+          <th>
+            Reason
+          </th>
+
+          <th>
+            Status
+          </th>
 
         </tr>
 
-        ${myLeaves.map(l=>`
 
-          <tr>
+        ${myLeaves.map(
+          l => `
 
-            <td>${l.type}</td>
-            <td>${formatDate(l.start)}</td>
-            <td>${formatDate(l.end)}</td>
-            <td>${l.reason || "-"}</td>
-            <td>${statusBadge(l.status)}</td>
+            <tr>
 
-          </tr>
+              <td>
+                ${l.type}
+              </td>
 
-        `).join("")}
+              <td>
+                ${formatDate(
+                  l.start
+                )}
+              </td>
+
+              <td>
+                ${formatDate(
+                  l.end
+                )}
+              </td>
+
+              <td>
+                ${
+                  l.reason || "-"
+                }
+              </td>
+
+              <td>
+                ${statusBadge(
+                  l.status
+                )}
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2548,26 +4592,47 @@ function renderMyLeaves(){
 
 function renderStaffSchedule(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
 
 
   const list =
     schedules
-    .filter(s=>s.staffCode === currentUser.code)
-    .sort((a,b)=>a.date.localeCompare(b.date));
+    .filter(
+      s =>
+        s.staffCode ===
+        currentUser.code
+    )
+    .sort(
+      (a,b) =>
+        a.date.localeCompare(
+          b.date
+        )
+    );
 
 
   if(!list.length){
 
-    document.getElementById("staffScheduleList").innerHTML =
-      `<div class="empty">No schedules available.</div>`;
+    document
+    .getElementById(
+      "staffScheduleList"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No schedules available.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("staffScheduleList").innerHTML = `
+  document
+  .getElementById(
+    "staffScheduleList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2575,25 +4640,56 @@ function renderStaffSchedule(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Task</th>
-          <th>Time</th>
-          <th>Location</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Task
+          </th>
+
+          <th>
+            Time
+          </th>
+
+          <th>
+            Location
+          </th>
 
         </tr>
 
-        ${list.map(s=>`
 
-          <tr>
+        ${list.map(
+          s => `
 
-            <td>${formatDate(s.date)}</td>
-            <td>${s.task}</td>
-            <td>${formatTime(s.time)}</td>
-            <td>${s.location || "-"}</td>
+            <tr>
 
-          </tr>
+              <td>
+                ${formatDate(
+                  s.date
+                )}
+              </td>
 
-        `).join("")}
+              <td>
+                ${s.task}
+              </td>
+
+              <td>
+                ${formatTime(
+                  s.time
+                )}
+              </td>
+
+              <td>
+                ${
+                  s.location || "-"
+                }
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2608,35 +4704,70 @@ function renderStaffSchedule(){
 
 function renderProfile(){
 
-  if(currentUser.role !== "staff") return;
+  if(
+    currentUser.role !== "staff"
+  ) return;
 
 
-  document.getElementById("profileName").value =
+  document
+  .getElementById(
+    "profileName"
+  )
+  .value =
     currentUser.name;
 
-  document.getElementById("profileCode").value =
+
+  document
+  .getElementById(
+    "profileCode"
+  )
+  .value =
     currentUser.code;
 
-  document.getElementById("profileDepartment").value =
+
+  document
+  .getElementById(
+    "profileDepartment"
+  )
+  .value =
     currentUser.department;
 
-  document.getElementById("profilePosition").value =
+
+  document
+  .getElementById(
+    "profilePosition"
+  )
+  .value =
     currentUser.position;
 
 
   const savedPhoto =
-    localStorage.getItem("nona_photo_"+currentUser.code);
+    localStorage.getItem(
+      "nona_photo_"
+      +
+      currentUser.code
+    );
 
 
   if(savedPhoto){
 
-    document.getElementById("profileAvatar").innerHTML =
+    document
+    .getElementById(
+      "profileAvatar"
+    )
+    .innerHTML =
       `<img src="${savedPhoto}">`;
 
   }else{
 
-    document.getElementById("profileAvatar").textContent =
-      currentUser.name.charAt(0).toUpperCase();
+    document
+    .getElementById(
+      "profileAvatar"
+    )
+    .textContent =
+      currentUser.name
+      .charAt(0)
+      .toUpperCase();
 
   }
 
@@ -2648,24 +4779,33 @@ function uploadPhoto(event){
   const file =
     event.target.files[0];
 
+
   if(!file) return;
 
 
-  const reader = new FileReader();
+  const reader =
+    new FileReader();
 
 
-  reader.onload = function(e){
+  reader.onload =
+    function(e){
 
-    localStorage.setItem(
-      "nona_photo_"+currentUser.code,
-      e.target.result
-    );
+      localStorage.setItem(
+
+        "nona_photo_"
+        +
+        currentUser.code,
+
+        e.target.result
+
+      );
 
 
-    renderProfile();
-    updateTopbar();
+      renderProfile();
 
-  };
+      updateTopbar();
+
+    };
 
 
   reader.readAsDataURL(file);
@@ -2678,31 +4818,69 @@ function uploadPhoto(event){
 function renderStaffAnnouncements(){
 
   const container =
-    document.getElementById("staffAnnouncements");
+    document
+    .getElementById(
+      "staffAnnouncements"
+    );
 
 
   container.innerHTML =
+
     announcements
-    .sort((a,b)=>b.date.localeCompare(a.date))
-    .map(a=>`
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    )
+    .map(
+      a => `
 
-      <div class="card" style="margin-bottom:14px;">
+        <div
+          class="card"
+          style="
+            margin-bottom:14px;
+          "
+        >
 
-        <div style="font-weight:700;font-size:15px;">
-          ${a.title}
+          <div
+            style="
+              font-weight:700;
+              font-size:15px;
+            "
+          >
+            ${a.title}
+          </div>
+
+
+          <div
+            style="
+              font-size:11px;
+              color:#999;
+              margin:7px 0 12px;
+            "
+          >
+            ${formatDate(
+              a.date
+            )}
+          </div>
+
+
+          <div
+            style="
+              font-size:13px;
+              line-height:1.6;
+              color:#666;
+            "
+          >
+            ${a.message}
+          </div>
+
         </div>
 
-        <div style="font-size:11px;color:#999;margin:7px 0 12px;">
-          ${formatDate(a.date)}
-        </div>
-
-        <div style="font-size:13px;line-height:1.6;color:#666;">
-          ${a.message}
-        </div>
-
-      </div>
-
-    `).join("");
+      `
+    )
+    .join("");
 
 }
 
@@ -2711,7 +4889,11 @@ function renderStaffAnnouncements(){
 
 function renderStaffList(){
 
-  document.getElementById("staffList").innerHTML = `
+  document
+  .getElementById(
+    "staffList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2719,43 +4901,146 @@ function renderStaffList(){
 
         <tr>
 
-          <th>Name</th>
-          <th>Code</th>
-          <th>Department</th>
-          <th>Position</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th>
+            Name
+          </th>
+
+          <th>
+            Code
+          </th>
+
+          <th>
+            Department
+          </th>
+
+          <th>
+            Position
+          </th>
+
+          <th>
+            Progress
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Action
+          </th>
 
         </tr>
 
-        ${staff.map((s,i)=>`
 
-          <tr>
+        ${staff.map(
+          (s,i) => {
 
-            <td>${s.name}</td>
+            const stats =
+              getStaffStats(
+                s.code
+              );
 
-            <td>${s.code}</td>
 
-            <td>${s.department}</td>
+            return `
 
-            <td>${s.position}</td>
+              <tr>
 
-            <td>${statusBadge(s.status)}</td>
+                <td>
+                  ${s.name}
+                </td>
 
-            <td>
+                <td>
+                  ${s.code}
+                </td>
 
-              <button
-                class="btn-small btn-light"
-                onclick="toggleStaffStatus(${i})"
-              >
-                ${s.status === "Active" ? "Deactivate" : "Activate"}
-              </button>
+                <td>
+                  ${s.department}
+                </td>
 
-            </td>
+                <td>
+                  ${s.position}
+                </td>
 
-          </tr>
+                <td>
 
-        `).join("")}
+                  <div
+                    style="
+                      min-width:100px;
+                    "
+                  >
+
+                    <div
+                      style="
+                        font-size:10px;
+                        margin-bottom:4px;
+                      "
+                    >
+                      ${stats.rate}%
+                    </div>
+
+                    <div
+                      class="progress-bar"
+                    >
+
+                      <div
+                        class="progress-fill"
+                        style="
+                          width:${stats.rate}%;
+                        "
+                      ></div>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  ${statusBadge(
+                    s.status
+                  )}
+                </td>
+
+                <td>
+
+                  <button
+                    class="btn-small btn-outline"
+                    onclick="
+                      viewStaffProfile(
+                        '${s.code}'
+                      )
+                    "
+                  >
+                    View
+                  </button>
+
+
+                  <button
+                    class="btn-small btn-light"
+                    onclick="
+                      toggleStaffStatus(
+                        ${i}
+                      )
+                    "
+                  >
+                    ${
+                      s.status ===
+                      "Active"
+                      ?
+                      "Deactivate"
+                      :
+                      "Activate"
+                    }
+                  </button>
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }
+        ).join("")}
 
       </table>
 
@@ -2769,24 +5054,47 @@ function renderStaffList(){
 function addStaff(){
 
   const name =
-    document.getElementById("newStaffName").value.trim();
+    document
+    .getElementById(
+      "newStaffName"
+    )
+    .value
+    .trim();
+
 
   const code =
-    document.getElementById("newStaffCode").value.trim();
+    document
+    .getElementById(
+      "newStaffCode"
+    )
+    .value
+    .trim();
 
 
-  if(!name || !code){
+  if(
+    !name ||
+    !code
+  ){
 
-    alert("Please enter staff name and code.");
+    alert(
+      "Please enter staff name and code."
+    );
 
     return;
 
   }
 
 
-  if(staff.some(s=>s.code === code)){
+  if(
+    staff.some(
+      s =>
+        s.code === code
+    )
+  ){
 
-    alert("Staff code already exists.");
+    alert(
+      "Staff code already exists."
+    );
 
     return;
 
@@ -2800,23 +5108,43 @@ function addStaff(){
     code,
 
     department:
-      document.getElementById("newStaffDepartment").value,
+      document
+      .getElementById(
+        "newStaffDepartment"
+      )
+      .value,
 
     position:
-      document.getElementById("newStaffPosition").value,
+      document
+      .getElementById(
+        "newStaffPosition"
+      )
+      .value,
 
-    status:"Active",
+    status:
+      "Active",
 
-    joining:today
+    joining:
+      today
 
   });
 
 
   saveData();
 
-  alert("Staff added successfully.");
 
-  document.getElementById("staffForm").classList.add("hidden");
+  alert(
+    "Staff added successfully."
+  );
+
+
+  document
+  .getElementById(
+    "staffForm"
+  )
+  .classList
+  .add("hidden");
+
 
   renderAll();
 
@@ -2826,14 +5154,230 @@ function addStaff(){
 function toggleStaffStatus(index){
 
   staff[index].status =
-    staff[index].status === "Active"
-      ? "Inactive"
-      : "Active";
+    staff[index].status ===
+    "Active"
+    ?
+    "Inactive"
+    :
+    "Active";
 
 
   saveData();
 
   renderAll();
+
+}
+
+
+/* ================= STAFF PROFILE MODAL ================= */
+
+function viewStaffProfile(code){
+
+  const member =
+    staff.find(
+      s =>
+        s.code === code
+    );
+
+
+  if(!member) return;
+
+
+  const stats =
+    getStaffStats(code);
+
+
+  document
+  .getElementById(
+    "modalStaffName"
+  )
+  .textContent =
+    member.name;
+
+
+  document
+  .getElementById(
+    "modalStaffInfo"
+  )
+  .textContent =
+    member.code
+    +
+    " · "
+    +
+    member.department
+    +
+    " · "
+    +
+    member.position;
+
+
+  document
+  .getElementById(
+    "modalTotal"
+  )
+  .textContent =
+    stats.total;
+
+
+  document
+  .getElementById(
+    "modalCompleted"
+  )
+  .textContent =
+    stats.completed;
+
+
+  document
+  .getElementById(
+    "modalProgress"
+  )
+  .textContent =
+    stats.inProgress;
+
+
+  document
+  .getElementById(
+    "modalOverdue"
+  )
+  .textContent =
+    stats.overdue;
+
+
+  document
+  .getElementById(
+    "modalRate"
+  )
+  .textContent =
+    stats.rate + "%";
+
+
+  document
+  .getElementById(
+    "modalProgressBar"
+  )
+  .style
+  .width =
+    stats.rate + "%";
+
+
+  const recent =
+    logs
+    .filter(
+      l =>
+        l.code === code
+    )
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    )
+    .slice(0,7);
+
+
+  if(!recent.length){
+
+    document
+    .getElementById(
+      "modalRecentTasks"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No tasks recorded yet.
+      </div>`;
+
+  }else{
+
+    document
+    .getElementById(
+      "modalRecentTasks"
+    )
+    .innerHTML = `
+
+      <div class="table-wrap">
+
+        <table>
+
+          <tr>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Task
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+
+          ${recent.map(
+            l => `
+
+              <tr>
+
+                <td>
+                  ${formatDate(
+                    l.date
+                  )}
+                </td>
+
+                <td>
+                  ${l.title}
+                </td>
+
+                <td>
+
+                  ${
+                    isOverdue(l)
+                    ?
+                    statusBadge(
+                      "Overdue"
+                    )
+                    :
+                    statusBadge(
+                      l.status
+                    )
+                  }
+
+                </td>
+
+              </tr>
+
+            `
+          ).join("")}
+
+        </table>
+
+      </div>
+
+    `;
+
+  }
+
+
+  document
+  .getElementById(
+    "staffProfileModal"
+  )
+  .classList
+  .remove("hidden");
+
+}
+
+
+function closeStaffProfile(){
+
+  document
+  .getElementById(
+    "staffProfileModal"
+  )
+  .classList
+  .add("hidden");
 
 }
 
@@ -2844,20 +5388,35 @@ function renderAdminAttendance(){
 
   const list =
     [...attendance]
-    .sort((a,b)=>b.date.localeCompare(a.date));
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    );
 
 
   if(!list.length){
 
-    document.getElementById("adminAttendanceList").innerHTML =
-      `<div class="empty">No attendance records yet.</div>`;
+    document
+    .getElementById(
+      "adminAttendanceList"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No attendance records yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("adminAttendanceList").innerHTML = `
+  document
+  .getElementById(
+    "adminAttendanceList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2865,27 +5424,64 @@ function renderAdminAttendance(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Staff</th>
-          <th>Code</th>
-          <th>Check In</th>
-          <th>Check Out</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Staff
+          </th>
+
+          <th>
+            Code
+          </th>
+
+          <th>
+            Check In
+          </th>
+
+          <th>
+            Check Out
+          </th>
 
         </tr>
 
-        ${list.map(a=>`
 
-          <tr>
+        ${list.map(
+          a => `
 
-            <td>${formatDate(a.date)}</td>
-            <td>${a.name}</td>
-            <td>${a.code}</td>
-            <td>${formatTime(a.checkIn)}</td>
-            <td>${formatTime(a.checkOut)}</td>
+            <tr>
 
-          </tr>
+              <td>
+                ${formatDate(
+                  a.date
+                )}
+              </td>
 
-        `).join("")}
+              <td>
+                ${a.name}
+              </td>
+
+              <td>
+                ${a.code}
+              </td>
+
+              <td>
+                ${formatTime(
+                  a.checkIn
+                )}
+              </td>
+
+              <td>
+                ${formatTime(
+                  a.checkOut
+                )}
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2902,20 +5498,35 @@ function renderAdminLogs(){
 
   const list =
     [...logs]
-    .sort((a,b)=>b.date.localeCompare(a.date));
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    );
 
 
   if(!list.length){
 
-    document.getElementById("adminLogsList").innerHTML =
-      `<div class="empty">No work logs yet.</div>`;
+    document
+    .getElementById(
+      "adminLogsList"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No work logs yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("adminLogsList").innerHTML = `
+  document
+  .getElementById(
+    "adminLogsList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2923,47 +5534,122 @@ function renderAdminLogs(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Staff</th>
-          <th>Task</th>
-          <th>Priority</th>
-          <th>Status</th>
-          <th>Due</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Staff
+          </th>
+
+          <th>
+            Task
+          </th>
+
+          <th>
+            Priority
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Due
+          </th>
 
         </tr>
 
-        ${list.map(l=>`
 
-          <tr>
+        ${list.map(
+          l => `
 
-            <td>${formatDate(l.date)}</td>
+            <tr>
 
-            <td>${l.name}</td>
+              <td>
+                ${formatDate(
+                  l.date
+                )}
+              </td>
 
-            <td>
+              <td>
+                ${l.name}
+              </td>
 
-              <div style="font-weight:600;">
-                ${l.title}
-              </div>
+              <td>
 
-              <div style="font-size:10px;color:#999;margin-top:4px;">
-                ${l.description || ""}
-              </div>
+                <div
+                  style="
+                    font-weight:600;
+                  "
+                >
+                  ${l.title}
+                </div>
 
-            </td>
+                <div
+                  style="
+                    font-size:10px;
+                    color:#999;
+                    margin-top:4px;
+                  "
+                >
+                  ${
+                    l.description || ""
+                  }
+                </div>
 
-            <td>${l.priority}</td>
+              </td>
 
-            <td>${statusBadge(l.status)}</td>
+              <td>
+                ${l.priority}
+              </td>
 
-            <td>
-              ${l.dueDate ? formatDate(l.dueDate) : "-"}
-              ${l.dueTime ? " · "+formatTime(l.dueTime) : ""}
-            </td>
+              <td>
 
-          </tr>
+                ${
+                  isOverdue(l)
+                  ?
+                  statusBadge(
+                    "Overdue"
+                  )
+                  :
+                  statusBadge(
+                    l.status
+                  )
+                }
 
-        `).join("")}
+              </td>
+
+              <td>
+
+                ${
+                  l.dueDate
+                  ?
+                  formatDate(
+                    l.dueDate
+                  )
+                  :
+                  "-"
+                }
+
+                ${
+                  l.dueTime
+                  ?
+                  " · "
+                  +
+                  formatTime(
+                    l.dueTime
+                  )
+                  :
+                  ""
+                }
+
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -2980,15 +5666,25 @@ function renderAdminLeave(){
 
   if(!leaves.length){
 
-    document.getElementById("adminLeaveList").innerHTML =
-      `<div class="empty">No leave requests yet.</div>`;
+    document
+    .getElementById(
+      "adminLeaveList"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No leave requests yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("adminLeaveList").innerHTML = `
+  document
+  .getElementById(
+    "adminLeaveList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -2996,66 +5692,120 @@ function renderAdminLeave(){
 
         <tr>
 
-          <th>Staff</th>
-          <th>Type</th>
-          <th>Dates</th>
-          <th>Reason</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th>
+            Staff
+          </th>
+
+          <th>
+            Type
+          </th>
+
+          <th>
+            Dates
+          </th>
+
+          <th>
+            Reason
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Action
+          </th>
 
         </tr>
 
-        ${leaves.map((l,i)=>`
 
-          <tr>
+        ${leaves.map(
+          (l,i) => `
 
-            <td>${l.name}</td>
+            <tr>
 
-            <td>${l.type}</td>
+              <td>
+                ${l.name}
+              </td>
 
-            <td>
-              ${formatDate(l.start)}
-              -
-              ${formatDate(l.end)}
-            </td>
+              <td>
+                ${l.type}
+              </td>
 
-            <td>${l.reason || "-"}</td>
+              <td>
 
-            <td>${statusBadge(l.status)}</td>
+                ${formatDate(
+                  l.start
+                )}
 
-            <td>
+                -
 
-              ${
-                l.status === "Pending"
+                ${formatDate(
+                  l.end
+                )}
 
-                ?
+              </td>
 
-                `
-                <button
-                  class="btn-small btn-dark"
-                  onclick="updateLeave(${i},'Approved')"
-                >
-                  Approve
-                </button>
+              <td>
+                ${
+                  l.reason || "-"
+                }
+              </td>
 
-                <button
-                  class="btn-small btn-danger"
-                  onclick="updateLeave(${i},'Rejected')"
-                >
-                  Reject
-                </button>
-                `
+              <td>
+                ${statusBadge(
+                  l.status
+                )}
+              </td>
 
-                :
+              <td>
 
-                "-"
-              }
+                ${
+                  l.status ===
+                  "Pending"
 
-            </td>
+                  ?
 
-          </tr>
+                  `
 
-        `).join("")}
+                    <button
+                      class="btn-small btn-dark"
+                      onclick="
+                        updateLeave(
+                          ${i},
+                          'Approved'
+                        )
+                      "
+                    >
+                      Approve
+                    </button>
+
+                    <button
+                      class="btn-small btn-danger"
+                      onclick="
+                        updateLeave(
+                          ${i},
+                          'Rejected'
+                        )
+                      "
+                    >
+                      Reject
+                    </button>
+
+                  `
+
+                  :
+
+                  "-"
+
+                }
+
+              </td>
+
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -3066,9 +5816,14 @@ function renderAdminLeave(){
 }
 
 
-function updateLeave(index,status){
+function updateLeave(
+  index,
+  status
+){
 
-  leaves[index].status = status;
+  leaves[index].status =
+    status;
+
 
   saveData();
 
@@ -3083,20 +5838,35 @@ function renderAdminSchedule(){
 
   const list =
     [...schedules]
-    .sort((a,b)=>a.date.localeCompare(b.date));
+    .sort(
+      (a,b) =>
+        a.date.localeCompare(
+          b.date
+        )
+    );
 
 
   if(!list.length){
 
-    document.getElementById("adminScheduleList").innerHTML =
-      `<div class="empty">No schedules yet.</div>`;
+    document
+    .getElementById(
+      "adminScheduleList"
+    )
+    .innerHTML =
+      `<div class="empty">
+        No schedules yet.
+      </div>`;
 
     return;
 
   }
 
 
-  document.getElementById("adminScheduleList").innerHTML = `
+  document
+  .getElementById(
+    "adminScheduleList"
+  )
+  .innerHTML = `
 
     <div class="table-wrap">
 
@@ -3104,43 +5874,83 @@ function renderAdminSchedule(){
 
         <tr>
 
-          <th>Date</th>
-          <th>Staff</th>
-          <th>Task</th>
-          <th>Time</th>
-          <th>Location</th>
-          <th>Action</th>
+          <th>
+            Date
+          </th>
+
+          <th>
+            Staff
+          </th>
+
+          <th>
+            Task
+          </th>
+
+          <th>
+            Time
+          </th>
+
+          <th>
+            Location
+          </th>
+
+          <th>
+            Action
+          </th>
 
         </tr>
 
-        ${list.map((s,i)=>`
 
-          <tr>
+        ${list.map(
+          (s,i) => `
 
-            <td>${formatDate(s.date)}</td>
+            <tr>
 
-            <td>${s.staffCode}</td>
+              <td>
+                ${formatDate(
+                  s.date
+                )}
+              </td>
 
-            <td>${s.task}</td>
+              <td>
+                ${s.staffCode}
+              </td>
 
-            <td>${formatTime(s.time)}</td>
+              <td>
+                ${s.task}
+              </td>
 
-            <td>${s.location || "-"}</td>
+              <td>
+                ${formatTime(
+                  s.time
+                )}
+              </td>
 
-            <td>
+              <td>
+                ${
+                  s.location || "-"
+                }
+              </td>
 
-              <button
-                class="btn-small btn-danger"
-                onclick="deleteSchedule(${i})"
-              >
-                Delete
-              </button>
+              <td>
 
-            </td>
+                <button
+                  class="btn-small btn-danger"
+                  onclick="
+                    deleteSchedule(
+                      ${i}
+                    )
+                  "
+                >
+                  Delete
+                </button>
 
-          </tr>
+              </td>
 
-        `).join("")}
+            </tr>
+
+          `
+        ).join("")}
 
       </table>
 
@@ -3154,18 +5964,40 @@ function renderAdminSchedule(){
 function addSchedule(){
 
   const staffCode =
-    document.getElementById("scheduleStaffCode").value.trim();
+    document
+    .getElementById(
+      "scheduleStaffCode"
+    )
+    .value
+    .trim();
+
 
   const task =
-    document.getElementById("scheduleTask").value.trim();
+    document
+    .getElementById(
+      "scheduleTask"
+    )
+    .value
+    .trim();
+
 
   const date =
-    document.getElementById("scheduleDate").value;
+    document
+    .getElementById(
+      "scheduleDate"
+    )
+    .value;
 
 
-  if(!staffCode || !task || !date){
+  if(
+    !staffCode ||
+    !task ||
+    !date
+  ){
 
-    alert("Please complete staff code, task and date.");
+    alert(
+      "Please complete staff code, task and date."
+    );
 
     return;
 
@@ -3181,19 +6013,37 @@ function addSchedule(){
     date,
 
     time:
-      document.getElementById("scheduleTime").value,
+      document
+      .getElementById(
+        "scheduleTime"
+      )
+      .value,
 
     location:
-      document.getElementById("scheduleLocation").value
+      document
+      .getElementById(
+        "scheduleLocation"
+      )
+      .value
 
   });
 
 
   saveData();
 
-  alert("Schedule added.");
 
-  document.getElementById("scheduleForm").classList.add("hidden");
+  alert(
+    "Schedule added."
+  );
+
+
+  document
+  .getElementById(
+    "scheduleForm"
+  )
+  .classList
+  .add("hidden");
+
 
   renderAll();
 
@@ -3202,9 +6052,18 @@ function addSchedule(){
 
 function deleteSchedule(index){
 
-  if(!confirm("Delete this schedule?")) return;
+  if(
+    !confirm(
+      "Delete this schedule?"
+    )
+  ) return;
 
-  schedules.splice(index,1);
+
+  schedules.splice(
+    index,
+    1
+  );
+
 
   saveData();
 
@@ -3217,46 +6076,85 @@ function deleteSchedule(index){
 
 function renderAdminAnnouncements(){
 
-  document.getElementById("adminAnnouncementList").innerHTML =
+  document
+  .getElementById(
+    "adminAnnouncementList"
+  )
+  .innerHTML =
 
     announcements
-    .sort((a,b)=>b.date.localeCompare(a.date))
-    .map((a,i)=>`
+    .sort(
+      (a,b) =>
+        b.date.localeCompare(
+          a.date
+        )
+    )
+    .map(
+      (a,i) => `
 
-      <div style="
-        padding:15px 0;
-        border-bottom:1px solid #eee;
-        display:flex;
-        justify-content:space-between;
-        gap:20px;
-      ">
+        <div
+          style="
+            padding:15px 0;
+            border-bottom:1px solid #eee;
+            display:flex;
+            justify-content:space-between;
+            gap:20px;
+          "
+        >
 
-        <div>
+          <div>
 
-          <div style="font-weight:700;font-size:14px;">
-            ${a.title}
+            <div
+              style="
+                font-weight:700;
+                font-size:14px;
+              "
+            >
+              ${a.title}
+            </div>
+
+
+            <div
+              style="
+                font-size:11px;
+                color:#999;
+                margin:5px 0;
+              "
+            >
+              ${formatDate(
+                a.date
+              )}
+            </div>
+
+
+            <div
+              style="
+                font-size:12px;
+                color:#666;
+              "
+            >
+              ${a.message}
+            </div>
+
           </div>
 
-          <div style="font-size:11px;color:#999;margin:5px 0;">
-            ${formatDate(a.date)}
-          </div>
 
-          <div style="font-size:12px;color:#666;">
-            ${a.message}
-          </div>
+          <button
+            class="btn-small btn-danger"
+            onclick="
+              deleteAnnouncement(
+                ${i}
+              )
+            "
+          >
+            Delete
+          </button>
 
         </div>
 
-        <button
-          class="btn-small btn-danger"
-          onclick="deleteAnnouncement(${i})"
-        >
-          Delete
-        </button>
-
-      </div>
-
-    `).join("");
+      `
+    )
+    .join("");
 
 }
 
@@ -3264,15 +6162,31 @@ function renderAdminAnnouncements(){
 function addAnnouncement(){
 
   const title =
-    document.getElementById("announcementTitle").value.trim();
+    document
+    .getElementById(
+      "announcementTitle"
+    )
+    .value
+    .trim();
+
 
   const message =
-    document.getElementById("announcementMessage").value.trim();
+    document
+    .getElementById(
+      "announcementMessage"
+    )
+    .value
+    .trim();
 
 
-  if(!title || !message){
+  if(
+    !title ||
+    !message
+  ){
 
-    alert("Please enter title and message.");
+    alert(
+      "Please enter title and message."
+    );
 
     return;
 
@@ -3282,20 +6196,44 @@ function addAnnouncement(){
   announcements.push({
 
     title,
+
     message,
-    date:today
+
+    date:
+      today
 
   });
 
 
   saveData();
 
-  alert("Announcement published.");
 
-  document.getElementById("announcementForm").classList.add("hidden");
+  alert(
+    "Announcement published."
+  );
 
-  document.getElementById("announcementTitle").value = "";
-  document.getElementById("announcementMessage").value = "";
+
+  document
+  .getElementById(
+    "announcementForm"
+  )
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById(
+    "announcementTitle"
+  )
+  .value = "";
+
+
+  document
+  .getElementById(
+    "announcementMessage"
+  )
+  .value = "";
+
 
   renderAll();
 
@@ -3304,9 +6242,18 @@ function addAnnouncement(){
 
 function deleteAnnouncement(index){
 
-  if(!confirm("Delete this announcement?")) return;
+  if(
+    !confirm(
+      "Delete this announcement?"
+    )
+  ) return;
 
-  announcements.splice(index,1);
+
+  announcements.splice(
+    index,
+    1
+  );
+
 
   saveData();
 
@@ -3321,33 +6268,53 @@ function renderAll(){
 
   saveData();
 
-  if(!currentUser) return;
+
+  if(!currentUser)
+    return;
 
 
   updateTopbar();
 
 
-  if(currentUser.role === "staff"){
+  if(
+    currentUser.role ===
+    "staff"
+  ){
 
     renderStaffDashboard();
+
     renderMyLogs();
+
     renderMyAttendance();
+
     renderMyLeaves();
+
     renderStaffSchedule();
+
     renderProfile();
+
     renderStaffAnnouncements();
 
   }
 
 
-  if(currentUser.role === "admin"){
+  if(
+    currentUser.role ===
+    "admin"
+  ){
 
     renderAdminDashboard();
+
     renderStaffList();
+
     renderAdminAttendance();
+
     renderAdminLogs();
+
     renderAdminLeave();
+
     renderAdminSchedule();
+
     renderAdminAnnouncements();
 
   }
@@ -3355,7 +6322,7 @@ function renderAll(){
 }
 
 
-/* INITIAL */
+/* INITIAL SAVE */
 
 saveData();
 
