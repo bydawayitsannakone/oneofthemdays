@@ -2,52 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nona Costex Staff Portal</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f5f2;
-  --card:#ffffff;
-  --text:#292b27;
-  --muted:#777a72;
+  --bg:#f5f5f1;
+  --card:#fff;
+  --text:#272923;
+  --muted:#77796f;
   --line:#e5e5df;
-  --olive:#73795e;
-  --olive-dark:#555b45;
-  --olive-soft:#e9eadf;
+  --soft:#eceee7;
+  --accent:#6d765e;
+  --accent-dark:#59614d;
   --danger:#b85c5c;
-  --danger-soft:#f5e4e4;
-  --warning:#b18a43;
-  --warning-soft:#f6eedb;
-  --success:#638267;
-  --success-soft:#e4eee5;
-  --shadow:0 8px 30px rgba(40,42,35,.06);
+  --warning:#b88b43;
+  --success:#668265;
+  --shadow:0 8px 25px rgba(40,45,35,.06);
 }
-
 body{
   font-family:Helvetica,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
   min-height:100vh;
 }
-
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
 /* LOGIN */
 .login-page{
@@ -56,191 +38,133 @@ button{
   align-items:center;
   justify-content:center;
   padding:24px;
-  background:#f1f2ed;
+  background:#eeefe9;
 }
-
 .login-box{
   width:100%;
-  max-width:430px;
+  max-width:410px;
   background:white;
-  border:1px solid var(--line);
-  border-radius:22px;
   padding:38px;
+  border:1px solid var(--line);
   box-shadow:var(--shadow);
+  border-radius:18px;
 }
-
-.brand{
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.brand-mark{
-  width:54px;
-  height:54px;
-  margin:0 auto 16px;
-  border-radius:16px;
-  background:var(--olive);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
+.logo{
+  font-size:24px;
   font-weight:700;
+  letter-spacing:-.5px;
 }
-
-.brand h1{
-  font-size:23px;
-  margin-bottom:7px;
-}
-
-.brand p{
+.login-sub{
   color:var(--muted);
   font-size:13px;
+  margin-top:6px;
+  margin-bottom:28px;
 }
-
-.form-group{
-  margin-bottom:17px;
-}
-
-.form-group label{
+.field{margin-bottom:16px}
+.field label{
   display:block;
   font-size:12px;
   font-weight:600;
   margin-bottom:7px;
-  color:#55584f;
+  color:#55584e;
 }
-
 input,select,textarea{
   width:100%;
   border:1px solid var(--line);
-  background:#fff;
-  border-radius:10px;
+  border-radius:9px;
   padding:11px 12px;
   outline:none;
+  background:#fff;
   color:var(--text);
 }
-
+textarea{min-height:100px;resize:vertical}
 input:focus,select:focus,textarea:focus{
-  border-color:var(--olive);
-  box-shadow:0 0 0 3px rgba(115,121,94,.1);
+  border-color:var(--accent);
 }
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.primary-btn{
-  width:100%;
+.btn{
   border:0;
-  border-radius:10px;
-  padding:12px;
-  background:var(--olive);
-  color:white;
+  border-radius:9px;
+  padding:10px 15px;
+  background:var(--accent);
+  color:#fff;
   font-weight:600;
 }
-
-.primary-btn:hover{
-  background:var(--olive-dark);
+.btn:hover{background:var(--accent-dark)}
+.btn.secondary{
+  background:#eceee8;
+  color:#50554a;
 }
-
-.login-demo{
-  margin-top:20px;
-  padding:12px;
-  background:var(--bg);
-  border-radius:10px;
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.7;
+.btn.danger{background:#b85c5c}
+.btn.warning{background:#b88b43}
+.btn.small{padding:7px 10px;font-size:12px}
+.login-error{
+  color:#a74d4d;
+  font-size:12px;
+  margin-top:10px;
 }
 
 /* APP */
-.app{
-  display:flex;
-  min-height:100vh;
-}
-
+.app{display:none;min-height:100vh}
 .sidebar{
   width:245px;
-  background:#30332c;
-  color:white;
+  background:#e9ebe4;
   position:fixed;
   top:0;
   bottom:0;
   left:0;
-  z-index:50;
-  padding:22px 15px;
-  overflow-y:auto;
+  padding:24px 15px;
+  z-index:100;
+  border-right:1px solid #dfe1d9;
 }
-
-.sidebar-brand{
-  padding:7px 12px 25px;
-}
-
-.sidebar-brand h2{
-  font-size:18px;
-}
-
-.sidebar-brand p{
-  color:#aaaFA4;
-  font-size:11px;
-  margin-top:4px;
-}
-
-.nav-section{
-  margin:18px 10px 8px;
-  color:#858a80;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-size:9px;
+.brand{
+  padding:0 12px 25px;
+  font-size:20px;
   font-weight:700;
 }
-
-.nav-item{
+.brand span{
+  display:block;
+  font-size:11px;
+  font-weight:400;
+  color:var(--muted);
+  margin-top:4px;
+}
+.nav-section{
+  color:#92958b;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  padding:13px 12px 7px;
+}
+.nav-btn{
   width:100%;
   border:0;
   background:transparent;
-  color:#cdd0c9;
-  display:flex;
-  align-items:center;
-  gap:11px;
+  color:#55594f;
+  text-align:left;
   padding:10px 12px;
   border-radius:9px;
-  margin-bottom:3px;
-  text-align:left;
-  font-size:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  margin:2px 0;
 }
-
-.nav-item:hover{
-  background:#3b3f36;
-  color:white;
+.nav-btn:hover,.nav-btn.active{
+  background:#fff;
+  color:#3f4939;
 }
-
-.nav-item.active{
-  background:#73795e;
-  color:white;
-}
-
-.nav-icon{
-  width:18px;
-  height:18px;
+.icon{
+  width:17px;
+  height:17px;
   flex:none;
 }
-
-.logout-btn{
-  margin-top:20px;
-  color:#d7aaa8;
-}
-
 .main{
   margin-left:245px;
-  width:calc(100% - 245px);
   min-height:100vh;
 }
-
 .topbar{
   height:70px;
-  background:white;
+  background:rgba(255,255,255,.92);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
@@ -248,71 +172,48 @@ textarea{
   padding:0 28px;
   position:sticky;
   top:0;
-  z-index:30;
+  z-index:50;
 }
-
-.topbar-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.menu-btn{
-  display:none;
-  border:0;
-  background:none;
-}
-
 .page-title{
-  font-size:17px;
+  font-size:18px;
   font-weight:700;
 }
-
-.user-area{
+.top-actions{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:10px;
 }
-
-.notification-btn{
-  position:relative;
-  border:0;
-  background:#f4f4f0;
+.icon-btn{
   width:37px;
   height:37px;
-  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:9px;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
-
-.notification-count{
+.badge-dot{
   position:absolute;
-  top:-3px;
-  right:-3px;
-  min-width:16px;
-  height:16px;
-  border-radius:20px;
-  background:var(--danger);
-  color:white;
-  font-size:9px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  right:5px;
+  top:5px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#b85c5c;
 }
-
 .user-mini{
   display:flex;
   align-items:center;
   gap:9px;
+  padding-left:5px;
 }
-
 .avatar{
   width:34px;
   height:34px;
   border-radius:50%;
-  background:var(--olive-soft);
-  color:var(--olive-dark);
+  background:#dfe2d8;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -320,585 +221,303 @@ textarea{
   font-weight:700;
   overflow:hidden;
 }
+.avatar img{width:100%;height:100%;object-fit:cover}
+.user-mini-name{font-size:12px;font-weight:600}
+.user-mini-role{font-size:10px;color:var(--muted)}
+.content{padding:28px;max-width:1600px;margin:auto}
 
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.user-mini-text strong{
-  display:block;
-  font-size:11px;
-}
-
-.user-mini-text span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:2px;
-}
-
-.content{
-  padding:28px;
-  max-width:1500px;
-  margin:auto;
-}
-
-/* GENERAL */
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.section-head h2{
-  font-size:19px;
-}
-
-.section-head p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-}
-
-.action-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  border:1px solid var(--line);
-  background:white;
-  color:var(--text);
-  border-radius:9px;
-  padding:9px 13px;
-  font-size:11px;
-  font-weight:600;
-}
-
-.btn:hover{
-  background:#f7f7f4;
-}
-
-.btn.primary{
-  background:var(--olive);
-  border-color:var(--olive);
-  color:white;
-}
-
-.btn.danger{
-  background:var(--danger-soft);
-  border-color:transparent;
-  color:var(--danger);
-}
-
-.btn.success{
-  background:var(--success-soft);
-  border-color:transparent;
-  color:var(--success);
-}
-
-.btn.small{
-  padding:6px 9px;
-  font-size:10px;
-}
-
-.cards{
+/* CARDS */
+.grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin-bottom:24px;
 }
-
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
 .card{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:14px;
+  padding:18px;
   box-shadow:var(--shadow);
 }
-
-.stat-card{
-  padding:18px;
-}
-
 .stat-label{
   color:var(--muted);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.05em;
+  font-size:11px;
+  margin-bottom:10px;
 }
-
-.stat-number{
-  font-size:25px;
-  font-weight:700;
-  margin-top:8px;
-}
-
-.stat-note{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
-}
-
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.card-head{
-  padding:17px 18px;
-  border-bottom:1px solid var(--line);
+.stat-number{font-size:27px;font-weight:700}
+.stat-small{font-size:11px;color:var(--muted);margin-top:5px}
+.section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:12px;
+  margin-bottom:15px;
 }
-
-.card-head h3{
-  font-size:13px;
-}
-
-.card-body{
-  padding:18px;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-
-th{
+.section-title{font-size:14px;font-weight:700}
+.section-sub{font-size:11px;color:var(--muted);margin-top:3px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{
+  padding:12px 10px;
+  border-bottom:1px solid var(--line);
   text-align:left;
-  font-size:9px;
-  color:var(--muted);
+  font-size:12px;
+}
+th{
+  color:#85877e;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.05em;
-  padding:11px 12px;
-  background:#f8f8f5;
-  border-bottom:1px solid var(--line);
+  letter-spacing:.5px;
 }
-
-td{
-  padding:12px;
-  border-bottom:1px solid #eeeeea;
-  font-size:11px;
-  vertical-align:middle;
-}
-
-tr:last-child td{
-  border-bottom:0;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  border-radius:20px;
-  padding:5px 8px;
-  font-size:9px;
-  font-weight:700;
-}
-
-.badge.pending{
-  background:#f0f0ec;
-  color:#777a70;
-}
-
-.badge.progress{
-  background:var(--warning-soft);
-  color:var(--warning);
-}
-
-.badge.completed{
-  background:var(--success-soft);
-  color:var(--success);
-}
-
-.badge.overdue{
-  background:var(--danger-soft);
-  color:var(--danger);
-}
-
-.badge.active{
-  background:var(--success-soft);
-  color:var(--success);
-}
-
-.badge.inactive{
-  background:#eeeeeb;
-  color:#777;
-}
-
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:35px 15px;
-  font-size:12px;
-}
-
-/* PROGRESS */
-.progress-line{
-  height:7px;
-  background:#ecece7;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:8px;
-}
-
-.progress-fill{
-  height:100%;
-  background:var(--olive);
-  border-radius:20px;
-}
-
-.performance-row{
-  margin-bottom:17px;
-}
-
-.performance-top{
-  display:flex;
-  justify-content:space-between;
-  font-size:11px;
-}
-
-.performance-top span:last-child{
-  color:var(--muted);
-}
-
-/* PROFILE */
-.profile-header{
-  padding:25px;
-  display:flex;
-  gap:22px;
-  align-items:center;
-}
-
-.profile-avatar{
-  width:88px;
-  height:88px;
-  border-radius:20px;
-  background:var(--olive-soft);
-  color:var(--olive-dark);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  font-weight:700;
-  overflow:hidden;
-  flex:none;
-}
-
-.profile-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile-name{
-  font-size:21px;
-  font-weight:700;
-}
-
-.profile-role{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
-}
-
-.profile-code{
+tr:last-child td{border-bottom:0}
+.status,.priority{
   display:inline-block;
-  margin-top:10px;
-  background:var(--olive-soft);
-  color:var(--olive-dark);
-  border-radius:7px;
   padding:5px 8px;
-  font-size:9px;
-  font-weight:700;
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
-  border-radius:13px;
-  overflow:hidden;
-}
-
-.info-item{
-  background:white;
-  padding:14px;
-}
-
-.info-item label{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-bottom:5px;
-  text-transform:uppercase;
-}
-
-.info-item strong{
-  font-size:11px;
+  border-radius:20px;
+  font-size:10px;
   font-weight:600;
 }
-
-/* WORKLOAD */
-.workload{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-size:9px;
-  font-weight:700;
-}
-
-.dot{
-  width:7px;
+.status.pending{background:#eeeae0;color:#887347}
+.status.progress{background:#e7ece2;color:#607055}
+.status.completed{background:#e4eee5;color:#5b795d}
+.status.overdue{background:#f2e2e2;color:#a45151}
+.priority.high{background:#f2e2e2;color:#a45151}
+.priority.medium{background:#eeeae0;color:#887347}
+.priority.low{background:#e7ece2;color:#607055}
+.progress{
   height:7px;
-  border-radius:50%;
+  background:#eceee9;
+  border-radius:20px;
+  overflow:hidden;
 }
-
-.dot.green{background:#6f9877}
-.dot.yellow{background:#c09b50}
-.dot.red{background:#bd6767}
-
-/* SEARCH */
+.progress > span{
+  display:block;
+  height:100%;
+  background:var(--accent);
+}
+.empty{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
 .toolbar{
   display:flex;
   gap:9px;
-  margin-bottom:15px;
   flex-wrap:wrap;
+  margin-bottom:15px;
 }
+.toolbar input,.toolbar select{max-width:220px}
 
-.toolbar input{
-  max-width:300px;
+/* DASHBOARD */
+.welcome{
+  margin-bottom:22px;
 }
+.welcome h2{font-size:21px}
+.welcome p{font-size:12px;color:var(--muted);margin-top:5px}
+.list-item{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+}
+.list-item:last-child{border-bottom:0}
+.item-title{font-size:12px;font-weight:600}
+.item-meta{font-size:10px;color:var(--muted);margin-top:4px}
+.activity{
+  border-left:2px solid #d9ddd2;
+  padding-left:13px;
+  margin:10px 0;
+}
+.activity strong{font-size:11px}
+.activity p{font-size:10px;color:var(--muted);margin-top:3px}
 
 /* MODAL */
 .modal-backdrop{
   position:fixed;
   inset:0;
-  background:rgba(20,22,18,.45);
-  z-index:100;
+  background:rgba(30,32,27,.4);
+  z-index:500;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
 }
-
 .modal{
   width:100%;
   max-width:620px;
   max-height:90vh;
-  overflow-y:auto;
-  background:white;
-  border-radius:18px;
+  overflow:auto;
+  background:#fff;
+  border-radius:15px;
+  padding:22px;
   box-shadow:0 20px 60px rgba(0,0,0,.18);
 }
-
+.modal.large{max-width:850px}
 .modal-head{
-  padding:18px 20px;
-  border-bottom:1px solid var(--line);
   display:flex;
   justify-content:space-between;
   align-items:center;
+  margin-bottom:18px;
 }
-
-.modal-head h3{
-  font-size:15px;
-}
-
-.close-btn{
-  width:30px;
-  height:30px;
+.modal-title{font-size:17px;font-weight:700}
+.close{
+  width:32px;
+  height:32px;
   border:0;
-  background:#f2f2ee;
+  background:#f0f1ec;
   border-radius:8px;
 }
-
-.modal-body{
-  padding:20px;
-}
-
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:14px;
 }
-
-.full{
-  grid-column:1/-1;
-}
-
+.form-full{grid-column:1/-1}
 .modal-foot{
-  padding:15px 20px;
-  border-top:1px solid var(--line);
   display:flex;
   justify-content:flex-end;
   gap:8px;
+  margin-top:18px;
 }
 
-/* STAFF PROFILE DETAIL */
-.detail-top{
+/* CALENDAR */
+.calendar-head{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
+  align-items:center;
+  margin-bottom:15px;
+}
+.month-title{font-size:17px;font-weight:700}
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.weekday{
+  background:#f0f1ec;
+  padding:10px;
+  font-size:10px;
+  color:#85877e;
+  text-align:center;
+  border-right:1px solid var(--line);
+}
+.day{
+  min-height:105px;
+  padding:8px;
+  border-top:1px solid var(--line);
+  border-right:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.day:hover{background:#fafaf7}
+.day.other{background:#f8f8f5;color:#b1b3ab}
+.day.today{background:#eef1e9}
+.day-number{
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.event{
+  padding:4px 5px;
+  background:#e9eee4;
+  border-radius:5px;
+  font-size:9px;
+  margin-bottom:4px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.event.task{background:#ece9e0}
+.event.overdue{background:#f2e2e2;color:#9f5050}
+
+/* PROFILE */
+.profile-head{
+  display:flex;
   gap:20px;
+  align-items:center;
   margin-bottom:20px;
 }
-
-.performance-cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:18px;
+.profile-avatar{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:#e0e3da;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  font-size:25px;
+  font-weight:700;
 }
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-size:20px;font-weight:700}
+.profile-position{font-size:12px;color:var(--muted);margin-top:4px}
 
-.performance-card{
-  padding:15px;
-  background:#f8f8f5;
-  border-radius:11px;
+/* NOTIFICATION */
+.notification{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-bottom:9px;
+  background:#fff;
 }
-
-.performance-card small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-}
-
-.performance-card strong{
-  display:block;
-  margin-top:5px;
-  font-size:20px;
-}
+.notification.unread{background:#f1f3ed;border-color:#dce2d5}
+.notification-title{font-size:12px;font-weight:700}
+.notification-text{font-size:11px;color:var(--muted);margin-top:4px}
+.notification-time{font-size:9px;color:#999;margin-top:7px}
 
 /* MOBILE */
-.mobile-overlay{
-  display:none;
-}
-
+.mobile-menu{display:none}
+.overlay{display:none}
 @media(max-width:1000px){
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid-2{
-    grid-template-columns:1fr;
-  }
-
-  .info-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .performance-cards{
-    grid-template-columns:repeat(2,1fr);
-  }
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr 1fr}
 }
-
-@media(max-width:750px){
+@media(max-width:760px){
   .sidebar{
     transform:translateX(-100%);
-    transition:.25s ease;
+    transition:.25s;
   }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .mobile-overlay.show{
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .mobile-menu{display:flex}
+  .topbar{padding:0 15px;height:62px}
+  .content{padding:18px 14px}
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .user-mini-name,.user-mini-role{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .form-full{grid-column:auto}
+  .calendar{min-width:650px}
+  .calendar-scroll{overflow-x:auto}
+  .day{min-height:85px}
+  .overlay.show{
     display:block;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.35);
-    z-index:40;
-  }
-
-  .main{
-    margin-left:0;
-    width:100%;
-  }
-
-  .menu-btn{
-    display:flex;
-    width:34px;
-    height:34px;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .user-mini-text{
-    display:none;
-  }
-
-  .content{
-    padding:18px 14px;
-  }
-
-  .cards{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .stat-card{
-    padding:14px;
-  }
-
-  .stat-number{
-    font-size:21px;
-  }
-
-  .section-head{
-    align-items:flex-start;
-  }
-
-  .profile-header{
-    padding:18px;
-    align-items:flex-start;
-  }
-
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
+    background:rgba(0,0,0,.25);
+    z-index:90;
   }
 }
 
-@media(max-width:480px){
-  .cards{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .page-title{
-    font-size:15px;
-  }
-
-  .notification-btn{
-    width:34px;
-    height:34px;
-  }
-
-  .performance-cards{
-    grid-template-columns:1fr 1fr;
-  }
+/* TOAST */
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#292c26;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:9px;
+  font-size:11px;
+  z-index:1000;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 </style>
 </head>
@@ -908,697 +527,517 @@ tr:last-child td{
 <!-- LOGIN -->
 <div id="loginPage" class="login-page">
   <div class="login-box">
+    <div class="logo">Nona Costex</div>
+    <div class="login-sub">Staff Portal</div>
 
-    <div class="brand">
-      <div class="brand-mark">N</div>
-      <h1>Nona Costex</h1>
-      <p>Staff Portal</p>
+    <div class="field">
+      <label>Username</label>
+      <input id="loginUsername" placeholder="Enter username">
     </div>
 
-    <form id="loginForm">
-      <div class="form-group">
-        <label>Username</label>
-        <input id="loginUsername" type="text" placeholder="Enter username" required>
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input id="loginPassword" type="password" placeholder="Enter password" required>
-      </div>
-
-      <button class="primary-btn" type="submit">Login</button>
-    </form>
-
-    <div class="login-demo">
-      <strong>Demo Login</strong><br>
-      Staff: Atikah / NC001<br>
-      Admin: Admin / ADMIN001
+    <div class="field">
+      <label>Password / Staff Code</label>
+      <input id="loginPassword" type="password" placeholder="Enter password">
     </div>
 
+    <button class="btn" style="width:100%" onclick="login()">Login</button>
+    <div id="loginError" class="login-error"></div>
+
+    <div style="margin-top:20px;font-size:10px;color:#999;line-height:1.7">
+      Staff demo: Atikah / NC001<br>
+      Admin demo: Admin / ADMIN001
+    </div>
   </div>
 </div>
 
-
 <!-- APP -->
-<div id="app" class="app hidden">
+<div id="app" class="app">
 
-  <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()"></div>
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
-  <aside id="sidebar" class="sidebar">
+<aside id="sidebar" class="sidebar">
+  <div class="brand">
+    Nona Costex
+    <span>Staff Portal</span>
+  </div>
 
-    <div class="sidebar-brand">
-      <h2>Nona Costex</h2>
-      <p>Staff Portal</p>
+  <div class="nav-section">Main</div>
+
+  <button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Dashboard
+  </button>
+
+  <button class="nav-btn" data-page="tasks" onclick="showPage('tasks')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L20 6"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+    Tasks
+  </button>
+
+  <button class="nav-btn" data-page="logs" onclick="showPage('logs')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+    Work Logs
+  </button>
+
+  <button class="nav-btn" data-page="attendance" onclick="showPage('attendance')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    Attendance
+  </button>
+
+  <button class="nav-btn" data-page="leave" onclick="showPage('leave')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h5"/></svg>
+    Leave
+  </button>
+
+  <button class="nav-btn" data-page="schedule" onclick="showPage('schedule')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+    Schedule
+  </button>
+
+  <button class="nav-btn" data-page="announcements" onclick="showPage('announcements')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13h3l9 5V6l-9 5H4z"/><path d="M7 13v5"/></svg>
+    Announcements
+  </button>
+
+  <button class="nav-btn" data-page="notifications" onclick="showPage('notifications')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+    Notifications
+    <span id="navNotifCount" style="margin-left:auto"></span>
+  </button>
+
+  <div id="adminNav">
+    <div class="nav-section">Admin</div>
+
+    <button class="nav-btn" data-page="staff" onclick="showPage('staff')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M16 11c3 0 5 1.5 5 4M16 5a3 3 0 0 1 0 6"/></svg>
+      Staff Management
+    </button>
+
+    <button class="nav-btn" data-page="analytics" onclick="showPage('analytics')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h17"/><path d="M7 16l4-5 3 2 5-7"/></svg>
+      Analytics
+    </button>
+
+    <button class="nav-btn" data-page="activity" onclick="showPage('activity')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h6M8 16h4"/></svg>
+      Activity History
+    </button>
+  </div>
+
+  <div class="nav-section">Account</div>
+
+  <button class="nav-btn" data-page="profile" onclick="showPage('profile')">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+    My Profile
+  </button>
+
+  <button class="nav-btn" onclick="logout()">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M21 3v18"/></svg>
+    Logout
+  </button>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="top-actions">
+      <button class="icon-btn mobile-menu" onclick="openSidebar()">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div id="pageTitle" class="page-title">Dashboard</div>
     </div>
 
-    <div class="nav-section">Main</div>
-
-    <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">
-      <span class="nav-icon">⌂</span>
-      Dashboard
-    </button>
-
-    <button class="nav-item" data-page="tasks" onclick="showPage('tasks')">
-      <span class="nav-icon">✓</span>
-      <span id="tasksNavLabel">My Tasks</span>
-    </button>
-
-    <button class="nav-item" data-page="worklogs" onclick="showPage('worklogs')">
-      <span class="nav-icon">▤</span>
-      Work Logs
-    </button>
-
-    <button class="nav-item" data-page="attendance" onclick="showPage('attendance')">
-      <span class="nav-icon">◷</span>
-      Attendance
-    </button>
-
-    <button class="nav-item" data-page="leave" onclick="showPage('leave')">
-      <span class="nav-icon">▱</span>
-      Leave
-    </button>
-
-    <button class="nav-item" data-page="schedule" onclick="showPage('schedule')">
-      <span class="nav-icon">□</span>
-      Schedule
-    </button>
-
-    <button class="nav-item" data-page="announcements" onclick="showPage('announcements')">
-      <span class="nav-icon">!</span>
-      Announcements
-    </button>
-
-    <button class="nav-item" data-page="notifications" onclick="showPage('notifications')">
-      <span class="nav-icon">◉</span>
-      Notifications
-    </button>
-
-    <div id="adminNav" class="hidden">
-      <div class="nav-section">Admin</div>
-
-      <button class="nav-item" data-page="staff" onclick="showPage('staff')">
-        <span class="nav-icon">♙</span>
-        Staff Management
+    <div class="top-actions">
+      <button class="icon-btn" onclick="showPage('notifications')">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+        <span id="topNotifDot" class="badge-dot hidden"></span>
       </button>
-
-      <button class="nav-item" data-page="analytics" onclick="showPage('analytics')">
-        <span class="nav-icon">▥</span>
-        Analytics
-      </button>
-
-      <button class="nav-item" data-page="activity" onclick="showPage('activity')">
-        <span class="nav-icon">↻</span>
-        Activity History
-      </button>
-    </div>
-
-    <div class="nav-section">Account</div>
-
-    <button class="nav-item" data-page="profile" onclick="showPage('profile')">
-      <span class="nav-icon">♙</span>
-      My Profile
-    </button>
-
-    <button class="nav-item logout-btn" onclick="logout()">
-      <span class="nav-icon">↪</span>
-      Logout
-    </button>
-
-  </aside>
-
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div class="topbar-left">
-        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-        <div id="pageTitle" class="page-title">Dashboard</div>
-      </div>
-
-      <div class="user-area">
-
-        <button class="notification-btn" onclick="showPage('notifications')">
-          <span>◉</span>
-          <span id="notificationCount" class="notification-count hidden">0</span>
-        </button>
-
-        <div class="user-mini">
-          <div id="topAvatar" class="avatar">A</div>
-          <div class="user-mini-text">
-            <strong id="topName">Atikah</strong>
-            <span id="topRole">Staff</span>
-          </div>
+      <div class="user-mini">
+        <div id="topAvatar" class="avatar">A</div>
+        <div>
+          <div id="topName" class="user-mini-name">Atikah</div>
+          <div id="topRole" class="user-mini-role">Staff</div>
         </div>
-
       </div>
+    </div>
+  </header>
 
-    </header>
-
-    <div id="content" class="content"></div>
-
-  </main>
-
+  <div id="content" class="content"></div>
+</main>
 </div>
 
-
 <!-- MODAL -->
-<div id="modalContainer"></div>
-
+<div id="modalRoot"></div>
 
 <script>
-
-/* =========================================================
-   DATA
-========================================================= */
+/* =========================
+   STORAGE
+========================= */
 
 const KEYS = {
-  logs: "nona_logs",
-  leaves: "nona_leaves",
-  attendance: "nona_attendance",
-  staff: "nona_staff",
-  schedules: "nona_schedules",
-  announcements: "nona_announcements",
-  notifications: "nona_notifications",
-  activity: "nona_activity",
-  photos: "nona_photo_"
+  logs:"nona_logs",
+  leaves:"nona_leaves",
+  attendance:"nona_attendance",
+  staff:"nona_staff",
+  schedules:"nona_schedules",
+  announcements:"nona_announcements",
+  notifications:"nona_notifications",
+  activity:"nona_activity",
+  photos:"nona_photo_"
 };
 
 let currentUser = null;
 let currentPage = "dashboard";
+let calendarDate = new Date();
 
-function getData(key){
-  try{
-    return JSON.parse(localStorage.getItem(key) || "[]");
-  }catch(e){
-    return [];
+const defaultStaff = [
+  {
+    id:"NC001",
+    name:"Atikah",
+    code:"NC001",
+    department:"Digital",
+    position:"Live Host Online & Offline",
+    status:"Active",
+    joiningDate:"2026-09-02",
+    email:"",
+    phone:""
+  },
+  {
+    id:"NC002",
+    name:"Temporary Staff 1",
+    code:"NC002",
+    department:"Digital",
+    position:"Temporary Staff",
+    status:"Active",
+    joiningDate:"",
+    email:"",
+    phone:""
+  },
+  {
+    id:"NC003",
+    name:"Temporary Staff 2",
+    code:"NC003",
+    department:"Digital",
+    position:"Temporary Staff",
+    status:"Active",
+    joiningDate:"",
+    email:"",
+    phone:""
   }
+];
+
+const defaultLogs = [
+  {
+    id:"LOG001",
+    staffId:"NC001",
+    title:"Budget quotation + Flite product shoot",
+    workDate:"2026-09-07",
+    startTime:"",
+    endTime:"",
+    dueDate:"2026-09-07",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Completed budget quotation and presented it to the team. Product shooting for Flite.",
+    assignedBy:"admin"
+  },
+  {
+    id:"LOG002",
+    staffId:"NC001",
+    title:"Product shooting + content brainstorming",
+    workDate:"2026-09-08",
+    startTime:"",
+    endTime:"",
+    dueDate:"2026-09-08",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Continued product shooting and brainstormed social media content ideas.",
+    assignedBy:"admin"
+  },
+  {
+    id:"LOG003",
+    staffId:"NC001",
+    title:"Live setup quotation + social media content",
+    workDate:"2026-09-09",
+    startTime:"",
+    endTime:"",
+    dueDate:"2026-09-09",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Presented budget quotation for live setup and shot social media content.",
+    assignedBy:"admin"
+  },
+  {
+    id:"LOG004",
+    staffId:"NC001",
+    title:"Content shooting + video editing",
+    workDate:"2026-09-10",
+    startTime:"",
+    endTime:"",
+    dueDate:"2026-09-10",
+    dueTime:"",
+    priority:"Medium",
+    status:"Completed",
+    description:"Content shooting and video editing.",
+    assignedBy:"admin"
+  }
+];
+
+const defaultSchedules = [
+  {
+    id:"SCH001",
+    title:"Content Planning",
+    date:"2026-09-15",
+    time:"10:00",
+    location:"Office",
+    staffId:"NC001",
+    description:"Plan upcoming social media content."
+  },
+  {
+    id:"SCH002",
+    title:"Product Shooting",
+    date:"2026-09-16",
+    time:"11:00",
+    location:"Studio",
+    staffId:"NC001",
+    description:"Product shooting session."
+  },
+  {
+    id:"SCH003",
+    title:"Video Editing",
+    date:"2026-09-17",
+    time:"14:00",
+    location:"Office",
+    staffId:"NC001",
+    description:"Edit social media videos."
+  }
+];
+
+const defaultAnnouncements = [
+  {
+    id:"ANN001",
+    title:"Welcome to Nona Costex Staff Portal",
+    message:"Welcome to the staff portal. Please keep your tasks, attendance and work updates up to date.",
+    createdAt:new Date().toISOString()
+  },
+  {
+    id:"ANN002",
+    title:"Digital Team Content Planning",
+    message:"Please keep upcoming content ideas and production schedules updated.",
+    createdAt:new Date().toISOString()
+  }
+];
+
+function get(key, fallback=[]){
+  try{
+    const raw=localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  }catch(e){return fallback}
 }
-
-function setData(key,data){
-  localStorage.setItem(key,JSON.stringify(data));
+function set(key,value){
+  localStorage.setItem(key,JSON.stringify(value));
 }
-
-function uid(prefix="id"){
-  return prefix + "_" + Date.now() + "_" + Math.random().toString(36).slice(2,7);
-}
-
-function todayISO(){
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-  return `${y}-${m}-${day}`;
-}
-
-function escapeHTML(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* =========================================================
-   DEFAULT DATA
-========================================================= */
 
 function initData(){
+  if(!localStorage.getItem(KEYS.staff)) set(KEYS.staff,defaultStaff);
+  if(!localStorage.getItem(KEYS.logs)) set(KEYS.logs,defaultLogs);
+  if(!localStorage.getItem(KEYS.schedules)) set(KEYS.schedules,defaultSchedules);
+  if(!localStorage.getItem(KEYS.announcements)) set(KEYS.announcements,defaultAnnouncements);
+  if(!localStorage.getItem(KEYS.leaves)) set(KEYS.leaves,[]);
+  if(!localStorage.getItem(KEYS.attendance)) set(KEYS.attendance,[]);
+  if(!localStorage.getItem(KEYS.notifications)) set(KEYS.notifications,[]);
+  if(!localStorage.getItem(KEYS.activity)) set(KEYS.activity,[]);
 
-  if(!localStorage.getItem(KEYS.staff)){
-    setData(KEYS.staff,[
-      {
-        id:"NC001",
-        code:"NC001",
-        name:"Atikah",
-        department:"Digital",
-        position:"Live Host Online & Offline",
-        status:"Active",
-        joiningDate:"2026-09-02",
-        email:"",
-        phone:"",
-        manager:""
-      },
-      {
-        id:"NC002",
-        code:"NC002",
-        name:"Temporary Staff 1",
-        department:"Digital",
-        position:"Temporary Staff",
-        status:"Active",
-        joiningDate:"2026-09-02",
-        email:"",
-        phone:"",
-        manager:""
-      },
-      {
-        id:"NC003",
-        code:"NC003",
-        name:"Temporary Staff 2",
-        department:"Digital",
-        position:"Temporary Staff",
-        status:"Active",
-        joiningDate:"2026-09-02",
-        email:"",
-        phone:"",
-        manager:""
-      }
-    ]);
-  }
-
-  if(!localStorage.getItem(KEYS.logs)){
-    setData(KEYS.logs,[
-      {
-        id:uid("log"),
-        staffId:"NC001",
-        title:"Budget quotation + Flite product shoot",
-        workDate:"2026-09-07",
-        startTime:"",
-        endTime:"",
-        dueDate:"2026-09-07",
-        dueTime:"",
-        priority:"High",
-        status:"Completed",
-        description:"Completed budget quotation, presented it to the team and conducted Flite product shooting.",
-        assignedBy:"Admin"
-      },
-      {
-        id:uid("log"),
-        staffId:"NC001",
-        title:"Product shooting + content brainstorming",
-        workDate:"2026-09-08",
-        startTime:"",
-        endTime:"",
-        dueDate:"2026-09-08",
-        dueTime:"",
-        priority:"Medium",
-        status:"Completed",
-        description:"Continued product shooting and brainstormed social media content ideas.",
-        assignedBy:"Admin"
-      },
-      {
-        id:uid("log"),
-        staffId:"NC001",
-        title:"Live setup quotation + social media content",
-        workDate:"2026-09-09",
-        startTime:"",
-        endTime:"",
-        dueDate:"2026-09-09",
-        dueTime:"",
-        priority:"High",
-        status:"Completed",
-        description:"Presented live setup budget quotation and shot social media content.",
-        assignedBy:"Admin"
-      },
-      {
-        id:uid("log"),
-        staffId:"NC001",
-        title:"Content shooting + video editing",
-        workDate:"2026-09-10",
-        startTime:"",
-        endTime:"",
-        dueDate:"2026-09-10",
-        dueTime:"",
-        priority:"Medium",
-        status:"Completed",
-        description:"Content shooting and video editing.",
-        assignedBy:"Admin"
-      }
-    ]);
-  }
-
-  if(!localStorage.getItem(KEYS.leaves)){
-    setData(KEYS.leaves,[]);
-  }
-
-  if(!localStorage.getItem(KEYS.attendance)){
-    setData(KEYS.attendance,[]);
-  }
-
-  if(!localStorage.getItem(KEYS.schedules)){
-    setData(KEYS.schedules,[
-      {
-        id:uid("sch"),
-        staffId:"NC001",
-        title:"Content Planning",
-        date:"2026-09-15",
-        time:"10:00",
-        location:"Office",
-        description:"Plan upcoming social media content."
-      },
-      {
-        id:uid("sch"),
-        staffId:"NC001",
-        title:"Product Shooting",
-        date:"2026-09-16",
-        time:"11:00",
-        location:"Studio",
-        description:"Product shooting session."
-      },
-      {
-        id:uid("sch"),
-        staffId:"NC001",
-        title:"Video Editing",
-        date:"2026-09-17",
-        time:"14:00",
-        location:"Office",
-        description:"Edit social media videos."
-      }
-    ]);
-  }
-
-  if(!localStorage.getItem(KEYS.announcements)){
-    setData(KEYS.announcements,[
-      {
-        id:uid("ann"),
-        title:"Welcome to Nona Costex Staff Portal",
-        message:"Welcome to the staff portal. Please keep your tasks, attendance and work information updated.",
-        date:todayISO(),
-        createdBy:"Admin"
-      },
-      {
-        id:uid("ann"),
-        title:"Digital Team Content Planning",
-        message:"Please keep content planning and production schedules updated.",
-        date:todayISO(),
-        createdBy:"Admin"
-      }
-    ]);
-  }
-
-  if(!localStorage.getItem(KEYS.notifications)){
-    setData(KEYS.notifications,[]);
-  }
-
-  if(!localStorage.getItem(KEYS.activity)){
-    setData(KEYS.activity,[]);
-  }
+  let logs=get(KEYS.logs);
+  let changed=false;
+  logs=logs.map(x=>{
+    if(!x.staffId){x.staffId="NC001";changed=true}
+    if(!x.assignedBy){x.assignedBy="admin";changed=true}
+    return x;
+  });
+  if(changed)set(KEYS.logs,logs);
 }
 
+initData();
 
-/* =========================================================
-   LOGIN
-========================================================= */
+/* =========================
+   HELPERS
+========================= */
 
-document.getElementById("loginForm").addEventListener("submit",function(e){
-  e.preventDefault();
-
-  const username = document.getElementById("loginUsername").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
-
-  const staff = getData(KEYS.staff);
-
-  if(username.toLowerCase()==="admin" && password==="ADMIN001"){
-    currentUser = {
-      role:"admin",
-      staffId:"admin",
-      name:"Admin"
-    };
-
-    addActivity("Login","Admin logged into the portal","admin");
-    startApp();
-    return;
-  }
-
-  const found = staff.find(s =>
-    s.name.toLowerCase()===username.toLowerCase() &&
-    s.code===password
-  );
-
-  if(found){
-    currentUser = {
-      role:"staff",
-      staffId:found.id || found.code,
-      name:found.name
-    };
-
-    addActivity("Login",`${found.name} logged into the portal`,found.id);
-    startApp();
-    return;
-  }
-
-  alert("Invalid username or password.");
-});
-
-
-function startApp(){
-
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-
-  setupUserUI();
-  generateOverdueNotifications();
-  updateNotificationCount();
-  showPage("dashboard");
+function uid(prefix){
+  return prefix+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
 }
-
-
-function logout(){
-
-  if(currentUser){
-    addActivity("Logout",`${currentUser.name} logged out`,currentUser.staffId);
-  }
-
-  currentUser = null;
-
-  document.getElementById("app").classList.add("hidden");
-  document.getElementById("loginPage").classList.remove("hidden");
-
-  document.getElementById("loginUsername").value="";
-  document.getElementById("loginPassword").value="";
+function esc(v){
+  return String(v??"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
-
-
-function setupUserUI(){
-
-  const admin = currentUser.role==="admin";
-
-  document.getElementById("adminNav").classList.toggle("hidden",!admin);
-  document.getElementById("tasksNavLabel").textContent = admin ? "Tasks" : "My Tasks";
-
-  document.getElementById("topName").textContent = currentUser.name;
-  document.getElementById("topRole").textContent = admin ? "Administrator" : "Staff";
-
-  const staff = getCurrentStaff();
-
-  if(staff){
-    document.getElementById("topAvatar").innerHTML =
-      getPhotoHTML(staff, "top-avatar");
-  }else{
-    document.getElementById("topAvatar").textContent = "A";
-  }
+function today(){
+  const d=new Date();
+  return d.toISOString().slice(0,10);
 }
-
-
-/* =========================================================
-   STAFF HELPERS
-========================================================= */
-
-function getStaff(){
-  return getData(KEYS.staff);
+function fmtDate(date){
+  if(!date)return "-";
+  const d=new Date(date+"T00:00:00");
+  return d.toLocaleDateString("en-MY",{day:"2-digit",month:"short",year:"numeric"});
 }
-
-function getCurrentStaff(){
-  if(!currentUser || currentUser.role==="admin") return null;
-  return getStaff().find(s => (s.id || s.code)===currentUser.staffId);
+function fmtDateTime(v){
+  if(!v)return "-";
+  const d=new Date(v);
+  return d.toLocaleString("en-MY",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
 }
-
-function getStaffById(id){
-  if(id==="admin") return {name:"Admin",code:"ADMIN"};
-  return getStaff().find(s => (s.id || s.code)===id);
+function staffName(id){
+  if(id==="admin")return "Admin";
+  const s=get(KEYS.staff).find(x=>x.id===id || x.code===id);
+  return s?s.name:"Unknown";
 }
-
-function getPhoto(staffId){
-  return localStorage.getItem(KEYS.photos + staffId) || "";
+function initials(name){
+  return String(name||"?").split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCase();
 }
-
-function getInitials(name){
-  return String(name || "?")
-    .split(" ")
-    .map(x=>x[0])
-    .join("")
-    .slice(0,2)
-    .toUpperCase();
+function isOverdue(task){
+  if(task.status==="Completed")return false;
+  if(!task.dueDate)return false;
+  const deadline=new Date(task.dueDate+"T"+(task.dueTime||"23:59"));
+  return deadline < new Date();
 }
-
-function getPhotoHTML(staff,cls=""){
-  const photo = getPhoto(staff.id || staff.code);
-
-  if(photo){
-    return `<img class="${cls}" src="${photo}" alt="">`;
-  }
-
-  return `<span>${escapeHTML(getInitials(staff.name))}</span>`;
+function statusClass(status){
+  if(status==="Completed")return "completed";
+  if(status==="In Progress")return "progress";
+  return "pending";
 }
-
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
+function priorityClass(p){
+  return String(p||"Medium").toLowerCase();
+}
+function toast(msg){
+  const old=document.querySelector(".toast");
+  if(old)old.remove();
+  const t=document.createElement("div");
+  t.className="toast";
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2500);
+}
 function addActivity(action,detail,staffId=null){
-
-  const data = getData(KEYS.activity);
-
-  data.unshift({
-    id:uid("act"),
+  const arr=get(KEYS.activity);
+  arr.unshift({
+    id:uid("ACT"),
     action,
     detail,
     staffId:staffId || currentUser?.staffId || "admin",
-    date:new Date().toISOString()
+    createdAt:new Date().toISOString()
   });
-
-  setData(KEYS.activity,data.slice(0,500));
+  set(KEYS.activity,arr.slice(0,500));
 }
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-function addNotification(staffId,title,message,type="info"){
-
-  const data = getData(KEYS.notifications);
-
-  data.unshift({
-    id:uid("not"),
+function addNotification(staffId,title,message,type="general"){
+  const arr=get(KEYS.notifications);
+  arr.unshift({
+    id:uid("NOT"),
     staffId,
     title,
     message,
     type,
-    date:new Date().toISOString(),
-    read:false
+    read:false,
+    createdAt:new Date().toISOString()
   });
-
-  setData(KEYS.notifications,data.slice(0,300));
-  updateNotificationCount();
+  set(KEYS.notifications,arr.slice(0,500));
+}
+function unreadCount(){
+  if(!currentUser)return 0;
+  return get(KEYS.notifications).filter(n=>n.staffId===currentUser.staffId && !n.read).length;
+}
+function updateNotificationUI(){
+  const count=unreadCount();
+  const dot=document.getElementById("topNotifDot");
+  if(dot)dot.classList.toggle("hidden",count===0);
+  const nav=document.getElementById("navNotifCount");
+  if(nav)nav.innerHTML=count?`<span class="status overdue">${count}</span>`:"";
+}
+function closeModal(){
+  document.getElementById("modalRoot").innerHTML="";
+}
+function openModal(html,large=false){
+  document.getElementById("modalRoot").innerHTML=
+    `<div class="modal-backdrop" onclick="if(event.target===this)closeModal()">
+      <div class="modal ${large?"large":""}">${html}</div>
+    </div>`;
+}
+function closeSidebar(){
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
+function openSidebar(){
+  document.getElementById("sidebar").classList.add("open");
+  document.getElementById("overlay").classList.add("show");
 }
 
+/* =========================
+   LOGIN
+========================= */
 
-function updateNotificationCount(){
+function login(){
+  const username=document.getElementById("loginUsername").value.trim();
+  const password=document.getElementById("loginPassword").value.trim();
+  const staff=get(KEYS.staff);
 
-  if(!currentUser) return;
-
-  const notifications = getData(KEYS.notifications)
-    .filter(n => n.staffId===currentUser.staffId && !n.read);
-
-  const el = document.getElementById("notificationCount");
-
-  el.textContent = notifications.length;
-  el.classList.toggle("hidden",notifications.length===0);
-}
-
-
-function markNotificationRead(id){
-
-  const data = getData(KEYS.notifications);
-
-  const item = data.find(n=>n.id===id);
-
-  if(item){
-    item.read=true;
-  }
-
-  setData(KEYS.notifications,data);
-  updateNotificationCount();
-  showPage("notifications");
-}
-
-
-function markAllRead(){
-
-  const data = getData(KEYS.notifications);
-
-  data.forEach(n=>{
-    if(n.staffId===currentUser.staffId){
-      n.read=true;
+  if(username.toLowerCase()==="admin" && password==="ADMIN001"){
+    currentUser={
+      role:"admin",
+      staffId:"admin",
+      name:"Admin"
+    };
+  }else{
+    const user=staff.find(s=>
+      s.name.toLowerCase()===username.toLowerCase() &&
+      s.code===password
+    );
+    if(user){
+      currentUser={
+        role:"staff",
+        staffId:user.id,
+        name:user.name
+      };
+    }else{
+      document.getElementById("loginError").textContent="Invalid username or password.";
+      return;
     }
-  });
+  }
 
-  setData(KEYS.notifications,data);
-  updateNotificationCount();
-  renderNotifications();
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  document.getElementById("adminNav").style.display=
+    currentUser.role==="admin"?"block":"none";
+
+  document.getElementById("topName").textContent=currentUser.name;
+  document.getElementById("topRole").textContent=
+    currentUser.role==="admin"?"Administrator":"Staff";
+
+  addActivity("Login",currentUser.name+" logged into the portal",currentUser.staffId);
+  generateOverdueNotifications();
+  updateNotificationUI();
+  showPage("dashboard");
 }
 
-
-/* =========================================================
-   TASK HELPERS
-========================================================= */
-
-function getTasks(){
-
-  const logs = getData(KEYS.logs);
-
-  if(currentUser?.role==="staff"){
-    return logs.filter(x=>x.staffId===currentUser.staffId);
-  }
-
-  return logs;
+function logout(){
+  if(currentUser)addActivity("Logout",currentUser.name+" logged out",currentUser.staffId);
+  currentUser=null;
+  document.getElementById("app").style.display="none";
+  document.getElementById("loginPage").style.display="flex";
+  document.getElementById("loginUsername").value="";
+  document.getElementById("loginPassword").value="";
 }
 
-function isOverdue(task){
-
-  if(task.status==="Completed") return false;
-
-  if(!task.dueDate) return false;
-
-  const due = new Date(
-    `${task.dueDate}T${task.dueTime || "23:59"}`
-  );
-
-  return new Date() > due;
-}
-
-function statusBadge(status,overdue=false){
-
-  if(overdue){
-    return `<span class="badge overdue">Overdue</span>`;
-  }
-
-  if(status==="Completed"){
-    return `<span class="badge completed">Completed</span>`;
-  }
-
-  if(status==="In Progress"){
-    return `<span class="badge progress">In Progress</span>`;
-  }
-
-  return `<span class="badge pending">Pending</span>`;
-}
-
-function workloadInfo(count){
-
-  if(count>=8){
-    return {
-      label:"High workload",
-      cls:"red"
-    };
-  }
-
-  if(count>=4){
-    return {
-      label:"Moderate workload",
-      cls:"yellow"
-    };
-  }
-
-  return {
-    label:"Light workload",
-    cls:"green"
-  };
-}
-
-
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
-const pageTitles = {
+const pageNames={
   dashboard:"Dashboard",
   tasks:"Tasks",
-  worklogs:"Work Logs",
+  logs:"Work Logs",
   attendance:"Attendance",
   leave:"Leave",
   schedule:"Schedule",
@@ -1611,1334 +1050,998 @@ const pageTitles = {
 };
 
 function showPage(page){
-
-  if(!currentUser) return;
-
-  if(
-    ["staff","analytics","activity"].includes(page) &&
-    currentUser.role!=="admin"
-  ){
-    page="dashboard";
-  }
-
-  currentPage=page;
-
-  document.getElementById("pageTitle").textContent =
-    pageTitles[page] || "Dashboard";
-
-  document.querySelectorAll(".nav-item").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page===page
-    );
-  });
-
-  closeSidebar();
-
-  switch(page){
-    case "dashboard": renderDashboard(); break;
-    case "tasks": renderTasks(); break;
-    case "worklogs": renderWorkLogs(); break;
-    case "attendance": renderAttendance(); break;
-    case "leave": renderLeave(); break;
-    case "schedule": renderSchedule(); break;
-    case "announcements": renderAnnouncements(); break;
-    case "notifications": renderNotifications(); break;
-    case "staff": renderStaffManagement(); break;
-    case "analytics": renderAnalytics(); break;
-    case "activity": renderActivity(); break;
-    case "profile": renderProfile(); break;
-    default: renderDashboard();
-  }
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboard(){
-
-  const tasks = getTasks();
-
-  const completed = tasks.filter(t=>t.status==="Completed").length;
-  const progress = tasks.filter(t=>t.status==="In Progress").length;
-  const overdue = tasks.filter(t=>isOverdue(t)).length;
-
-  const rate = tasks.length
-    ? Math.round(completed/tasks.length*100)
-    : 0;
-
-  if(currentUser.role==="admin"){
-    renderAdminDashboard(tasks);
-  }else{
-    renderStaffDashboard(tasks,completed,progress,overdue,rate);
-  }
-}
-
-
-function renderStaffDashboard(tasks,completed,progress,overdue,rate){
-
-  const schedules = getData(KEYS.schedules)
-    .filter(s=>s.staffId===currentUser.staffId)
-    .filter(s=>s.date>=todayISO())
-    .sort((a,b)=>a.date.localeCompare(b.date))
-    .slice(0,5);
-
-  const announcements = getData(KEYS.announcements)
-    .slice(0,3);
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-      <div>
-        <h2>Good to see you, ${escapeHTML(currentUser.name)}</h2>
-        <p>Here is your current work overview.</p>
-      </div>
-    </div>
-
-    <div class="cards">
-
-      <div class="card stat-card">
-        <div class="stat-label">Total Tasks</div>
-        <div class="stat-number">${tasks.length}</div>
-        <div class="stat-note">Assigned tasks</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Completed</div>
-        <div class="stat-number">${completed}</div>
-        <div class="stat-note">Completed tasks</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">In Progress</div>
-        <div class="stat-number">${progress}</div>
-        <div class="stat-note">Current tasks</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Overdue</div>
-        <div class="stat-number">${overdue}</div>
-        <div class="stat-note">Needs attention</div>
-      </div>
-
-    </div>
-
-    <div class="grid-2">
-
-      <div class="card">
-        <div class="card-head">
-          <h3>My Progress</h3>
-          <span>${rate}%</span>
-        </div>
-
-        <div class="card-body">
-          <div class="progress-line">
-            <div class="progress-fill" style="width:${rate}%"></div>
-          </div>
-
-          <p style="font-size:11px;color:var(--muted);margin-top:12px;">
-            ${completed} of ${tasks.length} tasks completed.
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <h3>Quick Actions</h3>
-        </div>
-
-        <div class="card-body">
-          <div class="action-row">
-            <button class="btn primary" onclick="showPage('tasks')">View My Tasks</button>
-            <button class="btn" onclick="showPage('worklogs')">Work Logs</button>
-            <button class="btn" onclick="showPage('attendance')">Attendance</button>
-            <button class="btn" onclick="showPage('leave')">Apply Leave</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="height:18px"></div>
-
-    <div class="grid-2">
-
-      <div class="card">
-        <div class="card-head">
-          <h3>Upcoming Schedule</h3>
-          <button class="btn small" onclick="showPage('schedule')">View all</button>
-        </div>
-
-        <div class="card-body">
-          ${
-            schedules.length
-            ? schedules.map(s=>`
-              <div style="padding:11px 0;border-bottom:1px solid var(--line)">
-                <strong style="font-size:11px">${escapeHTML(s.title)}</strong>
-                <div style="font-size:10px;color:var(--muted);margin-top:4px">
-                  ${formatDate(s.date)} · ${escapeHTML(s.time || "-")} · ${escapeHTML(s.location || "-")}
-                </div>
-              </div>
-            `).join("")
-            : `<div class="empty">No upcoming schedule.</div>`
-          }
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <h3>Announcements</h3>
-          <button class="btn small" onclick="showPage('announcements')">View all</button>
-        </div>
-
-        <div class="card-body">
-          ${
-            announcements.length
-            ? announcements.map(a=>`
-              <div style="padding:11px 0;border-bottom:1px solid var(--line)">
-                <strong style="font-size:11px">${escapeHTML(a.title)}</strong>
-                <div style="font-size:10px;color:var(--muted);margin-top:4px">
-                  ${escapeHTML(a.message)}
-                </div>
-              </div>
-            `).join("")
-            : `<div class="empty">No announcements.</div>`
-          }
-        </div>
-      </div>
-
-    </div>
-  `;
-}
-
-
-function renderAdminDashboard(tasks){
-
-  const staff = getStaff();
-  const active = staff.filter(s=>s.status==="Active").length;
-  const completed = tasks.filter(t=>t.status==="Completed").length;
-  const progress = tasks.filter(t=>t.status==="In Progress").length;
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-      <div>
-        <h2>Admin Dashboard</h2>
-        <p>Overview of staff and current work progress.</p>
-      </div>
-
-      <button class="btn primary" onclick="openTaskModal()">+ Assign Task</button>
-    </div>
-
-    <div class="cards">
-
-      <div class="card stat-card">
-        <div class="stat-label">Active Staff</div>
-        <div class="stat-number">${active}</div>
-        <div class="stat-note">Current employees</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Total Tasks</div>
-        <div class="stat-number">${tasks.length}</div>
-        <div class="stat-note">All assigned tasks</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">In Progress</div>
-        <div class="stat-number">${progress}</div>
-        <div class="stat-note">Current work</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Completed</div>
-        <div class="stat-number">${completed}</div>
-        <div class="stat-note">Finished tasks</div>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-head">
-        <h3>Staff Work Progress</h3>
-        <button class="btn small" onclick="showPage('staff')">Staff Management</button>
-      </div>
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Staff</th>
-              <th>Department</th>
-              <th>Position</th>
-              <th>Tasks</th>
-              <th>Completion</th>
-              <th>Workload</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            ${
-              staff.map(s=>{
-
-                const st = tasks.filter(t=>t.staffId===(s.id||s.code));
-                const done = st.filter(t=>t.status==="Completed").length;
-                const rate = st.length ? Math.round(done/st.length*100) : 0;
-                const work = workloadInfo(
-                  st.filter(t=>t.status!=="Completed").length
-                );
-
-                return `
-                  <tr>
-
-                    <td>
-                      <div style="display:flex;align-items:center;gap:8px">
-                        <div class="avatar">${getPhotoHTML(s)}</div>
-                        <div>
-                          <strong style="font-size:11px">${escapeHTML(s.name)}</strong>
-                          <div style="font-size:9px;color:var(--muted)">
-                            ${escapeHTML(s.code)}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td>${escapeHTML(s.department || "-")}</td>
-
-                    <td>${escapeHTML(s.position || "-")}</td>
-
-                    <td>${st.length}</td>
-
-                    <td>
-                      <div style="min-width:100px">
-                        <div style="font-size:9px">${rate}%</div>
-                        <div class="progress-line">
-                          <div class="progress-fill" style="width:${rate}%"></div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td>
-                      <span class="workload">
-                        <span class="dot ${work.cls}"></span>
-                        ${work.label}
-                      </span>
-                    </td>
-
-                  </tr>
-                `;
-
-              }).join("")
-            }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   TASKS
-========================================================= */
-
-function renderTasks(){
-
-  const tasks = getTasks();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>${currentUser.role==="admin" ? "Task Management" : "My Tasks"}</h2>
-        <p>${currentUser.role==="admin" ? "Assign and manage staff tasks." : "Tasks assigned to you."}</p>
-      </div>
-
-      ${
-        currentUser.role==="admin"
-        ? `<button class="btn primary" onclick="openTaskModal()">+ Assign Task</button>`
-        : ""
-      }
-
-    </div>
-
-    <div class="toolbar">
-
-      <input
-        id="taskSearch"
-        placeholder="Search tasks..."
-        oninput="filterTaskTable()"
-      >
-
-      <select id="taskStatusFilter" onchange="filterTaskTable()">
-        <option value="">All Status</option>
-        <option>Pending</option>
-        <option>In Progress</option>
-        <option>Completed</option>
-      </select>
-
-    </div>
-
-    <div class="card">
-
-      <div class="table-wrap">
-
-        <table id="taskTable">
-
-          <thead>
-            <tr>
-              <th>Task</th>
-              ${currentUser.role==="admin" ? "<th>Assigned To</th>" : ""}
-              <th>Due</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            tasks.length
-            ? tasks.map(t=>{
-
-              const staff = getStaffById(t.staffId);
-
-              return `
-                <tr data-search="${escapeHTML(
-                  (t.title+" "+(staff?.name||"")+" "+t.status).toLowerCase()
-                )}" data-status="${escapeHTML(t.status)}">
-
-                  <td>
-                    <strong>${escapeHTML(t.title)}</strong>
-                    <div style="font-size:9px;color:var(--muted);margin-top:3px">
-                      ${escapeHTML(t.workDate || "-")}
-                    </div>
-                  </td>
-
-                  ${
-                    currentUser.role==="admin"
-                    ? `<td>${escapeHTML(staff?.name || "-")}</td>`
-                    : ""
-                  }
-
-                  <td>
-                    ${escapeHTML(t.dueDate || "-")}
-                    ${t.dueTime ? `<br><span style="font-size:9px;color:var(--muted)">${escapeHTML(t.dueTime)}</span>` : ""}
-                  </td>
-
-                  <td>${escapeHTML(t.priority || "-")}</td>
-
-                  <td>${statusBadge(t.status,isOverdue(t))}</td>
-
-                  <td>
-
-                    ${
-                      currentUser.role==="admin"
-                      ? `
-                        <div class="action-row">
-                          <button class="btn small" onclick="openTaskModal('${t.id}')">Edit</button>
-                          <button class="btn small danger" onclick="deleteTask('${t.id}')">Delete</button>
-                        </div>
-                      `
-                      : `
-                        <button class="btn small" onclick="openTaskStatusModal('${t.id}')">
-                          Update
-                        </button>
-                      `
-                    }
-
-                  </td>
-
-                </tr>
-              `;
-
-            }).join("")
-            : `<tr><td colspan="7"><div class="empty">No tasks found.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-function filterTaskTable(){
-
-  const q = document.getElementById("taskSearch").value.toLowerCase();
-  const status = document.getElementById("taskStatusFilter").value;
-
-  document.querySelectorAll("#taskTable tbody tr").forEach(row=>{
-
-    const text = row.dataset.search || "";
-    const rowStatus = row.dataset.status || "";
-
-    const matchText = text.includes(q);
-    const matchStatus = !status || rowStatus===status;
-
-    row.style.display =
-      matchText && matchStatus ? "" : "none";
-  });
-}
-
-
-function openTaskModal(id=null){
-
-  const tasks = getData(KEYS.logs);
-  const task = id ? tasks.find(t=>t.id===id) : null;
-
-  const staff = getStaff().filter(s=>s.status==="Active");
-
-  openModal(
-    task ? "Edit Task" : "Assign New Task",
-    `
-
-      <form id="taskForm">
-
-        <div class="form-grid">
-
-          <div class="form-group full">
-            <label>Task Title</label>
-            <input id="taskTitle" required value="${escapeHTML(task?.title||"")}">
-          </div>
-
-          <div class="form-group">
-            <label>Assign To</label>
-            <select id="taskStaff" required>
-              <option value="">Select staff</option>
-
-              ${
-                staff.map(s=>`
-                  <option value="${escapeHTML(s.id||s.code)}"
-                    ${task?.staffId===(s.id||s.code)?"selected":""}>
-                    ${escapeHTML(s.name)}
-                  </option>
-                `).join("")
-              }
-
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Priority</label>
-            <select id="taskPriority">
-              ${["Low","Medium","High"].map(x=>`
-                <option ${task?.priority===x?"selected":""}>${x}</option>
-              `).join("")}
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Work Date</label>
-            <input id="taskWorkDate" type="date" value="${task?.workDate||todayISO()}">
-          </div>
-
-          <div class="form-group">
-            <label>Due Date</label>
-            <input id="taskDueDate" type="date" value="${task?.dueDate||todayISO()}">
-          </div>
-
-          <div class="form-group">
-            <label>Due Time</label>
-            <input id="taskDueTime" type="time" value="${task?.dueTime||""}">
-          </div>
-
-          <div class="form-group">
-            <label>Status</label>
-            <select id="taskStatus">
-              ${["Pending","In Progress","Completed"].map(x=>`
-                <option ${task?.status===x?"selected":""}>${x}</option>
-              `).join("")}
-            </select>
-          </div>
-
-          <div class="form-group full">
-            <label>Description</label>
-            <textarea id="taskDescription">${escapeHTML(task?.description||"")}</textarea>
-          </div>
-
-        </div>
-
-      </form>
-    `,
-    ()=>saveTask(id)
-  );
-}
-
-
-function saveTask(id){
-
-  const tasks = getData(KEYS.logs);
-
-  const staffId = document.getElementById("taskStaff").value;
-
-  if(!staffId){
-    alert("Please select staff.");
+  if(!currentUser)return;
+
+  const adminOnly=["staff","analytics","activity"];
+  if(adminOnly.includes(page) && currentUser.role!=="admin"){
+    toast("Admin access only");
     return;
   }
 
-  const data = {
-    title:document.getElementById("taskTitle").value.trim(),
-    staffId,
-    priority:document.getElementById("taskPriority").value,
-    workDate:document.getElementById("taskWorkDate").value,
-    dueDate:document.getElementById("taskDueDate").value,
-    dueTime:document.getElementById("taskDueTime").value,
-    status:document.getElementById("taskStatus").value,
-    description:document.getElementById("taskDescription").value.trim(),
-    assignedBy:"Admin"
+  currentPage=page;
+  document.querySelectorAll(".nav-btn[data-page]").forEach(b=>{
+    b.classList.toggle("active",b.dataset.page===page);
+  });
+  document.getElementById("pageTitle").textContent=pageNames[page]||page;
+
+  closeSidebar();
+
+  const renderers={
+    dashboard:renderDashboard,
+    tasks:renderTasks,
+    logs:renderLogs,
+    attendance:renderAttendance,
+    leave:renderLeave,
+    schedule:renderSchedule,
+    announcements:renderAnnouncements,
+    notifications:renderNotifications,
+    staff:renderStaff,
+    analytics:renderAnalytics,
+    activity:renderActivity,
+    profile:renderProfile
   };
 
+  if(renderers[page])renderers[page]();
+  updateNotificationUI();
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard(){
+  const logs=get(KEYS.logs);
+  const staff=get(KEYS.staff).filter(s=>s.status==="Active");
+  const schedules=get(KEYS.schedules);
+  const tasks=logs;
+
+  const mine=currentUser.role==="admin"
+    ? tasks
+    : tasks.filter(t=>t.staffId===currentUser.staffId);
+
+  const completed=mine.filter(t=>t.status==="Completed").length;
+  const progress=mine.filter(t=>t.status==="In Progress").length;
+  const overdue=mine.filter(t=>isOverdue(t)).length;
+  const rate=mine.length?Math.round(completed/mine.length*100):0;
+
+  const todayTasks=mine.filter(t=>t.dueDate===today() && t.status!=="Completed");
+  const upcoming=mine
+    .filter(t=>t.dueDate && t.dueDate>=today() && t.status!=="Completed")
+    .sort((a,b)=>(a.dueDate||"").localeCompare(b.dueDate||""))
+    .slice(0,5);
+
+  const todaySchedule=schedules.filter(s=>
+    s.date===today() &&
+    (currentUser.role==="admin" || s.staffId===currentUser.staffId)
+  );
+
+  const recent=get(KEYS.activity).slice(0,6);
+
+  document.getElementById("content").innerHTML=`
+    <div class="welcome">
+      <h2>Good day, ${esc(currentUser.name)}</h2>
+      <p>${currentUser.role==="admin"?"Here is your team overview.":"Here is your work overview for today."}</p>
+    </div>
+
+    <div class="grid grid-4">
+      ${currentUser.role==="admin"?`
+      <div class="card">
+        <div class="stat-label">Active Staff</div>
+        <div class="stat-number">${staff.length}</div>
+        <div class="stat-small">Currently active</div>
+      </div>`:""}
+      <div class="card">
+        <div class="stat-label">Total Tasks</div>
+        <div class="stat-number">${mine.length}</div>
+        <div class="stat-small">Assigned tasks</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">In Progress</div>
+        <div class="stat-number">${progress}</div>
+        <div class="stat-small">Currently working</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Overdue</div>
+        <div class="stat-number">${overdue}</div>
+        <div class="stat-small">Needs attention</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Completed</div>
+        <div class="stat-number">${completed}</div>
+        <div class="stat-small">${rate}% completion rate</div>
+      </div>
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Today's Tasks</div>
+            <div class="section-sub">Tasks due today</div>
+          </div>
+          <button class="btn small secondary" onclick="showPage('tasks')">View all</button>
+        </div>
+        ${
+          todayTasks.length
+          ?todayTasks.map(taskHTML).join("")
+          :`<div class="empty">No tasks due today.</div>`
+        }
+      </div>
+
+      <div class="card">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Upcoming Deadlines</div>
+            <div class="section-sub">Next tasks that need attention</div>
+          </div>
+        </div>
+        ${
+          upcoming.length
+          ?upcoming.map(taskHTML).join("")
+          :`<div class="empty">No upcoming deadlines.</div>`
+        }
+      </div>
+
+      <div class="card">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Today's Schedule</div>
+            <div class="section-sub">${fmtDate(today())}</div>
+          </div>
+          <button class="btn small secondary" onclick="showPage('schedule')">Calendar</button>
+        </div>
+        ${
+          todaySchedule.length
+          ?todaySchedule.map(s=>`
+            <div class="list-item">
+              <div>
+                <div class="item-title">${esc(s.title)}</div>
+                <div class="item-meta">${esc(s.time||"")} · ${esc(s.location||"")}</div>
+              </div>
+              ${currentUser.role==="admin"?`<div class="item-meta">${esc(staffName(s.staffId))}</div>`:""}
+            </div>
+          `).join("")
+          :`<div class="empty">No schedule for today.</div>`
+        }
+      </div>
+
+      <div class="card">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Recent Activity</div>
+            <div class="section-sub">Latest portal activity</div>
+          </div>
+          ${currentUser.role==="admin"?`<button class="btn small secondary" onclick="showPage('activity')">View all</button>`:""}
+        </div>
+        ${
+          recent.length
+          ?recent.map(a=>`
+            <div class="activity">
+              <strong>${esc(a.action)}</strong>
+              <p>${esc(a.detail)} · ${fmtDateTime(a.createdAt)}</p>
+            </div>
+          `).join("")
+          :`<div class="empty">No activity yet.</div>`
+        }
+      </div>
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <div class="section-title">My Progress</div>
+          <div class="section-sub">${completed} of ${mine.length} tasks completed</div>
+        </div>
+        <strong>${rate}%</strong>
+      </div>
+      <div class="progress"><span style="width:${rate}%"></span></div>
+    </div>
+
+    ${currentUser.role==="admin"?`
+    <div style="height:15px"></div>
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Staff Work Progress</div>
+          <div class="section-sub">Quick team performance view</div>
+        </div>
+      </div>
+      ${renderStaffProgress()}
+    </div>`:""}
+  `;
+}
+
+function taskHTML(t){
+  return `
+    <div class="list-item" onclick="viewTask('${t.id}')" style="cursor:pointer">
+      <div>
+        <div class="item-title">${esc(t.title)}</div>
+        <div class="item-meta">
+          ${t.dueDate?`Due ${fmtDate(t.dueDate)}${t.dueTime?" · "+esc(t.dueTime):""}`:"No due date"}
+          ${currentUser.role==="admin"?` · ${esc(staffName(t.staffId))}`:""}
+        </div>
+      </div>
+      <div>
+        <span class="status ${isOverdue(t)?"overdue":statusClass(t.status)}">
+          ${isOverdue(t)?"Overdue":esc(t.status)}
+        </span>
+      </div>
+    </div>
+  `;
+}
+
+function renderStaffProgress(){
+  const staff=get(KEYS.staff);
+  const logs=get(KEYS.logs);
+
+  return `
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Staff</th><th>Tasks</th><th>Completed</th><th>Progress</th>
+      </tr></thead>
+      <tbody>
+      ${staff.map(s=>{
+        const mine=logs.filter(x=>x.staffId===s.id);
+        const done=mine.filter(x=>x.status==="Completed").length;
+        const rate=mine.length?Math.round(done/mine.length*100):0;
+        return `<tr>
+          <td><strong>${esc(s.name)}</strong><br><span class="item-meta">${esc(s.position)}</span></td>
+          <td>${mine.length}</td>
+          <td>${done}</td>
+          <td style="min-width:150px">
+            <div class="progress"><span style="width:${rate}%"></span></div>
+            <div class="item-meta">${rate}%</div>
+          </td>
+        </tr>`;
+      }).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+/* =========================
+   TASKS
+========================= */
+
+function renderTasks(){
+  let tasks=get(KEYS.logs);
+
+  if(currentUser.role!=="admin")
+    tasks=tasks.filter(t=>t.staffId===currentUser.staffId);
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">${currentUser.role==="admin"?"All Tasks":"My Tasks"}</div>
+        <div class="section-sub">Manage assigned work and deadlines</div>
+      </div>
+      ${currentUser.role==="admin"?`<button class="btn" onclick="openTaskModal()">+ Assign Task</button>`:""}
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <input id="taskSearch" placeholder="Search task..." oninput="filterTasks()">
+        <select id="taskStatus" onchange="filterTasks()">
+          <option value="">All status</option>
+          <option>Pending</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+          <option>Overdue</option>
+        </select>
+        <select id="taskPriority" onchange="filterTasks()">
+          <option value="">All priority</option>
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+      </div>
+      <div id="taskTable">${taskTable(tasks)}</div>
+    </div>
+  `;
+}
+
+function taskTable(tasks){
+  if(!tasks.length)return `<div class="empty">No tasks found.</div>`;
+
+  return `
+  <div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th>Task</th>
+      ${currentUser.role==="admin"?`<th>Assigned To</th>`:""}
+      <th>Due</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr></thead>
+    <tbody>
+    ${tasks.map(t=>`
+      <tr>
+        <td>
+          <strong>${esc(t.title)}</strong>
+          <div class="item-meta">${esc(t.description||"")}</div>
+        </td>
+        ${currentUser.role==="admin"?`<td>${esc(staffName(t.staffId))}</td>`:""}
+        <td>${t.dueDate?fmtDate(t.dueDate):"-"} ${esc(t.dueTime||"")}</td>
+        <td><span class="priority ${priorityClass(t.priority)}">${esc(t.priority)}</span></td>
+        <td><span class="status ${isOverdue(t)?"overdue":statusClass(t.status)}">${isOverdue(t)?"Overdue":esc(t.status)}</span></td>
+        <td>
+          <div class="actions">
+            <button class="btn small secondary" onclick="viewTask('${t.id}')">View</button>
+            ${currentUser.role==="admin"
+              ?`<button class="btn small" onclick="openTaskModal('${t.id}')">Edit</button>
+                <button class="btn small danger" onclick="deleteTask('${t.id}')">Delete</button>`
+              :`<button class="btn small" onclick="updateTaskStatus('${t.id}')">Update</button>`
+            }
+          </div>
+        </td>
+      </tr>
+    `).join("")}
+    </tbody>
+  </table>
+  </div>`;
+}
+
+function filterTasks(){
+  let tasks=get(KEYS.logs);
+  if(currentUser.role!=="admin")
+    tasks=tasks.filter(t=>t.staffId===currentUser.staffId);
+
+  const q=(document.getElementById("taskSearch")?.value||"").toLowerCase();
+  const status=document.getElementById("taskStatus")?.value||"";
+  const priority=document.getElementById("taskPriority")?.value||"";
+
+  tasks=tasks.filter(t=>{
+    const matchQ=(t.title+" "+(t.description||"")+" "+staffName(t.staffId)).toLowerCase().includes(q);
+    const matchStatus=!status || (status==="Overdue"?isOverdue(t):t.status===status);
+    const matchPriority=!priority || t.priority===priority;
+    return matchQ&&matchStatus&&matchPriority;
+  });
+
+  document.getElementById("taskTable").innerHTML=taskTable(tasks);
+}
+
+function openTaskModal(id=null){
+  const tasks=get(KEYS.logs);
+  const task=id?tasks.find(x=>x.id===id):null;
+  const staff=get(KEYS.staff).filter(s=>s.status==="Active");
+
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">${task?"Edit Task":"Assign New Task"}</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="field form-full">
+        <label>Task Title</label>
+        <input id="fTitle" value="${esc(task?.title||"")}">
+      </div>
+
+      <div class="field">
+        <label>Assign To</label>
+        <select id="fStaff">
+          ${staff.map(s=>`<option value="${s.id}" ${task?.staffId===s.id?"selected":""}>${esc(s.name)}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Priority</label>
+        <select id="fPriority">
+          ${["High","Medium","Low"].map(x=>`<option ${task?.priority===x?"selected":""}>${x}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Work Date</label>
+        <input id="fWorkDate" type="date" value="${task?.workDate||today()}">
+      </div>
+
+      <div class="field">
+        <label>Due Date</label>
+        <input id="fDueDate" type="date" value="${task?.dueDate||""}">
+      </div>
+
+      <div class="field">
+        <label>Due Time</label>
+        <input id="fDueTime" type="time" value="${task?.dueTime||""}">
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select id="fStatus">
+          ${["Pending","In Progress","Completed"].map(x=>`<option ${task?.status===x?"selected":""}>${x}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="field form-full">
+        <label>Description</label>
+        <textarea id="fDescription">${esc(task?.description||"")}</textarea>
+      </div>
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveTask('${id||""}')">${task?"Save Changes":"Assign Task"}</button>
+    </div>
+  `);
+}
+
+function saveTask(id){
+  const arr=get(KEYS.logs);
+
+  const data={
+    title:document.getElementById("fTitle").value.trim(),
+    staffId:document.getElementById("fStaff").value,
+    priority:document.getElementById("fPriority").value,
+    workDate:document.getElementById("fWorkDate").value,
+    dueDate:document.getElementById("fDueDate").value,
+    dueTime:document.getElementById("fDueTime").value,
+    status:document.getElementById("fStatus").value,
+    description:document.getElementById("fDescription").value.trim(),
+    assignedBy:"admin"
+  };
+
+  if(!data.title){
+    toast("Please enter a task title");
+    return;
+  }
+
   if(id){
-
-    const task = tasks.find(t=>t.id===id);
-
-    if(task){
-      Object.assign(task,data);
+    const old=arr.find(x=>x.id===id);
+    Object.assign(old,data);
+    addActivity("Task Updated",`${data.title} updated`,data.staffId);
+    if(old.status!==data.status && data.status==="Completed"){
+      addNotification("admin","Task completed",`${staffName(data.staffId)} completed "${data.title}"`,"task");
     }
-
-    addActivity(
-      "Task Updated",
-      `${data.title} was updated`,
-      staffId
-    );
-
   }else{
-
-    const newTask = {
-      id:uid("task"),
-      ...data
-    };
-
-    tasks.unshift(newTask);
-
-    const staff = getStaffById(staffId);
-
+    data.id=uid("TASK");
+    arr.unshift(data);
     addNotification(
-      staffId,
+      data.staffId,
       "New task assigned",
       `You have been assigned: ${data.title}`,
       "task"
     );
-
-    addActivity(
-      "Task Assigned",
-      `${data.title} assigned to ${staff?.name || staffId}`,
-      staffId
-    );
+    addActivity("Task Assigned",`${data.title} assigned to ${staffName(data.staffId)}`,data.staffId);
   }
 
-  setData(KEYS.logs,tasks);
-
+  set(KEYS.logs,arr);
   closeModal();
-  renderTasks();
+  toast(id?"Task updated":"Task assigned");
+  showPage("tasks");
 }
-
 
 function deleteTask(id){
+  const arr=get(KEYS.logs);
+  const task=arr.find(x=>x.id===id);
+  if(!task)return;
 
-  if(!confirm("Delete this task?")) return;
+  if(!confirm("Delete this task?"))return;
 
-  let tasks = getData(KEYS.logs);
-  const task = tasks.find(t=>t.id===id);
-
-  tasks = tasks.filter(t=>t.id!==id);
-
-  setData(KEYS.logs,tasks);
-
-  addActivity(
-    "Task Deleted",
-    `${task?.title || "Task"} was deleted`,
-    task?.staffId || "admin"
-  );
-
+  set(KEYS.logs,arr.filter(x=>x.id!==id));
+  addActivity("Task Deleted",`${task.title} deleted`,task.staffId);
+  toast("Task deleted");
   renderTasks();
 }
 
+function updateTaskStatus(id){
+  const task=get(KEYS.logs).find(x=>x.id===id);
+  if(!task)return;
 
-function openTaskStatusModal(id){
-
-  const tasks = getData(KEYS.logs);
-  const task = tasks.find(t=>t.id===id);
-
-  if(!task) return;
-
-  openModal(
-    "Update Task Status",
-    `
-
-      <div class="form-group">
-        <label>Task</label>
-        <input value="${escapeHTML(task.title)}" disabled>
-      </div>
-
-      <div class="form-group">
-        <label>Status</label>
-
-        <select id="updateTaskStatus">
-          ${["Pending","In Progress","Completed"].map(x=>`
-            <option ${task.status===x?"selected":""}>${x}</option>
-          `).join("")}
-        </select>
-
-      </div>
-
-    `,
-    ()=>{
-
-      const newStatus =
-        document.getElementById("updateTaskStatus").value;
-
-      task.status=newStatus;
-
-      setData(KEYS.logs,tasks);
-
-      addActivity(
-        "Task Status Updated",
-        `${task.title} changed to ${newStatus}`,
-        currentUser.staffId
-      );
-
-      if(newStatus==="Completed"){
-        addNotification(
-          "admin",
-          "Task completed",
-          `${currentUser.name} completed: ${task.title}`,
-          "task"
-        );
-      }
-
-      closeModal();
-      renderTasks();
-    }
-  );
-}
-
-
-/* =========================================================
-   WORK LOGS
-========================================================= */
-
-function renderWorkLogs(){
-
-  let logs = getData(KEYS.logs);
-
-  if(currentUser.role==="staff"){
-    logs = logs.filter(l=>l.staffId===currentUser.staffId);
-  }
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Work Logs</h2>
-        <p>Track daily work and completed activities.</p>
-      </div>
-
-      <button class="btn primary" onclick="openWorkLogModal()">+ Add Work Log</button>
-
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">Update Task Status</div>
+      <button class="close" onclick="closeModal()">×</button>
     </div>
 
-    <div class="toolbar">
-      <input id="logSearch" placeholder="Search work logs..." oninput="filterLogs()">
+    <div style="margin-bottom:15px">
+      <strong>${esc(task.title)}</strong>
+      <div class="item-meta">${esc(task.description||"")}</div>
+    </div>
 
-      <select id="logStatus" onchange="filterLogs()">
-        <option value="">All Status</option>
-        <option>Pending</option>
-        <option>In Progress</option>
-        <option>Completed</option>
+    <div class="field">
+      <label>Status</label>
+      <select id="updateStatus">
+        ${["Pending","In Progress","Completed"].map(x=>`<option ${task.status===x?"selected":""}>${x}</option>`).join("")}
       </select>
     </div>
 
-    <div class="card">
-
-      <div class="table-wrap">
-
-        <table id="logsTable">
-
-          <thead>
-            <tr>
-              <th>Date</th>
-              ${currentUser.role==="admin" ? "<th>Staff</th>" : ""}
-              <th>Task</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            logs.length
-            ? logs.map(l=>{
-
-              const staff = getStaffById(l.staffId);
-
-              return `
-                <tr
-                  data-search="${escapeHTML((l.title+" "+(staff?.name||"")).toLowerCase())}"
-                  data-status="${escapeHTML(l.status)}"
-                >
-
-                  <td>${escapeHTML(l.workDate||"-")}</td>
-
-                  ${
-                    currentUser.role==="admin"
-                    ? `<td>${escapeHTML(staff?.name||"-")}</td>`
-                    : ""
-                  }
-
-                  <td>
-                    <strong>${escapeHTML(l.title)}</strong>
-                    <div style="font-size:9px;color:var(--muted);margin-top:3px">
-                      ${escapeHTML(l.description||"")}
-                    </div>
-                  </td>
-
-                  <td>${escapeHTML(l.priority||"-")}</td>
-
-                  <td>${statusBadge(l.status,isOverdue(l))}</td>
-
-                  <td>
-                    <div class="action-row">
-                      <button class="btn small" onclick="openWorkLogModal('${l.id}')">Edit</button>
-                      <button class="btn small danger" onclick="deleteWorkLog('${l.id}')">Delete</button>
-                    </div>
-                  </td>
-
-                </tr>
-              `;
-
-            }).join("")
-            : `<tr><td colspan="7"><div class="empty">No work logs found.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveTaskStatus('${id}')">Update</button>
     </div>
-  `;
+  `);
 }
 
+function saveTaskStatus(id){
+  const arr=get(KEYS.logs);
+  const task=arr.find(x=>x.id===id);
+  if(!task)return;
 
-function filterLogs(){
+  const old=task.status;
+  task.status=document.getElementById("updateStatus").value;
+  set(KEYS.logs,arr);
 
-  const q=document.getElementById("logSearch").value.toLowerCase();
-  const status=document.getElementById("logStatus").value;
-
-  document.querySelectorAll("#logsTable tbody tr").forEach(row=>{
-
-    const text=row.dataset.search||"";
-    const rowStatus=row.dataset.status||"";
-
-    row.style.display =
-      text.includes(q) &&
-      (!status || rowStatus===status)
-      ? ""
-      : "none";
-  });
-}
-
-
-function openWorkLogModal(id=null){
-
-  const logs=getData(KEYS.logs);
-  const log=id ? logs.find(l=>l.id===id) : null;
-
-  const staff=getStaff().filter(s=>s.status==="Active");
-
-  openModal(
-    log ? "Edit Work Log" : "Add Work Log",
-    `
-
-      <form id="workLogForm">
-
-        <div class="form-grid">
-
-          ${
-            currentUser.role==="admin"
-            ? `
-              <div class="form-group full">
-                <label>Staff</label>
-                <select id="logStaff">
-                  ${staff.map(s=>`
-                    <option value="${escapeHTML(s.id||s.code)}"
-                      ${(log?.staffId||currentUser.staffId)===(s.id||s.code)?"selected":""}>
-                      ${escapeHTML(s.name)}
-                    </option>
-                  `).join("")}
-                </select>
-              </div>
-            `
-            : ""
-          }
-
-          <div class="form-group full">
-            <label>Task Title</label>
-            <input id="logTitle" value="${escapeHTML(log?.title||"")}" required>
-          </div>
-
-          <div class="form-group">
-            <label>Work Date</label>
-            <input id="logWorkDate" type="date" value="${log?.workDate||todayISO()}">
-          </div>
-
-          <div class="form-group">
-            <label>Priority</label>
-            <select id="logPriority">
-              ${["Low","Medium","High"].map(x=>`
-                <option ${log?.priority===x?"selected":""}>${x}</option>
-              `).join("")}
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Due Date</label>
-            <input id="logDueDate" type="date" value="${log?.dueDate||todayISO()}">
-          </div>
-
-          <div class="form-group">
-            <label>Due Time</label>
-            <input id="logDueTime" type="time" value="${log?.dueTime||""}">
-          </div>
-
-          <div class="form-group">
-            <label>Status</label>
-            <select id="logStatusInput">
-              ${["Pending","In Progress","Completed"].map(x=>`
-                <option ${log?.status===x?"selected":""}>${x}</option>
-              `).join("")}
-            </select>
-          </div>
-
-          <div class="form-group full">
-            <label>Description</label>
-            <textarea id="logDescription">${escapeHTML(log?.description||"")}</textarea>
-          </div>
-
-        </div>
-
-      </form>
-
-    `,
-    ()=>saveWorkLog(id)
+  addActivity(
+    "Task Status Updated",
+    `${task.title}: ${old} → ${task.status}`,
+    task.staffId
   );
-}
 
-
-function saveWorkLog(id){
-
-  const logs=getData(KEYS.logs);
-
-  const staffId =
-    currentUser.role==="admin"
-    ? document.getElementById("logStaff").value
-    : currentUser.staffId;
-
-  const data={
-    title:document.getElementById("logTitle").value.trim(),
-    staffId,
-    workDate:document.getElementById("logWorkDate").value,
-    dueDate:document.getElementById("logDueDate").value,
-    dueTime:document.getElementById("logDueTime").value,
-    priority:document.getElementById("logPriority").value,
-    status:document.getElementById("logStatusInput").value,
-    description:document.getElementById("logDescription").value.trim(),
-    assignedBy:currentUser.role==="admin" ? "Admin" : ""
-  };
-
-  if(id){
-
-    const log=logs.find(x=>x.id===id);
-
-    if(log) Object.assign(log,data);
-
-    addActivity(
-      "Work Log Updated",
-      data.title,
-      staffId
-    );
-
-  }else{
-
-    logs.unshift({
-      id:uid("log"),
-      ...data
-    });
-
-    addActivity(
-      "Work Log Added",
-      data.title,
-      staffId
+  if(task.status==="Completed"){
+    addNotification(
+      "admin",
+      "Task completed",
+      `${staffName(task.staffId)} completed "${task.title}"`,
+      "task"
     );
   }
-
-  setData(KEYS.logs,logs);
 
   closeModal();
-  renderWorkLogs();
+  toast("Task status updated");
+  showPage("tasks");
 }
 
+function viewTask(id){
+  const task=get(KEYS.logs).find(x=>x.id===id);
+  if(!task)return;
 
-function deleteWorkLog(id){
-
-  if(!confirm("Delete this work log?")) return;
-
-  let logs=getData(KEYS.logs);
-  const log=logs.find(x=>x.id===id);
-
-  logs=logs.filter(x=>x.id!==id);
-
-  setData(KEYS.logs,logs);
-
-  addActivity(
-    "Work Log Deleted",
-    log?.title||"Work log",
-    log?.staffId||currentUser.staffId
+  const history=get(KEYS.activity).filter(a=>
+    a.detail.toLowerCase().includes(task.title.toLowerCase())
   );
 
-  renderWorkLogs();
-}
-
-
-/* =========================================================
-   ATTENDANCE
-========================================================= */
-
-function renderAttendance(){
-
-  const all=getData(KEYS.attendance);
-
-  const records =
-    currentUser.role==="admin"
-    ? all
-    : all.filter(a=>a.staffId===currentUser.staffId);
-
-  const todayRecord=all.find(a=>
-    a.staffId===currentUser.staffId &&
-    a.date===todayISO()
-  );
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
+  openModal(`
+    <div class="modal-head">
       <div>
-        <h2>Attendance</h2>
-        <p>Track daily clock in and clock out.</p>
+        <div class="modal-title">${esc(task.title)}</div>
+        <div class="section-sub">Task details & history</div>
       </div>
-
-      ${
-        currentUser.role==="staff"
-        ? `
-          <div class="action-row">
-
-            ${
-              !todayRecord?.clockIn
-              ? `<button class="btn primary" onclick="clockIn()">Clock In</button>`
-              : ""
-            }
-
-            ${
-              todayRecord?.clockIn && !todayRecord?.clockOut
-              ? `<button class="btn" onclick="clockOut()">Clock Out</button>`
-              : ""
-            }
-
-          </div>
-        `
-        : ""
-      }
-
+      <button class="close" onclick="closeModal()">×</button>
     </div>
 
-    <div class="cards">
-
-      <div class="card stat-card">
-        <div class="stat-label">Today's Date</div>
-        <div class="stat-number" style="font-size:18px">${formatDate(todayISO())}</div>
+    <div class="grid grid-2">
+      <div>
+        <div class="stat-label">Assigned To</div>
+        <strong>${esc(staffName(task.staffId))}</strong>
       </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Clock In</div>
-        <div class="stat-number" style="font-size:20px">${todayRecord?.clockIn||"-"}</div>
+      <div>
+        <div class="stat-label">Assigned By</div>
+        <strong>${esc(staffName(task.assignedBy||"admin"))}</strong>
       </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Clock Out</div>
-        <div class="stat-number" style="font-size:20px">${todayRecord?.clockOut||"-"}</div>
+      <div>
+        <div class="stat-label">Work Date</div>
+        <strong>${fmtDate(task.workDate)}</strong>
       </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Total Records</div>
-        <div class="stat-number">${records.length}</div>
+      <div>
+        <div class="stat-label">Due</div>
+        <strong>${fmtDate(task.dueDate)} ${esc(task.dueTime||"")}</strong>
       </div>
+      <div>
+        <div class="stat-label">Priority</div>
+        <span class="priority ${priorityClass(task.priority)}">${esc(task.priority)}</span>
+      </div>
+      <div>
+        <div class="stat-label">Status</div>
+        <span class="status ${isOverdue(task)?"overdue":statusClass(task.status)}">
+          ${isOverdue(task)?"Overdue":esc(task.status)}
+        </span>
+      </div>
+    </div>
 
+    <div style="margin-top:20px">
+      <div class="stat-label">Description</div>
+      <div style="font-size:12px;line-height:1.7">
+        ${esc(task.description||"No description.")}
+      </div>
+    </div>
+
+    <div style="margin-top:22px">
+      <div class="section-title" style="margin-bottom:10px">Task History</div>
+      ${
+        history.length
+        ?history.slice(0,10).map(a=>`
+          <div class="activity">
+            <strong>${esc(a.action)}</strong>
+            <p>${esc(a.detail)} · ${fmtDateTime(a.createdAt)}</p>
+          </div>
+        `).join("")
+        :`<div class="empty">No task history yet.</div>`
+      }
+    </div>
+  `,true);
+}
+
+/* =========================
+   WORK LOGS
+========================= */
+
+function renderLogs(){
+  let logs=get(KEYS.logs);
+
+  if(currentUser.role!=="admin")
+    logs=logs.filter(x=>x.staffId===currentUser.staffId);
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Work Logs</div>
+        <div class="section-sub">Track daily work and completed activities</div>
+      </div>
+      <button class="btn" onclick="openLogModal()">+ Add Work Log</button>
     </div>
 
     <div class="card">
-
-      <div class="card-head">
-        <h3>Attendance Records</h3>
+      <div class="toolbar">
+        <input id="logSearch" placeholder="Search..." oninput="filterLogs()">
+        <select id="logStatus" onchange="filterLogs()">
+          <option value="">All status</option>
+          <option>Pending</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+        <select id="logPriority" onchange="filterLogs()">
+          <option value="">All priority</option>
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
       </div>
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Date</th>
-              ${currentUser.role==="admin" ? "<th>Staff</th>" : ""}
-              <th>Clock In</th>
-              <th>Clock Out</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            records.length
-            ? records.map(a=>`
-
-              <tr>
-
-                <td>${formatDate(a.date)}</td>
-
-                ${
-                  currentUser.role==="admin"
-                  ? `<td>${escapeHTML(getStaffById(a.staffId)?.name||"-")}</td>`
-                  : ""
-                }
-
-                <td>${escapeHTML(a.clockIn||"-")}</td>
-                <td>${escapeHTML(a.clockOut||"-")}</td>
-
-              </tr>
-
-            `).join("")
-            : `<tr><td colspan="5"><div class="empty">No attendance records.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
+      <div id="logsTable">${logsTable(logs)}</div>
     </div>
   `;
 }
 
+function logsTable(logs){
+  if(!logs.length)return `<div class="empty">No work logs found.</div>`;
 
-function clockIn(){
+  return `<div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th>Date</th>
+      <th>Task</th>
+      ${currentUser.role==="admin"?`<th>Staff</th>`:""}
+      <th>Due</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr></thead>
+    <tbody>
+    ${logs.map(l=>`
+      <tr>
+        <td>${fmtDate(l.workDate)}</td>
+        <td><strong>${esc(l.title)}</strong><div class="item-meta">${esc(l.description||"")}</div></td>
+        ${currentUser.role==="admin"?`<td>${esc(staffName(l.staffId))}</td>`:""}
+        <td>${fmtDate(l.dueDate)} ${esc(l.dueTime||"")}</td>
+        <td><span class="status ${isOverdue(l)?"overdue":statusClass(l.status)}">${isOverdue(l)?"Overdue":esc(l.status)}</span></td>
+        <td>
+          <div class="actions">
+            <button class="btn small secondary" onclick="openLogModal('${l.id}')">Edit</button>
+            <button class="btn small danger" onclick="deleteLog('${l.id}')">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join("")}
+    </tbody>
+  </table></div>`;
+}
 
-  const data=getData(KEYS.attendance);
+function filterLogs(){
+  let logs=get(KEYS.logs);
+  if(currentUser.role!=="admin")logs=logs.filter(x=>x.staffId===currentUser.staffId);
 
-  let record=data.find(a=>
-    a.staffId===currentUser.staffId &&
-    a.date===todayISO()
+  const q=(document.getElementById("logSearch")?.value||"").toLowerCase();
+  const st=document.getElementById("logStatus")?.value||"";
+  const pr=document.getElementById("logPriority")?.value||"";
+
+  logs=logs.filter(x=>
+    (x.title+" "+(x.description||"")+" "+staffName(x.staffId)).toLowerCase().includes(q) &&
+    (!st||x.status===st) &&
+    (!pr||x.priority===pr)
   );
 
-  if(record){
-    alert("You have already clocked in today.");
-    return;
-  }
+  document.getElementById("logsTable").innerHTML=logsTable(logs);
+}
 
-  record={
-    id:uid("att"),
-    staffId:currentUser.staffId,
-    date:todayISO(),
-    clockIn:new Date().toLocaleTimeString([],{
-      hour:"2-digit",
-      minute:"2-digit"
-    }),
-    clockOut:""
+function openLogModal(id=null){
+  const logs=get(KEYS.logs);
+  const log=id?logs.find(x=>x.id===id):null;
+  const staff=get(KEYS.staff).filter(s=>s.status==="Active");
+
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">${log?"Edit Work Log":"Add Work Log"}</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="field form-full">
+        <label>Task Title</label>
+        <input id="lTitle" value="${esc(log?.title||"")}">
+      </div>
+
+      ${currentUser.role==="admin"?`
+      <div class="field">
+        <label>Staff</label>
+        <select id="lStaff">
+          ${staff.map(s=>`<option value="${s.id}" ${log?.staffId===s.id?"selected":""}>${esc(s.name)}</option>`).join("")}
+        </select>
+      </div>`:`<input id="lStaff" type="hidden" value="${currentUser.staffId}">`}
+
+      <div class="field">
+        <label>Work Date</label>
+        <input id="lWorkDate" type="date" value="${log?.workDate||today()}">
+      </div>
+
+      <div class="field">
+        <label>Start Time</label>
+        <input id="lStart" type="time" value="${log?.startTime||""}">
+      </div>
+
+      <div class="field">
+        <label>End Time</label>
+        <input id="lEnd" type="time" value="${log?.endTime||""}">
+      </div>
+
+      <div class="field">
+        <label>Due Date</label>
+        <input id="lDueDate" type="date" value="${log?.dueDate||""}">
+      </div>
+
+      <div class="field">
+        <label>Due Time</label>
+        <input id="lDueTime" type="time" value="${log?.dueTime||""}">
+      </div>
+
+      <div class="field">
+        <label>Priority</label>
+        <select id="lPriority">
+          ${["High","Medium","Low"].map(x=>`<option ${log?.priority===x?"selected":""}>${x}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select id="lStatus">
+          ${["Pending","In Progress","Completed"].map(x=>`<option ${log?.status===x?"selected":""}>${x}</option>`).join("")}
+        </select>
+      </div>
+
+      <div class="field form-full">
+        <label>Description</label>
+        <textarea id="lDescription">${esc(log?.description||"")}</textarea>
+      </div>
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveLog('${id||""}')">Save</button>
+    </div>
+  `);
+}
+
+function saveLog(id){
+  const arr=get(KEYS.logs);
+  const data={
+    title:document.getElementById("lTitle").value.trim(),
+    staffId:document.getElementById("lStaff").value,
+    workDate:document.getElementById("lWorkDate").value,
+    startTime:document.getElementById("lStart").value,
+    endTime:document.getElementById("lEnd").value,
+    dueDate:document.getElementById("lDueDate").value,
+    dueTime:document.getElementById("lDueTime").value,
+    priority:document.getElementById("lPriority").value,
+    status:document.getElementById("lStatus").value,
+    description:document.getElementById("lDescription").value.trim(),
+    assignedBy:currentUser.role==="admin"?"admin":currentUser.staffId
   };
 
-  data.unshift(record);
-  setData(KEYS.attendance,data);
-
-  addActivity(
-    "Clock In",
-    `${currentUser.name} clocked in`,
-    currentUser.staffId
-  );
-
-  renderAttendance();
-}
-
-
-function clockOut(){
-
-  const data=getData(KEYS.attendance);
-
-  const record=data.find(a=>
-    a.staffId===currentUser.staffId &&
-    a.date===todayISO()
-  );
-
-  if(!record){
-    alert("Please clock in first.");
+  if(!data.title){
+    toast("Please enter a title");
     return;
   }
 
-  if(record.clockOut){
-    alert("You have already clocked out.");
-    return;
+  if(id){
+    const old=arr.find(x=>x.id===id);
+    Object.assign(old,data);
+    addActivity("Work Log Updated",data.title,data.staffId);
+  }else{
+    data.id=uid("LOG");
+    arr.unshift(data);
+    addActivity("Work Log Added",data.title,data.staffId);
   }
 
-  record.clockOut=new Date().toLocaleTimeString([],{
-    hour:"2-digit",
-    minute:"2-digit"
-  });
-
-  setData(KEYS.attendance,data);
-
-  addActivity(
-    "Clock Out",
-    `${currentUser.name} clocked out`,
-    currentUser.staffId
-  );
-
-  renderAttendance();
+  set(KEYS.logs,arr);
+  closeModal();
+  toast("Work log saved");
+  showPage("logs");
 }
 
+function deleteLog(id){
+  if(!confirm("Delete this work log?"))return;
+  const arr=get(KEYS.logs);
+  const item=arr.find(x=>x.id===id);
+  set(KEYS.logs,arr.filter(x=>x.id!==id));
+  addActivity("Work Log Deleted",item?.title||"Work log deleted",item?.staffId);
+  renderLogs();
+}
 
-/* =========================================================
-   LEAVE
-========================================================= */
+/* =========================
+   ATTENDANCE
+========================= */
 
-function renderLeave(){
+function renderAttendance(){
+  const all=get(KEYS.attendance);
+  const records=currentUser.role==="admin"
+    ?all
+    :all.filter(a=>a.staffId===currentUser.staffId);
 
-  let leaves=getData(KEYS.leaves);
-
-  if(currentUser.role==="staff"){
-    leaves=leaves.filter(l=>l.staffId===currentUser.staffId);
-  }
+  const mine=all.find(a=>a.staffId===currentUser.staffId && a.date===today());
 
   document.getElementById("content").innerHTML=`
-
     <div class="section-head">
-
       <div>
-        <h2>Leave</h2>
-        <p>Manage leave applications.</p>
+        <div class="section-title">Attendance</div>
+        <div class="section-sub">Clock in and clock out</div>
       </div>
-
-      ${
-        currentUser.role==="staff"
-        ? `<button class="btn primary" onclick="openLeaveModal()">+ Apply Leave</button>`
-        : ""
-      }
-
+      ${currentUser.role==="staff"?`
+      <div class="actions">
+        ${!mine?`<button class="btn" onclick="clockIn()">Clock In</button>`:""}
+        ${mine&&!mine.clockOut?`<button class="btn warning" onclick="clockOut()">Clock Out</button>`:""}
+      </div>`:""}
     </div>
 
+    ${currentUser.role==="staff"&&mine?`
+    <div class="card" style="margin-bottom:15px">
+      <div class="section-title">Today's Attendance</div>
+      <div style="height:12px"></div>
+      <div class="grid grid-3">
+        <div><div class="stat-label">Date</div><strong>${fmtDate(mine.date)}</strong></div>
+        <div><div class="stat-label">Clock In</div><strong>${mine.clockIn||"-"}</strong></div>
+        <div><div class="stat-label">Clock Out</div><strong>${mine.clockOut||"-"}</strong></div>
+      </div>
+    </div>`:""}
+
     <div class="card">
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Staff</th>
-              <th>Type</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Reason</th>
-              <th>Status</th>
-              ${currentUser.role==="admin" ? "<th>Action</th>" : ""}
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            leaves.length
-            ? leaves.map(l=>`
-
-              <tr>
-
-                <td>${escapeHTML(getStaffById(l.staffId)?.name||"-")}</td>
-                <td>${escapeHTML(l.type)}</td>
-                <td>${formatDate(l.start)}</td>
-                <td>${formatDate(l.end)}</td>
-                <td>${escapeHTML(l.reason||"-")}</td>
-
-                <td>
-                  ${
-                    l.status==="Approved"
-                    ? `<span class="badge completed">Approved</span>`
-                    : l.status==="Rejected"
-                    ? `<span class="badge overdue">Rejected</span>`
-                    : `<span class="badge pending">Pending</span>`
-                  }
-                </td>
-
-                ${
-                  currentUser.role==="admin"
-                  ? `
-                    <td>
-                      ${
-                        l.status==="Pending"
-                        ? `
-                          <div class="action-row">
-                            <button class="btn small success" onclick="updateLeave('${l.id}','Approved')">Approve</button>
-                            <button class="btn small danger" onclick="updateLeave('${l.id}','Rejected')">Reject</button>
-                          </div>
-                        `
-                        : "-"
-                      }
-                    </td>
-                  `
-                  : ""
-                }
-
-              </tr>
-
-            `).join("")
-            : `<tr><td colspan="7"><div class="empty">No leave records.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
+      <div class="section-head">
+        <div class="section-title">Attendance Records</div>
+        ${currentUser.role==="admin"?`<button class="btn small secondary" onclick="exportCSV('attendance')">Export CSV</button>`:""}
       </div>
 
+      <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Date</th>
+          ${currentUser.role==="admin"?`<th>Staff</th>`:""}
+          <th>Clock In</th>
+          <th>Clock Out</th>
+        </tr></thead>
+        <tbody>
+        ${records.length?records.map(a=>`
+          <tr>
+            <td>${fmtDate(a.date)}</td>
+            ${currentUser.role==="admin"?`<td>${esc(staffName(a.staffId))}</td>`:""}
+            <td>${esc(a.clockIn||"-")}</td>
+            <td>${esc(a.clockOut||"-")}</td>
+          </tr>
+        `).join(""):`<tr><td colspan="4"><div class="empty">No attendance records.</div></td></tr>`}
+        </tbody>
+      </table>
+      </div>
     </div>
   `;
 }
 
+function clockIn(){
+  const arr=get(KEYS.attendance);
+  const existing=arr.find(a=>a.staffId===currentUser.staffId&&a.date===today());
+  if(existing){toast("Already clocked in");return}
+
+  const now=new Date();
+  const time=now.toLocaleTimeString("en-MY",{hour:"2-digit",minute:"2-digit",hour12:false});
+
+  arr.unshift({
+    id:uid("ATT"),
+    staffId:currentUser.staffId,
+    date:today(),
+    clockIn:time,
+    clockOut:""
+  });
+
+  set(KEYS.attendance,arr);
+  addActivity("Clock In",`${currentUser.name} clocked in`,currentUser.staffId);
+  toast("Clocked in");
+  renderAttendance();
+}
+
+function clockOut(){
+  const arr=get(KEYS.attendance);
+  const record=arr.find(a=>a.staffId===currentUser.staffId&&a.date===today());
+  if(!record)return;
+
+  const now=new Date();
+  record.clockOut=now.toLocaleTimeString("en-MY",{hour:"2-digit",minute:"2-digit",hour12:false});
+
+  set(KEYS.attendance,arr);
+  addActivity("Clock Out",`${currentUser.name} clocked out`,currentUser.staffId);
+  toast("Clocked out");
+  renderAttendance();
+}
+
+/* =========================
+   LEAVE
+========================= */
+
+function renderLeave(){
+  let leaves=get(KEYS.leaves);
+  if(currentUser.role!=="admin")
+    leaves=leaves.filter(l=>l.staffId===currentUser.staffId);
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Leave</div>
+        <div class="section-sub">Manage leave applications</div>
+      </div>
+      ${currentUser.role==="staff"?`<button class="btn" onclick="openLeaveModal()">+ Apply Leave</button>`:""}
+    </div>
+
+    <div class="card">
+      ${currentUser.role==="admin"?`
+      <div class="toolbar">
+        <select id="leaveFilter" onchange="renderLeave()">
+          <option value="">All requests</option>
+          <option>Pending</option>
+          <option>Approved</option>
+          <option>Rejected</option>
+        </select>
+        <button class="btn small secondary" onclick="exportCSV('leave')">Export CSV</button>
+      </div>`:""}
+
+      <div class="table-wrap">
+      <table>
+        <thead><tr>
+          ${currentUser.role==="admin"?`<th>Staff</th>`:""}
+          <th>Type</th><th>Date</th><th>Reason</th><th>Status</th><th>Action</th>
+        </tr></thead>
+        <tbody>
+        ${leaves.length?leaves.map(l=>`
+          <tr>
+            ${currentUser.role==="admin"?`<td>${esc(staffName(l.staffId))}</td>`:""}
+            <td>${esc(l.type)}</td>
+            <td>${fmtDate(l.startDate)} - ${fmtDate(l.endDate)}</td>
+            <td>${esc(l.reason||"-")}</td>
+            <td><span class="status ${l.status==="Approved"?"completed":l.status==="Rejected"?"overdue":"pending"}">${esc(l.status)}</span></td>
+            <td>
+              ${currentUser.role==="admin"&&l.status==="Pending"
+                ?`<div class="actions">
+                  <button class="btn small" onclick="processLeave('${l.id}','Approved')">Approve</button>
+                  <button class="btn small danger" onclick="processLeave('${l.id}','Rejected')">Reject</button>
+                </div>`
+                :"-"}
+            </td>
+          </tr>
+        `).join(""):`<tr><td colspan="6"><div class="empty">No leave requests.</div></td></tr>`}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  `;
+}
 
 function openLeaveModal(){
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">Apply Leave</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
 
-  openModal(
-    "Apply Leave",
-    `
-
-      <div class="form-group">
+    <div class="form-grid">
+      <div class="field form-full">
         <label>Leave Type</label>
         <select id="leaveType">
           <option>Annual Leave</option>
@@ -2948,1916 +2051,1064 @@ function openLeaveModal(){
         </select>
       </div>
 
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>Start Date</label>
-          <input id="leaveStart" type="date" value="${todayISO()}">
-        </div>
-
-        <div class="form-group">
-          <label>End Date</label>
-          <input id="leaveEnd" type="date" value="${todayISO()}">
-        </div>
-
+      <div class="field">
+        <label>Start Date</label>
+        <input id="leaveStart" type="date">
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>End Date</label>
+        <input id="leaveEnd" type="date">
+      </div>
+
+      <div class="field form-full">
         <label>Reason</label>
-        <textarea id="leaveReason" placeholder="Reason for leave"></textarea>
+        <textarea id="leaveReason"></textarea>
       </div>
+    </div>
 
-    `,
-    saveLeave
-  );
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveLeave()">Submit</button>
+    </div>
+  `);
 }
 
-
 function saveLeave(){
-
-  const leaves=getData(KEYS.leaves);
-
-  const item={
-    id:uid("leave"),
+  const arr=get(KEYS.leaves);
+  const data={
+    id:uid("LEAVE"),
     staffId:currentUser.staffId,
     type:document.getElementById("leaveType").value,
-    start:document.getElementById("leaveStart").value,
-    end:document.getElementById("leaveEnd").value,
+    startDate:document.getElementById("leaveStart").value,
+    endDate:document.getElementById("leaveEnd").value,
     reason:document.getElementById("leaveReason").value.trim(),
     status:"Pending",
-    appliedAt:new Date().toISOString()
+    createdAt:new Date().toISOString()
   };
 
-  leaves.unshift(item);
-  setData(KEYS.leaves,leaves);
+  if(!data.startDate||!data.endDate){
+    toast("Please select leave dates");
+    return;
+  }
 
-  addActivity(
-    "Leave Applied",
-    `${currentUser.name} applied for ${item.type}`,
-    currentUser.staffId
-  );
+  arr.unshift(data);
+  set(KEYS.leaves,arr);
+  addActivity("Leave Applied",`${currentUser.name} applied for ${data.type}`,currentUser.staffId);
+  addNotification("admin","New leave request",`${currentUser.name} submitted a leave request`,"leave");
 
   closeModal();
+  toast("Leave application submitted");
   renderLeave();
 }
 
+function processLeave(id,status){
+  const arr=get(KEYS.leaves);
+  const item=arr.find(x=>x.id===id);
+  if(!item)return;
 
-function updateLeave(id,status){
-
-  const leaves=getData(KEYS.leaves);
-  const leave=leaves.find(l=>l.id===id);
-
-  if(!leave) return;
-
-  leave.status=status;
-
-  setData(KEYS.leaves,leaves);
+  item.status=status;
+  item.processedAt=new Date().toISOString();
+  set(KEYS.leaves,arr);
 
   addNotification(
-    leave.staffId,
+    item.staffId,
     `Leave ${status.toLowerCase()}`,
-    `Your ${leave.type} request has been ${status.toLowerCase()}.`,
+    `Your ${item.type} request has been ${status.toLowerCase()}.`,
     "leave"
   );
 
-  addActivity(
-    "Leave Updated",
-    `${leave.type} request marked ${status}`,
-    leave.staffId
-  );
-
+  addActivity("Leave Processed",`${item.type} request ${status.toLowerCase()}`,item.staffId);
+  toast("Leave updated");
   renderLeave();
 }
 
-
-/* =========================================================
-   SCHEDULE
-========================================================= */
+/* =========================
+   SCHEDULE + CALENDAR
+========================= */
 
 function renderSchedule(){
+  const schedules=get(KEYS.schedules);
+  const tasks=get(KEYS.logs);
 
-  let schedules=getData(KEYS.schedules);
+  let mySchedules=currentUser.role==="admin"
+    ?schedules
+    :schedules.filter(s=>s.staffId===currentUser.staffId);
 
-  if(currentUser.role==="staff"){
-    schedules=schedules.filter(s=>s.staffId===currentUser.staffId);
-  }
+  let myTasks=currentUser.role==="admin"
+    ?tasks
+    :tasks.filter(t=>t.staffId===currentUser.staffId);
 
-  schedules.sort((a,b)=>
-    `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`)
-  );
+  const year=calendarDate.getFullYear();
+  const month=calendarDate.getMonth();
+  const monthName=calendarDate.toLocaleDateString("en-MY",{month:"long",year:"numeric"});
 
   document.getElementById("content").innerHTML=`
-
     <div class="section-head">
-
       <div>
-        <h2>Schedule</h2>
-        <p>Upcoming schedules and planned activities.</p>
+        <div class="section-title">Schedule & Calendar</div>
+        <div class="section-sub">View tasks and schedules by date</div>
       </div>
-
-      ${
-        currentUser.role==="admin"
-        ? `<button class="btn primary" onclick="openScheduleModal()">+ Add Schedule</button>`
-        : ""
-      }
-
+      ${currentUser.role==="admin"?`<button class="btn" onclick="openScheduleModal()">+ Add Schedule</button>`:""}
     </div>
 
     <div class="card">
-
-      <div class="card-head">
-        <h3>Schedule List</h3>
+      <div class="calendar-head">
+        <div class="month-title">${monthName}</div>
+        <div class="actions">
+          <button class="btn small secondary" onclick="changeMonth(-1)">‹</button>
+          <button class="btn small secondary" onclick="calendarToday()">Today</button>
+          <button class="btn small secondary" onclick="changeMonth(1)">›</button>
+        </div>
       </div>
 
-      <div class="table-wrap">
+      <div class="calendar-scroll">
+        <div class="calendar">
+          ${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="weekday">${x}</div>`).join("")}
+          ${buildCalendar(year,month,mySchedules,myTasks)}
+        </div>
+      </div>
+    </div>
 
-        <table>
+    <div style="height:15px"></div>
 
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Schedule</th>
-              ${currentUser.role==="admin" ? "<th>Staff</th>" : ""}
-              <th>Location</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            schedules.length
-            ? schedules.map(s=>`
-
-              <tr>
-
-                <td>${formatDate(s.date)}</td>
-                <td>${escapeHTML(s.time||"-")}</td>
-
-                <td>
-                  <strong>${escapeHTML(s.title)}</strong>
-                  <div style="font-size:9px;color:var(--muted);margin-top:3px">
-                    ${escapeHTML(s.description||"")}
-                  </div>
-                </td>
-
-                ${
-                  currentUser.role==="admin"
-                  ? `<td>${escapeHTML(getStaffById(s.staffId)?.name||"-")}</td>`
-                  : ""
-                }
-
-                <td>${escapeHTML(s.location||"-")}</td>
-
-                <td>
-                  ${
-                    currentUser.role==="admin"
-                    ? `
-                      <div class="action-row">
-                        <button class="btn small" onclick="openScheduleModal('${s.id}')">Edit</button>
-                        <button class="btn small danger" onclick="deleteSchedule('${s.id}')">Delete</button>
-                      </div>
-                    `
-                    : "-"
-                  }
-                </td>
-
-              </tr>
-
-            `).join("")
-            : `<tr><td colspan="6"><div class="empty">No schedules.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Upcoming Schedule</div>
+          <div class="section-sub">Next scheduled activities</div>
+        </div>
       </div>
 
+      ${mySchedules
+        .filter(s=>s.date>=today())
+        .sort((a,b)=>a.date.localeCompare(b.date))
+        .slice(0,8)
+        .map(s=>`
+          <div class="list-item">
+            <div>
+              <div class="item-title">${esc(s.title)}</div>
+              <div class="item-meta">${fmtDate(s.date)} · ${esc(s.time||"")} · ${esc(s.location||"")}</div>
+            </div>
+            ${currentUser.role==="admin"?`
+              <div class="actions">
+                <button class="btn small secondary" onclick="openScheduleModal('${s.id}')">Edit</button>
+                <button class="btn small danger" onclick="deleteSchedule('${s.id}')">Delete</button>
+              </div>`:""}
+          </div>
+        `).join("") || `<div class="empty">No upcoming schedules.</div>`
+      }
     </div>
   `;
 }
 
+function buildCalendar(year,month,schedules,tasks){
+  const first=new Date(year,month,1);
+  const last=new Date(year,month+1,0);
+  const prevLast=new Date(year,month,0).getDate();
+  const start=first.getDay();
+  const total=Math.ceil((start+last.getDate())/7)*7;
+  let html="";
 
-function openScheduleModal(id=null){
+  for(let i=0;i<total;i++){
+    const day=i-start+1;
+    let date;
+    let other=false;
 
-  const schedules=getData(KEYS.schedules);
-  const schedule=id ? schedules.find(s=>s.id===id) : null;
+    if(day<1){
+      date=new Date(year,month-1,prevLast+day);
+      other=true;
+    }else if(day>last.getDate()){
+      date=new Date(year,month+1,day-last.getDate());
+      other=true;
+    }else{
+      date=new Date(year,month,day);
+    }
 
-  const staff=getStaff().filter(s=>s.status==="Active");
+    const ds=date.toISOString().slice(0,10);
+    const isToday=ds===today();
 
-  openModal(
-    schedule ? "Edit Schedule" : "Add Schedule",
-    `
+    const ss=schedules.filter(s=>s.date===ds);
+    const ts=tasks.filter(t=>t.dueDate===ds);
 
-      <div class="form-group">
+    html+=`
+      <div class="day ${other?"other":""} ${isToday?"today":""}" onclick="calendarDateClick('${ds}')">
+        <div class="day-number">${date.getDate()}</div>
+
+        ${ss.slice(0,3).map(s=>`
+          <div class="event" title="${esc(s.title)}">
+            ${esc(s.time||"")} ${esc(s.title)}
+          </div>
+        `).join("")}
+
+        ${ts.slice(0,3).map(t=>`
+          <div class="event task ${isOverdue(t)?"overdue":""}" title="${esc(t.title)}">
+            Task · ${esc(t.title)}
+          </div>
+        `).join("")}
+
+        ${(ss.length+ts.length)>6?`<div class="item-meta">+ more</div>`:""}
+      </div>
+    `;
+  }
+
+  return html;
+}
+
+function changeMonth(n){
+  calendarDate.setMonth(calendarDate.getMonth()+n);
+  renderSchedule();
+}
+function calendarToday(){
+  calendarDate=new Date();
+  renderSchedule();
+}
+function calendarDateClick(date){
+  const schedules=get(KEYS.schedules).filter(s=>
+    s.date===date &&
+    (currentUser.role==="admin"||s.staffId===currentUser.staffId)
+  );
+  const tasks=get(KEYS.logs).filter(t=>
+    t.dueDate===date &&
+    (currentUser.role==="admin"||t.staffId===currentUser.staffId)
+  );
+
+  openModal(`
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">${fmtDate(date)}</div>
+        <div class="section-sub">Tasks and schedules</div>
+      </div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="section-title">Schedules</div>
+    <div style="margin:10px 0 20px">
+      ${schedules.length?schedules.map(s=>`
+        <div class="list-item">
+          <div>
+            <div class="item-title">${esc(s.title)}</div>
+            <div class="item-meta">${esc(s.time||"")} · ${esc(s.location||"")}</div>
+          </div>
+          ${currentUser.role==="admin"?`<button class="btn small secondary" onclick="closeModal();openScheduleModal('${s.id}')">Edit</button>`:""}
+        </div>
+      `).join(""):`<div class="empty">No schedules.</div>`}
+    </div>
+
+    <div class="section-title">Tasks</div>
+    <div style="margin-top:10px">
+      ${tasks.length?tasks.map(t=>taskHTML(t)).join(""):`<div class="empty">No tasks due.</div>`}
+    </div>
+
+    ${currentUser.role==="admin"?`
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal();openScheduleModal('', '${date}')">+ Add Schedule</button>
+    </div>`:""}
+  `);
+}
+
+function openScheduleModal(id="",selectedDate=""){
+  const schedules=get(KEYS.schedules);
+  const item=id?schedules.find(x=>x.id===id):null;
+  const staff=get(KEYS.staff).filter(s=>s.status==="Active");
+
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">${item?"Edit Schedule":"Add Schedule"}</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="field form-full">
         <label>Schedule Title</label>
-        <input id="schTitle" value="${escapeHTML(schedule?.title||"")}">
+        <input id="sTitle" value="${esc(item?.title||"")}">
       </div>
 
-      <div class="form-group">
+      <div class="field">
         <label>Assign To</label>
-        <select id="schStaff">
-          ${staff.map(s=>`
-            <option value="${escapeHTML(s.id||s.code)}"
-              ${schedule?.staffId===(s.id||s.code)?"selected":""}>
-              ${escapeHTML(s.name)}
-            </option>
-          `).join("")}
+        <select id="sStaff">
+          ${staff.map(s=>`<option value="${s.id}" ${item?.staffId===s.id?"selected":""}>${esc(s.name)}</option>`).join("")}
         </select>
       </div>
 
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>Date</label>
-          <input id="schDate" type="date" value="${schedule?.date||todayISO()}">
-        </div>
-
-        <div class="form-group">
-          <label>Time</label>
-          <input id="schTime" type="time" value="${schedule?.time||""}">
-        </div>
-
+      <div class="field">
+        <label>Date</label>
+        <input id="sDate" type="date" value="${item?.date||selectedDate||today()}">
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Time</label>
+        <input id="sTime" type="time" value="${item?.time||""}">
+      </div>
+
+      <div class="field">
         <label>Location</label>
-        <input id="schLocation" value="${escapeHTML(schedule?.location||"")}">
+        <input id="sLocation" value="${esc(item?.location||"")}">
       </div>
 
-      <div class="form-group">
+      <div class="field form-full">
         <label>Description</label>
-        <textarea id="schDescription">${escapeHTML(schedule?.description||"")}</textarea>
+        <textarea id="sDescription">${esc(item?.description||"")}</textarea>
       </div>
-
-    `,
-    ()=>saveSchedule(id)
-  );
-}
-
-
-function saveSchedule(id){
-
-  const schedules=getData(KEYS.schedules);
-
-  const data={
-    title:document.getElementById("schTitle").value.trim(),
-    staffId:document.getElementById("schStaff").value,
-    date:document.getElementById("schDate").value,
-    time:document.getElementById("schTime").value,
-    location:document.getElementById("schLocation").value.trim(),
-    description:document.getElementById("schDescription").value.trim()
-  };
-
-  if(id){
-
-    const schedule=schedules.find(s=>s.id===id);
-
-    if(schedule) Object.assign(schedule,data);
-
-    addActivity(
-      "Schedule Updated",
-      data.title,
-      data.staffId
-    );
-
-  }else{
-
-    schedules.unshift({
-      id:uid("sch"),
-      ...data
-    });
-
-    addNotification(
-      data.staffId,
-      "New schedule",
-      `${data.title} has been added to your schedule.`,
-      "schedule"
-    );
-
-    addActivity(
-      "Schedule Added",
-      data.title,
-      data.staffId
-    );
-  }
-
-  setData(KEYS.schedules,schedules);
-
-  closeModal();
-  renderSchedule();
-}
-
-
-function deleteSchedule(id){
-
-  if(!confirm("Delete this schedule?")) return;
-
-  let schedules=getData(KEYS.schedules);
-  const item=schedules.find(s=>s.id===id);
-
-  schedules=schedules.filter(s=>s.id!==id);
-
-  setData(KEYS.schedules,schedules);
-
-  addActivity(
-    "Schedule Deleted",
-    item?.title||"Schedule",
-    item?.staffId||"admin"
-  );
-
-  renderSchedule();
-}
-
-
-/* =========================================================
-   ANNOUNCEMENTS
-========================================================= */
-
-function renderAnnouncements(){
-
-  const announcements=getData(KEYS.announcements);
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Announcements</h2>
-        <p>Important updates from management.</p>
-      </div>
-
-      ${
-        currentUser.role==="admin"
-        ? `<button class="btn primary" onclick="openAnnouncementModal()">+ New Announcement</button>`
-        : ""
-      }
-
     </div>
 
-    <div style="display:grid;gap:12px">
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveSchedule('${id}')">Save</button>
+    </div>
+  `);
+}
 
-      ${
-        announcements.length
-        ? announcements.map(a=>`
+function saveSchedule(id){
+  const arr=get(KEYS.schedules);
+  const data={
+    title:document.getElementById("sTitle").value.trim(),
+    staffId:document.getElementById("sStaff").value,
+    date:document.getElementById("sDate").value,
+    time:document.getElementById("sTime").value,
+    location:document.getElementById("sLocation").value.trim(),
+    description:document.getElementById("sDescription").value.trim()
+  };
 
-          <div class="card">
+  if(!data.title||!data.date){
+    toast("Please enter title and date");
+    return;
+  }
 
-            <div class="card-body">
+  if(id){
+    const old=arr.find(x=>x.id===id);
+    Object.assign(old,data);
+    addActivity("Schedule Updated",data.title,data.staffId);
+  }else{
+    data.id=uid("SCH");
+    arr.unshift(data);
+    addNotification(data.staffId,"New schedule",`${data.title} has been added to your schedule.`,"schedule");
+    addActivity("Schedule Added",data.title,data.staffId);
+  }
 
-              <div style="display:flex;justify-content:space-between;gap:15px">
+  set(KEYS.schedules,arr);
+  closeModal();
+  toast("Schedule saved");
+  renderSchedule();
+}
 
-                <div>
+function deleteSchedule(id){
+  const arr=get(KEYS.schedules);
+  const item=arr.find(x=>x.id===id);
+  if(!confirm("Delete this schedule?"))return;
 
-                  <h3 style="font-size:13px">
-                    ${escapeHTML(a.title)}
-                  </h3>
+  set(KEYS.schedules,arr.filter(x=>x.id!==id));
+  addActivity("Schedule Deleted",item?.title||"Schedule deleted",item?.staffId);
+  toast("Schedule deleted");
+  renderSchedule();
+}
 
-                  <p style="font-size:11px;color:var(--muted);margin-top:7px;line-height:1.6">
-                    ${escapeHTML(a.message)}
-                  </p>
+/* =========================
+   ANNOUNCEMENTS
+========================= */
 
-                  <div style="font-size:9px;color:var(--muted);margin-top:10px">
-                    ${formatDate(a.date)} · ${escapeHTML(a.createdBy||"Admin")}
-                  </div>
+function renderAnnouncements(){
+  const arr=get(KEYS.announcements);
 
-                </div>
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Announcements</div>
+        <div class="section-sub">Company and team updates</div>
+      </div>
+      ${currentUser.role==="admin"?`<button class="btn" onclick="openAnnouncementModal()">+ New Announcement</button>`:""}
+    </div>
 
-                ${
-                  currentUser.role==="admin"
-                  ? `<button class="btn small danger" onclick="deleteAnnouncement('${a.id}')">Delete</button>`
-                  : ""
-                }
-
-              </div>
-
-            </div>
-
+    <div class="grid grid-2">
+      ${arr.length?arr.map(a=>`
+        <div class="card">
+          <div class="section-head">
+            <div class="section-title">${esc(a.title)}</div>
+            ${currentUser.role==="admin"?`<button class="btn small danger" onclick="deleteAnnouncement('${a.id}')">Delete</button>`:""}
           </div>
-
-        `).join("")
-        : `<div class="card"><div class="empty">No announcements.</div></div>`
-      }
-
+          <div style="font-size:12px;line-height:1.7;color:#5f6258">${esc(a.message)}</div>
+          <div class="item-meta" style="margin-top:12px">${fmtDateTime(a.createdAt)}</div>
+        </div>
+      `).join(""):`<div class="card"><div class="empty">No announcements.</div></div>`}
     </div>
   `;
 }
 
-
 function openAnnouncementModal(){
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">New Announcement</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
 
-  openModal(
-    "New Announcement",
-    `
+    <div class="field">
+      <label>Title</label>
+      <input id="aTitle">
+    </div>
 
-      <div class="form-group">
-        <label>Title</label>
-        <input id="annTitle">
-      </div>
+    <div class="field">
+      <label>Message</label>
+      <textarea id="aMessage"></textarea>
+    </div>
 
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="annMessage"></textarea>
-      </div>
-
-    `,
-    saveAnnouncement
-  );
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveAnnouncement()">Publish</button>
+    </div>
+  `);
 }
 
-
 function saveAnnouncement(){
+  const title=document.getElementById("aTitle").value.trim();
+  const message=document.getElementById("aMessage").value.trim();
 
-  const announcements=getData(KEYS.announcements);
-
-  const title=document.getElementById("annTitle").value.trim();
-  const message=document.getElementById("annMessage").value.trim();
-
-  if(!title || !message){
-    alert("Please fill in all fields.");
+  if(!title||!message){
+    toast("Please complete the announcement");
     return;
   }
 
+  const arr=get(KEYS.announcements);
   const item={
-    id:uid("ann"),
+    id:uid("ANN"),
     title,
     message,
-    date:todayISO(),
-    createdBy:"Admin"
+    createdAt:new Date().toISOString()
   };
 
-  announcements.unshift(item);
+  arr.unshift(item);
+  set(KEYS.announcements,arr);
 
-  setData(KEYS.announcements,announcements);
-
-  getStaff().filter(s=>s.status==="Active").forEach(s=>{
-    addNotification(
-      s.id||s.code,
-      "New announcement",
-      title,
-      "announcement"
-    );
+  get(KEYS.staff).forEach(s=>{
+    if(s.status==="Active")
+      addNotification(s.id,title,message,"announcement");
   });
 
-  addActivity(
-    "Announcement Added",
-    title,
-    "admin"
-  );
-
+  addActivity("Announcement Published",title);
   closeModal();
+  toast("Announcement published");
   renderAnnouncements();
 }
-
 
 function deleteAnnouncement(id){
-
-  if(!confirm("Delete this announcement?")) return;
-
-  let announcements=getData(KEYS.announcements);
-
-  announcements=announcements.filter(a=>a.id!==id);
-
-  setData(KEYS.announcements,announcements);
-
+  if(!confirm("Delete this announcement?"))return;
+  const arr=get(KEYS.announcements);
+  set(KEYS.announcements,arr.filter(x=>x.id!==id));
+  toast("Announcement deleted");
   renderAnnouncements();
 }
 
-
-/* =========================================================
+/* =========================
    NOTIFICATIONS
-========================================================= */
+========================= */
 
 function renderNotifications(){
-
-  const notifications=getData(KEYS.notifications)
+  const arr=get(KEYS.notifications)
     .filter(n=>n.staffId===currentUser.staffId);
 
   document.getElementById("content").innerHTML=`
-
     <div class="section-head">
-
       <div>
-        <h2>Notifications</h2>
-        <p>Stay updated with your latest activities.</p>
+        <div class="section-title">Notifications</div>
+        <div class="section-sub">${arr.filter(n=>!n.read).length} unread</div>
       </div>
-
-      ${
-        notifications.length
-        ? `<button class="btn" onclick="markAllRead()">Mark all as read</button>`
-        : ""
-      }
-
+      ${arr.some(n=>!n.read)?`<button class="btn secondary small" onclick="markAllRead()">Mark all as read</button>`:""}
     </div>
 
-    <div style="display:grid;gap:9px">
-
+    <div class="card">
       ${
-        notifications.length
-        ? notifications.map(n=>`
-
-          <div
-            class="card"
-            style="${n.read ? "" : "border-left:3px solid var(--olive);"}"
-          >
-
-            <div class="card-body">
-
-              <div style="display:flex;justify-content:space-between;gap:15px">
-
-                <div>
-
-                  <strong style="font-size:12px">
-                    ${escapeHTML(n.title)}
-                  </strong>
-
-                  <p style="font-size:11px;color:var(--muted);margin-top:6px">
-                    ${escapeHTML(n.message)}
-                  </p>
-
-                  <div style="font-size:9px;color:var(--muted);margin-top:8px">
-                    ${formatDateTime(n.date)}
-                  </div>
-
-                </div>
-
-                ${
-                  !n.read
-                  ? `<button class="btn small" onclick="markNotificationRead('${n.id}')">Mark read</button>`
-                  : `<span class="badge completed">Read</span>`
-                }
-
-              </div>
-
+        arr.length
+        ?arr.map(n=>`
+          <div class="notification ${n.read?"":"unread"}">
+            <div class="section-head" style="margin-bottom:5px">
+              <div class="notification-title">${esc(n.title)}</div>
+              ${!n.read?`<button class="btn small" onclick="markRead('${n.id}')">Mark read</button>`:""}
             </div>
-
+            <div class="notification-text">${esc(n.message)}</div>
+            <div class="notification-time">${fmtDateTime(n.createdAt)}</div>
           </div>
-
         `).join("")
-        : `<div class="card"><div class="empty">No notifications.</div></div>`
+        :`<div class="empty">No notifications.</div>`
       }
-
     </div>
   `;
 }
 
-
-/* =========================================================
-   STAFF MANAGEMENT V14
-========================================================= */
-
-function renderStaffManagement(){
-
-  let staff=getStaff();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Staff Management</h2>
-        <p>Manage employees, profiles and workload.</p>
-      </div>
-
-      <button class="btn primary" onclick="openStaffModal()">+ Add Staff</button>
-
-    </div>
-
-    <div class="toolbar">
-
-      <input
-        id="staffSearch"
-        placeholder="Search staff..."
-        oninput="filterStaff()"
-      >
-
-      <select id="staffDeptFilter" onchange="filterStaff()">
-        <option value="">All Departments</option>
-        ${
-          [...new Set(staff.map(s=>s.department).filter(Boolean))]
-          .map(d=>`<option>${escapeHTML(d)}</option>`)
-          .join("")
-        }
-      </select>
-
-      <select id="staffStatusFilter" onchange="filterStaff()">
-        <option value="">All Status</option>
-        <option>Active</option>
-        <option>On Leave</option>
-        <option>Inactive</option>
-        <option>Resigned</option>
-      </select>
-
-    </div>
-
-    <div class="card">
-
-      <div class="table-wrap">
-
-        <table id="staffTable">
-
-          <thead>
-            <tr>
-              <th>Staff</th>
-              <th>Department</th>
-              <th>Position</th>
-              <th>Status</th>
-              <th>Workload</th>
-              <th>Performance</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            staff.map(s=>{
-
-              const tasks=getData(KEYS.logs)
-                .filter(t=>t.staffId===(s.id||s.code));
-
-              const activeTasks=tasks.filter(
-                t=>t.status!=="Completed"
-              ).length;
-
-              const completed=tasks.filter(
-                t=>t.status==="Completed"
-              ).length;
-
-              const rate=tasks.length
-                ? Math.round(completed/tasks.length*100)
-                : 0;
-
-              const workload=workloadInfo(activeTasks);
-
-              return `
-
-                <tr
-                  data-search="${escapeHTML(
-                    (s.name+" "+s.code+" "+s.department+" "+s.position).toLowerCase()
-                  )}"
-                  data-dept="${escapeHTML(s.department||"")}"
-                  data-status="${escapeHTML(s.status||"")}"
-                >
-
-                  <td>
-
-                    <div style="display:flex;align-items:center;gap:9px">
-
-                      <div class="avatar">
-                        ${getPhotoHTML(s)}
-                      </div>
-
-                      <div>
-                        <strong>${escapeHTML(s.name)}</strong>
-
-                        <div style="font-size:9px;color:var(--muted);margin-top:3px">
-                          ${escapeHTML(s.code)}
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td>${escapeHTML(s.department||"-")}</td>
-
-                  <td>${escapeHTML(s.position||"-")}</td>
-
-                  <td>
-                    <span class="badge ${
-                      s.status==="Active" ? "active" : "inactive"
-                    }">
-                      ${escapeHTML(s.status||"-")}
-                    </span>
-                  </td>
-
-                  <td>
-                    <span class="workload">
-                      <span class="dot ${workload.cls}"></span>
-                      ${workload.label}
-                    </span>
-                  </td>
-
-                  <td>
-                    <strong>${rate}%</strong>
-                    <div class="progress-line" style="width:80px">
-                      <div class="progress-fill" style="width:${rate}%"></div>
-                    </div>
-                  </td>
-
-                  <td>
-
-                    <div class="action-row">
-
-                      <button
-                        class="btn small"
-                        onclick="viewStaffProfile('${escapeHTML(s.id||s.code)}')"
-                      >
-                        View
-                      </button>
-
-                      <button
-                        class="btn small"
-                        onclick="openStaffModal('${escapeHTML(s.id||s.code)}')"
-                      >
-                        Edit
-                      </button>
-
-                    </div>
-
-                  </td>
-
-                </tr>
-
-              `;
-            }).join("")
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
+function markRead(id){
+  const arr=get(KEYS.notifications);
+  const n=arr.find(x=>x.id===id);
+  if(n)n.read=true;
+  set(KEYS.notifications,arr);
+  renderNotifications();
+  updateNotificationUI();
 }
-
-
-function filterStaff(){
-
-  const q=document.getElementById("staffSearch").value.toLowerCase();
-  const dept=document.getElementById("staffDeptFilter").value;
-  const status=document.getElementById("staffStatusFilter").value;
-
-  document.querySelectorAll("#staffTable tbody tr").forEach(row=>{
-
-    const search=row.dataset.search||"";
-    const rowDept=row.dataset.dept||"";
-    const rowStatus=row.dataset.status||"";
-
-    row.style.display =
-      search.includes(q) &&
-      (!dept || rowDept===dept) &&
-      (!status || rowStatus===status)
-      ? ""
-      : "none";
+function markAllRead(){
+  const arr=get(KEYS.notifications);
+  arr.forEach(n=>{
+    if(n.staffId===currentUser.staffId)n.read=true;
   });
+  set(KEYS.notifications,arr);
+  renderNotifications();
+  updateNotificationUI();
 }
-
-
-/* =========================================================
-   V14 STAFF PROFILE
-========================================================= */
-
-function viewStaffProfile(id){
-
-  const staff=getStaffById(id);
-
-  if(!staff) return;
-
-  const tasks=getData(KEYS.logs)
-    .filter(t=>t.staffId===(staff.id||staff.code));
-
-  const attendance=getData(KEYS.attendance)
-    .filter(a=>a.staffId===(staff.id||staff.code));
-
-  const leaves=getData(KEYS.leaves)
-    .filter(l=>l.staffId===(staff.id||staff.code));
-
-  const activities=getData(KEYS.activity)
-    .filter(a=>a.staffId===(staff.id||staff.code))
-    .slice(0,8);
-
-  const completed=tasks.filter(t=>t.status==="Completed").length;
-  const inProgress=tasks.filter(t=>t.status==="In Progress").length;
-  const overdue=tasks.filter(t=>isOverdue(t)).length;
-
-  const completionRate=tasks.length
-    ? Math.round(completed/tasks.length*100)
-    : 0;
-
-  const workload=workloadInfo(
-    tasks.filter(t=>t.status!=="Completed").length
-  );
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Staff Profile</h2>
-        <p>Employee overview and performance.</p>
-      </div>
-
-      <button class="btn" onclick="showPage('staff')">
-        ← Back to Staff
-      </button>
-
-    </div>
-
-    <div class="card" style="margin-bottom:18px">
-
-      <div class="profile-header">
-
-        <div class="profile-avatar">
-          ${getPhotoHTML(staff)}
-        </div>
-
-        <div style="flex:1">
-
-          <div class="profile-name">
-            ${escapeHTML(staff.name)}
-          </div>
-
-          <div class="profile-role">
-            ${escapeHTML(staff.position||"-")} · ${escapeHTML(staff.department||"-")}
-          </div>
-
-          <span class="profile-code">
-            ${escapeHTML(staff.code)}
-          </span>
-
-        </div>
-
-        <button
-          class="btn"
-          onclick="openStaffModal('${escapeHTML(staff.id||staff.code)}')"
-        >
-          Edit Profile
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="performance-cards">
-
-      <div class="card performance-card">
-        <small>Total Tasks</small>
-        <strong>${tasks.length}</strong>
-      </div>
-
-      <div class="card performance-card">
-        <small>Completed</small>
-        <strong>${completed}</strong>
-      </div>
-
-      <div class="card performance-card">
-        <small>Completion Rate</small>
-        <strong>${completionRate}%</strong>
-      </div>
-
-      <div class="card performance-card">
-        <small>Overdue</small>
-        <strong>${overdue}</strong>
-      </div>
-
-    </div>
-
-
-    <div class="grid-2">
-
-      <div class="card">
-
-        <div class="card-head">
-          <h3>Employee Information</h3>
-        </div>
-
-        <div class="card-body">
-
-          <div class="info-grid">
-
-            <div class="info-item">
-              <label>Full Name</label>
-              <strong>${escapeHTML(staff.name||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Staff ID</label>
-              <strong>${escapeHTML(staff.code||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Department</label>
-              <strong>${escapeHTML(staff.department||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Position</label>
-              <strong>${escapeHTML(staff.position||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Status</label>
-              <strong>${escapeHTML(staff.status||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Joining Date</label>
-              <strong>${formatDate(staff.joiningDate)||"-"}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Email</label>
-              <strong>${escapeHTML(staff.email||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Phone</label>
-              <strong>${escapeHTML(staff.phone||"-")}</strong>
-            </div>
-
-            <div class="info-item">
-              <label>Reporting Manager</label>
-              <strong>${escapeHTML(staff.manager||"-")}</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="card-head">
-          <h3>Performance Overview</h3>
-        </div>
-
-        <div class="card-body">
-
-          <div class="performance-row">
-
-            <div class="performance-top">
-              <span>Task Completion</span>
-              <span>${completionRate}%</span>
-            </div>
-
-            <div class="progress-line">
-              <div
-                class="progress-fill"
-                style="width:${completionRate}%"
-              ></div>
-            </div>
-
-          </div>
-
-          <div class="performance-row">
-
-            <div class="performance-top">
-              <span>Current Workload</span>
-              <span>${workload.label}</span>
-            </div>
-
-            <div style="margin-top:10px">
-              <span class="workload">
-                <span class="dot ${workload.cls}"></span>
-                ${tasks.filter(t=>t.status!=="Completed").length} active tasks
-              </span>
-            </div>
-
-          </div>
-
-          <div class="performance-row">
-
-            <div class="performance-top">
-              <span>In Progress</span>
-              <span>${inProgress}</span>
-            </div>
-
-          </div>
-
-          <div class="performance-row">
-
-            <div class="performance-top">
-              <span>Attendance Records</span>
-              <span>${attendance.length}</span>
-            </div>
-
-          </div>
-
-          <div class="performance-row">
-
-            <div class="performance-top">
-              <span>Leave Applications</span>
-              <span>${leaves.length}</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div style="height:18px"></div>
-
-
-    <div class="card">
-
-      <div class="card-head">
-        <h3>Recent Activity</h3>
-      </div>
-
-      <div class="card-body">
-
-        ${
-          activities.length
-          ? activities.map(a=>`
-
-            <div style="padding:10px 0;border-bottom:1px solid var(--line)">
-
-              <strong style="font-size:11px">
-                ${escapeHTML(a.action)}
-              </strong>
-
-              <div style="font-size:10px;color:var(--muted);margin-top:3px">
-                ${escapeHTML(a.detail)}
-              </div>
-
-              <div style="font-size:9px;color:var(--muted);margin-top:5px">
-                ${formatDateTime(a.date)}
-              </div>
-
-            </div>
-
-          `).join("")
-          : `<div class="empty">No activity history.</div>`
-        }
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-/* =========================================================
-   STAFF MODAL
-========================================================= */
-
-function openStaffModal(id=null){
-
-  const staff=getStaff();
-  const item=id ? staff.find(s=>(s.id||s.code)===id) : null;
-
-  openModal(
-    item ? "Edit Staff Profile" : "Add New Staff",
-    `
-
-      <div class="form-grid">
-
-        <div class="form-group full">
-          <label>Full Name</label>
-          <input id="staffName" value="${escapeHTML(item?.name||"")}">
-        </div>
-
-        <div class="form-group">
-          <label>Staff Code</label>
-          <input id="staffCode" value="${escapeHTML(item?.code||"")}">
-        </div>
-
-        <div class="form-group">
-          <label>Department</label>
-          <input id="staffDepartment" value="${escapeHTML(item?.department||"")}">
-        </div>
-
-        <div class="form-group full">
-          <label>Position</label>
-          <input id="staffPosition" value="${escapeHTML(item?.position||"")}">
-        </div>
-
-        <div class="form-group">
-          <label>Status</label>
-          <select id="staffStatus">
-            ${["Active","On Leave","Inactive","Resigned"].map(x=>`
-              <option ${item?.status===x?"selected":""}>${x}</option>
-            `).join("")}
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Joining Date</label>
-          <input id="staffJoining" type="date" value="${item?.joiningDate||""}">
-        </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input id="staffEmail" type="email" value="${escapeHTML(item?.email||"")}">
-        </div>
-
-        <div class="form-group">
-          <label>Phone</label>
-          <input id="staffPhone" value="${escapeHTML(item?.phone||"")}">
-        </div>
-
-        <div class="form-group full">
-          <label>Reporting Manager</label>
-          <input id="staffManager" value="${escapeHTML(item?.manager||"")}">
-        </div>
-
-        <div class="form-group full">
-
-          <label>Profile Photo</label>
-
-          <input
-            id="staffPhoto"
-            type="file"
-            accept="image/*"
-          >
-
-          ${
-            item && getPhoto(item.id||item.code)
-            ? `
-              <div style="margin-top:10px">
-                <img
-                  src="${getPhoto(item.id||item.code)}"
-                  style="width:65px;height:65px;border-radius:14px;object-fit:cover"
-                >
-              </div>
-            `
-            : ""
-          }
-
-        </div>
-
-      </div>
-
-    `,
-    ()=>saveStaff(id)
-  );
-}
-
-
-async function saveStaff(id){
-
-  const staff=getStaff();
-
-  const name=document.getElementById("staffName").value.trim();
-  const code=document.getElementById("staffCode").value.trim();
-
-  if(!name || !code){
-    alert("Name and staff code are required.");
-    return;
-  }
-
-  if(
-    staff.some(s=>
-      s.code.toLowerCase()===code.toLowerCase() &&
-      (s.id||s.code)!==id
-    )
-  ){
-    alert("Staff code already exists.");
-    return;
-  }
-
-  const data={
-    name,
-    code,
-    department:document.getElementById("staffDepartment").value.trim(),
-    position:document.getElementById("staffPosition").value.trim(),
-    status:document.getElementById("staffStatus").value,
-    joiningDate:document.getElementById("staffJoining").value,
-    email:document.getElementById("staffEmail").value.trim(),
-    phone:document.getElementById("staffPhone").value.trim(),
-    manager:document.getElementById("staffManager").value.trim()
-  };
-
-  let staffId=id;
-
-  if(id){
-
-    const item=staff.find(s=>(s.id||s.code)===id);
-
-    if(item){
-
-      const oldCode=item.code;
-
-      Object.assign(item,data);
-
-      staffId=item.id||item.code;
-
-      if(oldCode!==item.code){
-        const photo=getPhoto(oldCode);
-
-        if(photo){
-          localStorage.setItem(
-            KEYS.photos+item.code,
-            photo
-          );
-
-          localStorage.removeItem(
-            KEYS.photos+oldCode
-          );
-        }
-      }
-    }
-
-    addActivity(
-      "Staff Profile Updated",
-      `${name}'s profile was updated`,
-      staffId
-    );
-
-  }else{
-
-    const newStaff={
-      id:code,
-      ...data
-    };
-
-    staff.unshift(newStaff);
-
-    staffId=code;
-
-    addActivity(
-      "Staff Added",
-      `${name} was added to staff management`,
-      staffId
-    );
-  }
-
-  const file=document.getElementById("staffPhoto").files[0];
-
-  if(file){
-
-    const photo=await fileToBase64(file);
-
-    localStorage.setItem(
-      KEYS.photos+staffId,
-      photo
-    );
-
-  }
-
-  setData(KEYS.staff,staff);
-
-  closeModal();
-  renderStaffManagement();
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-function renderProfile(){
-
-  if(currentUser.role==="admin"){
-
-    document.getElementById("content").innerHTML=`
-
-      <div class="section-head">
-        <div>
-          <h2>My Profile</h2>
-          <p>Administrator account.</p>
-        </div>
-      </div>
-
-      <div class="card">
-
-        <div class="profile-header">
-
-          <div class="profile-avatar">A</div>
-
-          <div>
-            <div class="profile-name">Admin</div>
-            <div class="profile-role">Administrator</div>
-            <span class="profile-code">ADMIN001</span>
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-  const staff=getCurrentStaff();
-
-  if(!staff) return;
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>My Profile</h2>
-        <p>Your employee information.</p>
-      </div>
-
-      <button
-        class="btn"
-        onclick="openStaffModal('${escapeHTML(staff.id||staff.code)}')"
-      >
-        Edit Profile
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="profile-header">
-
-        <div class="profile-avatar">
-          ${getPhotoHTML(staff)}
-        </div>
-
-        <div>
-
-          <div class="profile-name">
-            ${escapeHTML(staff.name)}
-          </div>
-
-          <div class="profile-role">
-            ${escapeHTML(staff.position||"-")} · ${escapeHTML(staff.department||"-")}
-          </div>
-
-          <span class="profile-code">
-            ${escapeHTML(staff.code)}
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div style="height:18px"></div>
-
-    <div class="card">
-
-      <div class="card-head">
-        <h3>Employee Information</h3>
-      </div>
-
-      <div class="card-body">
-
-        <div class="info-grid">
-
-          <div class="info-item">
-            <label>Full Name</label>
-            <strong>${escapeHTML(staff.name||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Staff ID</label>
-            <strong>${escapeHTML(staff.code||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Department</label>
-            <strong>${escapeHTML(staff.department||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Position</label>
-            <strong>${escapeHTML(staff.position||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Status</label>
-            <strong>${escapeHTML(staff.status||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Joining Date</label>
-            <strong>${formatDate(staff.joiningDate)||"-"}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Email</label>
-            <strong>${escapeHTML(staff.email||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Phone</label>
-            <strong>${escapeHTML(staff.phone||"-")}</strong>
-          </div>
-
-          <div class="info-item">
-            <label>Reporting Manager</label>
-            <strong>${escapeHTML(staff.manager||"-")}</strong>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   ANALYTICS
-========================================================= */
-
-function renderAnalytics(){
-
-  const logs=getData(KEYS.logs);
-  const attendance=getData(KEYS.attendance);
-  const staff=getStaff();
-
-  const completed=logs.filter(l=>l.status==="Completed").length;
-  const rate=logs.length
-    ? Math.round(completed/logs.length*100)
-    : 0;
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Analytics</h2>
-        <p>Overall staff and work performance.</p>
-      </div>
-
-      <div class="action-row">
-
-        <button class="btn" onclick="exportCSV('logs')">
-          Export Work Logs
-        </button>
-
-        <button class="btn" onclick="exportCSV('attendance')">
-          Export Attendance
-        </button>
-
-        <button class="btn" onclick="exportCSV('leaves')">
-          Export Leave
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="cards">
-
-      <div class="card stat-card">
-        <div class="stat-label">Total Work Logs</div>
-        <div class="stat-number">${logs.length}</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Completion Rate</div>
-        <div class="stat-number">${rate}%</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Attendance Records</div>
-        <div class="stat-number">${attendance.length}</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Active Staff</div>
-        <div class="stat-number">${staff.filter(s=>s.status==="Active").length}</div>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-head">
-        <h3>Staff Performance Comparison</h3>
-      </div>
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Staff</th>
-              <th>Total Tasks</th>
-              <th>Completed</th>
-              <th>In Progress</th>
-              <th>Overdue</th>
-              <th>Completion Rate</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            staff.map(s=>{
-
-              const t=logs.filter(l=>l.staffId===(s.id||s.code));
-
-              const done=t.filter(x=>x.status==="Completed").length;
-              const progress=t.filter(x=>x.status==="In Progress").length;
-              const overdue=t.filter(x=>isOverdue(x)).length;
-
-              const r=t.length
-                ? Math.round(done/t.length*100)
-                : 0;
-
-              return `
-                <tr>
-
-                  <td>
-                    <strong>${escapeHTML(s.name)}</strong>
-                    <div style="font-size:9px;color:var(--muted)">
-                      ${escapeHTML(s.department||"")}
-                    </div>
-                  </td>
-
-                  <td>${t.length}</td>
-                  <td>${done}</td>
-                  <td>${progress}</td>
-                  <td>${overdue}</td>
-
-                  <td>
-                    <strong>${r}%</strong>
-
-                    <div class="progress-line" style="width:100px">
-                      <div
-                        class="progress-fill"
-                        style="width:${r}%"
-                      ></div>
-                    </div>
-                  </td>
-
-                </tr>
-              `;
-
-            }).join("")
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-function renderActivity(){
-
-  const activity=getData(KEYS.activity);
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="section-head">
-
-      <div>
-        <h2>Activity History</h2>
-        <p>Recent portal activity.</p>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Staff</th>
-              <th>Action</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-          ${
-            activity.length
-            ? activity.map(a=>{
-
-              const staff=getStaffById(a.staffId);
-
-              return `
-                <tr>
-
-                  <td>${formatDateTime(a.date)}</td>
-
-                  <td>${escapeHTML(staff?.name||"Admin")}</td>
-
-                  <td>
-                    <strong>${escapeHTML(a.action)}</strong>
-                  </td>
-
-                  <td>${escapeHTML(a.detail)}</td>
-
-                </tr>
-              `;
-
-            }).join("")
-            : `<tr><td colspan="4"><div class="empty">No activity yet.</div></td></tr>`
-          }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function openModal(title,body,onSave){
-
-  const container=document.getElementById("modalContainer");
-
-  container.innerHTML=`
-
-    <div class="modal-backdrop" onclick="backdropClose(event)">
-
-      <div class="modal">
-
-        <div class="modal-head">
-
-          <h3>${escapeHTML(title)}</h3>
-
-          <button class="close-btn" onclick="closeModal()">×</button>
-
-        </div>
-
-        <div class="modal-body">
-          ${body}
-        </div>
-
-        <div class="modal-foot">
-
-          <button class="btn" onclick="closeModal()">
-            Cancel
-          </button>
-
-          <button id="modalSaveBtn" class="btn primary">
-            Save
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-  document.getElementById("modalSaveBtn")
-    .onclick=onSave;
-}
-
-
-function closeModal(){
-  document.getElementById("modalContainer").innerHTML="";
-}
-
-
-function backdropClose(e){
-
-  if(e.target.classList.contains("modal-backdrop")){
-    closeModal();
-  }
-}
-
-
-/* =========================================================
-   FILE
-========================================================= */
-
-function fileToBase64(file){
-
-  return new Promise((resolve,reject)=>{
-
-    const reader=new FileReader();
-
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=reject;
-
-    reader.readAsDataURL(file);
-  });
-}
-
-
-/* =========================================================
-   OVERDUE NOTIFICATIONS
-========================================================= */
 
 function generateOverdueNotifications(){
+  const tasks=get(KEYS.logs);
+  const notes=get(KEYS.notifications);
 
-  const tasks=getData(KEYS.logs);
-
-  tasks.forEach(task=>{
-
-    if(!isOverdue(task)) return;
-
-    const existing=getData(KEYS.notifications);
-
-    const already=existing.some(n=>
-      n.staffId===task.staffId &&
-      n.title==="Overdue task" &&
-      n.message.includes(task.id)
+  tasks.filter(t=>isOverdue(t)).forEach(t=>{
+    const exists=notes.some(n=>
+      n.staffId===t.staffId &&
+      n.type==="overdue" &&
+      n.message.includes(t.id)
     );
 
-    if(already) return;
-
-    addNotification(
-      task.staffId,
-      "Overdue task",
-      `${task.title} is overdue. Task ID: ${task.id}`,
-      "overdue"
-    );
-
+    if(!exists){
+      addNotification(
+        t.staffId,
+        "Task overdue",
+        `"${t.title}" is overdue. Task ID: ${t.id}`,
+        "overdue"
+      );
+    }
   });
 }
 
+/* =========================
+   STAFF MANAGEMENT
+========================= */
 
-/* =========================================================
-   EXPORT CSV
-========================================================= */
+function renderStaff(){
+  let arr=get(KEYS.staff);
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Staff Management</div>
+        <div class="section-sub">Manage staff profiles and status</div>
+      </div>
+      <button class="btn" onclick="openStaffModal()">+ Add Staff</button>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <input id="staffSearch" placeholder="Search staff..." oninput="filterStaff()">
+        <select id="staffStatus" onchange="filterStaff()">
+          <option value="">All status</option>
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+      </div>
+      <div id="staffTable">${staffTable(arr)}</div>
+    </div>
+  `;
+}
+
+function staffTable(arr){
+  return `<div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th>Staff</th><th>Code</th><th>Department</th><th>Position</th><th>Status</th><th>Action</th>
+    </tr></thead>
+    <tbody>
+    ${arr.length?arr.map(s=>`
+      <tr>
+        <td>
+          <strong>${esc(s.name)}</strong>
+          <div class="item-meta">${esc(s.email||"")}</div>
+        </td>
+        <td>${esc(s.code)}</td>
+        <td>${esc(s.department)}</td>
+        <td>${esc(s.position)}</td>
+        <td><span class="status ${s.status==="Active"?"completed":"pending"}">${esc(s.status)}</span></td>
+        <td>
+          <div class="actions">
+            <button class="btn small secondary" onclick="viewStaff('${s.id}')">View</button>
+            <button class="btn small" onclick="openStaffModal('${s.id}')">Edit</button>
+          </div>
+        </td>
+      </tr>
+    `).join(""):`<tr><td colspan="6"><div class="empty">No staff found.</div></td></tr>`}
+    </tbody>
+  </table></div>`;
+}
+
+function filterStaff(){
+  let arr=get(KEYS.staff);
+  const q=(document.getElementById("staffSearch")?.value||"").toLowerCase();
+  const status=document.getElementById("staffStatus")?.value||"";
+
+  arr=arr.filter(s=>
+    (s.name+" "+s.code+" "+s.department+" "+s.position).toLowerCase().includes(q) &&
+    (!status||s.status===status)
+  );
+
+  document.getElementById("staffTable").innerHTML=staffTable(arr);
+}
+
+function openStaffModal(id=null){
+  const arr=get(KEYS.staff);
+  const s=id?arr.find(x=>x.id===id):null;
+
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">${s?"Edit Staff":"Add Staff"}</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label>Name</label>
+        <input id="stName" value="${esc(s?.name||"")}">
+      </div>
+
+      <div class="field">
+        <label>Staff Code</label>
+        <input id="stCode" value="${esc(s?.code||"")}">
+      </div>
+
+      <div class="field">
+        <label>Department</label>
+        <input id="stDept" value="${esc(s?.department||"")}">
+      </div>
+
+      <div class="field">
+        <label>Position</label>
+        <input id="stPosition" value="${esc(s?.position||"")}">
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select id="stStatus">
+          <option ${s?.status==="Active"?"selected":""}>Active</option>
+          <option ${s?.status==="Inactive"?"selected":""}>Inactive</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Joining Date</label>
+        <input id="stJoining" type="date" value="${s?.joiningDate||""}">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input id="stEmail" type="email" value="${esc(s?.email||"")}">
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input id="stPhone" value="${esc(s?.phone||"")}">
+      </div>
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveStaff('${id||""}')">Save</button>
+    </div>
+  `);
+}
+
+function saveStaff(id){
+  const arr=get(KEYS.staff);
+  const data={
+    name:document.getElementById("stName").value.trim(),
+    code:document.getElementById("stCode").value.trim(),
+    department:document.getElementById("stDept").value.trim(),
+    position:document.getElementById("stPosition").value.trim(),
+    status:document.getElementById("stStatus").value,
+    joiningDate:document.getElementById("stJoining").value,
+    email:document.getElementById("stEmail").value.trim(),
+    phone:document.getElementById("stPhone").value.trim()
+  };
+
+  if(!data.name||!data.code){
+    toast("Name and staff code are required");
+    return;
+  }
+
+  const duplicate=arr.find(x=>x.code===data.code&&x.id!==id);
+  if(duplicate){
+    toast("Staff code already exists");
+    return;
+  }
+
+  if(id){
+    const old=arr.find(x=>x.id===id);
+    Object.assign(old,data);
+    addActivity("Staff Updated",data.name,id);
+  }else{
+    data.id=data.code;
+    arr.push(data);
+    addActivity("Staff Added",data.name,data.id);
+  }
+
+  set(KEYS.staff,arr);
+  closeModal();
+  toast("Staff saved");
+  renderStaff();
+}
+
+function viewStaff(id){
+  const s=get(KEYS.staff).find(x=>x.id===id);
+  if(!s)return;
+
+  const logs=get(KEYS.logs).filter(x=>x.staffId===id);
+  const completed=logs.filter(x=>x.status==="Completed").length;
+  const rate=logs.length?Math.round(completed/logs.length*100):0;
+  const attendance=get(KEYS.attendance).filter(x=>x.staffId===id).length;
+
+  openModal(`
+    <div class="modal-head">
+      <div class="modal-title">Staff Profile</div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="profile-head">
+      <div class="profile-avatar">
+        ${getPhoto(id)?`<img src="${getPhoto(id)}">`:esc(initials(s.name))}
+      </div>
+      <div>
+        <div class="profile-name">${esc(s.name)}</div>
+        <div class="profile-position">${esc(s.position)}</div>
+        <div class="item-meta">${esc(s.department)} · ${esc(s.code)}</div>
+      </div>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card"><div class="stat-label">Tasks</div><div class="stat-number">${logs.length}</div></div>
+      <div class="card"><div class="stat-label">Completed</div><div class="stat-number">${completed}</div></div>
+      <div class="card"><div class="stat-label">Completion</div><div class="stat-number">${rate}%</div></div>
+      <div class="card"><div class="stat-label">Attendance</div><div class="stat-number">${attendance}</div></div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="section-title">Staff Details</div>
+      <div style="height:10px"></div>
+      <div class="grid grid-2">
+        <div><div class="stat-label">Email</div><span style="font-size:12px">${esc(s.email||"-")}</span></div>
+        <div><div class="stat-label">Phone</div><span style="font-size:12px">${esc(s.phone||"-")}</span></div>
+        <div><div class="stat-label">Joining Date</div><span style="font-size:12px">${fmtDate(s.joiningDate)}</span></div>
+        <div><div class="stat-label">Status</div><span style="font-size:12px">${esc(s.status)}</span></div>
+      </div>
+    </div>
+  `,true);
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+function renderProfile(){
+  const s=currentUser.role==="admin"
+    ?null
+    :get(KEYS.staff).find(x=>x.id===currentUser.staffId);
+
+  if(!s){
+    document.getElementById("content").innerHTML=`
+      <div class="card"><div class="empty">Admin profile is managed separately.</div></div>`;
+    return;
+  }
+
+  const logs=get(KEYS.logs).filter(x=>x.staffId===s.id);
+  const completed=logs.filter(x=>x.status==="Completed").length;
+  const rate=logs.length?Math.round(completed/logs.length*100):0;
+
+  document.getElementById("content").innerHTML=`
+    <div class="card">
+      <div class="profile-head">
+        <div class="profile-avatar" id="profileAvatar">
+          ${getPhoto(s.id)?`<img src="${getPhoto(s.id)}">`:esc(initials(s.name))}
+        </div>
+
+        <div>
+          <div class="profile-name">${esc(s.name)}</div>
+          <div class="profile-position">${esc(s.position)}</div>
+          <div class="item-meta">${esc(s.department)} · ${esc(s.code)}</div>
+        </div>
+
+        <div style="margin-left:auto">
+          <label class="btn small secondary" style="cursor:pointer">
+            Change Photo
+            <input type="file" accept="image/*" onchange="changePhoto(event)" style="display:none">
+          </label>
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="stat-label">Total Tasks</div>
+          <div class="stat-number">${logs.length}</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-number">${completed}</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Completion Rate</div>
+          <div class="stat-number">${rate}%</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div class="card">
+      <div class="section-title">Personal Information</div>
+      <div style="height:15px"></div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Name</label>
+          <input value="${esc(s.name)}" disabled>
+        </div>
+        <div class="field">
+          <label>Staff Code</label>
+          <input value="${esc(s.code)}" disabled>
+        </div>
+        <div class="field">
+          <label>Department</label>
+          <input value="${esc(s.department)}" disabled>
+        </div>
+        <div class="field">
+          <label>Position</label>
+          <input value="${esc(s.position)}" disabled>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input value="${esc(s.email||"")}" disabled>
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input value="${esc(s.phone||"")}" disabled>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getPhoto(id){
+  return localStorage.getItem(KEYS.photos+id)||"";
+}
+
+function changePhoto(e){
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+  reader.onload=function(){
+    localStorage.setItem(KEYS.photos+currentUser.staffId,reader.result);
+    addActivity("Profile Photo Updated",`${currentUser.name} updated profile photo`,currentUser.staffId);
+    toast("Profile photo updated");
+    renderProfile();
+    updateTopAvatar();
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateTopAvatar(){
+  const el=document.getElementById("topAvatar");
+  if(!el||!currentUser)return;
+
+  const photo=getPhoto(currentUser.staffId);
+  if(photo)el.innerHTML=`<img src="${photo}">`;
+  else el.textContent=initials(currentUser.name);
+}
+
+/* =========================
+   ANALYTICS
+========================= */
+
+function renderAnalytics(){
+  const logs=get(KEYS.logs);
+  const staff=get(KEYS.staff);
+  const attendance=get(KEYS.attendance);
+
+  const completed=logs.filter(x=>x.status==="Completed").length;
+  const rate=logs.length?Math.round(completed/logs.length*100):0;
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Analytics</div>
+        <div class="section-sub">Work, attendance and staff performance</div>
+      </div>
+      <div class="actions">
+        <button class="btn small secondary" onclick="exportCSV('logs')">Export Logs</button>
+        <button class="btn small secondary" onclick="exportCSV('attendance')">Export Attendance</button>
+        <button class="btn small secondary" onclick="exportCSV('leave')">Export Leave</button>
+      </div>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card"><div class="stat-label">Total Work Logs</div><div class="stat-number">${logs.length}</div></div>
+      <div class="card"><div class="stat-label">Completed</div><div class="stat-number">${completed}</div></div>
+      <div class="card"><div class="stat-label">Completion Rate</div><div class="stat-number">${rate}%</div></div>
+      <div class="card"><div class="stat-label">Attendance Records</div><div class="stat-number">${attendance.length}</div></div>
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Staff Performance</div>
+          <div class="section-sub">Task completion by staff</div>
+        </div>
+      </div>
+
+      ${renderStaffProgress()}
+    </div>
+
+    <div style="height:15px"></div>
+
+    <div class="card">
+      <div class="section-title">Monthly Work Summary</div>
+      <div style="height:12px"></div>
+      ${monthlySummary(logs)}
+    </div>
+  `;
+}
+
+function monthlySummary(logs){
+  const months={};
+
+  logs.forEach(l=>{
+    if(!l.workDate)return;
+    const key=l.workDate.slice(0,7);
+    if(!months[key])months[key]={total:0,completed:0};
+    months[key].total++;
+    if(l.status==="Completed")months[key].completed++;
+  });
+
+  const rows=Object.entries(months).sort((a,b)=>b[0].localeCompare(a[0]));
+
+  if(!rows.length)return `<div class="empty">No data.</div>`;
+
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Month</th><th>Total</th><th>Completed</th><th>Rate</th></tr></thead>
+    <tbody>
+      ${rows.map(([m,v])=>{
+        const r=Math.round(v.completed/v.total*100);
+        return `<tr>
+          <td>${m}</td>
+          <td>${v.total}</td>
+          <td>${v.completed}</td>
+          <td>${r}%</td>
+        </tr>`;
+      }).join("")}
+    </tbody>
+  </table></div>`;
+}
+
+/* =========================
+   ACTIVITY
+========================= */
+
+function renderActivity(){
+  const arr=get(KEYS.activity);
+
+  document.getElementById("content").innerHTML=`
+    <div class="section-head">
+      <div>
+        <div class="section-title">Activity History</div>
+        <div class="section-sub">Portal activity and changes</div>
+      </div>
+    </div>
+
+    <div class="card">
+      ${
+        arr.length
+        ?arr.map(a=>`
+          <div class="activity">
+            <strong>${esc(a.action)}</strong>
+            <p>${esc(a.detail)} · ${esc(staffName(a.staffId))} · ${fmtDateTime(a.createdAt)}</p>
+          </div>
+        `).join("")
+        :`<div class="empty">No activity history.</div>`
+      }
+    </div>
+  `;
+}
+
+/* =========================
+   EXPORT
+========================= */
 
 function exportCSV(type){
-
   let rows=[];
-  let filename="";
+  let filename="export.csv";
 
   if(type==="logs"){
-
-    const data=getData(KEYS.logs);
-
+    const data=get(KEYS.logs);
     rows=[
-      ["Staff","Task","Work Date","Due Date","Due Time","Priority","Status","Description"]
-    ];
-
-    data.forEach(x=>{
-      rows.push([
-        getStaffById(x.staffId)?.name||x.staffId,
-        x.title,
+      ["Date","Staff","Task","Due Date","Due Time","Priority","Status","Description"],
+      ...data.map(x=>[
         x.workDate,
+        staffName(x.staffId),
+        x.title,
         x.dueDate,
         x.dueTime,
         x.priority,
         x.status,
         x.description
-      ]);
-    });
-
+      ])
+    ];
     filename="nona_work_logs.csv";
   }
 
   if(type==="attendance"){
-
-    const data=getData(KEYS.attendance);
-
+    const data=get(KEYS.attendance);
     rows=[
-      ["Staff","Date","Clock In","Clock Out"]
-    ];
-
-    data.forEach(x=>{
-      rows.push([
-        getStaffById(x.staffId)?.name||x.staffId,
+      ["Date","Staff","Clock In","Clock Out"],
+      ...data.map(x=>[
         x.date,
+        staffName(x.staffId),
         x.clockIn,
         x.clockOut
-      ]);
-    });
-
+      ])
+    ];
     filename="nona_attendance.csv";
   }
 
-  if(type==="leaves"){
-
-    const data=getData(KEYS.leaves);
-
+  if(type==="leave"){
+    const data=get(KEYS.leaves);
     rows=[
-      ["Staff","Leave Type","Start","End","Reason","Status"]
-    ];
-
-    data.forEach(x=>{
-      rows.push([
-        getStaffById(x.staffId)?.name||x.staffId,
+      ["Staff","Type","Start Date","End Date","Reason","Status"],
+      ...data.map(x=>[
+        staffName(x.staffId),
         x.type,
-        x.start,
-        x.end,
+        x.startDate,
+        x.endDate,
         x.reason,
         x.status
-      ]);
-    });
-
+      ])
+    ];
     filename="nona_leave_requests.csv";
   }
 
-  const csv=rows
-    .map(row=>
-      row.map(value=>
-        `"${String(value??"").replace(/"/g,'""')}"`
-      ).join(",")
-    )
-    .join("\n");
+  const csv=rows.map(row=>
+    row.map(v=>`"${String(v??"").replaceAll('"','""')}"`).join(",")
+  ).join("\n");
 
-  const blob=new Blob([csv],{
-    type:"text/csv;charset=utf-8;"
-  });
-
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
   const url=URL.createObjectURL(blob);
-
   const a=document.createElement("a");
-
   a.href=url;
   a.download=filename;
   a.click();
-
   URL.revokeObjectURL(url);
 }
 
+/* =========================
+   START
+========================= */
 
-/* =========================================================
-   FORMAT
-========================================================= */
+document.getElementById("loginPassword").addEventListener("keydown",e=>{
+  if(e.key==="Enter")login();
+});
 
-function formatDate(date){
-
-  if(!date) return "";
-
-  const d=new Date(date+"T00:00:00");
-
-  if(isNaN(d)) return date;
-
-  return d.toLocaleDateString("en-GB",{
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
-  });
-}
-
-
-function formatDateTime(value){
-
-  if(!value) return "";
-
-  const d=new Date(value);
-
-  if(isNaN(d)) return value;
-
-  return d.toLocaleString("en-GB",{
-    day:"2-digit",
-    month:"short",
-    year:"numeric",
-    hour:"2-digit",
-    minute:"2-digit"
-  });
-}
-
-
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
-
-function toggleSidebar(){
-
-  document.getElementById("sidebar")
-    .classList.toggle("open");
-
-  document.getElementById("mobileOverlay")
-    .classList.toggle("show");
-}
-
-
-function closeSidebar(){
-
-  document.getElementById("sidebar")
-    .classList.remove("open");
-
-  document.getElementById("mobileOverlay")
-    .classList.remove("show");
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-initData();
-
+document.getElementById("loginUsername").addEventListener("keydown",e=>{
+  if(e.key==="Enter")login();
+});
 </script>
 
 </body>
