@@ -1,1048 +1,2097 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nona Costex Staff Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nona Costex Staff Portal</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Helvetica, Arial, sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Helvetica,Arial,sans-serif;
+}
 
-    body {
-      background: #f5f3ef;
-      color: #292825;
-      min-height: 100vh;
-    }
+body{
+  background:#f5f3ef;
+  color:#2f2d29;
+}
 
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+button,input,textarea,select{
+  font-family:inherit;
+}
 
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: white;
-      padding: 42px;
-      border-radius: 20px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.06);
-    }
+button{
+  cursor:pointer;
+}
 
-    .logo {
-      width: 55px;
-      height: 55px;
-      background: #403d35;
-      color: white;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 25px;
-    }
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    .login-card h1 {
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  padding:42px;
+  border-radius:22px;
+  box-shadow:0 12px 40px rgba(0,0,0,.07);
+}
 
-    .login-card p {
-      color: #77736b;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:15px;
+  background:#403d35;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:19px;
+  margin-bottom:25px;
+}
 
-    label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
+.login-card h1{
+  font-size:28px;
+  margin-bottom:8px;
+}
 
-    input {
-      width: 100%;
-      padding: 14px 15px;
-      border: 1px solid #ddd9d0;
-      border-radius: 10px;
-      outline: none;
-      margin-bottom: 18px;
-      font-size: 14px;
-      background: #faf9f7;
-    }
+.login-card>p{
+  color:#77736b;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:28px;
+}
 
-    input:focus {
-      border-color: #817b6d;
-      background: white;
-    }
+label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:8px;
+}
 
-    button {
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      border-radius: 10px;
-      padding: 13px 18px;
-    }
+input,textarea,select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #ddd9d0;
+  border-radius:10px;
+  background:#faf9f7;
+  outline:none;
+  font-size:14px;
+  margin-bottom:17px;
+}
 
-    .login-btn {
-      width: 100%;
-      background: #403d35;
-      color: white;
-      margin-top: 5px;
-    }
+input:focus,textarea:focus,select:focus{
+  border-color:#8d877b;
+  background:#fff;
+}
 
-    .login-btn:hover {
-      background: #2e2c27;
-    }
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
 
-    .demo-text {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 12px;
-      color: #99958d;
-    }
+.primary-btn{
+  background:#403d35;
+  color:#fff;
+  border:none;
+  padding:12px 17px;
+  border-radius:10px;
+}
 
-    .portal {
-      display: none;
-      min-height: 100vh;
-    }
+.primary-btn:hover{
+  background:#2f2d29;
+}
 
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 240px;
-      height: 100vh;
-      background: #403d35;
-      color: white;
-      padding: 28px 18px;
-    }
+.login-btn{
+  width:100%;
+  margin-top:4px;
+}
 
-    .brand {
-      padding: 0 12px 30px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      margin-bottom: 25px;
-    }
+.demo{
+  text-align:center;
+  color:#99958d;
+  font-size:12px;
+  margin-top:17px;
+}
 
-    .brand h2 {
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
+.portal{
+  display:none;
+  min-height:100vh;
+}
 
-    .brand span {
-      font-size: 11px;
-      color: #c8c4bb;
-    }
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:245px;
+  height:100vh;
+  background:#403d35;
+  color:#fff;
+  padding:28px 18px;
+  z-index:10;
+}
 
-    .nav-item {
-      display: block;
-      width: 100%;
-      padding: 12px 14px;
-      margin-bottom: 5px;
-      color: #d8d5ce;
-      background: transparent;
-      text-align: left;
-      border-radius: 9px;
-    }
+.brand{
+  padding:0 12px 28px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  margin-bottom:22px;
+}
 
-    .nav-item:hover,
-    .nav-item.active {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
+.brand h2{
+  font-size:18px;
+  margin-bottom:5px;
+}
 
-    .logout {
-      position: absolute;
-      bottom: 25px;
-      left: 18px;
-      width: calc(100% - 36px);
-      background: rgba(255,255,255,0.08);
-      color: white;
-    }
+.brand span{
+  font-size:11px;
+  color:#c8c4bb;
+}
 
-    .main {
-      margin-left: 240px;
-      padding: 35px;
-    }
+.nav-item{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:#d8d5ce;
+  text-align:left;
+  padding:12px 14px;
+  border-radius:9px;
+  margin-bottom:4px;
+  font-size:13px;
+}
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
+.nav-item:hover,
+.nav-item.active{
+  background:rgba(255,255,255,.11);
+  color:#fff;
+}
 
-    .topbar h1 {
-      font-size: 28px;
-    }
+.logout{
+  position:absolute;
+  left:18px;
+  bottom:25px;
+  width:calc(100% - 36px);
+  border:none;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:12px;
+  border-radius:9px;
+}
 
-    .user-info {
-      text-align: right;
-    }
+.main{
+  margin-left:245px;
+  padding:32px;
+  max-width:1600px;
+}
 
-    .user-info strong {
-      display: block;
-      font-size: 14px;
-    }
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:28px;
+}
 
-    .user-info span {
-      font-size: 12px;
-      color: #88837a;
-    }
+.topbar h1{
+  font-size:27px;
+}
 
-    .section {
-      display: none;
-    }
+.user-info{
+  text-align:right;
+}
 
-    .section.active {
-      display: block;
-    }
+.user-info strong{
+  display:block;
+  font-size:14px;
+}
 
-    .welcome {
-      background: white;
-      border-radius: 18px;
-      padding: 28px;
-      margin-bottom: 22px;
-      border: 1px solid #ebe8e2;
-    }
+.user-info span{
+  color:#88837a;
+  font-size:12px;
+}
 
-    .welcome h2 {
-      margin-bottom: 7px;
-      font-size: 21px;
-    }
+.section{
+  display:none;
+}
 
-    .welcome p {
-      color: #77736b;
-      font-size: 14px;
-    }
+.section.active{
+  display:block;
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
+.welcome{
+  background:#fff;
+  border:1px solid #ebe8e2;
+  border-radius:18px;
+  padding:27px;
+  margin-bottom:20px;
+}
 
-    .stat-card {
-      background: white;
-      padding: 22px;
-      border-radius: 16px;
-      border: 1px solid #ebe8e2;
-    }
+.welcome h2{
+  font-size:21px;
+  margin-bottom:7px;
+}
 
-    .stat-card span {
-      display: block;
-      color: #88837a;
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
+.welcome p{
+  color:#77736b;
+  font-size:13px;
+}
 
-    .stat-card strong {
-      font-size: 25px;
-    }
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
 
-    .content-card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid #ebe8e2;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
+.stat-card{
+  background:#fff;
+  border:1px solid #ebe8e2;
+  border-radius:16px;
+  padding:21px;
+}
 
-    .content-card h3 {
-      margin-bottom: 18px;
-      font-size: 17px;
-    }
+.stat-card span{
+  display:block;
+  color:#88837a;
+  font-size:12px;
+  margin-bottom:10px;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.stat-card strong{
+  font-size:23px;
+}
 
-    th,
-    td {
-      padding: 14px 10px;
-      text-align: left;
-      border-bottom: 1px solid #eeeae3;
-      font-size: 13px;
-    }
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:18px;
+}
 
-    th {
-      color: #77736b;
-      font-weight: 600;
-    }
+.card{
+  background:#fff;
+  border:1px solid #ebe8e2;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:18px;
+}
 
-    .status {
-      display: inline-block;
-      padding: 6px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      background: #eeeae2;
-    }
+.card h3{
+  font-size:16px;
+  margin-bottom:18px;
+}
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
+.schedule-item{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #eeeae3;
+}
 
-    .form-group {
-      margin-bottom: 5px;
-    }
+.schedule-item:last-child{
+  border-bottom:none;
+}
 
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      resize: vertical;
-      border: 1px solid #ddd9d0;
-      border-radius: 10px;
-      padding: 14px;
-      outline: none;
-      background: #faf9f7;
-      font-family: inherit;
-    }
+.schedule-item strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:5px;
+}
 
-    .submit-btn {
-      background: #403d35;
-      color: white;
-      margin-top: 15px;
-    }
+.schedule-item span{
+  font-size:12px;
+  color:#88837a;
+}
 
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 30px;
-      align-items: start;
-    }
+.time{
+  color:#6e685d;
+  font-size:12px;
+  white-space:nowrap;
+}
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #ddd8ce;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 35px;
-      color: #6f6a60;
-    }
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#eeeae2;
+  color:#5e594f;
+  font-size:10px;
+}
 
-    .profile-details p {
-      padding: 13px 0;
-      border-bottom: 1px solid #eeeae3;
-      font-size: 14px;
-    }
+table{
+  width:100%;
+  border-collapse:collapse;
+}
 
-    .profile-details strong {
-      display: inline-block;
-      width: 150px;
-    }
+th,td{
+  padding:13px 9px;
+  text-align:left;
+  border-bottom:1px solid #eeeae3;
+  font-size:12px;
+  vertical-align:top;
+}
 
-    .empty {
-      padding: 30px;
-      text-align: center;
-      color: #99958d;
-      font-size: 14px;
-    }
+th{
+  color:#77736b;
+  font-weight:600;
+}
 
-    @media (max-width: 900px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
+.action-btn{
+  border:none;
+  background:#eeeae2;
+  padding:7px 9px;
+  border-radius:7px;
+  font-size:11px;
+  margin-right:4px;
+}
 
-      .sidebar {
-        width: 200px;
-      }
+.delete-btn{
+  background:#f0e5e1;
+}
 
-      .main {
-        margin-left: 200px;
-        padding: 25px;
-      }
-    }
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
 
-    @media (max-width: 700px) {
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-      }
+.search{
+  margin-bottom:18px;
+}
 
-      .logout {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
+.attendance-box{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:18px;
+}
 
-      .main {
-        margin-left: 0;
-        padding: 20px;
-      }
+.attendance-card{
+  background:#faf9f7;
+  border:1px solid #ebe8e2;
+  border-radius:12px;
+  padding:17px;
+}
 
-      .topbar {
-        align-items: flex-start;
-        gap: 15px;
-      }
+.attendance-card span{
+  display:block;
+  color:#88837a;
+  font-size:11px;
+  margin-bottom:8px;
+}
 
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
+.attendance-card strong{
+  font-size:17px;
+}
 
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+.profile-layout{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:30px;
+}
 
-      .profile-grid {
-        grid-template-columns: 1fr;
-      }
+.avatar{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  background:#ded9cf;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6c675e;
+  font-size:38px;
+  font-weight:600;
+}
 
-      .user-info {
-        display: none;
-      }
-    }
-  </style>
+.profile-row{
+  padding:13px 0;
+  border-bottom:1px solid #eeeae3;
+  font-size:13px;
+}
+
+.profile-row strong{
+  display:inline-block;
+  width:150px;
+}
+
+.notification{
+  padding:17px 0;
+  border-bottom:1px solid #eeeae3;
+}
+
+.notification:last-child{
+  border-bottom:none;
+}
+
+.notification strong{
+  font-size:14px;
+}
+
+.notification p{
+  margin-top:6px;
+  color:#77736b;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  color:#99958d;
+  font-size:13px;
+}
+
+.mobile-menu{
+  display:none;
+}
+
+@media(max-width:1000px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .sidebar{
+    position:fixed;
+    width:100%;
+    height:auto;
+    min-height:auto;
+    padding:15px;
+  }
+
+  .brand{
+    border:none;
+    padding:5px 8px 15px;
+    margin:0;
+  }
+
+  .nav-item{
+    display:none;
+  }
+
+  .sidebar.open .nav-item{
+    display:block;
+  }
+
+  .logout{
+    position:static;
+    display:none;
+    width:100%;
+    margin-top:8px;
+  }
+
+  .sidebar.open .logout{
+    display:block;
+  }
+
+  .mobile-menu{
+    display:block;
+    position:absolute;
+    right:15px;
+    top:15px;
+    background:rgba(255,255,255,.1);
+    color:white;
+    border:none;
+    padding:9px 12px;
+    border-radius:8px;
+  }
+
+  .main{
+    margin-left:0;
+    padding:90px 17px 25px;
+  }
+
+  .topbar{
+    margin-bottom:20px;
+  }
+
+  .topbar h1{
+    font-size:23px;
+  }
+
+  .user-info{
+    display:none;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .stat-card{
+    padding:16px;
+  }
+
+  .stat-card strong{
+    font-size:19px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .attendance-box{
+    grid-template-columns:1fr;
+  }
+
+  .profile-layout{
+    grid-template-columns:1fr;
+  }
+
+  .profile-row strong{
+    width:110px;
+  }
+
+  .card{
+    padding:17px;
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:600px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOGIN -->
-  <div class="login-page" id="loginPage">
-    <div class="login-card">
-      <div class="logo">NC</div>
+<!-- LOGIN -->
+<div class="login-page" id="loginPage">
 
-      <h1>Welcome back</h1>
-      <p>Sign in to access the Nona Costex Staff Portal.</p>
+  <div class="login-card">
 
-      <label>Staff Name</label>
-      <input type="text" id="staffName" placeholder="Enter your name">
+    <div class="logo">NC</div>
 
-      <label>Staff Code</label>
-      <input type="text" id="staffCode" placeholder="e.g. NC001">
+    <h1>Welcome back</h1>
 
-      <button class="login-btn" onclick="login()">Sign In</button>
+    <p>
+      Sign in to access the Nona Costex Staff Portal.
+    </p>
 
-      <div class="demo-text">
-        Demo: Atikah / NC001
-      </div>
+    <label>Staff Name</label>
+    <input
+      type="text"
+      id="staffName"
+      placeholder="Enter your name"
+    >
+
+    <label>Staff Code</label>
+    <input
+      type="text"
+      id="staffCode"
+      placeholder="e.g. NC001"
+    >
+
+    <button
+      class="primary-btn login-btn"
+      onclick="login()"
+    >
+      Sign In
+    </button>
+
+    <div class="demo">
+      Demo login: Atikah / NC001
     </div>
+
   </div>
 
+</div>
 
-  <!-- PORTAL -->
-  <div class="portal" id="portal">
 
-    <aside class="sidebar">
+<!-- PORTAL -->
+<div class="portal" id="portal">
 
-      <div class="brand">
-        <h2>Nona Costex</h2>
-        <span>Staff Portal</span>
-      </div>
+  <aside class="sidebar" id="sidebar">
 
-      <button class="nav-item active" onclick="showSection('dashboard', this)">
+    <button class="mobile-menu" onclick="toggleMenu()">
+      Menu
+    </button>
+
+    <div class="brand">
+      <h2>Nona Costex</h2>
+      <span>Staff Portal</span>
+    </div>
+
+    <button class="nav-item active" onclick="showSection('dashboard',this)">
+      Dashboard
+    </button>
+
+    <button class="nav-item" onclick="showSection('schedule',this)">
+      My Schedule
+    </button>
+
+    <button class="nav-item" onclick="showSection('worklog',this)">
+      Daily Work Log
+    </button>
+
+    <button class="nav-item" onclick="showSection('attendance',this)">
+      Attendance
+    </button>
+
+    <button class="nav-item" onclick="showSection('leave',this)">
+      Leave
+    </button>
+
+    <button class="nav-item" onclick="showSection('notifications',this)">
+      Notifications
+    </button>
+
+    <button class="nav-item" onclick="showSection('profile',this)">
+      My Profile
+    </button>
+
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
+
+  </aside>
+
+
+  <main class="main">
+
+    <div class="topbar">
+
+      <h1 id="pageTitle">
         Dashboard
-      </button>
+      </h1>
 
-      <button class="nav-item" onclick="showSection('schedule', this)">
-        My Schedule
-      </button>
+      <div class="user-info">
+        <strong id="topName">Atikah</strong>
+        <span>NC001 · Digital</span>
+      </div>
 
-      <button class="nav-item" onclick="showSection('worklog', this)">
-        Daily Work Log
-      </button>
-
-      <button class="nav-item" onclick="showSection('attendance', this)">
-        Attendance
-      </button>
-
-      <button class="nav-item" onclick="showSection('leave', this)">
-        Leave
-      </button>
-
-      <button class="nav-item" onclick="showSection('notifications', this)">
-        Notifications
-      </button>
-
-      <button class="nav-item" onclick="showSection('profile', this)">
-        My Profile
-      </button>
-
-      <button class="logout" onclick="logout()">
-        Logout
-      </button>
-
-    </aside>
+    </div>
 
 
-    <main class="main">
+    <!-- DASHBOARD -->
+    <section class="section active" id="dashboard">
 
-      <div class="topbar">
-        <div>
-          <h1 id="pageTitle">Dashboard</h1>
-        </div>
+      <div class="welcome">
 
-        <div class="user-info">
-          <strong id="topName">Atikah</strong>
-          <span>NC001 · Digital</span>
-        </div>
+        <h2 id="welcomeName">
+          Good morning, Atikah
+        </h2>
+
+        <p>
+          Here's your work overview and upcoming activities.
+        </p>
+
       </div>
 
 
-      <!-- DASHBOARD -->
-      <section class="section active" id="dashboard">
+      <div class="stats">
 
-        <div class="welcome">
-          <h2 id="welcomeName">Good morning, Atikah</h2>
-          <p>Here is your work overview for today.</p>
+        <div class="stat-card">
+          <span>Attendance</span>
+          <strong id="dashboardAttendance">
+            Present
+          </strong>
         </div>
 
-        <div class="stats">
-
-          <div class="stat-card">
-            <span>Today's Attendance</span>
-            <strong>Present</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Work Logs</span>
-            <strong>4</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Upcoming Tasks</span>
-            <strong>3</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Leave Balance</span>
-            <strong>12</strong>
-          </div>
-
+        <div class="stat-card">
+          <span>Work Logs</span>
+          <strong id="workLogCount">
+            4
+          </strong>
         </div>
 
-        <div class="content-card">
-          <h3>Today's Schedule</h3>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Activity</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>9:00 AM</td>
-                <td>Content Planning</td>
-                <td><span class="status">Upcoming</span></td>
-              </tr>
-
-              <tr>
-                <td>11:00 AM</td>
-                <td>Product Shooting</td>
-                <td><span class="status">Upcoming</span></td>
-              </tr>
-
-              <tr>
-                <td>2:30 PM</td>
-                <td>Video Editing</td>
-                <td><span class="status">Upcoming</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="stat-card">
+          <span>Upcoming Tasks</span>
+          <strong>
+            3
+          </strong>
         </div>
 
-      </section>
-
-
-      <!-- SCHEDULE -->
-      <section class="section" id="schedule">
-
-        <div class="content-card">
-          <h3>My Schedule</h3>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Activity</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>15 Sep 2026</td>
-                <td>9:00 AM</td>
-                <td>Content Planning</td>
-                <td><span class="status">Upcoming</span></td>
-              </tr>
-
-              <tr>
-                <td>15 Sep 2026</td>
-                <td>11:00 AM</td>
-                <td>Product Shooting</td>
-                <td><span class="status">Upcoming</span></td>
-              </tr>
-
-              <tr>
-                <td>16 Sep 2026</td>
-                <td>10:00 AM</td>
-                <td>Social Media Content</td>
-                <td><span class="status">Scheduled</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="stat-card">
+          <span>Leave Balance</span>
+          <strong>
+            12
+          </strong>
         </div>
 
-      </section>
+      </div>
 
 
-      <!-- WORK LOG -->
-      <section class="section" id="worklog">
+      <div class="dashboard-grid">
 
-        <div class="content-card">
+        <div class="card">
 
-          <h3>Add Daily Work Log</h3>
+          <h3>
+            Upcoming Schedule
+          </h3>
 
-          <div class="form-grid">
+          <div class="schedule-item">
 
-            <div class="form-group">
-              <label>Date</label>
-              <input type="date" id="logDate">
+            <div>
+              <strong>
+                Content Planning
+              </strong>
+
+              <span>
+                15 September 2026
+              </span>
             </div>
 
-            <div class="form-group">
-              <label>Task / Activity</label>
-              <input type="text" id="logTask" placeholder="e.g. Product shooting">
+            <div class="time">
+              9:00 AM
             </div>
 
           </div>
 
-          <label>Description</label>
-          <textarea id="logDescription" placeholder="Describe what you worked on..."></textarea>
 
-          <button class="submit-btn" onclick="addWorkLog()">
-            Add Work Log
-          </button>
+          <div class="schedule-item">
+
+            <div>
+              <strong>
+                Product Shooting
+              </strong>
+
+              <span>
+                15 September 2026
+              </span>
+            </div>
+
+            <div class="time">
+              11:00 AM
+            </div>
+
+          </div>
+
+
+          <div class="schedule-item">
+
+            <div>
+              <strong>
+                Video Editing
+              </strong>
+
+              <span>
+                15 September 2026
+              </span>
+            </div>
+
+            <div class="time">
+              2:30 PM
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Attendance
+          </h3>
+
+          <div class="attendance-card">
+
+            <span>
+              Today's status
+            </span>
+
+            <strong>
+              Present
+            </strong>
+
+          </div>
+
+          <div class="attendance-card">
+
+            <span>
+              Check-in
+            </span>
+
+            <strong id="dashboardCheckIn">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>
+          Recent Work Logs
+        </h3>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Date</th>
+              <th>Task</th>
+              <th>Description</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="dashboardLogs">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- SCHEDULE -->
+    <section class="section" id="schedule">
+
+      <div class="card">
+
+        <h3>
+          My Schedule
+        </h3>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Activity</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>15 Sep 2026</td>
+              <td>9:00 AM</td>
+              <td>Content Planning</td>
+              <td><span class="status">Upcoming</span></td>
+            </tr>
+
+            <tr>
+              <td>15 Sep 2026</td>
+              <td>11:00 AM</td>
+              <td>Product Shooting</td>
+              <td><span class="status">Upcoming</span></td>
+            </tr>
+
+            <tr>
+              <td>16 Sep 2026</td>
+              <td>10:00 AM</td>
+              <td>Social Media Content</td>
+              <td><span class="status">Scheduled</span></td>
+            </tr>
+
+            <tr>
+              <td>17 Sep 2026</td>
+              <td>2:00 PM</td>
+              <td>Live Session Preparation</td>
+              <td><span class="status">Scheduled</span></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- WORK LOG -->
+    <section class="section" id="worklog">
+
+      <div class="card">
+
+        <h3>
+          Add Daily Work Log
+        </h3>
+
+        <div class="form-grid">
+
+          <div>
+
+            <label>
+              Date
+            </label>
+
+            <input
+              type="date"
+              id="logDate"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Task / Activity
+            </label>
+
+            <input
+              type="text"
+              id="logTask"
+              placeholder="e.g. Product shooting"
+            >
+
+          </div>
 
         </div>
 
 
-        <div class="content-card">
+        <label>
+          Due Date
+        </label>
 
-          <h3>Recent Work Logs</h3>
+        <input
+          type="date"
+          id="dueDate"
+        >
 
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Task</th>
-                <th>Description</th>
-              </tr>
-            </thead>
 
-            <tbody id="workLogTable">
+        <label>
+          Due Time
+        </label>
 
-              <tr>
-                <td>07 Sep 2026</td>
-                <td>Budget Quotation</td>
-                <td>Completed budget quotation and presented to team. Product shooting for Flite.</td>
-              </tr>
+        <input
+          type="time"
+          id="dueTime"
+        >
 
-              <tr>
-                <td>08 Sep 2026</td>
-                <td>Product Shooting</td>
-                <td>Product shooting and content brainstorming.</td>
-              </tr>
 
-              <tr>
-                <td>09 Sep 2026</td>
-                <td>Live Setup</td>
-                <td>Presented budget quotation for live setup and shot social media content.</td>
-              </tr>
+        <label>
+          Description
+        </label>
 
-              <tr>
-                <td>10 Sep 2026</td>
-                <td>Content Production</td>
-                <td>Content shooting and video editing.</td>
-              </tr>
+        <textarea
+          id="logDescription"
+          placeholder="Describe what you worked on..."
+        ></textarea>
 
-            </tbody>
-          </table>
+
+        <button
+          class="primary-btn"
+          onclick="saveWorkLog()"
+          id="saveLogButton"
+        >
+          Add Work Log
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>
+          Work Logs
+        </h3>
+
+        <input
+          class="search"
+          type="text"
+          id="workSearch"
+          placeholder="Search work logs..."
+          oninput="renderWorkLogs()"
+        >
+
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Date</th>
+              <th>Task</th>
+              <th>Due</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="workLogTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+    <section class="section" id="attendance">
+
+      <div class="card">
+
+        <h3>
+          Today's Attendance
+        </h3>
+
+        <div class="attendance-box">
+
+          <div class="attendance-card">
+
+            <span>
+              Status
+            </span>
+
+            <strong id="attendanceStatus">
+              Not checked in
+            </strong>
+
+          </div>
+
+
+          <div class="attendance-card">
+
+            <span>
+              Check In
+            </span>
+
+            <strong id="checkInTime">
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="attendance-card">
+
+            <span>
+              Check Out
+            </span>
+
+            <strong id="checkOutTime">
+              —
+            </strong>
+
+          </div>
 
         </div>
 
-      </section>
+
+        <button
+          class="primary-btn"
+          onclick="checkIn()"
+        >
+          Check In
+        </button>
 
 
-      <!-- ATTENDANCE -->
-      <section class="section" id="attendance">
+        <button
+          class="action-btn"
+          onclick="checkOut()"
+          style="margin-left:5px;padding:12px 15px;"
+        >
+          Check Out
+        </button>
 
-        <div class="content-card">
+      </div>
 
-          <h3>Today's Attendance</h3>
 
-          <p style="margin-bottom:20px; color:#77736b;">
-            Record your attendance for today.
+      <div class="card">
+
+        <h3>
+          Attendance History
+        </h3>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Date</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="attendanceTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- LEAVE -->
+    <section class="section" id="leave">
+
+      <div class="card">
+
+        <h3>
+          Apply for Leave
+        </h3>
+
+        <label>
+          Leave Type
+        </label>
+
+        <select id="leaveType">
+
+          <option>
+            Annual Leave
+          </option>
+
+          <option>
+            Medical Leave
+          </option>
+
+          <option>
+            Emergency Leave
+          </option>
+
+          <option>
+            Other
+          </option>
+
+        </select>
+
+
+        <div class="form-grid">
+
+          <div>
+
+            <label>
+              Start Date
+            </label>
+
+            <input
+              type="date"
+              id="leaveStart"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label>
+              End Date
+            </label>
+
+            <input
+              type="date"
+              id="leaveEnd"
+            >
+
+          </div>
+
+        </div>
+
+
+        <label>
+          Reason
+        </label>
+
+        <textarea
+          id="leaveReason"
+          placeholder="Reason for leave..."
+        ></textarea>
+
+
+        <button
+          class="primary-btn"
+          onclick="applyLeave()"
+        >
+          Submit Application
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>
+          Leave Applications
+        </h3>
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="leaveTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+    <section class="section" id="notifications">
+
+      <div class="card">
+
+        <h3>
+          Notifications & Announcements
+        </h3>
+
+
+        <div class="notification">
+
+          <strong>
+            Digital Team Meeting
+          </strong>
+
+          <p>
+            Team meeting scheduled for this week. Please prepare your current task updates.
           </p>
 
-          <button class="submit-btn" onclick="checkIn()">
-            Check In
-          </button>
+        </div>
 
-          <button style="margin-left:8px; background:#eeeae2;" onclick="checkOut()">
-            Check Out
-          </button>
 
-          <p id="attendanceMessage" style="margin-top:20px; font-size:14px;"></p>
+        <div class="notification">
+
+          <strong>
+            Content Planning
+          </strong>
+
+          <p>
+            Prepare upcoming social media content and product materials.
+          </p>
 
         </div>
 
 
-        <div class="content-card">
+        <div class="notification">
 
-          <h3>Attendance History</h3>
+          <strong>
+            Live Session
+          </strong>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="attendanceTable">
-
-              <tr>
-                <td>15 Sep 2026</td>
-                <td>09:00 AM</td>
-                <td>-</td>
-                <td><span class="status">Present</span></td>
-              </tr>
-
-            </tbody>
-          </table>
+          <p>
+            Make sure the live setup and product materials are ready before the session.
+          </p>
 
         </div>
 
-      </section>
+      </div>
+
+    </section>
 
 
-      <!-- LEAVE -->
-      <section class="section" id="leave">
+    <!-- PROFILE -->
+    <section class="section" id="profile">
 
-        <div class="content-card">
+      <div class="card">
 
-          <h3>Apply for Leave</h3>
-
-          <label>Leave Type</label>
-
-          <select id="leaveType" style="width:100%; padding:14px; border:1px solid #ddd9d0; border-radius:10px; margin-bottom:18px;">
-            <option>Annual Leave</option>
-            <option>Medical Leave</option>
-            <option>Emergency Leave</option>
-            <option>Other</option>
-          </select>
-
-          <div class="form-grid">
-
-            <div>
-              <label>Start Date</label>
-              <input type="date" id="leaveStart">
-            </div>
-
-            <div>
-              <label>End Date</label>
-              <input type="date" id="leaveEnd">
-            </div>
-
-          </div>
-
-          <label>Reason</label>
-          <textarea id="leaveReason" placeholder="Reason for leave..."></textarea>
-
-          <button class="submit-btn" onclick="applyLeave()">
-            Submit Application
-          </button>
-
-        </div>
+        <h3>
+          My Profile
+        </h3>
 
 
-        <div class="content-card">
+        <div class="profile-layout">
 
-          <h3>Leave Applications</h3>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="leaveTable">
-
-              <tr>
-                <td>Annual Leave</td>
-                <td>20 Sep 2026</td>
-                <td><span class="status">Pending</span></td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- NOTIFICATIONS -->
-      <section class="section" id="notifications">
-
-        <div class="content-card">
-
-          <h3>Notifications</h3>
-
-          <div style="padding:16px 0; border-bottom:1px solid #eeeae3;">
-            <strong>Team Meeting</strong>
-            <p style="font-size:13px; color:#77736b; margin-top:6px;">
-              Digital team meeting scheduled for this week.
-            </p>
-          </div>
-
-          <div style="padding:16px 0;">
-            <strong>Content Planning</strong>
-            <p style="font-size:13px; color:#77736b; margin-top:6px;">
-              Remember to prepare the upcoming social media content.
-            </p>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PROFILE -->
-      <section class="section" id="profile">
-
-        <div class="content-card">
-
-          <h3>My Profile</h3>
-
-          <div class="profile-grid">
+          <div>
 
             <div class="avatar">
               A
             </div>
 
-            <div class="profile-details">
+          </div>
 
-              <p>
-                <strong>Name</strong>
-                <span id="profileName">Atikah</span>
-              </p>
 
-              <p>
-                <strong>Staff Code</strong>
-                NC001
-              </p>
+          <div>
 
-              <p>
-                <strong>Department</strong>
-                Digital
-              </p>
+            <div class="profile-row">
+              <strong>Name</strong>
+              <span id="profileName">Atikah</span>
+            </div>
 
-              <p>
-                <strong>Position</strong>
-                Live Host Online & Offline
-              </p>
+            <div class="profile-row">
+              <strong>Staff Code</strong>
+              <span id="profileCode">NC001</span>
+            </div>
 
-              <p>
-                <strong>Status</strong>
-                Probation
-              </p>
+            <div class="profile-row">
+              <strong>Department</strong>
+              Digital
+            </div>
 
-              <p>
-                <strong>Joining Date</strong>
-                02 September 2026
-              </p>
+            <div class="profile-row">
+              <strong>Position</strong>
+              Live Host Online & Offline
+            </div>
 
+            <div class="profile-row">
+              <strong>Status</strong>
+              Probation
+            </div>
+
+            <div class="profile-row">
+              <strong>Joining Date</strong>
+              02 September 2026
             </div>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
 
-    </main>
+    </section>
 
-  </div>
+  </main>
+
+</div>
 
 
-  <script>
+<script>
 
-    function login() {
+const defaultLogs = [
+  {
+    id:1,
+    date:"2026-09-07",
+    task:"Budget Quotation",
+    dueDate:"",
+    dueTime:"",
+    description:"Completed budget quotation and presented to team. Product shooting for Flite."
+  },
+  {
+    id:2,
+    date:"2026-09-08",
+    task:"Product Shooting",
+    dueDate:"",
+    dueTime:"",
+    description:"Product shooting and content brainstorming."
+  },
+  {
+    id:3,
+    date:"2026-09-09",
+    task:"Live Setup",
+    dueDate:"",
+    dueTime:"",
+    description:"Presented budget quotation for live setup and shot social media content."
+  },
+  {
+    id:4,
+    date:"2026-09-10",
+    task:"Content Production",
+    dueDate:"",
+    dueTime:"",
+    description:"Content shooting and video editing."
+  }
+];
 
-      const name = document.getElementById("staffName").value.trim();
-      const code = document.getElementById("staffCode").value.trim();
 
-      if (!name || !code) {
-        alert("Please enter your staff name and staff code.");
-        return;
-      }
+let workLogs =
+  JSON.parse(localStorage.getItem("nonaWorkLogs"))
+  || defaultLogs;
 
-      localStorage.setItem("staffName", name);
-      localStorage.setItem("staffCode", code);
 
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("portal").style.display = "block";
+let leaveApplications =
+  JSON.parse(localStorage.getItem("nonaLeaveApplications"))
+  || [];
 
-      document.getElementById("topName").textContent = name;
-      document.getElementById("profileName").textContent = name;
-      document.getElementById("welcomeName").textContent = "Good morning, " + name;
+
+let editingLogId = null;
+
+
+function login(){
+
+  const name =
+    document.getElementById("staffName").value.trim();
+
+  const code =
+    document.getElementById("staffCode").value.trim();
+
+  if(!name || !code){
+
+    alert("Please enter your staff name and staff code.");
+
+    return;
+  }
+
+  localStorage.setItem("staffName",name);
+  localStorage.setItem("staffCode",code);
+
+  document.getElementById("loginPage").style.display="none";
+
+  document.getElementById("portal").style.display="block";
+
+  updateUser();
+
+  renderWorkLogs();
+
+  renderLeave();
+
+  renderAttendance();
+
+}
+
+
+function updateUser(){
+
+  const name =
+    localStorage.getItem("staffName")
+    || "Atikah";
+
+  const code =
+    localStorage.getItem("staffCode")
+    || "NC001";
+
+  document.getElementById("topName").textContent=name;
+
+  document.getElementById("profileName").textContent=name;
+
+  document.getElementById("profileCode").textContent=code;
+
+  document.getElementById("welcomeName").textContent=
+    "Good morning, " + name;
+
+}
+
+
+function logout(){
+
+  document.getElementById("portal").style.display="none";
+
+  document.getElementById("loginPage").style.display="flex";
+
+}
+
+
+function toggleMenu(){
+
+  document
+    .getElementById("sidebar")
+    .classList
+    .toggle("open");
+
+}
+
+
+function showSection(sectionId,button){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+  document
+    .getElementById(sectionId)
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(item=>{
+      item.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+
+  const titles={
+
+    dashboard:"Dashboard",
+    schedule:"My Schedule",
+    worklog:"Daily Work Log",
+    attendance:"Attendance",
+    leave:"Leave",
+    notifications:"Notifications",
+    profile:"My Profile"
+
+  };
+
+  document.getElementById("pageTitle").textContent=
+    titles[sectionId];
+
+
+  document
+    .getElementById("sidebar")
+    .classList
+    .remove("open");
+
+}
+
+
+function saveWorkLog(){
+
+  const date =
+    document.getElementById("logDate").value;
+
+  const task =
+    document.getElementById("logTask").value.trim();
+
+  const dueDate =
+    document.getElementById("dueDate").value;
+
+  const dueTime =
+    document.getElementById("dueTime").value;
+
+  const description =
+    document.getElementById("logDescription").value.trim();
+
+
+  if(!date || !task || !description){
+
+    alert("Please complete the date, task and description.");
+
+    return;
+  }
+
+
+  if(editingLogId){
+
+    const log =
+      workLogs.find(item=>item.id===editingLogId);
+
+    log.date=date;
+    log.task=task;
+    log.dueDate=dueDate;
+    log.dueTime=dueTime;
+    log.description=description;
+
+    editingLogId=null;
+
+    document.getElementById("saveLogButton").textContent=
+      "Add Work Log";
+
+  }else{
+
+    workLogs.unshift({
+
+      id:Date.now(),
+
+      date,
+
+      task,
+
+      dueDate,
+
+      dueTime,
+
+      description
+
+    });
+
+  }
+
+
+  localStorage.setItem(
+    "nonaWorkLogs",
+    JSON.stringify(workLogs)
+  );
+
+
+  clearWorkForm();
+
+  renderWorkLogs();
+
+  alert("Work log saved successfully.");
+
+}
+
+
+function clearWorkForm(){
+
+  document.getElementById("logDate").value="";
+
+  document.getElementById("logTask").value="";
+
+  document.getElementById("dueDate").value="";
+
+  document.getElementById("dueTime").value="";
+
+  document.getElementById("logDescription").value="";
+
+}
+
+
+function editWorkLog(id){
+
+  const log =
+    workLogs.find(item=>item.id===id);
+
+  if(!log) return;
+
+  document.getElementById("logDate").value=log.date;
+
+  document.getElementById("logTask").value=log.task;
+
+  document.getElementById("dueDate").value=log.dueDate;
+
+  document.getElementById("dueTime").value=log.dueTime;
+
+  document.getElementById("logDescription").value=log.description;
+
+  editingLogId=id;
+
+  document.getElementById("saveLogButton").textContent=
+    "Update Work Log";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function deleteWorkLog(id){
+
+  if(!confirm("Delete this work log?")) return;
+
+  workLogs =
+    workLogs.filter(item=>item.id!==id);
+
+  localStorage.setItem(
+    "nonaWorkLogs",
+    JSON.stringify(workLogs)
+  );
+
+  renderWorkLogs();
+
+}
+
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const d=new Date(date+"T00:00:00");
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
     }
+  );
+
+}
 
 
-    function logout() {
+function renderWorkLogs(){
 
-      document.getElementById("portal").style.display = "none";
-      document.getElementById("loginPage").style.display = "flex";
+  const search =
+    document
+      .getElementById("workSearch")
+      ?.value
+      .toLowerCase()
+      || "";
 
+
+  const filtered =
+    workLogs.filter(log=>
+
+      log.task.toLowerCase().includes(search)
+      ||
+      log.description.toLowerCase().includes(search)
+      ||
+      log.date.includes(search)
+
+    );
+
+
+  const table =
+    document.getElementById("workLogTable");
+
+  const dashboard =
+    document.getElementById("dashboardLogs");
+
+
+  table.innerHTML="";
+
+  dashboard.innerHTML="";
+
+
+  filtered.forEach(log=>{
+
+    const due =
+      log.dueDate
+      ?
+      `${formatDate(log.dueDate)} ${log.dueTime || ""}`
+      :
+      "—";
+
+
+    const row =
+      document.createElement("tr");
+
+
+    row.innerHTML=`
+
+      <td>${formatDate(log.date)}</td>
+
+      <td>${escapeHtml(log.task)}</td>
+
+      <td>${due}</td>
+
+      <td>${escapeHtml(log.description)}</td>
+
+      <td>
+
+        <button
+          class="action-btn"
+          onclick="editWorkLog(${log.id})"
+        >
+          Edit
+        </button>
+
+        <button
+          class="action-btn delete-btn"
+          onclick="deleteWorkLog(${log.id})"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    `;
+
+
+    table.appendChild(row);
+
+  });
+
+
+  workLogs.slice(0,4).forEach(log=>{
+
+    const row =
+      document.createElement("tr");
+
+
+    row.innerHTML=`
+
+      <td>${formatDate(log.date)}</td>
+
+      <td>${escapeHtml(log.task)}</td>
+
+      <td>${escapeHtml(log.description)}</td>
+
+    `;
+
+
+    dashboard.appendChild(row);
+
+  });
+
+
+  document.getElementById("workLogCount").textContent=
+    workLogs.length;
+
+}
+
+
+function escapeHtml(text){
+
+  const div=document.createElement("div");
+
+  div.textContent=text;
+
+  return div.innerHTML;
+
+}
+
+
+function checkIn(){
+
+  const now=new Date();
+
+  const time=now.toLocaleTimeString(
+    [],
+    {
+      hour:"2-digit",
+      minute:"2-digit"
     }
+  );
 
 
-    function showSection(sectionId, button) {
+  localStorage.setItem(
+    "nonaCheckIn",
+    time
+  );
 
-      document.querySelectorAll(".section").forEach(section => {
-        section.classList.remove("active");
-      });
 
-      document.getElementById(sectionId).classList.add("active");
+  document.getElementById("checkInTime").textContent=time;
 
-      document.querySelectorAll(".nav-item").forEach(item => {
-        item.classList.remove("active");
-      });
+  document.getElementById("dashboardCheckIn").textContent=time;
 
-      button.classList.add("active");
+  document.getElementById("attendanceStatus").textContent="Present";
 
-      const titles = {
-        dashboard: "Dashboard",
-        schedule: "My Schedule",
-        worklog: "Daily Work Log",
-        attendance: "Attendance",
-        leave: "Leave",
-        notifications: "Notifications",
-        profile: "My Profile"
-      };
+  renderAttendance();
 
-      document.getElementById("pageTitle").textContent = titles[sectionId];
+}
+
+
+function checkOut(){
+
+  const now=new Date();
+
+  const time=now.toLocaleTimeString(
+    [],
+    {
+      hour:"2-digit",
+      minute:"2-digit"
     }
+  );
 
 
-    function addWorkLog() {
-
-      const date = document.getElementById("logDate").value;
-      const task = document.getElementById("logTask").value;
-      const description = document.getElementById("logDescription").value;
-
-      if (!date || !task || !description) {
-        alert("Please complete all fields.");
-        return;
-      }
-
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td>${date}</td>
-        <td>${task}</td>
-        <td>${description}</td>
-      `;
-
-      document.getElementById("workLogTable").prepend(row);
-
-      document.getElementById("logDate").value = "";
-      document.getElementById("logTask").value = "";
-      document.getElementById("logDescription").value = "";
-
-      alert("Work log added successfully.");
-    }
+  localStorage.setItem(
+    "nonaCheckOut",
+    time
+  );
 
 
-    function checkIn() {
+  document.getElementById("checkOutTime").textContent=time;
 
-      const now = new Date();
+  renderAttendance();
 
-      const time = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
-      document.getElementById("attendanceMessage").textContent =
-        "Checked in at " + time;
-
-    }
+}
 
 
-    function checkOut() {
+function renderAttendance(){
 
-      const now = new Date();
+  const checkInTime =
+    localStorage.getItem("nonaCheckIn")
+    || "—";
 
-      const time = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
-      document.getElementById("attendanceMessage").textContent =
-        "Checked out at " + time;
-
-    }
+  const checkOutTime =
+    localStorage.getItem("nonaCheckOut")
+    || "—";
 
 
-    function applyLeave() {
+  document.getElementById("checkInTime").textContent=
+    checkInTime;
 
-      const type = document.getElementById("leaveType").value;
-      const start = document.getElementById("leaveStart").value;
-      const end = document.getElementById("leaveEnd").value;
-      const reason = document.getElementById("leaveReason").value;
+  document.getElementById("checkOutTime").textContent=
+    checkOutTime;
 
-      if (!start || !end || !reason) {
-        alert("Please complete all fields.");
-        return;
-      }
+  document.getElementById("dashboardCheckIn").textContent=
+    checkInTime;
 
-      const row = document.createElement("tr");
+  if(checkInTime!=="—"){
 
-      row.innerHTML = `
-        <td>${type}</td>
-        <td>${start} - ${end}</td>
-        <td><span class="status">Pending</span></td>
-      `;
+    document.getElementById("attendanceStatus").textContent=
+      "Present";
 
-      document.getElementById("leaveTable").prepend(row);
+  }
 
-      document.getElementById("leaveStart").value = "";
-      document.getElementById("leaveEnd").value = "";
-      document.getElementById("leaveReason").value = "";
 
-      alert("Leave application submitted.");
-    }
+  const table=
+    document.getElementById("attendanceTable");
 
-  </script>
+
+  table.innerHTML=`
+
+    <tr>
+
+      <td>15 Sep 2026</td>
+
+      <td>${checkInTime}</td>
+
+      <td>${checkOutTime}</td>
+
+      <td>
+        <span class="status">
+          Present
+        </span>
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+function applyLeave(){
+
+  const type =
+    document.getElementById("leaveType").value;
+
+  const start =
+    document.getElementById("leaveStart").value;
+
+  const end =
+    document.getElementById("leaveEnd").value;
+
+  const reason =
+    document.getElementById("leaveReason").value.trim();
+
+
+  if(!start || !end || !reason){
+
+    alert("Please complete all fields.");
+
+    return;
+  }
+
+
+  leaveApplications.unshift({
+
+    id:Date.now(),
+
+    type,
+
+    start,
+
+    end,
+
+    reason,
+
+    status:"Pending"
+
+  });
+
+
+  localStorage.setItem(
+    "nonaLeaveApplications",
+    JSON.stringify(leaveApplications)
+  );
+
+
+  document.getElementById("leaveStart").value="";
+
+  document.getElementById("leaveEnd").value="";
+
+  document.getElementById("leaveReason").value="";
+
+
+  renderLeave();
+
+  alert("Leave application submitted.");
+
+}
+
+
+function renderLeave(){
+
+  const table =
+    document.getElementById("leaveTable");
+
+  table.innerHTML="";
+
+
+  if(leaveApplications.length===0){
+
+    table.innerHTML=`
+
+      <tr>
+        <td colspan="4">
+          <div class="empty">
+            No leave applications yet.
+          </div>
+        </td>
+      </tr>
+
+    `;
+
+    return;
+  }
+
+
+  leaveApplications.forEach(item=>{
+
+    const row =
+      document.createElement("tr");
+
+
+    row.innerHTML=`
+
+      <td>${escapeHtml(item.type)}</td>
+
+      <td>
+        ${formatDate(item.start)}
+        -
+        ${formatDate(item.end)}
+      </td>
+
+      <td>
+        ${escapeHtml(item.reason)}
+      </td>
+
+      <td>
+        <span class="status">
+          ${item.status}
+        </span>
+      </td>
+
+    `;
+
+
+    table.appendChild(row);
+
+  });
+
+}
+
+
+window.onload=function(){
+
+  const savedName =
+    localStorage.getItem("staffName");
+
+  const savedCode =
+    localStorage.getItem("staffCode");
+
+
+  if(savedName && savedCode){
+
+    document.getElementById("loginPage").style.display="none";
+
+    document.getElementById("portal").style.display="block";
+
+    updateUser();
+
+    renderWorkLogs();
+
+    renderLeave();
+
+    renderAttendance();
+
+  }
+
+};
+
+</script>
 
 </body>
 </html>
