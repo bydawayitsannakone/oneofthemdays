@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nona Costex Staff Portal</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f3ef;
+      color: #292825;
+      min-height: 100vh;
+    }
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 42px;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      width: 55px;
+      height: 55px;
+      background: #403d35;
+      color: white;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .login-card h1 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      color: #77736b;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #ddd9d0;
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 18px;
+      font-size: 14px;
+      background: #faf9f7;
+    }
+
+    input:focus {
+      border-color: #817b6d;
+      background: white;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 10px;
+      padding: 13px 18px;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: #403d35;
+      color: white;
+      margin-top: 5px;
+    }
+
+    .login-btn:hover {
+      background: #2e2c27;
+    }
+
+    .demo-text {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 12px;
+      color: #99958d;
+    }
+
+    .portal {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 100vh;
+      background: #403d35;
+      color: white;
+      padding: 28px 18px;
+    }
+
+    .brand {
+      padding: 0 12px 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 25px;
+    }
+
+    .brand h2 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .brand span {
+      font-size: 11px;
+      color: #c8c4bb;
+    }
+
+    .nav-item {
+      display: block;
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 5px;
+      color: #d8d5ce;
+      background: transparent;
+      text-align: left;
+      border-radius: 9px;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .logout {
+      position: absolute;
+      bottom: 25px;
+      left: 18px;
+      width: calc(100% - 36px);
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .main {
+      margin-left: 240px;
+      padding: 35px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .topbar h1 {
+      font-size: 28px;
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-info strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .user-info span {
+      font-size: 12px;
+      color: #88837a;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 22px;
+      border: 1px solid #ebe8e2;
+    }
+
+    .welcome h2 {
+      margin-bottom: 7px;
+      font-size: 21px;
+    }
+
+    .welcome p {
+      color: #77736b;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      border: 1px solid #ebe8e2;
+    }
+
+    .stat-card span {
+      display: block;
+      color: #88837a;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card strong {
+      font-size: 25px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #ebe8e2;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .content-card h3 {
+      margin-bottom: 18px;
+      font-size: 17px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 10px;
+      text-align: left;
+      border-bottom: 1px solid #eeeae3;
+      font-size: 13px;
+    }
+
+    th {
+      color: #77736b;
+      font-weight: 600;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      background: #eeeae2;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      border: 1px solid #ddd9d0;
+      border-radius: 10px;
+      padding: 14px;
+      outline: none;
+      background: #faf9f7;
+      font-family: inherit;
+    }
+
+    .submit-btn {
+      background: #403d35;
+      color: white;
+      margin-top: 15px;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #ddd8ce;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      color: #6f6a60;
+    }
+
+    .profile-details p {
+      padding: 13px 0;
+      border-bottom: 1px solid #eeeae3;
+      font-size: 14px;
+    }
+
+    .profile-details strong {
+      display: inline-block;
+      width: 150px;
+    }
+
+    .empty {
+      padding: 30px;
+      text-align: center;
+      color: #99958d;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sidebar {
+        width: 200px;
+      }
+
+      .main {
+        margin-left: 200px;
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .logout {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .user-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-page" id="loginPage">
+    <div class="login-card">
+      <div class="logo">NC</div>
+
+      <h1>Welcome back</h1>
+      <p>Sign in to access the Nona Costex Staff Portal.</p>
+
+      <label>Staff Name</label>
+      <input type="text" id="staffName" placeholder="Enter your name">
+
+      <label>Staff Code</label>
+      <input type="text" id="staffCode" placeholder="e.g. NC001">
+
+      <button class="login-btn" onclick="login()">Sign In</button>
+
+      <div class="demo-text">
+        Demo: Atikah / NC001
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PORTAL -->
+  <div class="portal" id="portal">
+
+    <aside class="sidebar">
+
+      <div class="brand">
+        <h2>Nona Costex</h2>
+        <span>Staff Portal</span>
+      </div>
+
+      <button class="nav-item active" onclick="showSection('dashboard', this)">
+        Dashboard
+      </button>
+
+      <button class="nav-item" onclick="showSection('schedule', this)">
+        My Schedule
+      </button>
+
+      <button class="nav-item" onclick="showSection('worklog', this)">
+        Daily Work Log
+      </button>
+
+      <button class="nav-item" onclick="showSection('attendance', this)">
+        Attendance
+      </button>
+
+      <button class="nav-item" onclick="showSection('leave', this)">
+        Leave
+      </button>
+
+      <button class="nav-item" onclick="showSection('notifications', this)">
+        Notifications
+      </button>
+
+      <button class="nav-item" onclick="showSection('profile', this)">
+        My Profile
+      </button>
+
+      <button class="logout" onclick="logout()">
+        Logout
+      </button>
+
+    </aside>
+
+
+    <main class="main">
+
+      <div class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+
+        <div class="user-info">
+          <strong id="topName">Atikah</strong>
+          <span>NC001 · Digital</span>
+        </div>
+      </div>
+
+
+      <!-- DASHBOARD -->
+      <section class="section active" id="dashboard">
+
+        <div class="welcome">
+          <h2 id="welcomeName">Good morning, Atikah</h2>
+          <p>Here is your work overview for today.</p>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat-card">
+            <span>Today's Attendance</span>
+            <strong>Present</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>Work Logs</span>
+            <strong>4</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>Upcoming Tasks</span>
+            <strong>3</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>Leave Balance</span>
+            <strong>12</strong>
+          </div>
+
+        </div>
+
+        <div class="content-card">
+          <h3>Today's Schedule</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Activity</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>9:00 AM</td>
+                <td>Content Planning</td>
+                <td><span class="status">Upcoming</span></td>
+              </tr>
+
+              <tr>
+                <td>11:00 AM</td>
+                <td>Product Shooting</td>
+                <td><span class="status">Upcoming</span></td>
+              </tr>
+
+              <tr>
+                <td>2:30 PM</td>
+                <td>Video Editing</td>
+                <td><span class="status">Upcoming</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+
+      <!-- SCHEDULE -->
+      <section class="section" id="schedule">
+
+        <div class="content-card">
+          <h3>My Schedule</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Activity</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>15 Sep 2026</td>
+                <td>9:00 AM</td>
+                <td>Content Planning</td>
+                <td><span class="status">Upcoming</span></td>
+              </tr>
+
+              <tr>
+                <td>15 Sep 2026</td>
+                <td>11:00 AM</td>
+                <td>Product Shooting</td>
+                <td><span class="status">Upcoming</span></td>
+              </tr>
+
+              <tr>
+                <td>16 Sep 2026</td>
+                <td>10:00 AM</td>
+                <td>Social Media Content</td>
+                <td><span class="status">Scheduled</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+
+      <!-- WORK LOG -->
+      <section class="section" id="worklog">
+
+        <div class="content-card">
+
+          <h3>Add Daily Work Log</h3>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="logDate">
+            </div>
+
+            <div class="form-group">
+              <label>Task / Activity</label>
+              <input type="text" id="logTask" placeholder="e.g. Product shooting">
+            </div>
+
+          </div>
+
+          <label>Description</label>
+          <textarea id="logDescription" placeholder="Describe what you worked on..."></textarea>
+
+          <button class="submit-btn" onclick="addWorkLog()">
+            Add Work Log
+          </button>
+
+        </div>
+
+
+        <div class="content-card">
+
+          <h3>Recent Work Logs</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Task</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+
+            <tbody id="workLogTable">
+
+              <tr>
+                <td>07 Sep 2026</td>
+                <td>Budget Quotation</td>
+                <td>Completed budget quotation and presented to team. Product shooting for Flite.</td>
+              </tr>
+
+              <tr>
+                <td>08 Sep 2026</td>
+                <td>Product Shooting</td>
+                <td>Product shooting and content brainstorming.</td>
+              </tr>
+
+              <tr>
+                <td>09 Sep 2026</td>
+                <td>Live Setup</td>
+                <td>Presented budget quotation for live setup and shot social media content.</td>
+              </tr>
+
+              <tr>
+                <td>10 Sep 2026</td>
+                <td>Content Production</td>
+                <td>Content shooting and video editing.</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- ATTENDANCE -->
+      <section class="section" id="attendance">
+
+        <div class="content-card">
+
+          <h3>Today's Attendance</h3>
+
+          <p style="margin-bottom:20px; color:#77736b;">
+            Record your attendance for today.
+          </p>
+
+          <button class="submit-btn" onclick="checkIn()">
+            Check In
+          </button>
+
+          <button style="margin-left:8px; background:#eeeae2;" onclick="checkOut()">
+            Check Out
+          </button>
+
+          <p id="attendanceMessage" style="margin-top:20px; font-size:14px;"></p>
+
+        </div>
+
+
+        <div class="content-card">
+
+          <h3>Attendance History</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="attendanceTable">
+
+              <tr>
+                <td>15 Sep 2026</td>
+                <td>09:00 AM</td>
+                <td>-</td>
+                <td><span class="status">Present</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- LEAVE -->
+      <section class="section" id="leave">
+
+        <div class="content-card">
+
+          <h3>Apply for Leave</h3>
+
+          <label>Leave Type</label>
+
+          <select id="leaveType" style="width:100%; padding:14px; border:1px solid #ddd9d0; border-radius:10px; margin-bottom:18px;">
+            <option>Annual Leave</option>
+            <option>Medical Leave</option>
+            <option>Emergency Leave</option>
+            <option>Other</option>
+          </select>
+
+          <div class="form-grid">
+
+            <div>
+              <label>Start Date</label>
+              <input type="date" id="leaveStart">
+            </div>
+
+            <div>
+              <label>End Date</label>
+              <input type="date" id="leaveEnd">
+            </div>
+
+          </div>
+
+          <label>Reason</label>
+          <textarea id="leaveReason" placeholder="Reason for leave..."></textarea>
+
+          <button class="submit-btn" onclick="applyLeave()">
+            Submit Application
+          </button>
+
+        </div>
+
+
+        <div class="content-card">
+
+          <h3>Leave Applications</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="leaveTable">
+
+              <tr>
+                <td>Annual Leave</td>
+                <td>20 Sep 2026</td>
+                <td><span class="status">Pending</span></td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- NOTIFICATIONS -->
+      <section class="section" id="notifications">
+
+        <div class="content-card">
+
+          <h3>Notifications</h3>
+
+          <div style="padding:16px 0; border-bottom:1px solid #eeeae3;">
+            <strong>Team Meeting</strong>
+            <p style="font-size:13px; color:#77736b; margin-top:6px;">
+              Digital team meeting scheduled for this week.
+            </p>
+          </div>
+
+          <div style="padding:16px 0;">
+            <strong>Content Planning</strong>
+            <p style="font-size:13px; color:#77736b; margin-top:6px;">
+              Remember to prepare the upcoming social media content.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PROFILE -->
+      <section class="section" id="profile">
+
+        <div class="content-card">
+
+          <h3>My Profile</h3>
+
+          <div class="profile-grid">
+
+            <div class="avatar">
+              A
+            </div>
+
+            <div class="profile-details">
+
+              <p>
+                <strong>Name</strong>
+                <span id="profileName">Atikah</span>
+              </p>
+
+              <p>
+                <strong>Staff Code</strong>
+                NC001
+              </p>
+
+              <p>
+                <strong>Department</strong>
+                Digital
+              </p>
+
+              <p>
+                <strong>Position</strong>
+                Live Host Online & Offline
+              </p>
+
+              <p>
+                <strong>Status</strong>
+                Probation
+              </p>
+
+              <p>
+                <strong>Joining Date</strong>
+                02 September 2026
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script>
+
+    function login() {
+
+      const name = document.getElementById("staffName").value.trim();
+      const code = document.getElementById("staffCode").value.trim();
+
+      if (!name || !code) {
+        alert("Please enter your staff name and staff code.");
+        return;
+      }
+
+      localStorage.setItem("staffName", name);
+      localStorage.setItem("staffCode", code);
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("portal").style.display = "block";
+
+      document.getElementById("topName").textContent = name;
+      document.getElementById("profileName").textContent = name;
+      document.getElementById("welcomeName").textContent = "Good morning, " + name;
+    }
+
+
+    function logout() {
+
+      document.getElementById("portal").style.display = "none";
+      document.getElementById("loginPage").style.display = "flex";
+
+    }
+
+
+    function showSection(sectionId, button) {
+
+      document.querySelectorAll(".section").forEach(section => {
+        section.classList.remove("active");
+      });
+
+      document.getElementById(sectionId).classList.add("active");
+
+      document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const titles = {
+        dashboard: "Dashboard",
+        schedule: "My Schedule",
+        worklog: "Daily Work Log",
+        attendance: "Attendance",
+        leave: "Leave",
+        notifications: "Notifications",
+        profile: "My Profile"
+      };
+
+      document.getElementById("pageTitle").textContent = titles[sectionId];
+    }
+
+
+    function addWorkLog() {
+
+      const date = document.getElementById("logDate").value;
+      const task = document.getElementById("logTask").value;
+      const description = document.getElementById("logDescription").value;
+
+      if (!date || !task || !description) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${date}</td>
+        <td>${task}</td>
+        <td>${description}</td>
+      `;
+
+      document.getElementById("workLogTable").prepend(row);
+
+      document.getElementById("logDate").value = "";
+      document.getElementById("logTask").value = "";
+      document.getElementById("logDescription").value = "";
+
+      alert("Work log added successfully.");
+    }
+
+
+    function checkIn() {
+
+      const now = new Date();
+
+      const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      document.getElementById("attendanceMessage").textContent =
+        "Checked in at " + time;
+
+    }
+
+
+    function checkOut() {
+
+      const now = new Date();
+
+      const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      document.getElementById("attendanceMessage").textContent =
+        "Checked out at " + time;
+
+    }
+
+
+    function applyLeave() {
+
+      const type = document.getElementById("leaveType").value;
+      const start = document.getElementById("leaveStart").value;
+      const end = document.getElementById("leaveEnd").value;
+      const reason = document.getElementById("leaveReason").value;
+
+      if (!start || !end || !reason) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${type}</td>
+        <td>${start} - ${end}</td>
+        <td><span class="status">Pending</span></td>
+      `;
+
+      document.getElementById("leaveTable").prepend(row);
+
+      document.getElementById("leaveStart").value = "";
+      document.getElementById("leaveEnd").value = "";
+      document.getElementById("leaveReason").value = "";
+
+      alert("Leave application submitted.");
+    }
+
+  </script>
+
+</body>
+</html>
