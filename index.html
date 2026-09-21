@@ -9,35 +9,33 @@
 
 <style>
 :root{
-  --green:#16823a;
-  --green-dark:#10652d;
-  --green-light:#e8f5ec;
-  --green-soft:#f3faf5;
+  --green:#9fb873;
+  --green-dark:#7f9a58;
+  --green-light:#edf3e4;
+  --green-soft:#f6f8f1;
   --border:#e2e8e4;
   --text:#172019;
   --muted:#718078;
   --bg:#f7f9f7;
   --white:#fff;
   --danger:#c0392b;
-  --shadow:0 4px 20px rgba(0,0,0,.05);
+  --warning:#d79a28;
+  --shadow:0 8px 30px rgba(35,50,40,.06);
 }
 
 *{
   box-sizing:border-box;
-}
-
-html,body{
   margin:0;
   padding:0;
+}
+
+body{
   font-family:Helvetica,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
-button,
-input,
-textarea,
-select{
+button,input,select,textarea{
   font-family:inherit;
 }
 
@@ -45,22 +43,19 @@ button{
   cursor:pointer;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+.hidden{
+  display:none!important;
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
-.login-wrap{
+.login-screen{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:30px;
-  background:linear-gradient(135deg,#f3faf5,#fff);
+  background:var(--bg);
+  padding:24px;
 }
 
 .login-card{
@@ -68,105 +63,177 @@ a{
   max-width:420px;
   background:#fff;
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:20px;
   padding:38px;
   box-shadow:var(--shadow);
 }
 
-.logo{
-  font-size:26px;
+.logo-box{
+  width:54px;
+  height:54px;
+  border-radius:15px;
+  background:var(--green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-weight:700;
-  color:var(--green);
-  margin-bottom:5px;
+  font-size:21px;
+  margin-bottom:20px;
 }
 
 .login-card h1{
-  margin:0 0 8px;
   font-size:25px;
+  margin-bottom:7px;
 }
 
 .login-card p{
   color:var(--muted);
-  margin:0 0 28px;
+  font-size:14px;
+  margin-bottom:26px;
 }
 
-/* =========================
-   LAYOUT
-========================= */
+/* APP */
 
 .app{
-  display:flex;
   min-height:100vh;
+  display:flex;
 }
 
 .sidebar{
   width:245px;
   background:#fff;
   border-right:1px solid var(--border);
+  padding:22px 15px;
   position:fixed;
-  left:0;
   top:0;
   bottom:0;
+  left:0;
   overflow-y:auto;
   z-index:20;
 }
 
 .brand{
-  padding:25px 22px 20px;
-  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:5px 10px 27px;
 }
 
-.brand-title{
-  color:var(--green);
+.brand-icon{
+  width:39px;
+  height:39px;
+  border-radius:11px;
+  background:var(--green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.brand-text{
   font-weight:700;
-  font-size:21px;
+  font-size:15px;
 }
 
 .brand-sub{
   color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
+  font-size:10px;
+  margin-top:3px;
 }
 
-.nav{
-  padding:18px 12px;
-}
-
-.nav-section{
-  font-size:11px;
-  color:#9aa59e;
+.nav-title{
+  color:#a0aaa4;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.08em;
-  margin:18px 10px 8px;
+  letter-spacing:.8px;
+  padding:13px 11px 7px;
 }
 
 .nav button{
   width:100%;
   border:0;
   background:transparent;
+  padding:10px 11px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#5e6962;
+  font-size:13px;
   text-align:left;
-  padding:11px 12px;
-  border-radius:9px;
-  margin-bottom:3px;
-  color:#46524a;
-  font-size:14px;
-  transition:.15s;
+  margin:2px 0;
 }
 
-.nav button:hover{
-  background:var(--green-light);
-  color:var(--green-dark);
-}
-
+.nav button:hover,
 .nav button.active{
   background:var(--green-light);
-  color:var(--green-dark);
-  font-weight:600;
+  color:#5f7541;
 }
 
 .nav-icon{
-  display:inline-block;
-  width:25px;
+  width:20px;
+  text-align:center;
+}
+
+.sidebar-bottom{
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  right:15px;
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
+
+.user-mini{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:7px;
+}
+
+.avatar{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:var(--green-light);
+  color:#5f7541;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:12px;
+}
+
+.user-mini-info{
+  min-width:0;
+  flex:1;
+}
+
+.user-mini-name{
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.user-mini-role{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.logout-btn{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  padding:9px;
+  border-radius:9px;
+  color:#66716a;
+  font-size:12px;
+  margin-top:8px;
 }
 
 .main{
@@ -182,42 +249,76 @@ a{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 28px;
+  padding:0 30px;
   position:sticky;
   top:0;
   z-index:10;
 }
 
 .topbar-title{
-  font-size:18px;
+  font-size:17px;
   font-weight:600;
 }
 
-.top-actions{
+.topbar-right{
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
+}
+
+.icon-btn{
+  width:36px;
+  height:36px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
+  position:relative;
+}
+
+.notification-dot{
+  position:absolute;
+  width:7px;
+  height:7px;
+  background:#d95d5d;
+  border-radius:50%;
+  top:7px;
+  right:7px;
 }
 
 .content{
-  padding:28px;
+  padding:28px 30px 50px;
   max-width:1500px;
   margin:auto;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* COMMON */
+
+.page-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.page-head h1{
+  font-size:24px;
+  margin-bottom:5px;
+}
+
+.page-head p{
+  color:var(--muted);
+  font-size:13px;
+}
 
 .btn{
   border:0;
   background:var(--green);
-  color:white;
-  padding:10px 16px;
-  border-radius:8px;
-  font-size:13px;
+  color:#fff;
+  border-radius:9px;
+  padding:10px 15px;
+  font-size:12px;
   font-weight:600;
-  transition:.15s;
 }
 
 .btn:hover{
@@ -225,48 +326,65 @@ a{
 }
 
 .btn.secondary{
-  background:#eef5f0;
-  color:var(--green-dark);
+  background:var(--green-light);
+  color:#5f7541;
 }
 
-.btn.secondary:hover{
-  background:#dfeee4;
+.btn.outline{
+  background:#fff;
+  border:1px solid var(--border);
+  color:#5e6962;
 }
 
 .btn.danger{
-  background:#fff0ee;
+  background:#f9e9e7;
   color:var(--danger);
 }
 
-.btn.danger:hover{
-  background:#ffe1dc;
-}
-
 .btn.small{
-  padding:7px 11px;
-  font-size:12px;
+  padding:7px 10px;
+  font-size:11px;
 }
 
-.btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.card{
-  background:#fff;
+.input,
+select,
+textarea{
+  width:100%;
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.025);
+  border-radius:9px;
+  padding:10px 12px;
+  outline:none;
+  background:#fff;
+  color:var(--text);
+  font-size:13px;
+}
+
+.input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--green);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:6px;
+  color:#59645d;
 }
 
 .grid{
   display:grid;
-  gap:18px;
+  gap:15px;
 }
 
 .grid-2{
@@ -281,256 +399,253 @@ a{
   grid-template-columns:repeat(4,minmax(0,1fr));
 }
 
-.page-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:22px;
-  gap:15px;
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
 }
 
-.page-head h1{
-  margin:0;
-  font-size:24px;
+.card-pad{
+  padding:19px;
 }
 
-.page-head p{
-  margin:5px 0 0;
+.card-title{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.empty{
+  padding:35px;
+  text-align:center;
   color:var(--muted);
   font-size:13px;
 }
 
-.stat{
-  padding:20px;
+/* DASHBOARD */
+
+.stat-card{
+  padding:18px;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:12px;
-  margin-bottom:10px;
+  font-size:11px;
+  margin-bottom:9px;
 }
 
 .stat-value{
   font-size:27px;
-  font-weight:700;
-}
-
-.stat-icon{
-  float:right;
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--green-light);
-  color:var(--green);
-}
-
-/* =========================
-   FORMS
-========================= */
-
-.form-group{
-  margin-bottom:16px;
-}
-
-.form-group label{
-  display:block;
-  font-size:12px;
   font-weight:600;
-  margin-bottom:7px;
-  color:#48534d;
 }
 
-.input,
-textarea,
-select{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:11px 12px;
-  outline:none;
-  background:#fff;
-  font-size:13px;
+.stat-small{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:5px;
 }
 
-.input:focus,
-textarea:focus,
-select:focus{
-  border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(22,130,58,.08);
+.dashboard-grid{
+  margin-top:18px;
 }
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-th{
-  text-align:left;
-  background:#f7faf8;
-  color:#69756d;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.04em;
-}
-
-th,td{
-  padding:13px 12px;
-  border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
-
-tr:hover td{
-  background:#fbfdfb;
-}
-
-/* =========================
-   BADGES
-========================= */
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:600;
-  background:#eef3ef;
-  color:#536057;
-}
-
-.badge.green{
-  background:var(--green-light);
-  color:var(--green-dark);
-}
-
-.badge.red{
-  background:#fff0ee;
-  color:var(--danger);
-}
-
-.badge.yellow{
-  background:#fff7df;
-  color:#987000;
-}
-
-/* =========================
-   PROGRESS
-========================= */
 
 .progress{
-  height:8px;
-  background:#edf1ee;
-  border-radius:99px;
+  height:7px;
+  background:#edf0ed;
+  border-radius:20px;
   overflow:hidden;
+  margin-top:9px;
 }
 
 .progress i{
   display:block;
   height:100%;
   background:var(--green);
-  border-radius:99px;
+  border-radius:20px;
 }
 
-/* =========================
-   TASKS
-========================= */
+/* TABLE */
 
-.task-list{
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+  font-size:10px;
+  color:#89938d;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+td{
+  padding:13px 12px;
+  font-size:12px;
+  border-bottom:1px solid #eef1ef;
+  vertical-align:middle;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:10px;
+  font-weight:600;
+}
+
+.badge.green{
+  background:var(--green-light);
+  color:#5f7541;
+}
+
+.badge.gray{
+  background:#f0f2f1;
+  color:#6e7872;
+}
+
+.badge.red{
+  background:#fae9e7;
+  color:#a94b40;
+}
+
+.badge.yellow{
+  background:#fff5df;
+  color:#9a7027;
+}
+
+/* ATTENDANCE */
+
+.attendance-status{
+  padding:22px;
+  background:var(--green-soft);
+  border:1px solid #dce6ca;
+  border-radius:14px;
+  margin-bottom:16px;
+}
+
+.attendance-time{
+  color:var(--green-dark);
+  font-size:31px;
+  font-weight:600;
+  margin:7px 0;
+}
+
+.clock-time{
+  color:var(--green-dark);
+  font-size:24px;
+  font-weight:600;
+}
+
+.attendance-actions{
   display:flex;
-  flex-direction:column;
-  gap:10px;
+  gap:9px;
+  margin-top:15px;
 }
 
-.task-item{
+/* TASKS */
+
+.task-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
   padding:14px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fff;
-  cursor:pointer;
+  border-bottom:1px solid #eef1ef;
 }
 
-.task-item:hover{
-  border-color:#bdd9c5;
+.task-row:last-child{
+  border-bottom:0;
+}
+
+.task-check{
+  width:18px;
+  height:18px;
+  accent-color:var(--green);
+}
+
+.task-info{
+  flex:1;
 }
 
 .task-title{
+  font-size:12px;
   font-weight:600;
-  font-size:14px;
 }
 
 .task-meta{
   color:var(--muted);
-  font-size:11px;
-  margin-top:7px;
+  font-size:10px;
+  margin-top:4px;
 }
 
-/* =========================
-   CHAT
-========================= */
+/* CHAT */
 
 .chat-layout{
   display:grid;
   grid-template-columns:280px 1fr;
-  height:calc(100vh - 124px);
-  min-height:550px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
+  min-height:600px;
 }
 
-.chat-sidebar{
+.chat-list{
   border-right:1px solid var(--border);
-  overflow-y:auto;
 }
 
-.chat-sidebar-head{
+.chat-list-head{
   padding:15px;
   border-bottom:1px solid var(--border);
 }
 
-.chat-list{
-  padding:8px;
-}
-
 .chat-item{
-  padding:12px;
-  border-radius:9px;
-  cursor:pointer;
-  margin-bottom:3px;
+  width:100%;
+  border:0;
+  background:#fff;
+  padding:13px 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-align:left;
+  border-bottom:1px solid #f0f2f1;
 }
 
 .chat-item:hover,
 .chat-item.active{
-  background:var(--green-light);
+  background:var(--green-soft);
 }
 
-.chat-item-title{
+.chat-item-info{
+  min-width:0;
+  flex:1;
+}
+
+.chat-item-name{
+  font-size:12px;
   font-weight:600;
-  font-size:13px;
 }
 
-.chat-item-sub{
-  font-size:11px;
+.chat-item-preview{
   color:var(--muted);
-  margin-top:4px;
+  font-size:10px;
+  margin-top:3px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .chat-main{
@@ -539,55 +654,61 @@ tr:hover td{
   min-width:0;
 }
 
-.chat-header{
-  padding:15px 18px;
+.chat-head{
+  padding:16px 18px;
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
-.chat-messages{
+.chat-head-name{
+  font-size:13px;
+  font-weight:600;
+}
+
+.messages{
   flex:1;
+  min-height:450px;
+  max-height:550px;
   overflow-y:auto;
   padding:20px;
-  background:#fbfcfb;
+  background:#fafbfa;
 }
 
 .message{
-  margin-bottom:13px;
-  max-width:70%;
+  display:flex;
+  margin-bottom:12px;
 }
 
 .message.mine{
-  margin-left:auto;
+  justify-content:flex-end;
+}
+
+.message-bubble{
+  max-width:65%;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:9px 12px;
+  font-size:12px;
+}
+
+.message.mine .message-bubble{
+  background:var(--green-light);
+  border-color:#dce6ca;
 }
 
 .message-name{
-  font-size:10px;
+  font-size:9px;
   color:var(--muted);
   margin-bottom:4px;
 }
 
-.message-bubble{
-  display:inline-block;
-  padding:10px 12px;
-  border-radius:11px;
-  background:#fff;
-  border:1px solid var(--border);
-  font-size:13px;
-}
-
-.message.mine .message-bubble{
-  background:var(--green);
-  border-color:var(--green);
-  color:#fff;
-}
-
 .message-time{
-  font-size:9px;
-  color:#9aa39e;
-  margin-top:4px;
+  color:#9ba49e;
+  font-size:8px;
+  margin-top:5px;
 }
 
 .chat-input{
@@ -601,171 +722,218 @@ tr:hover td{
   flex:1;
 }
 
-/* =========================
-   ATTENDANCE
-========================= */
+/* KNOWLEDGE */
 
-.attendance-clock{
-  text-align:center;
-  padding:30px;
+.doc-card{
+  padding:17px;
 }
 
-.clock-time{
-  font-size:38px;
-  font-weight:700;
-  color:var(--green);
-}
-
-.clock-date{
-  color:var(--muted);
-  margin-top:5px;
-}
-
-.attendance-status{
-  padding:20px;
-  border-radius:12px;
-  background:var(--green-soft);
-  border:1px solid #d9ebde;
-}
-
-.attendance-status h3{
-  margin:0 0 6px;
-}
-
-.attendance-time{
-  font-size:25px;
-  font-weight:700;
-  color:var(--green);
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  border-top:1px solid var(--border);
-  border-left:1px solid var(--border);
-}
-
-.calendar-day{
-  min-height:100px;
-  background:#fff;
-  border-right:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:9px;
-}
-
-.calendar-day strong{
-  font-size:12px;
-}
-
-.calendar-event{
-  margin-top:7px;
-  padding:5px;
+.doc-icon{
+  width:38px;
+  height:38px;
   background:var(--green-light);
-  color:var(--green-dark);
-  border-radius:5px;
-  font-size:10px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(20,30,23,.35);
+  color:#5f7541;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:100;
+  margin-bottom:12px;
+}
+
+.doc-title{
+  font-size:13px;
+  font-weight:600;
+}
+
+.doc-meta{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
+/* PROFILE */
+
+.profile-avatar{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:var(--green-light);
+  color:#5f7541;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  font-weight:bold;
+}
+
+/* MODAL */
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(20,28,23,.42);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:20px;
+  z-index:100;
 }
 
 .modal{
   width:100%;
   max-width:560px;
-  background:#fff;
-  border-radius:15px;
-  padding:23px;
-  box-shadow:0 20px 60px rgba(0,0,0,.18);
   max-height:90vh;
-  overflow:auto;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:17px;
+  box-shadow:0 25px 70px rgba(0,0,0,.16);
 }
 
 .modal-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
 }
 
-.modal-head h2{
-  margin:0;
-  font-size:18px;
+.modal-head h3{
+  font-size:15px;
 }
 
-.close{
+.modal-close{
   border:0;
   background:transparent;
-  font-size:22px;
-  color:#7b857f;
+  font-size:20px;
+  color:#88928c;
 }
 
-.modal-actions{
+.modal-body{
+  padding:20px;
+}
+
+.modal-foot{
+  padding:15px 20px;
+  border-top:1px solid var(--border);
   display:flex;
   justify-content:flex-end;
   gap:8px;
-  margin-top:20px;
 }
 
-/* =========================
-   PROFILE
-========================= */
+/* LEAVE */
 
-.profile-avatar{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  background:var(--green-light);
-  color:var(--green-dark);
+.leave-card{
+  padding:17px;
+}
+
+.leave-summary{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.leave-type{
+  font-size:13px;
+  font-weight:600;
+}
+
+.leave-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.leave-reason{
+  font-size:11px;
+  color:#68736c;
+  margin-top:9px;
+  line-height:1.5;
+}
+
+/* CALENDAR */
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.calendar-day-head{
+  background:var(--green-soft);
+  padding:10px;
+  font-size:10px;
+  color:#68736c;
+  text-align:center;
+}
+
+.calendar-cell{
+  min-height:95px;
+  border-top:1px solid var(--border);
+  border-right:1px solid var(--border);
+  padding:9px;
+  font-size:11px;
+}
+
+.calendar-cell:nth-child(7n){
+  border-right:0;
+}
+
+.calendar-number{
+  font-weight:600;
+}
+
+.today{
+  width:24px;
+  height:24px;
+  background:var(--green);
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
-  font-weight:700;
-  margin-bottom:15px;
+  border-radius:50%;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.event{
+  margin-top:7px;
+  padding:4px 6px;
+  background:var(--green-light);
+  color:#5f7541;
+  border-radius:5px;
+  font-size:9px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#202721;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:9px;
+  font-size:12px;
+  z-index:300;
+  box-shadow:var(--shadow);
+}
+
+/* MOBILE */
+
+.mobile-menu{
+  display:none;
+}
 
 @media(max-width:900px){
   .sidebar{
-    width:200px;
+    transform:translateX(-100%);
+    transition:.2s;
   }
 
-  .main{
-    margin-left:200px;
-    width:calc(100% - 200px);
-  }
-
-  .grid-4{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid-3{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:700px){
-  .sidebar{
-    display:none;
+  .sidebar.open{
+    transform:translateX(0);
   }
 
   .main{
@@ -773,13 +941,15 @@ tr:hover td{
     width:100%;
   }
 
-  .content{
-    padding:18px;
+  .mobile-menu{
+    display:block;
   }
 
-  .grid-2,
-  .grid-3,
   .grid-4{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-3{
     grid-template-columns:1fr;
   }
 
@@ -787,8 +957,35 @@ tr:hover td{
     grid-template-columns:1fr;
   }
 
-  .chat-sidebar{
+  .chat-list{
     display:none;
+  }
+
+  .chat-list.mobile-show{
+    display:block;
+  }
+}
+
+@media(max-width:600px){
+  .content{
+    padding:20px 15px 40px;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .grid-2,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+  .page-head .btn{
+    width:100%;
   }
 }
 </style>
@@ -796,8 +993,150 @@ tr:hover td{
 
 <body>
 
-<div id="app"></div>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="logo-box">NC</div>
+    <h1>Nona Costex</h1>
+    <p>Staff Portal</p>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input id="loginEmail" class="input" type="email" placeholder="Enter your email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input id="loginPassword" class="input" type="password" placeholder="Enter your password">
+    </div>
+
+    <button class="btn" style="width:100%" onclick="login()">Sign In</button>
+
+    <div id="loginError" style="margin-top:12px;color:#c0392b;font-size:11px"></div>
+  </div>
+</div>
+
+
+<div id="app" class="app hidden">
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">NC</div>
+      <div>
+        <div class="brand-text">Nona Costex</div>
+        <div class="brand-sub">Staff Portal</div>
+      </div>
+    </div>
+
+    <div class="nav">
+
+      <div class="nav-title">Main</div>
+
+      <button onclick="go('dashboard')" data-nav="dashboard">
+        <span class="nav-icon">⌂</span> Dashboard
+      </button>
+
+      <button onclick="go('attendance')" data-nav="attendance">
+        <span class="nav-icon">◷</span> Attendance
+      </button>
+
+      <button onclick="go('tasks')" data-nav="tasks">
+        <span class="nav-icon">✓</span> Tasks
+      </button>
+
+      <button onclick="go('logs')" data-nav="logs">
+        <span class="nav-icon">▤</span> Work Logs
+      </button>
+
+      <button onclick="go('leave')" data-nav="leave">
+        <span class="nav-icon">▱</span> Leave
+      </button>
+
+      <div class="nav-title">Communication</div>
+
+      <button onclick="go('chat')" data-nav="chat">
+        <span class="nav-icon">◌</span> Chat
+      </button>
+
+      <button onclick="go('knowledge')" data-nav="knowledge">
+        <span class="nav-icon">▧</span> Knowledge Hub
+      </button>
+
+      <button onclick="go('calendar')" data-nav="calendar">
+        <span class="nav-icon">□</span> Calendar
+      </button>
+
+      <div id="adminNav">
+        <div class="nav-title">Administration</div>
+
+        <button onclick="go('staff')" data-nav="staff">
+          <span class="nav-icon">♙</span> Staff Management
+        </button>
+
+        <button onclick="go('analytics')" data-nav="analytics">
+          <span class="nav-icon">◒</span> Analytics
+        </button>
+
+        <button onclick="go('data')" data-nav="data">
+          <span class="nav-icon">▦</span> Data
+        </button>
+      </div>
+
+      <div class="nav-title">Account</div>
+
+      <button onclick="go('profile')" data-nav="profile">
+        <span class="nav-icon">○</span> Profile
+      </button>
+
+      <button onclick="go('notifications')" data-nav="notifications">
+        <span class="nav-icon">♧</span> Notifications
+      </button>
+
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="user-mini">
+        <div class="avatar" id="sideAvatar">U</div>
+        <div class="user-mini-info">
+          <div class="user-mini-name" id="sideName">User</div>
+          <div class="user-mini-role" id="sideRole">Staff</div>
+        </div>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">Sign Out</button>
+    </div>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="topTitle">Dashboard</div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" onclick="go('notifications')">
+          ♧
+          <span class="notification-dot hidden" id="notificationDot"></span>
+        </button>
+      </div>
+
+    </header>
+
+    <section class="content" id="content"></section>
+
+  </main>
+
+</div>
+
+
 <div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
 
 <script>
 
@@ -805,13 +1144,11 @@ tr:hover td{
    SUPABASE
 ========================================================= */
 
-const SUPABASE_URL =
-  "https://jccryyxdxykomwsivtjy.supabase.co";
+const SUPABASE_URL = "https://jccryyxdxykomwsivtjy.supabase.co";
 
-const SUPABASE_KEY =
-  "sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM";
+const SUPABASE_KEY = "sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM";
 
-const db = supabase.createClient(
+const db = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
@@ -822,24 +1159,21 @@ const db = supabase.createClient(
 ========================================================= */
 
 const S = {
-  page:"dashboard",
   user:null,
   profile:null,
   profiles:[],
-  channels:[],
-  conversations:[],
-  conversationMembers:[],
+  page:"dashboard",
   messages:[],
-  notifications:[],
-  docs:[],
-  channel:null,
+  conversations:[],
   conversation:null,
-  sidebar:true,
-  modal:null,
-  chatSearch:"",
-  taskSearch:"",
-  taskFilter:"all",
-  pendingFile:null
+  channels:[],
+  channel:null,
+  notifications:[],
+  tasks:[],
+  logs:[],
+  leaveRequests:[],
+  selectedStaff:null,
+  calendarDate:new Date()
 };
 
 
@@ -850,63 +1184,100 @@ const S = {
 function esc(value){
   if(value === null || value === undefined) return "";
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function me(){
-  return S.user?.id || null;
-}
-
-function today(){
-  return new Date().toISOString().slice(0,10);
-}
-
-function nowTime(){
-  return new Date().toLocaleTimeString("en-MY",{
-    hour:"2-digit",
-    minute:"2-digit"
-  });
-}
-
-function formatDate(d){
-  if(!d) return "-";
-
-  return new Date(d).toLocaleDateString("en-MY",{
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
-  });
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 function initials(name){
-  if(!name) return "?";
+  if(!name) return "U";
 
   return name
     .split(" ")
     .filter(Boolean)
     .slice(0,2)
-    .map(x=>x[0])
+    .map(x => x[0])
     .join("")
     .toUpperCase();
 }
 
-function nameOf(p){
-  return p?.full_name ||
-         p?.name ||
-         p?.email ||
-         "Unknown";
+function isAdmin(){
+  return S.profile?.role?.toLowerCase() === "admin";
 }
 
-function currentProfile(){
-  return S.profile || {};
+function formatDate(date){
+  if(!date) return "-";
+
+  return new Date(date).toLocaleDateString("en-MY",{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
 }
 
-function notify(msg){
-  alert(msg);
+function formatDateTime(date){
+  if(!date) return "-";
+
+  return new Date(date).toLocaleString("en-MY",{
+    day:"numeric",
+    month:"short",
+    year:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function today(){
+  return new Date().toISOString().split("T")[0];
+}
+
+function toast(message){
+  const root = document.getElementById("toastRoot");
+
+  root.innerHTML = `
+    <div class="toast">${esc(message)}</div>
+  `;
+
+  setTimeout(()=>{
+    root.innerHTML="";
+  },3000);
+}
+
+function modal(title,body,footer=""){
+  document.getElementById("modalRoot").innerHTML = `
+    <div class="modal-backdrop" onclick="closeModal(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-head">
+          <h3>${title}</h3>
+          <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+
+        <div class="modal-body">
+          ${body}
+        </div>
+
+        ${footer ? `<div class="modal-foot">${footer}</div>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function closeModal(event){
+  if(event && event.target?.classList?.contains("modal-backdrop") === false){
+    return;
+  }
+
+  document.getElementById("modalRoot").innerHTML="";
+}
+
+function closeModalForce(){
+  document.getElementById("modalRoot").innerHTML="";
+}
+
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
 }
 
 
@@ -916,442 +1287,224 @@ function notify(msg){
 
 async function login(){
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
 
-  const password =
-    document.getElementById("loginPassword").value;
+  document.getElementById("loginError").textContent="";
 
   if(!email || !password){
-    notify("Please enter email and password.");
+    document.getElementById("loginError").textContent =
+      "Please enter your email and password.";
     return;
   }
 
-  const {data,error} =
-    await db.auth.signInWithPassword({
-      email,
-      password
-    });
+  const {data,error} = await db.auth.signInWithPassword({
+    email,
+    password
+  });
 
   if(error){
-    notify(error.message);
+    document.getElementById("loginError").textContent = error.message;
     return;
   }
 
-  S.user = data.user;
-
-  await initData();
-
-  render();
+  await startApp(data.user);
 }
 
 async function logout(){
 
   await db.auth.signOut();
 
-  S.user = null;
-  S.profile = null;
-  S.page = "dashboard";
+  S.user=null;
+  S.profile=null;
 
-  render();
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("loginScreen").classList.remove("hidden");
 }
 
-function loginPage(){
+async function startApp(user){
 
-  return `
-    <div class="login-wrap">
+  S.user=user;
 
-      <div class="login-card">
-
-        <div class="logo">Nona Costex</div>
-
-        <h1>Staff Portal</h1>
-
-        <p>
-          Sign in to access your staff workspace.
-        </p>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input
-            id="loginEmail"
-            class="input"
-            type="email"
-            placeholder="your@email.com"
-          >
-        </div>
-
-        <div class="form-group">
-          <label>Password</label>
-          <input
-            id="loginPassword"
-            class="input"
-            type="password"
-            placeholder="••••••••"
-            onkeydown="if(event.key==='Enter') login()"
-          >
-        </div>
-
-        <button
-          class="btn"
-          style="width:100%"
-          onclick="login()"
-        >
-          Sign In
-        </button>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   SUPABASE DATA
-========================================================= */
-
-async function profile(){
-
-  if(!me()) return;
-
-  let {data,error} =
-    await db
-      .from("profiles")
-      .select("*")
-      .eq("id",me())
-      .maybeSingle();
+  const {data,error} = await db
+    .from("profiles")
+    .select("*")
+    .eq("id",user.id)
+    .single();
 
   if(error){
     console.error(error);
-    return;
+
+    S.profile={
+      id:user.id,
+      email:user.email,
+      full_name:user.email?.split("@")[0] || "User",
+      role:"staff"
+    };
+  }else{
+    S.profile=data;
   }
 
-  if(!data){
+  await loadProfiles();
 
-    const {data:newProfile,error:createError} =
-      await db
-        .from("profiles")
-        .insert({
-          id:me(),
-          email:S.user.email,
-          full_name:S.user.email?.split("@")[0] || "Staff",
-          role:"staff"
-        })
-        .select()
-        .single();
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 
-    if(createError){
-      console.error(createError);
-      return;
-    }
+  updateUserUI();
 
-    data = newProfile;
-  }
-
-  S.profile = data;
+  go("dashboard");
 }
 
-async function profiles(){
+function updateUserUI(){
 
-  const {data,error} =
-    await db
-      .from("profiles")
-      .select("*")
-      .order("full_name");
+  const name =
+    S.profile?.full_name ||
+    S.user?.email ||
+    "User";
 
-  if(!error){
-    S.profiles = data || [];
-  }
-}
+  document.getElementById("sideName").textContent=name;
+  document.getElementById("sideRole").textContent=
+    S.profile?.position ||
+    S.profile?.role ||
+    "Staff";
 
-async function channels(){
+  document.getElementById("sideAvatar").textContent=initials(name);
 
-  const {data,error} =
-    await db
-      .from("channels")
-      .select("*")
-      .order("created_at");
-
-  if(!error){
-    S.channels = data || [];
-  }
-}
-
-async function notifs(){
-
-  if(!me()) return;
-
-  const {data,error} =
-    await db
-      .from("communication_notifications")
-      .select("*")
-      .eq("user_id",me())
-      .order("created_at",{ascending:false});
-
-  if(!error){
-    S.notifications = data || [];
-  }
-}
-
-async function docs(){
-
-  const {data,error} =
-    await db
-      .from("knowledge_documents")
-      .select("*")
-      .order("created_at",{ascending:false});
-
-  if(!error){
-    S.docs = data || [];
-  }
+  document.getElementById("adminNav").style.display =
+    isAdmin() ? "block" : "none";
 }
 
 
 /* =========================================================
-   INITIALISE
+   DATABASE
 ========================================================= */
 
-async function initData(){
+async function loadProfiles(){
 
-  await profile();
-  await profiles();
-  await channels();
-  await notifs();
-  await docs();
-  await loadConversations();
+  const {data,error} = await db
+    .from("profiles")
+    .select("*")
+    .order("full_name");
+
+  if(!error){
+    S.profiles=data || [];
+  }
 }
 
-async function init(){
+async function loadNotifications(){
 
-  const {
-    data:{
-      session
-    }
-  } = await db.auth.getSession();
+  if(!S.user) return;
 
-  if(session){
+  const {data,error} = await db
+    .from("communication_notifications")
+    .select("*")
+    .eq("user_id",S.user.id)
+    .order("created_at",{ascending:false});
 
-    S.user = session.user;
-
-    await initData();
+  if(!error){
+    S.notifications=data || [];
   }
 
-  render();
+  document
+    .getElementById("notificationDot")
+    ?.classList.toggle(
+      "hidden",
+      !S.notifications.some(x=>!x.is_read)
+    );
 }
 
-db.auth.onAuthStateChange(
-  async (_event,session)=>{
+async function loadTasks(){
 
-    if(session && !S.user){
+  try{
 
-      S.user = session.user;
+    const {data,error}=await db
+      .from("tasks")
+      .select("*")
+      .order("created_at",{ascending:false});
 
-      await initData();
-
-      render();
-
-    }else if(!session){
-
-      S.user = null;
-
-      render();
+    if(!error && data){
+      S.tasks=data;
+      return;
     }
-  }
-);
+
+  }catch(e){}
+
+  const local=localStorage.getItem("nona_tasks");
+
+  S.tasks=local ? JSON.parse(local) : [];
+}
+
+async function loadLogs(){
+
+  try{
+
+    const {data,error}=await db
+      .from("work_logs")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+    if(!error && data){
+      S.logs=data;
+      return;
+    }
+
+  }catch(e){}
+
+  const local=localStorage.getItem("nona_logs");
+
+  S.logs=local ? JSON.parse(local) : [];
+}
 
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
-function nav(page,label,icon){
+async function go(page){
 
-  return `
-    <button
-      class="${S.page===page ? "active":""}"
-      onclick="go('${page}')"
-    >
-      <span class="nav-icon">${icon}</span>
-      ${label}
-    </button>
-  `;
-}
+  S.page=page;
 
-function go(page){
+  document.querySelectorAll("[data-nav]").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.nav===page
+    );
+  });
 
-  S.page = page;
-
-  if(page !== "communication"){
-    S.conversation = null;
-    S.channel = null;
-  }
-
-  render();
-}
-
-
-/* =========================================================
-   APP SHELL
-========================================================= */
-
-function shell(){
-
-  const profileName =
-    nameOf(currentProfile());
-
-  return `
-    <div class="app">
-
-      <aside class="sidebar">
-
-        <div class="brand">
-          <div class="brand-title">
-            Nona Costex
-          </div>
-
-          <div class="brand-sub">
-            Staff Portal
-          </div>
-        </div>
-
-        <div class="nav">
-
-          <div class="nav-section">
-            Workspace
-          </div>
-
-          ${nav("dashboard","Dashboard","⌂")}
-          ${nav("attendance","Attendance","◷")}
-          ${nav("tasks","Tasks","✓")}
-          ${nav("logs","Work Logs","▤")}
-
-          <div class="nav-section">
-            Communication
-          </div>
-
-          ${nav("communication","Communication","◉")}
-          ${nav("knowledge","Knowledge Hub","▧")}
-          ${nav("calendar","Calendar","□")}
-
-          <div class="nav-section">
-            Management
-          </div>
-
-          ${nav("staff","Staff","♙")}
-          ${nav("analytics","Analytics","◒")}
-          ${nav("data","Data & Backup","◫")}
-
-          <div class="nav-section">
-            Account
-          </div>
-
-          ${nav("profile","My Profile","○")}
-
-          <button onclick="logout()">
-            <span class="nav-icon">↪</span>
-            Logout
-          </button>
-
-        </div>
-
-      </aside>
-
-
-      <main class="main">
-
-        <header class="topbar">
-
-          <div class="topbar-title">
-            ${pageTitle()}
-          </div>
-
-          <div class="top-actions">
-
-            <button
-              class="btn secondary small"
-              onclick="notifications()"
-            >
-              🔔
-              ${S.notifications.filter(n=>!n.read_at).length || ""}
-            </button>
-
-            <button
-              class="btn small"
-              onclick="go('profile')"
-            >
-              ${esc(profileName)}
-            </button>
-
-          </div>
-
-        </header>
-
-        <section class="content">
-
-          ${page()}
-
-        </section>
-
-      </main>
-
-    </div>
-  `;
-}
-
-function pageTitle(){
-
-  const titles = {
+  const titles={
     dashboard:"Dashboard",
     attendance:"Attendance",
     tasks:"Tasks",
     logs:"Work Logs",
-    communication:"Communication",
+    leave:"Leave",
+    chat:"Chat",
     knowledge:"Knowledge Hub",
     calendar:"Calendar",
-    staff:"Staff",
+    staff:"Staff Management",
     analytics:"Analytics",
-    data:"Data & Backup",
-    profile:"My Profile"
+    data:"Data",
+    profile:"Profile",
+    notifications:"Notifications"
   };
 
-  return titles[S.page] || "Dashboard";
-}
+  document.getElementById("topTitle").textContent =
+    titles[page] || "Dashboard";
 
-function page(){
+  document.getElementById("sidebar").classList.remove("open");
 
-  if(S.page==="dashboard") return dashboard();
-  if(S.page==="attendance") return attendancePage();
-  if(S.page==="tasks") return tasksPage();
-  if(S.page==="logs") return logsPage();
-  if(S.page==="communication") return chatPage();
-  if(S.page==="knowledge") return knowledge();
-  if(S.page==="calendar") return calendar();
-  if(S.page==="staff") return staff();
-  if(S.page==="analytics") return analytics();
-  if(S.page==="data") return dataPage();
-  if(S.page==="profile") return profilePage();
-
-  return dashboard();
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function render(){
-
-  const root =
-    document.getElementById("app");
-
-  if(!S.user){
-
-    root.innerHTML = loginPage();
-    return;
-  }
-
-  root.innerHTML = shell();
+  if(page==="dashboard") await dashboardPage();
+  else if(page==="attendance") attendancePage();
+  else if(page==="tasks") await tasksPage();
+  else if(page==="logs") await logsPage();
+  else if(page==="leave") await leavePage();
+  else if(page==="chat") await chatPage();
+  else if(page==="knowledge") await knowledgePage();
+  else if(page==="calendar") calendarPage();
+  else if(page==="staff") await staffPage();
+  else if(page==="analytics") await analyticsPage();
+  else if(page==="data") dataPage();
+  else if(page==="profile") profilePage();
+  else if(page==="notifications") await notificationsPage();
 }
 
 
@@ -1359,175 +1512,109 @@ function render(){
    DASHBOARD
 ========================================================= */
 
-function dashboard(){
+async function dashboardPage(){
 
-  const tasks =
-    JSON.parse(localStorage.getItem("nona_tasks") || "[]");
-
-  const logs =
-    JSON.parse(localStorage.getItem("nona_logs") || "[]");
-
-  const attendance =
-    JSON.parse(
-      localStorage.getItem(
-        `nona_attendance_${me()}_${today()}`
-      ) || "null"
-    );
+  await loadTasks();
+  await loadLogs();
 
   const completed =
-    tasks.filter(t=>t.status==="Completed").length;
+    S.tasks.filter(t=>t.status==="Completed").length;
 
-  return `
+  const pending =
+    S.tasks.filter(t=>t.status!=="Completed").length;
+
+  const myTasks =
+    S.tasks.filter(t=>t.user_id===S.user?.id).length;
+
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
       <div>
-        <h1>Dashboard</h1>
-        <p>
-          Welcome back, ${esc(nameOf(currentProfile()))}.
-        </p>
+        <h1>Good ${new Date().getHours()<12?"morning":new Date().getHours()<18?"afternoon":"evening"}, ${esc(S.profile?.full_name?.split(" ")[0] || "there")}.</h1>
+        <p>Here's what's happening in your workspace today.</p>
       </div>
 
-      <button
-        class="btn"
-        onclick="openTask()"
-      >
-        + New Task
+      <button class="btn" onclick="go('tasks')">
+        + View Tasks
       </button>
     </div>
 
 
     <div class="grid grid-4">
 
-      <div class="card stat">
-        <div class="stat-icon">✓</div>
-        <div class="stat-label">Total Tasks</div>
-        <div class="stat-value">${tasks.length}</div>
+      <div class="card stat-card">
+        <div class="stat-label">My Tasks</div>
+        <div class="stat-value">${myTasks}</div>
+        <div class="stat-small">Assigned to you</div>
       </div>
 
-      <div class="card stat">
-        <div class="stat-icon">◉</div>
+      <div class="card stat-card">
         <div class="stat-label">Completed</div>
         <div class="stat-value">${completed}</div>
+        <div class="stat-small">Tasks completed</div>
       </div>
 
-      <div class="card stat">
-        <div class="stat-icon">▤</div>
-        <div class="stat-label">Work Logs</div>
-        <div class="stat-value">${logs.length}</div>
+      <div class="card stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value">${pending}</div>
+        <div class="stat-small">Tasks remaining</div>
       </div>
 
-      <div class="card stat">
-        <div class="stat-icon">◷</div>
-        <div class="stat-label">Today's Attendance</div>
-        <div class="stat-value">
-          ${attendance?.checkIn ? "Present" : "—"}
-        </div>
+      <div class="card stat-card">
+        <div class="stat-label">Today</div>
+        <div class="stat-value">${new Date().getDate()}</div>
+        <div class="stat-small">${new Date().toLocaleDateString("en-MY",{month:"long",year:"numeric"})}</div>
       </div>
 
     </div>
 
 
-    <br>
+    <div class="grid grid-2 dashboard-grid">
 
-    <div class="grid grid-2">
+      <div class="card card-pad">
 
-      <div class="card">
-
-        <div class="page-head">
-          <div>
-            <h3 style="margin:0">Today's Attendance</h3>
-            <p>
-              ${new Date().toLocaleDateString("en-MY",{
-                weekday:"long",
-                day:"numeric",
-                month:"long"
-              })}
-            </p>
-          </div>
-
-          <button
-            class="btn small"
-            onclick="go('attendance')"
-          >
-            View
-          </button>
-        </div>
+        <div class="card-title">Today's Attendance</div>
 
         <div class="attendance-status">
+          <div class="muted" style="font-size:11px">
+            Current status
+          </div>
 
-          ${
-            attendance?.checkIn
-            ?
-            `
-              <h3>Checked In</h3>
-              <div class="attendance-time">
-                ${attendance.checkIn}
-              </div>
+          <div class="attendance-time" id="dashboardClock">
+            ${new Date().toLocaleTimeString("en-MY",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}
+          </div>
 
-              ${
-                attendance.checkOut
-                ?
-                `
-                  <div style="margin-top:10px">
-                    Checked out at
-                    <strong>${attendance.checkOut}</strong>
-                  </div>
-                `
-                :
-                `
-                  <div style="margin-top:10px">
-                    You are currently working.
-                  </div>
-                `
-              }
-            `
-            :
-            `
-              <h3>Not Checked In</h3>
-              <div style="margin-top:10px;color:var(--muted)">
-                Don't forget to check in today.
-              </div>
-            `
-          }
-
+          <div style="font-size:11px;color:#66716a">
+            ${new Date().toLocaleDateString("en-MY",{weekday:"long",day:"numeric",month:"long"})}
+          </div>
         </div>
+
+        <button class="btn secondary" onclick="go('attendance')">
+          Open Attendance
+        </button>
 
       </div>
 
 
-      <div class="card">
+      <div class="card card-pad">
 
-        <h3 style="margin-top:0">
-          Quick Actions
-        </h3>
+        <div class="card-title">Quick Actions</div>
 
         <div class="grid grid-2">
 
-          <button
-            class="btn"
-            onclick="go('attendance')"
-          >
-            Attendance
+          <button class="btn secondary" onclick="applyLeaveModal()">
+            Apply Leave
           </button>
 
-          <button
-            class="btn"
-            onclick="openTask()"
-          >
+          <button class="btn secondary" onclick="newTaskModal()">
             Add Task
           </button>
 
-          <button
-            class="btn"
-            onclick="openLog()"
-          >
+          <button class="btn secondary" onclick="newLogModal()">
             Add Work Log
           </button>
 
-          <button
-            class="btn"
-            onclick="go('communication')"
-          >
+          <button class="btn secondary" onclick="go('chat')">
             Open Chat
           </button>
 
@@ -1538,44 +1625,66 @@ function dashboard(){
     </div>
 
 
-    <br>
+    <div class="card card-pad" style="margin-top:15px">
 
-    <div class="card">
-
-      <h3 style="margin-top:0">
-        Recent Tasks
-      </h3>
+      <div class="card-title">Recent Tasks</div>
 
       ${
-        tasks.length
+        S.tasks.length
         ?
-        `
-          <div class="task-list">
-            ${tasks.slice(-5).reverse().map(task=>`
-              <div
-                class="task-item"
-                onclick="openTask(${task.id})"
-              >
-                <div class="task-title">
-                  ${esc(task.title)}
-                </div>
-
-                <div class="task-meta">
-                  ${esc(task.status || "Pending")}
-                  ·
-                  ${esc(task.due || "No due date")}
-                </div>
-              </div>
-            `).join("")}
-          </div>
-        `
+        S.tasks.slice(0,5).map(taskRowHTML).join("")
         :
-        `
-          <p style="color:var(--muted)">
-            No tasks yet.
-          </p>
-        `
+        `<div class="empty">No tasks yet.</div>`
       }
+
+    </div>
+  `;
+
+  setInterval(()=>{
+    const el=document.getElementById("dashboardClock");
+
+    if(el){
+      el.textContent =
+        new Date().toLocaleTimeString("en-MY",{
+          hour:"2-digit",
+          minute:"2-digit",
+          second:"2-digit"
+        });
+    }
+  },1000);
+}
+
+function taskRowHTML(task){
+
+  return `
+    <div class="task-row">
+
+      <input
+        type="checkbox"
+        class="task-check"
+        ${task.status==="Completed"?"checked":""}
+        onchange="toggleTask('${esc(task.id)}')"
+      >
+
+      <div class="task-info">
+
+        <div class="task-title">
+          ${esc(task.title)}
+        </div>
+
+        <div class="task-meta">
+          ${esc(task.due_date || "No due date")}
+        </div>
+
+      </div>
+
+      <span class="badge ${
+        task.status==="Completed"
+        ?"green"
+        :"yellow"
+      }">
+        ${esc(task.status || "Pending")}
+      </span>
 
     </div>
   `;
@@ -1586,129 +1695,91 @@ function dashboard(){
    ATTENDANCE
 ========================================================= */
 
-function getAttendance(){
-
-  return JSON.parse(
-    localStorage.getItem(
-      `nona_attendance_${me()}_${today()}`
-    ) || "null"
-  );
-}
-
-function saveAttendance(data){
-
-  localStorage.setItem(
-    `nona_attendance_${me()}_${today()}`,
-    JSON.stringify(data)
-  );
-}
-
 function attendancePage(){
 
-  const record = getAttendance();
+  const key=`attendance_${S.user?.id}_${today()}`;
 
-  const date =
-    new Date().toLocaleDateString("en-MY",{
-      weekday:"long",
-      day:"numeric",
-      month:"long",
-      year:"numeric"
-    });
+  const saved=JSON.parse(
+    localStorage.getItem(key) || "{}"
+  );
 
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
-
       <div>
         <h1>Attendance</h1>
-        <p>
-          Track your daily check-in and check-out.
-        </p>
+        <p>Track your daily check-in and check-out.</p>
       </div>
-
     </div>
 
 
     <div class="grid grid-2">
 
-      <div class="card attendance-clock">
+      <div class="card card-pad">
 
-        <div class="clock-time" id="liveClock">
-          ${nowTime()}
-        </div>
-
-        <div class="clock-date">
-          ${date}
-        </div>
-
-        <br>
-
-        ${
-          !record?.checkIn
-          ?
-          `
-            <button
-              class="btn"
-              onclick="attendanceCheckIn()"
-            >
-              Check In
-            </button>
-          `
-          :
-          !record.checkOut
-          ?
-          `
-            <button
-              class="btn"
-              onclick="attendanceCheckOut()"
-            >
-              Check Out
-            </button>
-          `
-          :
-          `
-            <span class="badge green">
-              Attendance Completed
-            </span>
-          `
-        }
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 style="margin-top:0">
-          Today's Record
-        </h3>
+        <div class="card-title">Today's Attendance</div>
 
         <div class="attendance-status">
 
-          <div style="margin-bottom:16px">
-
-            <div class="stat-label">
-              Check In
-            </div>
-
-            <div class="attendance-time">
-              ${record?.checkIn || "--:--"}
-            </div>
-
+          <div style="font-size:11px;color:#718078">
+            ${new Date().toLocaleDateString("en-MY",{
+              weekday:"long",
+              day:"numeric",
+              month:"long",
+              year:"numeric"
+            })}
           </div>
 
-
-          <div>
-
-            <div class="stat-label">
-              Check Out
-            </div>
-
-            <div class="attendance-time">
-              ${record?.checkOut || "--:--"}
-            </div>
-
+          <div class="clock-time" id="liveClock">
+            ${new Date().toLocaleTimeString("en-MY")}
           </div>
 
+          <div style="font-size:12px;margin-top:8px">
+            Status:
+            <b>${saved.checkIn ? (saved.checkOut ? "Completed" : "Checked In") : "Not Checked In"}</b>
+          </div>
+
+        </div>
+
+        <div class="attendance-actions">
+
+          <button
+            class="btn"
+            onclick="checkIn()"
+            ${saved.checkIn?"disabled":""}
+          >
+            Check In
+          </button>
+
+          <button
+            class="btn secondary"
+            onclick="checkOut()"
+            ${!saved.checkIn || saved.checkOut?"disabled":""}
+          >
+            Check Out
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card card-pad">
+
+        <div class="card-title">Today's Record</div>
+
+        <div style="padding:12px 0;border-bottom:1px solid var(--border)">
+          <div class="muted" style="font-size:10px">Check In</div>
+          <div style="font-size:17px;margin-top:4px">
+            ${saved.checkIn || "—"}
+          </div>
+        </div>
+
+        <div style="padding:12px 0">
+          <div class="muted" style="font-size:10px">Check Out</div>
+          <div style="font-size:17px;margin-top:4px">
+            ${saved.checkOut || "—"}
+          </div>
         </div>
 
       </div>
@@ -1716,80 +1787,63 @@ function attendancePage(){
     </div>
 
 
-    <br>
+    <div class="card card-pad" style="margin-top:15px">
 
+      <div class="card-title">Attendance Notes</div>
 
-    <div class="card">
-
-      <h3 style="margin-top:0">
-        Staff Information
-      </h3>
-
-      <div class="grid grid-2">
-
-        <div>
-          <div class="stat-label">
-            Name
-          </div>
-
-          <strong>
-            ${esc(nameOf(currentProfile()))}
-          </strong>
-        </div>
-
-        <div>
-          <div class="stat-label">
-            Role
-          </div>
-
-          <strong>
-            ${esc(currentProfile().role || "Staff")}
-          </strong>
-        </div>
-
-      </div>
+      <p class="muted" style="font-size:12px;line-height:1.6">
+        Please make sure to check in when you start work and check out before leaving.
+      </p>
 
     </div>
   `;
+
+  setInterval(()=>{
+    const el=document.getElementById("liveClock");
+
+    if(el){
+      el.textContent =
+        new Date().toLocaleTimeString("en-MY");
+    }
+  },1000);
 }
 
-function attendanceCheckIn(){
+function checkIn(){
 
-  const record =
-    getAttendance() || {};
+  const key=`attendance_${S.user.id}_${today()}`;
 
-  if(record.checkIn){
-    notify("You have already checked in.");
-    return;
-  }
+  const saved=JSON.parse(
+    localStorage.getItem(key) || "{}"
+  );
 
-  record.checkIn = nowTime();
+  if(saved.checkIn) return;
 
-  saveAttendance(record);
+  saved.checkIn=new Date().toLocaleTimeString("en-MY");
 
-  render();
+  localStorage.setItem(key,JSON.stringify(saved));
+
+  toast("Checked in successfully.");
+
+  attendancePage();
 }
 
-function attendanceCheckOut(){
+function checkOut(){
 
-  const record =
-    getAttendance() || {};
+  const key=`attendance_${S.user.id}_${today()}`;
 
-  if(!record.checkIn){
-    notify("Please check in first.");
-    return;
-  }
+  const saved=JSON.parse(
+    localStorage.getItem(key) || "{}"
+  );
 
-  if(record.checkOut){
-    notify("You have already checked out.");
-    return;
-  }
+  if(!saved.checkIn || saved.checkOut) return;
 
-  record.checkOut = nowTime();
+  saved.checkOut=new Date().toLocaleTimeString("en-MY");
 
-  saveAttendance(record);
+  localStorage.setItem(key,JSON.stringify(saved));
 
-  render();
+  toast("Checked out successfully.");
+
+  attendancePage();
 }
 
 
@@ -1797,62 +1851,21 @@ function attendanceCheckOut(){
    TASKS
 ========================================================= */
 
-function getTasks(){
+async function tasksPage(){
 
-  return JSON.parse(
-    localStorage.getItem("nona_tasks") || "[]"
-  );
-}
+  await loadTasks();
 
-function setTasks(tasks){
-
-  localStorage.setItem(
-    "nona_tasks",
-    JSON.stringify(tasks)
-  );
-}
-
-function tasksPage(){
-
-  let tasks = getTasks();
-
-  const search =
-    S.taskSearch.toLowerCase();
-
-  if(search){
-
-    tasks =
-      tasks.filter(t=>
-        String(t.title || "")
-          .toLowerCase()
-          .includes(search)
-      );
-  }
-
-  if(S.taskFilter !== "all"){
-
-    tasks =
-      tasks.filter(t=>
-        t.status === S.taskFilter
-      );
-  }
-
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
 
       <div>
         <h1>Tasks</h1>
-        <p>
-          Manage your work tasks.
-        </p>
+        <p>Manage your tasks and daily work.</p>
       </div>
 
-      <button
-        class="btn"
-        onclick="openTask()"
-      >
-        + New Task
+      <button class="btn" onclick="newTaskModal()">
+        + Add Task
       </button>
 
     </div>
@@ -1860,265 +1873,133 @@ function tasksPage(){
 
     <div class="card">
 
-      <div
-        style="
-          display:flex;
-          gap:10px;
-          margin-bottom:18px;
-        "
-      >
-
-        <input
-          class="input"
-          placeholder="Search tasks..."
-          value="${esc(S.taskSearch)}"
-          oninput="
-            S.taskSearch=this.value;
-            tasksPageRefresh()
-          "
-        >
-
-        <select
-          class="input"
-          style="max-width:180px"
-          onchange="
-            S.taskFilter=this.value;
-            tasksPageRefresh()
-          "
-        >
-          <option value="all">All</option>
-          <option value="Pending"
-            ${S.taskFilter==="Pending"?"selected":""}>
-            Pending
-          </option>
-          <option value="In Progress"
-            ${S.taskFilter==="In Progress"?"selected":""}>
-            In Progress
-          </option>
-          <option value="Completed"
-            ${S.taskFilter==="Completed"?"selected":""}>
-            Completed
-          </option>
-        </select>
-
-      </div>
-
-
-      <div class="task-list">
-
-        ${
-          tasks.length
-          ?
-          tasks.map(t=>`
-
-            <div
-              class="task-item"
-              onclick="openTask(${t.id})"
-            >
-
-              <div
-                style="
-                  display:flex;
-                  justify-content:space-between;
-                  gap:10px;
-                "
-              >
-
-                <div class="task-title">
-                  ${esc(t.title)}
-                </div>
-
-                <span class="badge ${
-                  t.status==="Completed"
-                  ? "green"
-                  :
-                  t.status==="In Progress"
-                  ? "yellow"
-                  : ""
-                }">
-                  ${esc(t.status || "Pending")}
-                </span>
-
-              </div>
-
-              <div class="task-meta">
-                ${esc(t.description || "")}
-              </div>
-
-              <div class="task-meta">
-                Due:
-                ${esc(t.due || "No due date")}
-              </div>
-
-            </div>
-
-          `).join("")
-          :
-          `
-            <p style="color:var(--muted)">
-              No tasks found.
-            </p>
-          `
-        }
-
-      </div>
+      ${
+        S.tasks.length
+        ?
+        S.tasks.map(taskRowHTML).join("")
+        :
+        `<div class="empty">No tasks found.</div>`
+      }
 
     </div>
   `;
 }
 
-function tasksPageRefresh(){
+function newTaskModal(){
 
-  const area =
-    document.querySelector(".content");
-
-  if(area){
-    area.innerHTML = tasksPage();
-  }
-}
-
-function openTask(id=null){
-
-  const tasks = getTasks();
-
-  const task =
-    id
-    ? tasks.find(t=>t.id===id)
-    : null;
-
-  modal(`
-    <div class="modal-head">
-      <h2>${task ? "Edit Task" : "New Task"}</h2>
-      <button class="close" onclick="closeModal()">×</button>
-    </div>
-
-    <div class="form-group">
-      <label>Task Title</label>
-      <input
-        id="taskTitle"
-        class="input"
-        value="${esc(task?.title || "")}"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <textarea id="taskDescription">${esc(task?.description || "")}</textarea>
-    </div>
-
-    <div class="grid grid-2">
-
+  modal(
+    "Add Task",
+    `
       <div class="form-group">
-        <label>Status</label>
-
-        <select id="taskStatus" class="input">
-
-          <option
-            ${task?.status==="Pending" || !task ? "selected":""}
-          >
-            Pending
-          </option>
-
-          <option
-            ${task?.status==="In Progress" ? "selected":""}
-          >
-            In Progress
-          </option>
-
-          <option
-            ${task?.status==="Completed" ? "selected":""}
-          >
-            Completed
-          </option>
-
-        </select>
+        <label>Task</label>
+        <input id="taskTitle" class="input" placeholder="Task name">
       </div>
 
       <div class="form-group">
         <label>Due Date</label>
-
-        <input
-          id="taskDue"
-          class="input"
-          type="date"
-          value="${esc(task?.due || "")}"
-        >
+        <input id="taskDue" class="input" type="date">
       </div>
 
-    </div>
-
-    <div class="modal-actions">
-
-      ${
-        task
-        ?
-        `
-          <button
-            class="btn danger"
-            onclick="deleteTask(${task.id})"
-          >
-            Delete
-          </button>
-        `
-        :
-        ""
-      }
-
-      <button
-        class="btn"
-        onclick="saveTask(${id || "null"})"
-      >
-        Save
-      </button>
-
-    </div>
-  `);
+      <div class="form-group">
+        <label>Status</label>
+        <select id="taskStatus">
+          <option>Pending</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+      </div>
+    `,
+    `
+      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
+      <button class="btn" onclick="saveTask()">Save Task</button>
+    `
+  );
 }
 
-function saveTask(id){
+async function saveTask(){
 
-  const tasks = getTasks();
+  const title=document.getElementById("taskTitle").value.trim();
+  const due=document.getElementById("taskDue").value;
+  const status=document.getElementById("taskStatus").value;
 
-  const data = {
-    id:id || Date.now(),
-    title:document.getElementById("taskTitle").value,
-    description:document.getElementById("taskDescription").value,
-    status:document.getElementById("taskStatus").value,
-    due:document.getElementById("taskDue").value,
-    created_at:new Date().toISOString()
-  };
-
-  if(!data.title.trim()){
-    notify("Please enter a task title.");
+  if(!title){
+    toast("Please enter a task.");
     return;
   }
 
-  const index =
-    tasks.findIndex(t=>t.id===id);
+  const task={
+    title,
+    due_date:due || null,
+    status,
+    user_id:S.user.id
+  };
 
-  if(index >= 0){
-    tasks[index] = data;
-  }else{
-    tasks.push(data);
+  try{
+
+    const {data,error}=await db
+      .from("tasks")
+      .insert(task)
+      .select()
+      .single();
+
+    if(!error && data){
+      S.tasks.unshift(data);
+    }else{
+      task.id=Date.now().toString();
+      S.tasks.unshift(task);
+
+      localStorage.setItem(
+        "nona_tasks",
+        JSON.stringify(S.tasks)
+      );
+    }
+
+  }catch(e){
+
+    task.id=Date.now().toString();
+    S.tasks.unshift(task);
+
+    localStorage.setItem(
+      "nona_tasks",
+      JSON.stringify(S.tasks)
+    );
   }
 
-  setTasks(tasks);
+  closeModalForce();
 
-  closeModal();
-  render();
+  toast("Task added.");
+
+  tasksPage();
 }
 
-function deleteTask(id){
+async function toggleTask(id){
 
-  if(!confirm("Delete this task?")) return;
+  const task=S.tasks.find(x=>String(x.id)===String(id));
 
-  const tasks =
-    getTasks().filter(t=>t.id!==id);
+  if(!task) return;
 
-  setTasks(tasks);
+  const next=
+    task.status==="Completed"
+    ?"Pending"
+    :"Completed";
 
-  closeModal();
-  render();
+  try{
+
+    await db
+      .from("tasks")
+      .update({status:next})
+      .eq("id",id);
+
+  }catch(e){}
+
+  task.status=next;
+
+  localStorage.setItem(
+    "nona_tasks",
+    JSON.stringify(S.tasks)
+  );
+
+  if(S.page==="tasks") tasksPage();
 }
 
 
@@ -2126,44 +2007,1684 @@ function deleteTask(id){
    WORK LOGS
 ========================================================= */
 
-function getLogs(){
+async function logsPage(){
 
-  return JSON.parse(
-    localStorage.getItem("nona_logs") || "[]"
-  );
-}
+  await loadLogs();
 
-function setLogs(logs){
-
-  localStorage.setItem(
-    "nona_logs",
-    JSON.stringify(logs)
-  );
-}
-
-function logsPage(){
-
-  const logs =
-    getLogs()
-      .filter(l=>l.user_id===me());
-
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
 
       <div>
         <h1>Work Logs</h1>
-        <p>
-          Record your daily work activities.
-        </p>
+        <p>Keep track of your daily work activities.</p>
       </div>
+
+      <button class="btn" onclick="newLogModal()">
+        + Add Work Log
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      ${
+        S.logs.length
+        ?
+        S.logs.map(log=>`
+
+          <div style="padding:17px;border-bottom:1px solid var(--border)">
+
+            <div style="display:flex;justify-content:space-between;gap:15px">
+
+              <div>
+                <div style="font-size:13px;font-weight:600">
+                  ${esc(log.title || log.activity || "Work Log")}
+                </div>
+
+                <div style="font-size:11px;color:var(--muted);margin-top:5px">
+                  ${esc(log.log_date || formatDate(log.created_at))}
+                </div>
+              </div>
+
+            </div>
+
+            <div style="font-size:12px;color:#68736c;line-height:1.6;margin-top:10px">
+              ${esc(log.description || "")}
+            </div>
+
+          </div>
+
+        `).join("")
+        :
+        `<div class="empty">No work logs yet.</div>`
+      }
+
+    </div>
+  `;
+}
+
+function newLogModal(){
+
+  modal(
+    "Add Work Log",
+    `
+      <div class="form-group">
+        <label>Date</label>
+        <input id="logDate" class="input" type="date" value="${today()}">
+      </div>
+
+      <div class="form-group">
+        <label>Title</label>
+        <input id="logTitle" class="input" placeholder="e.g. Product shooting">
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="logDescription" placeholder="Describe what you worked on..."></textarea>
+      </div>
+    `,
+    `
+      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
+      <button class="btn" onclick="saveLog()">Save Log</button>
+    `
+  );
+}
+
+async function saveLog(){
+
+  const log={
+    user_id:S.user.id,
+    log_date:document.getElementById("logDate").value,
+    title:document.getElementById("logTitle").value.trim(),
+    description:document.getElementById("logDescription").value.trim()
+  };
+
+  if(!log.title){
+    toast("Please enter a title.");
+    return;
+  }
+
+  try{
+
+    const {data,error}=await db
+      .from("work_logs")
+      .insert(log)
+      .select()
+      .single();
+
+    if(!error && data){
+      S.logs.unshift(data);
+    }else{
+      log.id=Date.now().toString();
+      log.created_at=new Date().toISOString();
+
+      S.logs.unshift(log);
+
+      localStorage.setItem(
+        "nona_logs",
+        JSON.stringify(S.logs)
+      );
+    }
+
+  }catch(e){
+
+    log.id=Date.now().toString();
+    log.created_at=new Date().toISOString();
+
+    S.logs.unshift(log);
+
+    localStorage.setItem(
+      "nona_logs",
+      JSON.stringify(S.logs)
+    );
+  }
+
+  closeModalForce();
+
+  toast("Work log added.");
+
+  logsPage();
+}
+
+
+/* =========================================================
+   LEAVE
+========================================================= */
+
+async function leavePage(){
+
+  document.getElementById("content").innerHTML=`
+
+    <div class="page-head">
+
+      <div>
+        <h1>Leave</h1>
+        <p>Apply for leave and view your leave requests.</p>
+      </div>
+
+      <button class="btn" onclick="applyLeaveModal()">
+        + Apply Leave
+      </button>
+
+    </div>
+
+    <div class="grid grid-3" style="margin-bottom:15px">
+
+      <div class="card stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value" id="leavePending">0</div>
+        <div class="stat-small">Awaiting review</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-label">Approved</div>
+        <div class="stat-value" id="leaveApproved">0</div>
+        <div class="stat-small">Approved requests</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-label">Rejected</div>
+        <div class="stat-value" id="leaveRejected">0</div>
+        <div class="stat-small">Rejected requests</div>
+      </div>
+
+    </div>
+
+    <div id="leaveList" class="card">
+      <div class="empty">Loading leave requests...</div>
+    </div>
+
+    ${
+      isAdmin()
+      ?
+      `
+        <div class="card card-pad" style="margin-top:15px">
+          <div class="card-title">Admin Leave Management</div>
+          <p class="muted" style="font-size:12px">
+            As an admin, you can review and approve or reject staff leave requests.
+          </p>
+        </div>
+      `
+      :""
+    }
+  `;
+
+  await loadLeaveRequests();
+
+  renderLeaveList();
+}
+
+async function loadLeaveRequests(){
+
+  if(!S.user) return;
+
+  let query=db
+    .from("leave_requests")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+  if(!isAdmin()){
+    query=query.eq("user_id",S.user.id);
+  }
+
+  const {data,error}=await query;
+
+  if(error){
+
+    console.error(error);
+
+    S.leaveRequests=[];
+
+    const el=document.getElementById("leaveList");
+
+    if(el){
+      el.innerHTML=`
+        <div class="empty">
+          Leave table is not available yet.<br>
+          Please run the Leave SQL setup in Supabase first.
+        </div>
+      `;
+    }
+
+    return;
+  }
+
+  S.leaveRequests=data || [];
+}
+
+function renderLeaveList(){
+
+  const list=document.getElementById("leaveList");
+
+  if(!list) return;
+
+  const pending=S.leaveRequests.filter(x=>x.status==="Pending").length;
+  const approved=S.leaveRequests.filter(x=>x.status==="Approved").length;
+  const rejected=S.leaveRequests.filter(x=>x.status==="Rejected").length;
+
+  document.getElementById("leavePending").textContent=pending;
+  document.getElementById("leaveApproved").textContent=approved;
+  document.getElementById("leaveRejected").textContent=rejected;
+
+  if(!S.leaveRequests.length){
+
+    list.innerHTML=`
+      <div class="empty">
+        No leave requests yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  list.innerHTML=S.leaveRequests.map(leave=>{
+
+    const staff=S.profiles.find(
+      p=>p.id===leave.user_id
+    );
+
+    const canReview =
+      isAdmin() &&
+      leave.status==="Pending";
+
+    return `
+      <div class="leave-card" style="border-bottom:1px solid var(--border)">
+
+        <div class="leave-summary">
+
+          <div>
+
+            ${
+              isAdmin()
+              ?
+              `
+                <div class="leave-type">
+                  ${esc(staff?.full_name || "Staff")}
+                </div>
+
+                <div class="leave-date">
+                  ${esc(staff?.position || "")}
+                </div>
+              `
+              :
+              ""
+            }
+
+            <div class="leave-type" style="${isAdmin()?"margin-top:10px":""}">
+              ${esc(leave.leave_type)}
+            </div>
+
+            <div class="leave-date">
+              ${formatDate(leave.start_date)}
+              -
+              ${formatDate(leave.end_date)}
+            </div>
+
+          </div>
+
+          <span class="badge ${
+            leave.status==="Approved"
+            ?"green"
+            :
+            leave.status==="Rejected"
+            ?"red"
+            :"yellow"
+          }">
+            ${esc(leave.status)}
+          </span>
+
+        </div>
+
+        ${
+          leave.reason
+          ?
+          `<div class="leave-reason">${esc(leave.reason)}</div>`
+          :""
+        }
+
+        ${
+          leave.admin_note
+          ?
+          `
+            <div style="margin-top:9px;padding:9px;background:#f7f8f7;border-radius:7px;font-size:10px">
+              <b>Admin note:</b> ${esc(leave.admin_note)}
+            </div>
+          `
+          :""
+        }
+
+        ${
+          canReview
+          ?
+          `
+            <div style="display:flex;gap:7px;margin-top:13px">
+
+              <button
+                class="btn small"
+                onclick="reviewLeave('${leave.id}','Approved')"
+              >
+                Approve
+              </button>
+
+              <button
+                class="btn small danger"
+                onclick="reviewLeave('${leave.id}','Rejected')"
+              >
+                Reject
+              </button>
+
+            </div>
+          `
+          :""
+        }
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+function applyLeaveModal(){
+
+  modal(
+    "Apply Leave",
+    `
+      <div class="form-group">
+        <label>Leave Type</label>
+
+        <select id="leaveType">
+
+          <option>Annual Leave</option>
+          <option>Medical Leave</option>
+          <option>Emergency Leave</option>
+          <option>Unpaid Leave</option>
+          <option>Other</option>
+
+        </select>
+      </div>
+
+
+      <div class="grid grid-2">
+
+        <div class="form-group">
+          <label>Start Date</label>
+          <input
+            id="leaveStart"
+            class="input"
+            type="date"
+            value="${today()}"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>End Date</label>
+          <input
+            id="leaveEnd"
+            class="input"
+            type="date"
+            value="${today()}"
+          >
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label>Reason</label>
+
+        <textarea
+          id="leaveReason"
+          placeholder="Enter your reason..."
+        ></textarea>
+
+      </div>
+    `,
+    `
+      <button class="btn outline" onclick="closeModalForce()">
+        Cancel
+      </button>
+
+      <button class="btn" onclick="submitLeave()">
+        Submit Leave
+      </button>
+    `
+  );
+}
+
+async function submitLeave(){
+
+  const leaveType=document.getElementById("leaveType").value;
+  const start=document.getElementById("leaveStart").value;
+  const end=document.getElementById("leaveEnd").value;
+  const reason=document.getElementById("leaveReason").value.trim();
+
+  if(!start || !end){
+    toast("Please select your leave dates.");
+    return;
+  }
+
+  if(end < start){
+    toast("End date cannot be before start date.");
+    return;
+  }
+
+  const payload={
+    user_id:S.user.id,
+    leave_type:leaveType,
+    start_date:start,
+    end_date:end,
+    reason:reason || null,
+    status:"Pending"
+  };
+
+  const {error}=await db
+    .from("leave_requests")
+    .insert(payload);
+
+  if(error){
+
+    console.error(error);
+
+    toast("Could not submit leave. Please check the Leave table setup.");
+
+    return;
+  }
+
+  closeModalForce();
+
+  toast("Leave application submitted.");
+
+  await leavePage();
+}
+
+async function reviewLeave(id,status){
+
+  let note="";
+
+  if(status==="Rejected"){
+
+    note=prompt(
+      "Reason / note for rejecting this leave:",
+      ""
+    );
+
+    if(note===null) return;
+  }
+
+  const {error}=await db
+    .from("leave_requests")
+    .update({
+      status,
+      reviewed_by:S.user.id,
+      reviewed_at:new Date().toISOString(),
+      admin_note:note || null
+    })
+    .eq("id",id);
+
+  if(error){
+
+    console.error(error);
+
+    toast(error.message);
+
+    return;
+  }
+
+  toast(
+    status==="Approved"
+    ?"Leave approved."
+    :"Leave rejected."
+  );
+
+  await leavePage();
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+async function chatPage(){
+
+  await loadConversations();
+
+  document.getElementById("content").innerHTML=`
+
+    <div class="page-head">
+
+      <div>
+        <h1>Chat</h1>
+        <p>Communicate with your teammates.</p>
+      </div>
+
+      <button class="btn" onclick="newChatModal()">
+        + New Chat
+      </button>
+
+    </div>
+
+
+    <div class="card chat-layout">
+
+      <div class="chat-list">
+
+        <div class="chat-list-head">
+
+          <input
+            class="input"
+            placeholder="Search chat..."
+            oninput="filterChats(this.value)"
+          >
+
+        </div>
+
+        <div id="chatListItems">
+
+          ${chatListHTML()}
+
+        </div>
+
+      </div>
+
+
+      <div class="chat-main">
+
+        ${
+          S.conversation
+          ?
+          `
+            <div class="chat-head">
+
+              <div>
+                <div class="chat-head-name">
+                  ${esc(conversationName(S.conversation))}
+                </div>
+
+                <div style="font-size:10px;color:var(--muted)">
+                  ${S.conversation.is_group ? "Group chat" : "Direct chat"}
+                </div>
+              </div>
+
+              ${
+                S.conversation.is_group
+                ?
+                `
+                  <button class="btn secondary small" onclick="groupManageModal()">
+                    Manage Group
+                  </button>
+                `
+                :""
+              }
+
+            </div>
+
+            <div id="messages" class="messages">
+              <div class="empty">Loading messages...</div>
+            </div>
+
+            <div class="chat-input">
+
+              <input
+                id="messageInput"
+                placeholder="Write a message..."
+                onkeydown="if(event.key==='Enter')sendMessage()"
+              >
+
+              <button class="btn" onclick="sendMessage()">
+                Send
+              </button>
+
+            </div>
+          `
+          :
+          `
+            <div class="empty" style="margin:auto">
+              Select a conversation to start chatting.
+            </div>
+          `
+        }
+
+      </div>
+
+    </div>
+  `;
+
+  if(S.conversation){
+    await loadMessages();
+  }
+}
+
+async function loadConversations(){
+
+  if(!S.user) return;
+
+  const {data,error}=await db
+    .from("conversation_members")
+    .select(`
+      conversation_id,
+      role,
+      conversations(
+        id,
+        name,
+        is_group,
+        created_at
+      )
+    `)
+    .eq("user_id",S.user.id);
+
+  if(error){
+
+    console.error(error);
+
+    S.conversations=[];
+
+    return;
+  }
+
+  S.conversations=(data || [])
+    .map(x=>({
+      ...(x.conversations || {}),
+      member_role:x.role
+    }))
+    .filter(x=>x.id);
+}
+
+function chatListHTML(){
+
+  if(!S.conversations.length){
+    return `<div class="empty">No conversations yet.</div>`;
+  }
+
+  return S.conversations.map(c=>`
+
+    <button
+      class="chat-item ${S.conversation?.id===c.id?"active":""}"
+      onclick="openConversation('${c.id}')"
+    >
+
+      <div class="avatar">
+        ${c.is_group ? "G" : "U"}
+      </div>
+
+      <div class="chat-item-info">
+
+        <div class="chat-item-name">
+          ${esc(conversationName(c))}
+        </div>
+
+        <div class="chat-item-preview">
+          ${c.is_group ? "Group conversation" : "Direct conversation"}
+        </div>
+
+      </div>
+
+    </button>
+
+  `).join("");
+}
+
+function filterChats(value){
+
+  const q=value.toLowerCase();
+
+  document.querySelectorAll(".chat-item").forEach(item=>{
+    item.style.display =
+      item.textContent.toLowerCase().includes(q)
+      ?"flex"
+      :"none";
+  });
+}
+
+function conversationName(c){
+
+  if(c.is_group){
+    return c.name || "Unnamed Group";
+  }
+
+  if(c.name){
+    return c.name;
+  }
+
+  return "Conversation";
+}
+
+async function openConversation(id){
+
+  const c=S.conversations.find(x=>x.id===id);
+
+  if(!c) return;
+
+  S.conversation=c;
+
+  await chatPage();
+}
+
+async function loadMessages(){
+
+  const box=document.getElementById("messages");
+
+  if(!box || !S.conversation) return;
+
+  const {data,error}=await db
+    .from("messages")
+    .select("*")
+    .eq("conversation_id",S.conversation.id)
+    .order("created_at",{ascending:true});
+
+  if(error){
+
+    box.innerHTML=`
+      <div class="empty">
+        Unable to load messages.
+      </div>
+    `;
+
+    return;
+  }
+
+  S.messages=data || [];
+
+  if(!S.messages.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        No messages yet. Say hi 👋
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML=S.messages.map(message=>{
+
+    const mine=message.user_id===S.user.id;
+
+    const profile=S.profiles.find(
+      p=>p.id===message.user_id
+    );
+
+    return `
+      <div class="message ${mine?"mine":""}">
+
+        <div class="message-bubble">
+
+          ${
+            !mine
+            ?
+            `<div class="message-name">
+              ${esc(profile?.full_name || "User")}
+            </div>`
+            :""
+          }
+
+          <div>
+            ${esc(message.content || "")}
+          </div>
+
+          <div class="message-time">
+            ${formatDateTime(message.created_at)}
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+
+  box.scrollTop=box.scrollHeight;
+}
+
+async function sendMessage(){
+
+  const input=document.getElementById("messageInput");
+
+  if(!input || !S.conversation) return;
+
+  const content=input.value.trim();
+
+  if(!content) return;
+
+  const {error}=await db
+    .from("messages")
+    .insert({
+      conversation_id:S.conversation.id,
+      user_id:S.user.id,
+      content
+    });
+
+  if(error){
+
+    console.error(error);
+
+    toast(error.message);
+
+    return;
+  }
+
+  input.value="";
+
+  await loadMessages();
+}
+
+function newChatModal(){
+
+  const staff=S.profiles.filter(
+    p=>p.id!==S.user.id
+  );
+
+  modal(
+    "New Conversation",
+    `
+
+      <div class="form-group">
+        <label>Conversation Type</label>
+
+        <select id="chatType" onchange="toggleChatTypeFields()">
+
+          <option value="direct">Personal Chat</option>
+          <option value="group">Group Chat</option>
+
+        </select>
+      </div>
+
+
+      <div id="directField" class="form-group">
+
+        <label>Select Staff</label>
+
+        <select id="directStaff">
+
+          ${
+            staff.map(p=>`
+              <option value="${p.id}">
+                ${esc(p.full_name || p.email)}
+              </option>
+            `).join("")
+          }
+
+        </select>
+
+      </div>
+
+
+      <div id="groupFields" class="hidden">
+
+        <div class="form-group">
+
+          <label>Group Name</label>
+
+          <input
+            id="groupName"
+            class="input"
+            placeholder="e.g. Digital Team"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Select Members</label>
+
+          <div style="border:1px solid var(--border);border-radius:9px;max-height:180px;overflow:auto">
+
+            ${
+              staff.map(p=>`
+
+                <label style="display:flex;align-items:center;gap:8px;padding:9px 11px;border-bottom:1px solid #f0f2f1;font-size:12px">
+
+                  <input
+                    type="checkbox"
+                    class="group-member"
+                    value="${p.id}"
+                  >
+
+                  ${esc(p.full_name || p.email)}
+
+                </label>
+
+              `).join("")
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `,
+    `
+      <button class="btn outline" onclick="closeModalForce()">
+        Cancel
+      </button>
+
+      <button class="btn" onclick="createConversation()">
+        Create
+      </button>
+    `
+  );
+}
+
+function toggleChatTypeFields(){
+
+  const type=document.getElementById("chatType").value;
+
+  document
+    .getElementById("directField")
+    .classList.toggle("hidden",type!=="direct");
+
+  document
+    .getElementById("groupFields")
+    .classList.toggle("hidden",type!=="group");
+}
+
+async function createConversation(){
+
+  const type=document.getElementById("chatType").value;
+
+  if(type==="direct"){
+
+    const target=document.getElementById("directStaff").value;
+
+    if(!target){
+      toast("Please select a staff member.");
+      return;
+    }
+
+    const {data,error}=await db
+      .from("conversations")
+      .insert({
+        name:null,
+        is_group:false
+      })
+      .select()
+      .single();
+
+    if(error){
+
+      toast(error.message);
+      return;
+    }
+
+    await db
+      .from("conversation_members")
+      .insert([
+        {
+          conversation_id:data.id,
+          user_id:S.user.id,
+          role:"admin"
+        },
+        {
+          conversation_id:data.id,
+          user_id:target,
+          role:"member"
+        }
+      ]);
+
+    closeModalForce();
+
+    await loadConversations();
+
+    S.conversation=data;
+
+    await chatPage();
+
+    return;
+  }
+
+
+  const name=document
+    .getElementById("groupName")
+    .value.trim();
+
+  const members=[
+    ...document.querySelectorAll(".group-member:checked")
+  ].map(x=>x.value);
+
+  if(!name){
+    toast("Please enter a group name.");
+    return;
+  }
+
+  if(!members.length){
+    toast("Please select at least one member.");
+    return;
+  }
+
+  const {data,error}=await db
+    .from("conversations")
+    .insert({
+      name,
+      is_group:true
+    })
+    .select()
+    .single();
+
+  if(error){
+
+    toast(error.message);
+    return;
+  }
+
+  const rows=[
+    {
+      conversation_id:data.id,
+      user_id:S.user.id,
+      role:"admin"
+    },
+    ...members.map(id=>({
+      conversation_id:data.id,
+      user_id:id,
+      role:"member"
+    }))
+  ];
+
+  const memberResult=await db
+    .from("conversation_members")
+    .insert(rows);
+
+  if(memberResult.error){
+
+    console.error(memberResult.error);
+
+    toast(memberResult.error.message);
+
+    return;
+  }
+
+  closeModalForce();
+
+  await loadConversations();
+
+  S.conversation=data;
+
+  await chatPage();
+}
+
+async function groupManageModal(){
+
+  if(!S.conversation?.is_group) return;
+
+  const {data,error}=await db
+    .from("conversation_members")
+    .select("*")
+    .eq("conversation_id",S.conversation.id);
+
+  if(error){
+
+    toast(error.message);
+    return;
+  }
+
+  const members=data || [];
+
+  modal(
+    "Manage Group",
+    `
+
+      <div class="form-group">
+
+        <label>Group Name</label>
+
+        <input
+          id="editGroupName"
+          class="input"
+          value="${esc(S.conversation.name || "")}"
+        >
+
+      </div>
+
+
+      <div style="font-size:11px;font-weight:600;margin-bottom:8px">
+        Members
+      </div>
+
+
+      <div style="border:1px solid var(--border);border-radius:9px">
+
+        ${
+          members.map(member=>{
+
+            const p=S.profiles.find(
+              x=>x.id===member.user_id
+            );
+
+            return `
+
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #f0f2f1">
+
+                <div style="display:flex;align-items:center;gap:9px">
+
+                  <div class="avatar">
+                    ${initials(p?.full_name)}
+                  </div>
+
+                  <div>
+
+                    <div style="font-size:11px;font-weight:600">
+                      ${esc(p?.full_name || "User")}
+                    </div>
+
+                    <div style="font-size:9px;color:var(--muted)">
+                      ${esc(member.role || "member")}
+                    </div>
+
+                  </div>
+
+                </div>
+
+                ${
+                  member.user_id===S.user.id
+                  ?
+                  `<span class="badge green">You</span>`
+                  :
+                  isAdmin()
+                  ?
+                  `
+                    <button
+                      class="btn small danger"
+                      onclick="removeGroupMember('${member.user_id}')"
+                    >
+                      Remove
+                    </button>
+                  `
+                  :""
+                }
+
+              </div>
+
+            `;
+
+          }).join("")
+        }
+
+      </div>
+
+
+      <div style="margin-top:17px">
+
+        <button
+          class="btn secondary"
+          style="width:100%"
+          onclick="addGroupMemberModal()"
+        >
+          + Add Member
+        </button>
+
+      </div>
+
+    `,
+    `
+
+      <button
+        class="btn danger"
+        onclick="leaveGroup()"
+      >
+        Leave Group
+      </button>
 
       <button
         class="btn"
-        onclick="openLog()"
+        onclick="saveGroupDetails()"
       >
-        + Add Log
+        Save Changes
       </button>
+
+    `
+  );
+}
+
+async function saveGroupDetails(){
+
+  const name=document
+    .getElementById("editGroupName")
+    .value.trim();
+
+  if(!name){
+    toast("Group name cannot be empty.");
+    return;
+  }
+
+  const {error}=await db
+    .from("conversations")
+    .update({name})
+    .eq("id",S.conversation.id);
+
+  if(error){
+
+    toast(error.message);
+    return;
+  }
+
+  S.conversation.name=name;
+
+  closeModalForce();
+
+  toast("Group updated.");
+
+  await chatPage();
+}
+
+async function addGroupMemberModal(){
+
+  const existing=await db
+    .from("conversation_members")
+    .select("user_id")
+    .eq("conversation_id",S.conversation.id);
+
+  const ids=(existing.data || []).map(x=>x.user_id);
+
+  const available=S.profiles.filter(
+    p=>!ids.includes(p.id)
+  );
+
+  if(!available.length){
+
+    toast("Everyone is already in this group.");
+
+    return;
+  }
+
+  modal(
+    "Add Member",
+    `
+
+      <div class="form-group">
+
+        <label>Staff Member</label>
+
+        <select id="newGroupMember">
+
+          ${
+            available.map(p=>`
+              <option value="${p.id}">
+                ${esc(p.full_name || p.email)}
+              </option>
+            `).join("")
+          }
+
+        </select>
+
+      </div>
+
+    `,
+    `
+
+      <button
+        class="btn outline"
+        onclick="closeModalForce()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn"
+        onclick="addGroupMember()"
+      >
+        Add Member
+      </button>
+
+    `
+  );
+}
+
+async function addGroupMember(){
+
+  const userId=document
+    .getElementById("newGroupMember")
+    .value;
+
+  const {error}=await db
+    .from("conversation_members")
+    .insert({
+      conversation_id:S.conversation.id,
+      user_id:userId,
+      role:"member"
+    });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+  }
+
+  closeModalForce();
+
+  toast("Member added.");
+
+  groupManageModal();
+}
+
+async function removeGroupMember(userId){
+
+  if(!confirm("Remove this member from the group?")){
+    return;
+  }
+
+  const {error}=await db
+    .from("conversation_members")
+    .delete()
+    .eq("conversation_id",S.conversation.id)
+    .eq("user_id",userId);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+  }
+
+  toast("Member removed.");
+
+  groupManageModal();
+}
+
+async function leaveGroup(){
+
+  if(!confirm("Leave this group?")){
+    return;
+  }
+
+  const {error}=await db
+    .from("conversation_members")
+    .delete()
+    .eq("conversation_id",S.conversation.id)
+    .eq("user_id",S.user.id);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+  }
+
+  closeModalForce();
+
+  S.conversation=null;
+
+  await loadConversations();
+
+  await chatPage();
+
+  toast("You left the group.");
+}
+
+
+/* =========================================================
+   KNOWLEDGE HUB
+========================================================= */
+
+async function knowledgePage(){
+
+  const {data,error}=await db
+    .from("knowledge_documents")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+  const docs=error ? [] : (data || []);
+
+  document.getElementById("content").innerHTML=`
+
+    <div class="page-head">
+
+      <div>
+        <h1>Knowledge Hub</h1>
+        <p>Important documents and resources for the team.</p>
+      </div>
+
+      ${
+        isAdmin()
+        ?
+        `
+          <button class="btn" onclick="addDocModal()">
+            + Add Document
+          </button>
+        `
+        :""
+      }
+
+    </div>
+
+
+    <div class="grid grid-3">
+
+      ${
+        docs.length
+        ?
+        docs.map(doc=>`
+
+          <div class="card doc-card">
+
+            <div class="doc-icon">▧</div>
+
+            <div class="doc-title">
+              ${esc(doc.title || "Document")}
+            </div>
+
+            <div class="doc-meta">
+              ${esc(doc.category || "General")}
+            </div>
+
+            ${
+              doc.description
+              ?
+              `
+                <div style="font-size:11px;color:#718078;line-height:1.5;margin-top:10px">
+                  ${esc(doc.description)}
+                </div>
+              `
+              :""
+            }
+
+          </div>
+
+        `).join("")
+        :
+        `<div class="card" style="grid-column:1/-1">
+          <div class="empty">No documents available.</div>
+        </div>`
+      }
+
+    </div>
+  `;
+}
+
+function addDocModal(){
+
+  modal(
+    "Add Document",
+    `
+      <div class="form-group">
+        <label>Title</label>
+        <input id="docTitle" class="input">
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input id="docCategory" class="input" placeholder="General">
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="docDescription"></textarea>
+      </div>
+    `,
+    `
+      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
+      <button class="btn" onclick="saveDoc()">Save</button>
+    `
+  );
+}
+
+async function saveDoc(){
+
+  const title=document.getElementById("docTitle").value.trim();
+  const category=document.getElementById("docCategory").value.trim();
+  const description=document.getElementById("docDescription").value.trim();
+
+  if(!title){
+    toast("Please enter a title.");
+    return;
+  }
+
+  const {error}=await db
+    .from("knowledge_documents")
+    .insert({
+      title,
+      category:category || "General",
+      description
+    });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+  }
+
+  closeModalForce();
+
+  toast("Document added.");
+
+  knowledgePage();
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function calendarPage(){
+
+  const d=S.calendarDate;
+
+  const year=d.getFullYear();
+  const month=d.getMonth();
+
+  const first=new Date(year,month,1);
+  const last=new Date(year,month+1,0);
+
+  const start=first.getDay();
+
+  let cells="";
+
+  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    .forEach(day=>{
+      cells+=`
+        <div class="calendar-day-head">
+          ${day}
+        </div>
+      `;
+    });
+
+  for(let i=0;i<start;i++){
+
+    cells+=`
+      <div class="calendar-cell"></div>
+    `;
+  }
+
+  for(let day=1;day<=last.getDate();day++){
+
+    const isToday =
+      day===new Date().getDate() &&
+      month===new Date().getMonth() &&
+      year===new Date().getFullYear();
+
+    cells+=`
+
+      <div class="calendar-cell">
+
+        <div class="${isToday?"today":"calendar-number"}">
+          ${day}
+        </div>
+
+      </div>
+
+    `;
+  }
+
+  document.getElementById("content").innerHTML=`
+
+    <div class="page-head">
+
+      <div>
+        <h1>Calendar</h1>
+        <p>Keep track of important dates.</p>
+      </div>
+
+      <div style="display:flex;gap:7px">
+
+        <button class="btn secondary" onclick="changeMonth(-1)">
+          ←
+        </button>
+
+        <button class="btn secondary" onclick="changeMonth(1)">
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <div style="font-size:17px;font-weight:600;margin-bottom:17px">
+        ${d.toLocaleDateString("en-MY",{month:"long",year:"numeric"})}
+      </div>
+
+      <div class="calendar">
+        ${cells}
+      </div>
+
+    </div>
+  `;
+}
+
+function changeMonth(offset){
+
+  S.calendarDate.setMonth(
+    S.calendarDate.getMonth()+offset
+  );
+
+  calendarPage();
+}
+
+
+/* =========================================================
+   STAFF MANAGEMENT
+========================================================= */
+
+async function staffPage(){
+
+  await loadProfiles();
+
+  if(!isAdmin()){
+
+    document.getElementById("content").innerHTML=`
+      <div class="card">
+        <div class="empty">
+          You do not have permission to access Staff Management.
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  document.getElementById("content").innerHTML=`
+
+    <div class="page-head">
+
+      <div>
+        <h1>Staff Management</h1>
+        <p>View and update staff information.</p>
+      </div>
 
     </div>
 
@@ -2175,62 +3696,128 @@ function logsPage(){
         <table>
 
           <thead>
+
             <tr>
-              <th>Date</th>
-              <th>Activity</th>
-              <th>Details</th>
-              <th></th>
+
+              <th>Staff</th>
+              <th>User ID</th>
+              <th>Position</th>
+              <th>Department</th>
+              <th>Employee ID</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Action</th>
+
             </tr>
+
           </thead>
 
           <tbody>
 
             ${
-              logs.length
-              ?
-              logs
-                .sort((a,b)=>
-                  String(b.date)
-                    .localeCompare(String(a.date))
-                )
-                .map(l=>`
+              S.profiles.map(staff=>`
 
-                  <tr>
-
-                    <td>
-                      ${esc(l.date)}
-                    </td>
-
-                    <td>
-                      <strong>
-                        ${esc(l.activity)}
-                      </strong>
-                    </td>
-
-                    <td>
-                      ${esc(l.details || "")}
-                    </td>
-
-                    <td>
-                      <button
-                        class="btn danger small"
-                        onclick="delLog(${l.id})"
-                      >
-                        Delete
-                      </button>
-                    </td>
-
-                  </tr>
-
-                `).join("")
-              :
-              `
                 <tr>
-                  <td colspan="4">
-                    No work logs yet.
+
+                  <td>
+
+                    <div style="display:flex;align-items:center;gap:8px">
+
+                      <div class="avatar">
+                        ${initials(staff.full_name)}
+                      </div>
+
+                      <div>
+
+                        <div style="font-weight:600;font-size:12px">
+                          ${esc(staff.full_name || "Unnamed")}
+                        </div>
+
+                        <div style="font-size:9px;color:var(--muted)">
+                          ${esc(staff.email || "")}
+                        </div>
+
+                      </div>
+
+                    </div>
+
                   </td>
+
+
+                  <td>
+
+                    <div style="max-width:100px;overflow:hidden;text-overflow:ellipsis;font-size:9px;color:var(--muted)">
+                      ${esc(staff.id)}
+                    </div>
+
+                  </td>
+
+
+                  <td>
+                    ${esc(staff.position || "—")}
+                  </td>
+
+
+                  <td>
+                    ${esc(staff.department || "—")}
+                  </td>
+
+
+                  <td>
+                    ${esc(staff.employee_id || "—")}
+                  </td>
+
+
+                  <td>
+                    ${esc(staff.phone || "—")}
+                  </td>
+
+
+                  <td>
+
+                    <span class="badge ${
+                      staff.role==="admin"
+                      ?"green"
+                      :"gray"
+                    }">
+                      ${esc(staff.role || "staff")}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="badge ${
+                      staff.status==="Inactive"
+                      ?"red"
+                      :
+                      staff.status==="On Leave"
+                      ?"yellow"
+                      :"green"
+                    }">
+                      ${esc(staff.status || "Active")}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <button
+                      class="btn small"
+                      onclick="editStaff('${staff.id}')"
+                    >
+                      Edit
+                    </button>
+
+                  </td>
+
                 </tr>
-              `
+
+              `).join("")
+
             }
 
           </tbody>
@@ -2243,1599 +3830,278 @@ function logsPage(){
   `;
 }
 
-function openLog(){
+function editStaff(id){
 
-  modal(`
-
-    <div class="modal-head">
-      <h2>Add Work Log</h2>
-      <button class="close" onclick="closeModal()">×</button>
-    </div>
-
-    <div class="form-group">
-
-      <label>Date</label>
-
-      <input
-        id="logDate"
-        class="input"
-        type="date"
-        value="${today()}"
-      >
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Activity</label>
-
-      <input
-        id="logActivity"
-        class="input"
-        placeholder="e.g. Product shooting"
-      >
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Details</label>
-
-      <textarea
-        id="logDetails"
-        placeholder="Describe what you worked on..."
-      ></textarea>
-
-    </div>
-
-    <div class="modal-actions">
-
-      <button
-        class="btn"
-        onclick="saveLog()"
-      >
-        Save Log
-      </button>
-
-    </div>
-  `);
-}
-
-function saveLog(){
-
-  const logs = getLogs();
-
-  logs.push({
-    id:Date.now(),
-    user_id:me(),
-    date:document.getElementById("logDate").value,
-    activity:document.getElementById("logActivity").value,
-    details:document.getElementById("logDetails").value
-  });
-
-  setLogs(logs);
-
-  closeModal();
-  render();
-}
-
-function delLog(id){
-
-  if(!confirm("Delete this work log?")) return;
-
-  setLogs(
-    getLogs().filter(l=>l.id!==id)
+  const staff=S.profiles.find(
+    x=>x.id===id
   );
 
-  render();
-}
+  if(!staff) return;
 
+  modal(
+    "Edit Staff Information",
+    `
 
-/* =========================================================
-   COMMUNICATION
-========================================================= */
+      <div class="form-group">
 
-async function loadConversations(){
+        <label>User ID</label>
 
-  if(!me()) return;
+        <input
+          class="input"
+          value="${esc(staff.id)}"
+          disabled
+        >
 
-  const {data,error} =
-    await db
-      .from("conversation_members")
-      .select(`
-        conversation_id,
-        role,
-        conversations(*)
-      `)
-      .eq("user_id",me());
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  S.conversations =
-    (data || [])
-      .map(x=>({
-        ...x.conversations,
-        member_role:x.role
-      }))
-      .filter(Boolean);
-}
-
-async function loadConversationMembers(id){
-
-  const {data,error} =
-    await db
-      .from("conversation_members")
-      .select("*")
-      .eq("conversation_id",id);
-
-  if(!error){
-    S.conversationMembers = data || [];
-  }
-}
-
-async function loadMessages(){
-
-  if(!S.conversation && !S.channel){
-    S.messages = [];
-    return;
-  }
-
-  let query =
-    db
-      .from("messages")
-      .select("*")
-      .order("created_at");
-
-  if(S.conversation){
-
-    query =
-      query.eq(
-        "conversation_id",
-        S.conversation.id
-      );
-
-  }else if(S.channel){
-
-    query =
-      query.eq(
-        "channel_id",
-        S.channel.id
-      );
-  }
-
-  const {data,error} =
-    await query;
-
-  if(!error){
-    S.messages = data || [];
-  }
-}
-
-function memberName(id){
-
-  const p =
-    S.profiles.find(x=>x.id===id);
-
-  return nameOf(p);
-}
-
-function isGroup(c){
-
-  return c?.type === "group";
-}
-
-async function selectConversationById(id){
-
-  const c =
-    S.conversations.find(x=>x.id===id);
-
-  if(!c) return;
-
-  S.conversation = c;
-  S.channel = null;
-
-  await loadConversationMembers(c.id);
-  await loadMessages();
-
-  render();
-}
-
-async function selectChannelById(id){
-
-  const c =
-    S.channels.find(x=>x.id===id);
-
-  if(!c) return;
-
-  S.channel = c;
-  S.conversation = null;
-
-  await loadMessages();
-
-  render();
-}
-
-async function direct(targetId){
-
-  if(!targetId || targetId===me()) return;
-
-  const {data:mine} =
-    await db
-      .from("conversation_members")
-      .select("conversation_id")
-      .eq("user_id",me());
-
-  const myIds =
-    (mine || [])
-      .map(x=>x.conversation_id);
-
-  if(myIds.length){
-
-    const {data:members} =
-      await db
-        .from("conversation_members")
-        .select("*")
-        .in("conversation_id",myIds);
-
-    const grouped = {};
-
-    (members || []).forEach(m=>{
-
-      grouped[m.conversation_id] =
-        grouped[m.conversation_id] || [];
-
-      grouped[m.conversation_id].push(m.user_id);
-    });
-
-    for(const id of Object.keys(grouped)){
-
-      const users =
-        grouped[id];
-
-      const c =
-        S.conversations.find(x=>x.id===id);
-
-      if(
-        c &&
-        c.type==="direct" &&
-        users.length===2 &&
-        users.includes(targetId) &&
-        users.includes(me())
-      ){
-
-        await selectConversationById(id);
-        return;
-      }
-    }
-  }
-
-  const {
-    data:c,
-    error
-  } =
-    await db
-      .from("conversations")
-      .insert({
-        type:"direct",
-        created_by:me()
-      })
-      .select()
-      .single();
-
-  if(error){
-    notify(error.message);
-    return;
-  }
-
-  await db
-    .from("conversation_members")
-    .insert([
-      {
-        conversation_id:c.id,
-        user_id:me(),
-        role:"admin"
-      },
-      {
-        conversation_id:c.id,
-        user_id:targetId,
-        role:"member"
-      }
-    ]);
-
-  await loadConversations();
-
-  await selectConversationById(c.id);
-}
-
-
-/* =========================================================
-   GROUP CHAT
-========================================================= */
-
-function createGroupModal(){
-
-  const staff =
-    S.profiles.filter(p=>p.id!==me());
-
-  modal(`
-
-    <div class="modal-head">
-
-      <h2>Create Group</h2>
-
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>Group Name</label>
-
-      <input
-        id="groupName"
-        class="input"
-        placeholder="e.g. Digital Team"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>Select Members</label>
-
-      <div style="
-        max-height:250px;
-        overflow:auto;
-        border:1px solid var(--border);
-        border-radius:8px;
-        padding:8px;
-      ">
-
-        ${
-          staff.map(p=>`
-
-            <label
-              style="
-                display:flex;
-                gap:10px;
-                align-items:center;
-                padding:9px;
-              "
-            >
-
-              <input
-                type="checkbox"
-                value="${p.id}"
-                class="groupMember"
-              >
-
-              <span>
-                ${esc(nameOf(p))}
-              </span>
-
-            </label>
-
-          `).join("")
-        }
+        <div style="font-size:9px;color:var(--muted);margin-top:5px">
+          User ID is the Supabase Auth ID and cannot be changed.
+        </div>
 
       </div>
 
-    </div>
 
+      <div class="grid grid-2">
 
-    <div class="modal-actions">
-
-      <button
-        class="btn"
-        onclick="createGroup()"
-      >
-        Create Group
-      </button>
-
-    </div>
-  `);
-}
-
-async function createGroup(){
-
-  const name =
-    document
-      .getElementById("groupName")
-      .value
-      .trim();
-
-  if(!name){
-    notify("Please enter a group name.");
-    return;
-  }
-
-  const members =
-    [...document.querySelectorAll(".groupMember:checked")]
-      .map(x=>x.value);
-
-  const {
-    data:c,
-    error
-  } =
-    await db
-      .from("conversations")
-      .insert({
-        name,
-        type:"group",
-        created_by:me()
-      })
-      .select()
-      .single();
-
-  if(error){
-    notify(error.message);
-    return;
-  }
-
-  const rows = [
-    {
-      conversation_id:c.id,
-      user_id:me(),
-      role:"admin"
-    }
-  ];
-
-  members.forEach(id=>{
-
-    rows.push({
-      conversation_id:c.id,
-      user_id:id,
-      role:"member"
-    });
-
-  });
-
-  const result =
-    await db
-      .from("conversation_members")
-      .insert(rows);
-
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
-
-  await loadConversations();
-
-  closeModal();
-
-  await selectConversationById(c.id);
-}
-
-function groupManageModal(){
-
-  if(!S.conversation) return;
-
-  const c = S.conversation;
-
-  const mine =
-    S.conversationMembers
-      .find(x=>x.user_id===me());
-
-  const isAdmin =
-    mine?.role==="admin";
-
-  modal(`
-
-    <div class="modal-head">
-
-      <h2>Group Settings</h2>
-
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>Group Name</label>
-
-      <input
-        id="renameGroupInput"
-        class="input"
-        value="${esc(c.name || "")}"
-        ${!isAdmin ? "disabled":""}
-      >
-
-    </div>
-
-
-    <div style="margin-bottom:18px">
-
-      <label
-        style="
-          display:block;
-          font-size:12px;
-          font-weight:600;
-          margin-bottom:8px;
-        "
-      >
-        Members
-      </label>
-
-      ${
-        S.conversationMembers
-          .map(m=>`
-
-            <div
-              style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                padding:9px;
-                border-bottom:1px solid var(--border);
-              "
-            >
-
-              <div>
-
-                <strong>
-                  ${esc(memberName(m.user_id))}
-                </strong>
-
-                <div
-                  style="
-                    font-size:10px;
-                    color:var(--muted);
-                  "
-                >
-                  ${esc(m.role || "member")}
-                </div>
-
-              </div>
-
-              ${
-                isAdmin && m.user_id!==me()
-                ?
-                `
-                  <button
-                    class="btn danger small"
-                    onclick="removeMember('${m.user_id}')"
-                  >
-                    Remove
-                  </button>
-                `
-                :
-                ""
-              }
-
-            </div>
-
-          `).join("")
-      }
-
-    </div>
-
-
-    ${
-      isAdmin
-      ?
-      `
         <div class="form-group">
 
-          <label>
-            Add Member
-          </label>
+          <label>Full Name</label>
 
-          <select
-            id="newGroupMember"
+          <input
+            id="editFullName"
             class="input"
+            value="${esc(staff.full_name || "")}"
           >
 
-            <option value="">
-              Select staff
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Profile Email</label>
+
+          <input
+            id="editEmail"
+            class="input"
+            type="email"
+            value="${esc(staff.email || "")}"
+          >
+
+          <div style="font-size:9px;color:var(--muted);margin-top:5px">
+            This updates the profile information, not the Supabase login email.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+        <div class="form-group">
+
+          <label>Position</label>
+
+          <input
+            id="editPosition"
+            class="input"
+            value="${esc(staff.position || "")}"
+            placeholder="e.g. Digital Marketing Executive"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Department</label>
+
+          <input
+            id="editDepartment"
+            class="input"
+            value="${esc(staff.department || "")}"
+            placeholder="e.g. Digital"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+        <div class="form-group">
+
+          <label>Employee ID</label>
+
+          <input
+            id="editEmployeeId"
+            class="input"
+            value="${esc(staff.employee_id || "")}"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Phone</label>
+
+          <input
+            id="editPhone"
+            class="input"
+            value="${esc(staff.phone || "")}"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+        <div class="form-group">
+
+          <label>Join Date</label>
+
+          <input
+            id="editJoinDate"
+            class="input"
+            type="date"
+            value="${esc(staff.join_date || "")}"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Role</label>
+
+          <select id="editRole">
+
+            <option value="staff" ${staff.role==="staff"?"selected":""}>
+              Staff
             </option>
 
-            ${
-              S.profiles
-                .filter(p=>
-                  !S.conversationMembers
-                    .some(m=>m.user_id===p.id)
-                )
-                .map(p=>`
-                  <option value="${p.id}">
-                    ${esc(nameOf(p))}
-                  </option>
-                `)
-                .join("")
-            }
+            <option value="admin" ${staff.role==="admin"?"selected":""}>
+              Admin
+            </option>
 
           </select>
 
         </div>
 
-        <button
-          class="btn secondary"
-          onclick="addMember()"
-        >
-          Add Member
-        </button>
-
-        <div style="height:15px"></div>
-
-        <button
-          class="btn"
-          onclick="renameGroup()"
-        >
-          Save Group Name
-        </button>
-      `
-      :
-      ""
-    }
+      </div>
 
 
-    <div class="modal-actions">
+      <div class="form-group">
+
+        <label>Status</label>
+
+        <select id="editStatus">
+
+          <option value="Active" ${staff.status==="Active"?"selected":""}>
+            Active
+          </option>
+
+          <option value="Inactive" ${staff.status==="Inactive"?"selected":""}>
+            Inactive
+          </option>
+
+          <option value="On Leave" ${staff.status==="On Leave"?"selected":""}>
+            On Leave
+          </option>
+
+        </select>
+
+      </div>
+
+    `,
+    `
 
       <button
-        class="btn danger"
-        onclick="leaveGroup()"
+        class="btn outline"
+        onclick="closeModalForce()"
       >
-        Leave Group
+        Cancel
       </button>
 
-    </div>
-  `);
-}
+      <button
+        class="btn"
+        onclick="saveStaff('${staff.id}')"
+      >
+        Save Changes
+      </button>
 
-async function addMember(){
-
-  const userId =
-    document.getElementById("newGroupMember").value;
-
-  if(!userId) return;
-
-  const result =
-    await db
-      .from("conversation_members")
-      .insert({
-        conversation_id:S.conversation.id,
-        user_id:userId,
-        role:"member"
-      });
-
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
-
-  await loadConversationMembers(
-    S.conversation.id
+    `
   );
-
-  groupManageModal();
 }
 
-async function removeMember(userId){
+async function saveStaff(id){
 
-  if(!confirm("Remove this member from the group?")){
-    return;
-  }
+  const updates={
 
-  const result =
-    await db
-      .from("conversation_members")
-      .delete()
-      .eq(
-        "conversation_id",
-        S.conversation.id
-      )
-      .eq(
-        "user_id",
-        userId
-      );
+    full_name:
+      document.getElementById("editFullName").value.trim(),
 
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
+    email:
+      document.getElementById("editEmail").value.trim(),
 
-  await loadConversationMembers(
-    S.conversation.id
-  );
+    position:
+      document.getElementById("editPosition").value.trim(),
 
-  groupManageModal();
-}
+    department:
+      document.getElementById("editDepartment").value.trim(),
 
-async function renameGroup(){
+    employee_id:
+      document.getElementById("editEmployeeId").value.trim(),
 
-  const name =
-    document
-      .getElementById("renameGroupInput")
-      .value
-      .trim();
+    phone:
+      document.getElementById("editPhone").value.trim(),
 
-  if(!name) return;
+    join_date:
+      document.getElementById("editJoinDate").value || null,
 
-  const result =
-    await db
-      .from("conversations")
-      .update({name})
-      .eq("id",S.conversation.id);
+    role:
+      document.getElementById("editRole").value,
 
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
-
-  S.conversation.name = name;
-
-  await loadConversations();
-
-  closeModal();
-
-  render();
-}
-
-async function leaveGroup(){
-
-  if(!confirm("Leave this group?")){
-    return;
-  }
-
-  const members =
-    S.conversationMembers
-      .filter(m=>m.user_id!==me());
-
-  const mine =
-    S.conversationMembers
-      .find(m=>m.user_id===me());
-
-  if(mine?.role==="admin" && members.length){
-
-    await db
-      .from("conversation_members")
-      .update({role:"admin"})
-      .eq(
-        "conversation_id",
-        S.conversation.id
-      )
-      .eq(
-        "user_id",
-        members[0].user_id
-      );
-  }
-
-  const result =
-    await db
-      .from("conversation_members")
-      .delete()
-      .eq(
-        "conversation_id",
-        S.conversation.id
-      )
-      .eq(
-        "user_id",
-        me()
-      );
-
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
-
-  S.conversation = null;
-
-  await loadConversations();
-
-  closeModal();
-
-  render();
-}
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-async function send(){
-
-  const input =
-    document.getElementById("chatMessage");
-
-  if(!input) return;
-
-  const text =
-    input.value.trim();
-
-  if(!text) return;
-
-  const row = {
-    sender_id:me(),
-    content:text
+    status:
+      document.getElementById("editStatus").value
   };
 
-  if(S.conversation){
-    row.conversation_id =
-      S.conversation.id;
-  }
+  const {data,error}=await db
+    .from("profiles")
+    .update(updates)
+    .eq("id",id)
+    .select()
+    .single();
 
-  if(S.channel){
-    row.channel_id =
-      S.channel.id;
-  }
+  if(error){
 
-  const result =
-    await db
-      .from("messages")
-      .insert(row);
+    console.error(error);
 
-  if(result.error){
-    notify(result.error.message);
+    toast(error.message);
+
     return;
   }
 
-  input.value = "";
-
-  await loadMessages();
-
-  render();
-}
-
-function fileAttach(){
-
-  const input =
-    document.createElement("input");
-
-  input.type="file";
-
-  input.onchange =
-    e=>{
-
-      const file =
-        e.target.files[0];
-
-      if(!file) return;
-
-      S.pendingFile = file;
-
-      notify(
-        `Selected file: ${file.name}`
-      );
-    };
-
-  input.click();
-}
-
-
-/* =========================================================
-   CHAT PAGE
-========================================================= */
-
-function chatPage(){
-
-  const conversations =
-    S.conversations.filter(c=>{
-
-      if(!S.chatSearch) return true;
-
-      const term =
-        S.chatSearch.toLowerCase();
-
-      return String(c.name || "")
-        .toLowerCase()
-        .includes(term);
-    });
-
-  const staff =
-    S.profiles.filter(p=>p.id!==me());
-
-  return `
-
-    <div class="page-head">
-
-      <div>
-
-        <h1>Communication</h1>
-
-        <p>
-          Chat with your team.
-        </p>
-
-      </div>
-
-      <div style="display:flex;gap:8px">
-
-        <button
-          class="btn secondary"
-          onclick="createGroupModal()"
-        >
-          + Group
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="chat-layout">
-
-      <aside class="chat-sidebar">
-
-        <div class="chat-sidebar-head">
-
-          <input
-            class="input"
-            placeholder="Search chats..."
-            value="${esc(S.chatSearch)}"
-            oninput="
-              S.chatSearch=this.value;
-              render()
-            "
-          >
-
-        </div>
-
-
-        <div class="chat-list">
-
-          <div
-            style="
-              font-size:10px;
-              color:var(--muted);
-              text-transform:uppercase;
-              padding:8px;
-            "
-          >
-            Conversations
-          </div>
-
-
-          ${
-            conversations.map(c=>`
-
-              <div
-                class="
-                  chat-item
-                  ${
-                    S.conversation?.id===c.id
-                    ? "active"
-                    : ""
-                  }
-                "
-                onclick="
-                  selectConversationById('${c.id}')
-                "
-              >
-
-                <div class="chat-item-title">
-
-                  ${
-                    c.type==="group"
-                    ? "👥 "
-                    : "● "
-                  }
-
-                  ${esc(
-                    c.type==="group"
-                    ? c.name
-                    : directChatName(c)
-                  )}
-
-                </div>
-
-                <div class="chat-item-sub">
-                  ${c.type==="group" ? "Group chat" : "Direct message"}
-                </div>
-
-              </div>
-
-            `).join("")
-          }
-
-
-          <div
-            style="
-              font-size:10px;
-              color:var(--muted);
-              text-transform:uppercase;
-              padding:18px 8px 8px;
-            "
-          >
-            Start Chat
-          </div>
-
-
-          ${
-            staff.map(p=>`
-
-              <div
-                class="chat-item"
-                onclick="direct('${p.id}')"
-              >
-
-                <div class="chat-item-title">
-                  ${esc(nameOf(p))}
-                </div>
-
-                <div class="chat-item-sub">
-                  ${esc(p.role || "Staff")}
-                </div>
-
-              </div>
-
-            `).join("")
-          }
-
-        </div>
-
-      </aside>
-
-
-      <section class="chat-main">
-
-        ${
-          S.conversation || S.channel
-          ?
-          `
-            <div class="chat-header">
-
-              <div>
-
-                <strong>
-
-                  ${
-                    S.conversation
-                    ?
-                    esc(
-                      S.conversation.type==="group"
-                      ? S.conversation.name
-                      : directChatName(
-                          S.conversation
-                        )
-                    )
-                    :
-                    `# ${esc(S.channel.name)}`
-                  }
-
-                </strong>
-
-                <div
-                  style="
-                    color:var(--muted);
-                    font-size:10px;
-                    margin-top:3px;
-                  "
-                >
-
-                  ${
-                    S.conversation
-                    ?
-                    S.conversation.type==="group"
-                    ? `${S.conversationMembers.length} members`
-                    : "Direct message"
-                    :
-                    "Channel"
-                  }
-
-                </div>
-
-              </div>
-
-
-              ${
-                S.conversation?.type==="group"
-                ?
-                `
-                  <button
-                    class="btn secondary small"
-                    onclick="groupManageModal()"
-                  >
-                    Group Settings
-                  </button>
-                `
-                :
-                ""
-              }
-
-            </div>
-
-
-            <div class="chat-messages">
-
-              ${
-                S.messages.length
-                ?
-                S.messages.map(m=>`
-
-                  <div
-                    class="
-                      message
-                      ${m.sender_id===me() ? "mine":""}
-                    "
-                  >
-
-                    <div class="message-name">
-
-                      ${
-                        m.sender_id===me()
-                        ? "You"
-                        : esc(memberName(m.sender_id))
-                      }
-
-                    </div>
-
-                    <div class="message-bubble">
-                      ${esc(m.content || "")}
-                    </div>
-
-                    <div class="message-time">
-                      ${formatDate(m.created_at)}
-                    </div>
-
-                  </div>
-
-                `).join("")
-                :
-                `
-                  <div
-                    style="
-                      text-align:center;
-                      color:var(--muted);
-                      padding:50px;
-                    "
-                  >
-                    No messages yet.
-                  </div>
-                `
-              }
-
-            </div>
-
-
-            <div class="chat-input">
-
-              <button
-                class="btn secondary"
-                onclick="fileAttach()"
-              >
-                📎
-              </button>
-
-              <input
-                id="chatMessage"
-                class="input"
-                placeholder="Type a message..."
-                onkeydown="
-                  if(event.key==='Enter' && !event.shiftKey){
-                    event.preventDefault();
-                    send();
-                  }
-                "
-              >
-
-              <button
-                class="btn"
-                onclick="send()"
-              >
-                Send
-              </button>
-
-            </div>
-
-          `
-          :
-          `
-            <div
-              style="
-                flex:1;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:var(--muted);
-                text-align:center;
-              "
-            >
-
-              <div>
-
-                <div
-                  style="
-                    font-size:40px;
-                    margin-bottom:12px;
-                  "
-                >
-                  ◉
-                </div>
-
-                <strong>
-                  Select a conversation
-                </strong>
-
-                <div style="font-size:12px;margin-top:5px">
-                  Or start a new chat with a staff member.
-                </div>
-
-              </div>
-
-            </div>
-          `
-        }
-
-      </section>
-
-    </div>
-  `;
-}
-
-function directChatName(c){
-
-  if(!c) return "Chat";
-
-  const members =
-    S.conversationMembers
-      .filter(m=>m.conversation_id===c.id);
-
-  const other =
-    members.find(m=>m.user_id!==me());
-
-  if(other){
-    return memberName(other.user_id);
+  const index=S.profiles.findIndex(
+    x=>x.id===id
+  );
+
+  if(index!==-1){
+    S.profiles[index]=data;
   }
 
-  return "Direct Chat";
-}
-
-
-/* =========================================================
-   KNOWLEDGE HUB
-========================================================= */
-
-function knowledge(){
-
-  return `
-
-    <div class="page-head">
-
-      <div>
-        <h1>Knowledge Hub</h1>
-        <p>
-          Shared documents and resources.
-        </p>
-      </div>
-
-      <button
-        class="btn"
-        onclick="uploadDoc()"
-      >
-        + Upload
-      </button>
-
-    </div>
-
-
-    <div class="grid grid-3">
-
-      ${
-        S.docs.length
-        ?
-        S.docs.map(d=>`
-
-          <div class="card">
-
-            <div
-              style="
-                font-size:28px;
-                margin-bottom:12px;
-              "
-            >
-              📄
-            </div>
-
-            <strong>
-              ${esc(d.title || d.name || "Document")}
-            </strong>
-
-            <p
-              style="
-                color:var(--muted);
-                font-size:12px;
-              "
-            >
-              ${esc(d.description || "")}
-            </p>
-
-            <span class="badge">
-              ${esc(d.category || "General")}
-            </span>
-
-          </div>
-
-        `).join("")
-        :
-        `
-          <div class="card">
-            <p style="color:var(--muted)">
-              No documents available.
-            </p>
-          </div>
-        `
-      }
-
-    </div>
-  `;
-}
-
-function uploadDoc(){
-
-  modal(`
-
-    <div class="modal-head">
-
-      <h2>Add Document</h2>
-
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Title</label>
-
-      <input
-        id="docTitle"
-        class="input"
-      >
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Description</label>
-
-      <textarea id="docDescription"></textarea>
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Category</label>
-
-      <input
-        id="docCategory"
-        class="input"
-        placeholder="General"
-      >
-
-    </div>
-
-    <div class="modal-actions">
-
-      <button
-        class="btn"
-        onclick="saveDoc()"
-      >
-        Save
-      </button>
-
-    </div>
-  `);
-}
-
-async function saveDoc(){
-
-  const title =
-    document.getElementById("docTitle").value.trim();
-
-  const description =
-    document.getElementById("docDescription").value;
-
-  const category =
-    document.getElementById("docCategory").value || "General";
-
-  if(!title){
-    notify("Please enter a title.");
-    return;
+  if(id===S.user.id){
+    S.profile=data;
+    updateUserUI();
   }
 
-  const result =
-    await db
-      .from("knowledge_documents")
-      .insert({
-        title,
-        description,
-        category,
-        created_by:me()
-      });
+  closeModalForce();
 
-  if(result.error){
-    notify(result.error.message);
-    return;
-  }
+  toast("Staff information updated.");
 
-  await docs();
-
-  closeModal();
-
-  render();
-}
-
-
-/* =========================================================
-   CALENDAR
-========================================================= */
-
-function calendar(){
-
-  const date =
-    new Date();
-
-  const year =
-    date.getFullYear();
-
-  const month =
-    date.getMonth();
-
-  const first =
-    new Date(year,month,1);
-
-  const last =
-    new Date(year,month+1,0);
-
-  const start =
-    first.getDay();
-
-  let cells = "";
-
-  for(let i=0;i<start;i++){
-
-    cells += `
-      <div class="calendar-day"></div>
-    `;
-  }
-
-  for(let d=1;d<=last.getDate();d++){
-
-    cells += `
-      <div class="calendar-day">
-
-        <strong>${d}</strong>
-
-        ${
-          d===date.getDate()
-          ?
-          `
-            <div class="calendar-event">
-              Today
-            </div>
-          `
-          :
-          ""
-        }
-
-      </div>
-    `;
-  }
-
-  return `
-
-    <div class="page-head">
-
-      <div>
-
-        <h1>Calendar</h1>
-
-        <p>
-          ${date.toLocaleDateString("en-MY",{
-            month:"long",
-            year:"numeric"
-          })}
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="calendar-grid">
-
-        ${cells}
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   STAFF
-========================================================= */
-
-function staff(){
-
-  return `
-
-    <div class="page-head">
-
-      <div>
-        <h1>Staff</h1>
-        <p>
-          Nona Costex team directory.
-        </p>
-      </div>
-
-    </div>
-
-
-    <div class="grid grid-3">
-
-      ${
-        S.profiles.map(p=>`
-
-          <div class="card">
-
-            <div class="profile-avatar">
-              ${initials(nameOf(p))}
-            </div>
-
-            <strong>
-              ${esc(nameOf(p))}
-            </strong>
-
-            <div
-              style="
-                color:var(--muted);
-                font-size:12px;
-                margin-top:5px;
-              "
-            >
-              ${esc(p.role || "Staff")}
-            </div>
-
-            ${
-              p.id!==me()
-              ?
-              `
-                <div style="margin-top:15px">
-
-                  <button
-                    class="btn secondary small"
-                    onclick="direct('${p.id}');go('communication')"
-                  >
-                    Message
-                  </button>
-
-                </div>
-              `
-              :
-              ""
-            }
-
-          </div>
-
-        `).join("")
-      }
-
-    </div>
-  `;
+  await staffPage();
 }
 
 
@@ -3843,38 +4109,27 @@ function staff(){
    ANALYTICS
 ========================================================= */
 
-function analytics(){
+async function analyticsPage(){
 
-  const tasks = getTasks();
+  await loadTasks();
 
-  const completed =
-    tasks.filter(
-      t=>t.status==="Completed"
-    ).length;
+  const total=S.tasks.length;
 
-  const progress =
-    tasks.length
-    ? Math.round(
-        completed/tasks.length*100
-      )
-    : 0;
+  const completed=
+    S.tasks.filter(x=>x.status==="Completed").length;
 
-  const logs =
-    getLogs()
-      .filter(l=>l.user_id===me());
+  const progress=
+    total
+    ?Math.round((completed/total)*100)
+    :0;
 
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
 
       <div>
-
         <h1>Analytics</h1>
-
-        <p>
-          Your current activity overview.
-        </p>
-
+        <p>Overview of workspace activity.</p>
       </div>
 
     </div>
@@ -3882,24 +4137,20 @@ function analytics(){
 
     <div class="grid grid-3">
 
-      <div class="card stat">
+      <div class="card stat-card">
 
-        <div class="stat-label">
-          Total Tasks
-        </div>
+        <div class="stat-label">Total Tasks</div>
 
         <div class="stat-value">
-          ${tasks.length}
+          ${total}
         </div>
 
       </div>
 
 
-      <div class="card stat">
+      <div class="card stat-card">
 
-        <div class="stat-label">
-          Completed Tasks
-        </div>
+        <div class="stat-label">Completed Tasks</div>
 
         <div class="stat-value">
           ${completed}
@@ -3908,14 +4159,12 @@ function analytics(){
       </div>
 
 
-      <div class="card stat">
+      <div class="card stat-card">
 
-        <div class="stat-label">
-          Work Logs
-        </div>
+        <div class="stat-label">Completion Rate</div>
 
         <div class="stat-value">
-          ${logs.length}
+          ${progress}%
         </div>
 
       </div>
@@ -3923,37 +4172,18 @@ function analytics(){
     </div>
 
 
-    <br>
+    <div class="card card-pad" style="margin-top:15px">
 
-
-    <div class="card">
-
-      <h3 style="margin-top:0">
+      <div class="card-title">
         Task Completion
-      </h3>
+      </div>
 
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          margin-bottom:8px;
-        "
-      >
-
-        <span>
-          Progress
-        </span>
-
-        <strong>
-          ${progress}%
-        </strong>
-
+      <div style="font-size:30px;font-weight:600">
+        ${progress}%
       </div>
 
       <div class="progress">
-
         <i style="width:${progress}%"></i>
-
       </div>
 
     </div>
@@ -3967,172 +4197,60 @@ function analytics(){
 
 function dataPage(){
 
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
 
       <div>
-
-        <h1>Data & Backup</h1>
-
-        <p>
-          Export and restore local portal data.
-        </p>
-
+        <h1>Data</h1>
+        <p>Workspace data overview.</p>
       </div>
 
     </div>
 
 
-    <div class="grid grid-2">
+    <div class="grid grid-3">
 
-      <div class="card">
-
-        <h3 style="margin-top:0">
-          Backup
-        </h3>
-
-        <p
-          style="
-            color:var(--muted);
-            font-size:13px;
-          "
-        >
-          Download your local tasks, work logs
-          and attendance records.
-        </p>
-
-        <button
-          class="btn"
-          onclick="backup()"
-        >
-          Export Backup
-        </button>
-
+      <div class="card stat-card">
+        <div class="stat-label">Staff</div>
+        <div class="stat-value">${S.profiles.length}</div>
       </div>
 
+      <div class="card stat-card">
+        <div class="stat-label">Conversations</div>
+        <div class="stat-value">${S.conversations.length}</div>
+      </div>
 
-      <div class="card">
+      <div class="card stat-card">
+        <div class="stat-label">Notifications</div>
+        <div class="stat-value">${S.notifications.length}</div>
+      </div>
 
-        <h3 style="margin-top:0">
-          Restore
-        </h3>
+    </div>
 
-        <p
-          style="
-            color:var(--muted);
-            font-size:13px;
-          "
-        >
-          Restore a previous portal backup.
-        </p>
 
-        <input
-          id="restoreFile"
-          type="file"
-          accept=".json"
-          class="input"
-          onchange="restore(event)"
-        >
+    <div class="card card-pad" style="margin-top:15px">
+
+      <div class="card-title">
+        Supabase Connection
+      </div>
+
+      <div style="font-size:12px;color:#68736c;line-height:1.7">
+
+        <div>
+          Status:
+          <span class="badge green">Connected</span>
+        </div>
+
+        <div style="margin-top:7px">
+          Project:
+          ${esc(SUPABASE_URL)}
+        </div>
 
       </div>
 
     </div>
   `;
-}
-
-function backup(){
-
-  const data = {
-
-    tasks:getTasks(),
-
-    logs:getLogs(),
-
-    attendance:Object.keys(localStorage)
-      .filter(k=>
-        k.startsWith("nona_attendance_")
-      )
-      .reduce((o,k)=>{
-        o[k]=localStorage.getItem(k);
-        return o;
-      },{}),
-
-    exported_at:new Date().toISOString()
-
-  };
-
-  const blob =
-    new Blob(
-      [JSON.stringify(data,null,2)],
-      {type:"application/json"}
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href=url;
-  a.download=
-    `nona-costex-backup-${today()}.json`;
-
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-
-function restore(event){
-
-  const file =
-    event.target.files[0];
-
-  if(!file) return;
-
-  const reader =
-    new FileReader();
-
-  reader.onload = e=>{
-
-    try{
-
-      const data =
-        JSON.parse(e.target.result);
-
-      if(data.tasks){
-        setTasks(data.tasks);
-      }
-
-      if(data.logs){
-        setLogs(data.logs);
-      }
-
-      if(data.attendance){
-
-        Object.entries(
-          data.attendance
-        ).forEach(([key,value])=>{
-          localStorage.setItem(key,value);
-        });
-
-      }
-
-      notify("Backup restored successfully.");
-
-      render();
-
-    }catch(err){
-
-      notify(
-        "Invalid backup file."
-      );
-
-    }
-
-  };
-
-  reader.readAsText(file);
 }
 
 
@@ -4142,90 +4260,107 @@ function restore(event){
 
 function profilePage(){
 
-  const p =
-    currentProfile();
+  const p=S.profile || {};
 
-  return `
+  document.getElementById("content").innerHTML=`
 
     <div class="page-head">
 
       <div>
-
-        <h1>My Profile</h1>
-
-        <p>
-          Manage your staff information.
-        </p>
-
+        <h1>Profile</h1>
+        <p>Your staff information.</p>
       </div>
 
     </div>
 
 
-    <div class="card">
+    <div class="grid grid-2">
 
-      <div class="profile-avatar">
-        ${initials(nameOf(p))}
+      <div class="card card-pad">
+
+        <div style="display:flex;align-items:center;gap:15px">
+
+          <div class="profile-avatar">
+            ${initials(p.full_name)}
+          </div>
+
+          <div>
+
+            <div style="font-size:18px;font-weight:600">
+              ${esc(p.full_name || "User")}
+            </div>
+
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">
+              ${esc(p.position || p.role || "Staff")}
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="grid grid-2">
 
-        <div>
+      <div class="card card-pad">
 
-          <div class="stat-label">
-            Full Name
-          </div>
-
-          <strong>
-            ${esc(nameOf(p))}
-          </strong>
-
+        <div class="card-title">
+          Personal Information
         </div>
 
+        ${profileField("Full Name",p.full_name)}
+        ${profileField("Email",p.email)}
+        ${profileField("Phone",p.phone)}
+        ${profileField("Employee ID",p.employee_id)}
 
-        <div>
+      </div>
 
-          <div class="stat-label">
-            Email
-          </div>
 
-          <strong>
-            ${esc(p.email || S.user?.email || "")}
-          </strong>
+      <div class="card card-pad">
 
+        <div class="card-title">
+          Work Information
         </div>
 
+        ${profileField("Position",p.position)}
+        ${profileField("Department",p.department)}
+        ${profileField("Role",p.role)}
+        ${profileField("Join Date",p.join_date ? formatDate(p.join_date) : "")}
+        ${profileField("Status",p.status || "Active")}
 
-        <div>
+      </div>
 
-          <div class="stat-label">
-            Role
-          </div>
 
-          <strong>
-            ${esc(p.role || "Staff")}
-          </strong>
+      <div class="card card-pad">
 
+        <div class="card-title">
+          User ID
         </div>
 
-
-        <div>
-
-          <div class="stat-label">
-            User ID
-          </div>
-
-          <strong
-            style="
-              font-size:11px;
-              word-break:break-all;
-            "
-          >
-            ${esc(me())}
-          </strong>
-
+        <div style="font-size:10px;color:var(--muted);word-break:break-all">
+          ${esc(p.id)}
         </div>
 
+        <div style="font-size:10px;color:var(--muted);margin-top:8px">
+          This is your Supabase Auth user ID.
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function profileField(label,value){
+
+  return `
+    <div style="padding:9px 0;border-bottom:1px solid #f0f2f1">
+
+      <div style="font-size:9px;color:var(--muted)">
+        ${label}
+      </div>
+
+      <div style="font-size:12px;margin-top:4px">
+        ${esc(value || "—")}
       </div>
 
     </div>
@@ -4237,160 +4372,112 @@ function profilePage(){
    NOTIFICATIONS
 ========================================================= */
 
-function notifications(){
+async function notificationsPage(){
 
-  modal(`
+  await loadNotifications();
 
-    <div class="modal-head">
+  document.getElementById("content").innerHTML=`
 
-      <h2>Notifications</h2>
+    <div class="page-head">
 
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
+      <div>
+        <h1>Notifications</h1>
+        <p>Your latest updates and notifications.</p>
+      </div>
 
     </div>
 
 
-    ${
-      S.notifications.length
-      ?
-      S.notifications.map(n=>`
+    <div class="card">
 
-        <div
-          style="
-            padding:12px;
-            border-bottom:1px solid var(--border);
-          "
-        >
+      ${
+        S.notifications.length
+        ?
+        S.notifications.map(n=>`
 
-          <strong>
-            ${esc(n.title || "Notification")}
-          </strong>
+          <div style="padding:16px;border-bottom:1px solid var(--border)">
 
-          <div
-            style="
-              color:var(--muted);
-              font-size:12px;
-              margin-top:4px;
-            "
-          >
-            ${esc(n.message || n.content || "")}
+            <div style="display:flex;justify-content:space-between;gap:15px">
+
+              <div>
+
+                <div style="font-size:12px;font-weight:600">
+                  ${esc(n.title || "Notification")}
+                </div>
+
+                <div style="font-size:11px;color:#68736c;margin-top:5px;line-height:1.5">
+                  ${esc(n.message || "")}
+                </div>
+
+                <div style="font-size:9px;color:#a0aaa4;margin-top:7px">
+                  ${formatDateTime(n.created_at)}
+                </div>
+
+              </div>
+
+              ${
+                !n.is_read
+                ?
+                `<span class="badge green">New</span>`
+                :""
+              }
+
+            </div>
+
           </div>
 
-        </div>
-
-      `).join("")
-      :
-      `
-        <p style="color:var(--muted)">
-          No notifications.
-        </p>
-      `
-    }
-
-
-    <div class="modal-actions">
-
-      <button
-        class="btn secondary"
-        onclick="markRead()"
-      >
-        Mark All Read
-      </button>
-
-    </div>
-
-  `);
-}
-
-async function markRead(){
-
-  if(!me()) return;
-
-  await db
-    .from("communication_notifications")
-    .update({
-      read_at:new Date().toISOString()
-    })
-    .eq("user_id",me())
-    .is("read_at",null);
-
-  await notifs();
-
-  closeModal();
-
-  render();
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function modal(content){
-
-  S.modal = true;
-
-  document.getElementById("modalRoot").innerHTML = `
-
-    <div
-      class="modal-overlay"
-      onclick="
-        if(event.target===this) closeModal()
-      "
-    >
-
-      <div class="modal">
-
-        ${content}
-
-      </div>
+        `).join("")
+        :
+        `<div class="empty">No notifications.</div>`
+      }
 
     </div>
   `;
 }
 
-function closeModal(){
-
-  S.modal = null;
-
-  document.getElementById(
-    "modalRoot"
-  ).innerHTML = "";
-}
-
 
 /* =========================================================
-   LIVE CLOCK
+   INITIALISE
 ========================================================= */
 
-setInterval(()=>{
+async function init(){
 
-  const clock =
-    document.getElementById("liveClock");
+  const {
+    data:{
+      session
+    }
+  }=await db.auth.getSession();
 
-  if(clock){
-    clock.textContent =
-      new Date().toLocaleTimeString(
-        "en-MY",
-        {
-          hour:"2-digit",
-          minute:"2-digit",
-          second:"2-digit"
-        }
-      );
+  if(session?.user){
+
+    await startApp(session.user);
+
+  }else{
+
+    document
+      .getElementById("loginScreen")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("app")
+      .classList.add("hidden");
+
   }
 
-},1000);
+  db.auth.onAuthStateChange(
+    async(event,session)=>{
 
+      if(event==="SIGNED_IN" && session?.user){
 
-/* =========================================================
-   START
-========================================================= */
+        if(!S.user){
+          await startApp(session.user);
+        }
+
+      }
+
+    }
+  );
+}
 
 init();
 
