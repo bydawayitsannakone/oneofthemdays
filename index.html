@@ -4,43 +4,108 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nona Costex Staff Portal</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Helvetica,Arial,sans-serif;background:#f7f9f7;color:#172019}
+body{
+  margin:0;
+  font-family:Helvetica,Arial,sans-serif;
+  background:#f7f9f7;
+  color:#172019
+}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-input,select,textarea{width:100%;border:1px solid #e2e8e4;border-radius:9px;padding:10px;background:#fff}
-textarea{min-height:90px;resize:vertical}
-
-:root{
- --green:#9fb873;
- --green-dark:#7f9a58;
- --green-light:#edf3e4;
- --green-soft:#f6f8f1;
- --border:#e2e8e4;
- --text:#172019;
- --muted:#718078;
- --bg:#f7f9f7;
- --white:#fff;
- --danger:#c0392b;
+input,select,textarea{
+  width:100%;
+  border:1px solid #e2e8e4;
+  border-radius:10px;
+  padding:11px 12px;
+  background:#fff;
+  outline:none
 }
+input:focus,select:focus,textarea:focus{
+  border-color:#9fb873;
+  box-shadow:0 0 0 3px #edf3e4
+}
+textarea{min-height:95px;resize:vertical}
 
 .app{display:flex;min-height:100vh}
-.side{width:240px;position:fixed;inset:0 auto 0 0;background:#fff;border-right:1px solid var(--border);padding:18px 12px;z-index:20}
-.main{margin-left:240px;flex:1;min-width:0}
-.top{height:64px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:10}
-.content{padding:22px;max-width:1300px;margin:auto}
+.side{
+  width:245px;
+  position:fixed;
+  inset:0 auto 0 0;
+  background:#fff;
+  border-right:1px solid #e2e8e4;
+  padding:18px 12px;
+  z-index:20
+}
+.main{
+  margin-left:245px;
+  flex:1;
+  min-width:0
+}
+.top{
+  height:68px;
+  background:#fff;
+  border-bottom:1px solid #e2e8e4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  position:sticky;
+  top:0;
+  z-index:10
+}
+.content{
+  padding:24px;
+  max-width:1350px;
+  margin:auto
+}
 
-.brand{font-weight:700;font-size:19px;padding:5px 10px 20px}
-.brand small{display:block;font-size:11px;color:#888;font-weight:400;margin-top:3px}
-.nav-title{font-size:10px;color:#aaa;text-transform:uppercase;padding:14px 10px 6px}
-.nav button{width:100%;background:transparent;border:0;text-align:left;padding:10px;border-radius:9px;color:#718078}
-.nav button:hover,.nav button.active{background:var(--green-light);color:#5f7541}
+.brand{
+  font-weight:700;
+  font-size:19px;
+  padding:5px 10px 20px
+}
+.brand small{
+  display:block;
+  font-size:11px;
+  color:#8a948d;
+  font-weight:400;
+  margin-top:4px
+}
+.nav-title{
+  font-size:10px;
+  color:#a0aaa4;
+  text-transform:uppercase;
+  padding:15px 10px 7px;
+  letter-spacing:.7px
+}
+.nav button{
+  width:100%;
+  background:transparent;
+  border:0;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:10px;
+  color:#657068;
+  transition:.15s
+}
+.nav button:hover,
+.nav button.active{
+  background:#edf3e4;
+  color:#5f7541
+}
 
-.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
-.grid{display:grid;gap:14px}
+.card{
+  background:#fff;
+  border:1px solid #e2e8e4;
+  border-radius:16px;
+  padding:18px
+}
+.grid{display:grid;gap:15px}
 .two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .four{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -48,86 +113,439 @@ textarea{min-height:90px;resize:vertical}
 .between{justify-content:space-between}
 .wrap{flex-wrap:wrap}
 
-.title{font-size:24px;font-weight:700;margin:0}
-.sub{font-size:13px;color:var(--muted);margin:5px 0 0}
-.small{font-size:12px}
-.muted{color:var(--muted)}
+.title{
+  font-size:25px;
+  font-weight:700;
+  margin:0
+}
+.sub{
+  font-size:13px;
+  color:#758078;
+  margin:5px 0 0
+}
 
-.btn{border:0;background:var(--green);color:#fff;padding:9px 14px;border-radius:9px}
-.btn:hover{background:var(--green-dark)}
-.btn.secondary{background:var(--green-light);color:#5f7541}
-.btn.danger{background:#fff0ef;color:var(--danger)}
-.btn.small{padding:7px 10px;font-size:12px}
+.btn{
+  border:0;
+  background:#9fb873;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:600
+}
+.btn:hover{background:#7f9a58}
+.btn.secondary{
+  background:#edf3e4;
+  color:#5f7541
+}
+.btn.secondary:hover{background:#e1ebd2}
+.btn.danger{
+  background:#fff0ef;
+  color:#b42318
+}
+.btn.small{
+  padding:7px 10px;
+  font-size:12px
+}
 
-.stat{padding:15px}
-.stat b{display:block;font-size:24px}
-.stat span{font-size:12px;color:var(--muted)}
+.stat{
+  padding:18px;
+  min-height:110px
+}
+.stat b{
+  display:block;
+  font-size:26px;
+  margin-bottom:5px
+}
+.stat span{
+  font-size:12px;
+  color:#778179
+}
 
-.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:600;background:#eef1ee}
+.pill{
+  display:inline-block;
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:11px;
+  font-weight:600
+}
 .high{background:#fee2e2;color:#991b1b}
 .medium{background:#fef3c7;color:#92400e}
-.low,.green{background:var(--green-light);color:#5f7541}
-.blue{background:#dbeafe;color:#1e40af}
+.low{background:#edf3e4;color:#5f7541}
+.green{background:#edf3e4;color:#5f7541}
+.blue{background:#e8f0fb;color:#315b88}
 .red{background:#fee2e2;color:#991b1b}
-.orange{background:#fff3cd;color:#856404}
+.orange{background:#fff3df;color:#a65d00}
+.purple{background:#f1eafd;color:#7352a5}
 
-.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#edf3e4}
-.progress{height:8px;background:#e8eee5;border-radius:99px;overflow:hidden}
-.progress i{display:block;height:100%;background:var(--green)}
+.progress{
+  height:9px;
+  background:#edf0eb;
+  border-radius:99px;
+  overflow:hidden
+}
+.progress i{
+  display:block;
+  height:100%;
+  background:#9fb873;
+  border-radius:99px;
+  transition:.25s
+}
 
-table{width:100%;border-collapse:collapse}
-th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:middle}
-th{font-size:11px;color:var(--muted)}
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#edf3e4
+}
+.small{font-size:12px}
+.muted{color:#778179}
 
-.empty{text-align:center;color:#999;padding:40px 10px}
-.knowledge{padding:12px 0;border-bottom:1px solid #eee}
+.empty{
+  text-align:center;
+  color:#99a19b;
+  padding:45px 10px
+}
 
-.login{min-height:100vh;display:grid;place-items:center;background:#f0f4ed;padding:20px}
-.loginbox{width:min(410px,100%);background:#fff;padding:28px;border:1px solid var(--border);border-radius:18px}
-.error{background:#fff0ef;color:#b42318;padding:10px;border-radius:9px;font-size:13px;margin:10px 0}
+table{
+  width:100%;
+  border-collapse:collapse
+}
+th,td{
+  padding:11px;
+  border-bottom:1px solid #edf0ed;
+  text-align:left;
+  font-size:13px
+}
+th{
+  font-size:11px;
+  color:#7b857e;
+  text-transform:uppercase;
+  letter-spacing:.4px
+}
 
-.modalbg{position:fixed;inset:0;background:#0006;display:grid;place-items:center;z-index:100;padding:18px}
-.modal{background:#fff;border-radius:16px;width:min(760px,100%);max-height:90vh;overflow:auto;padding:22px}
+.login{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  background:#f1f5ee;
+  padding:20px
+}
+.loginbox{
+  width:min(410px,100%);
+  background:#fff;
+  padding:30px;
+  border:1px solid #e2e8e4;
+  border-radius:20px;
+  box-shadow:0 15px 45px #78905d18
+}
+.error{
+  background:#fff0ef;
+  color:#b42318;
+  padding:10px;
+  border-radius:9px;
+  font-size:13px;
+  margin:10px 0
+}
 
-.toast{position:fixed;right:18px;top:78px;z-index:200;background:#172019;color:#fff;padding:11px 14px;border-radius:9px;font-size:13px}
+.modalbg{
+  position:fixed;
+  inset:0;
+  background:#17201966;
+  display:grid;
+  place-items:center;
+  z-index:100;
+  padding:18px
+}
+.modal{
+  background:#fff;
+  border-radius:18px;
+  width:min(720px,100%);
+  max-height:92vh;
+  overflow:auto;
+  padding:23px;
+  box-shadow:0 25px 70px #0002
+}
 
-.attendance-status{background:var(--green-soft);border:1px solid #dce6ca;border-radius:12px;padding:18px}
-.attendance-time,.clock-time{color:var(--green-dark);font-size:28px;font-weight:700}
+.toast{
+  position:fixed;
+  right:18px;
+  top:80px;
+  z-index:200;
+  background:#172019;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:10px;
+  font-size:13px
+}
 
-.chat{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 110px);min-height:550px;padding:0;overflow:hidden}
-.chatlist{border-right:1px solid #eee;overflow:auto}
-.chatitem{padding:12px;border-bottom:1px solid #eee;cursor:pointer}
-.chatitem:hover,.chatitem.active{background:var(--green-soft)}
-.chatwindow{display:flex;flex-direction:column;min-width:0}
-.messages{flex:1;overflow:auto;padding:16px;background:#fafcf9}
-.bubble{max-width:75%;padding:9px 11px;border:1px solid #e7e7e2;background:#fff;border-radius:12px;margin-bottom:9px}
-.bubble.mine{margin-left:auto;background:var(--green);color:#fff;border-color:var(--green)}
-.meta{font-size:10px;opacity:.6;margin-top:4px}
+/* dashboard */
+.hero-card{
+  background:linear-gradient(135deg,#f2f6e9,#fff);
+  border:1px solid #dfe8d5;
+  border-radius:18px;
+  padding:22px
+}
+.mini-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:#edf3e4;
+  color:#5f7541;
+  font-size:19px
+}
 
+/* tasks */
+.task-card{
+  border:1px solid #e4eae5;
+  border-radius:14px;
+  padding:15px;
+  background:#fff
+}
+.task-card:hover{
+  border-color:#cfdcc1;
+  box-shadow:0 8px 25px #6f88501a
+}
+.task-actions{
+  opacity:.8
+}
+
+/* work progress */
+.progress-card{
+  padding:17px;
+  border:1px solid #e2e8e4;
+  border-radius:15px;
+  background:#fff
+}
+
+/* communication */
+.chat{
+  display:grid;
+  grid-template-columns:285px 1fr;
+  height:calc(100vh - 125px);
+  min-height:570px;
+  padding:0;
+  overflow:hidden
+}
+.chatlist{
+  border-right:1px solid #edf0ed;
+  overflow:auto;
+  background:#fbfcfa
+}
+.chatitem{
+  padding:12px 14px;
+  border-bottom:1px solid #edf0ed;
+  cursor:pointer
+}
+.chatitem:hover,
+.chatitem.active{
+  background:#edf3e4
+}
+.chatwindow{
+  display:flex;
+  flex-direction:column;
+  min-width:0
+}
+.chat-header{
+  padding:15px;
+  border-bottom:1px solid #edf0ed;
+  background:#fff
+}
+.messages{
+  flex:1;
+  overflow:auto;
+  padding:18px;
+  background:#f8faf7
+}
+.bubble{
+  max-width:75%;
+  padding:10px 12px;
+  border:1px solid #e4e9e5;
+  background:#fff;
+  border-radius:14px;
+  margin-bottom:10px
+}
+.bubble.mine{
+  margin-left:auto;
+  background:#9fb873;
+  color:#fff;
+  border-color:#9fb873
+}
+.meta{
+  font-size:10px;
+  opacity:.6;
+  margin-top:5px
+}
+
+/* communication thumbnail */
+.comm-preview{
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:#edf3e4;
+  color:#5f7541;
+  flex:none;
+  font-size:19px
+}
+
+/* notifications */
+.notification-card{
+  display:flex;
+  gap:12px;
+  padding:13px;
+  margin-bottom:9px;
+  border:1px solid #e4eae5;
+  border-radius:13px;
+  background:#fbfcfa
+}
+.notification-card.unread{
+  background:#f2f6ea;
+  border-color:#dbe6ce
+}
+
+/* knowledge */
+.knowledge-card{
+  display:flex;
+  gap:14px;
+  padding:15px;
+  border:1px solid #e3e9e4;
+  border-radius:14px;
+  background:#fff
+}
+.doc-thumb{
+  width:55px;
+  height:55px;
+  border-radius:14px;
+  background:#edf3e4;
+  color:#5f7541;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  flex:none
+}
+
+/* calendar */
+.calendar-wrap{
+  background:#fff;
+  border:1px solid #e2e8e4;
+  border-radius:18px;
+  overflow:hidden
+}
+.calendar-head{
+  padding:18px;
+  border-bottom:1px solid #edf0ed
+}
+.calendar-week{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  background:#f8faf7;
+  border-bottom:1px solid #e5ebe5
+}
+.calendar-week div{
+  padding:10px;
+  text-align:center;
+  font-size:11px;
+  color:#7a847d;
+  font-weight:600
+}
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr)
+}
+.cal-cell{
+  min-height:115px;
+  border-right:1px solid #edf0ed;
+  border-bottom:1px solid #edf0ed;
+  padding:9px;
+  background:#fff
+}
+.cal-cell:nth-child(7n){border-right:0}
+.cal-cell.muted-day{
+  background:#fafbf9;
+  color:#aab1ac
+}
+.cal-cell.today{
+  background:#f3f7ed
+}
+.day-number{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:12px;
+  margin-bottom:5px
+}
+.today .day-number{
+  background:#9fb873;
+  color:#fff;
+  font-weight:700
+}
+.cal-event{
+  display:block;
+  padding:4px 6px;
+  border-radius:6px;
+  margin-top:4px;
+  font-size:10px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis
+}
+.event-public{
+  background:#edf3e4;
+  color:#5f7541
+}
+.event-company{
+  background:#e8f0fb;
+  color:#315b88
+}
+.event-other{
+  background:#f1eafd;
+  color:#7352a5
+}
+
+/* mobile */
 .mobile{display:none}
+.hide{display:flex}
 
-.calendar-event{border-left:4px solid var(--green);padding:10px 12px;background:var(--green-soft);border-radius:8px}
-.calendar-event.public{border-left-color:#78909c}
-.calendar-event.company{border-left-color:var(--green)}
-.calendar-event.event{border-left-color:#d5a84c}
-
-.leave-card{padding:16px;border:1px solid var(--border);border-radius:12px;background:#fff}
-.leave-number{font-size:28px;font-weight:700;color:var(--green-dark)}
-
-@media(max-width:800px){
- .side{transform:translateX(-100%);transition:.2s}
- .side.open{transform:none}
- .main{margin-left:0}
- .mobile{display:block}
- .content{padding:14px}
- .four,.three,.two{grid-template-columns:1fr 1fr}
- .chat{grid-template-columns:1fr;height:auto}
- .chatlist{max-height:250px;border-right:0;border-bottom:1px solid #eee}
- .hide{display:none}
+@media(max-width:900px){
+  .side{
+    transform:translateX(-100%);
+    transition:.2s
+  }
+  .side.open{transform:none}
+  .main{margin-left:0}
+  .mobile{display:block}
+  .hide{display:none}
+  .content{padding:15px}
+  .four{grid-template-columns:1fr 1fr}
+  .three{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .chat{
+    grid-template-columns:1fr;
+    height:auto
+  }
+  .chatlist{
+    max-height:250px;
+    border-right:0;
+    border-bottom:1px solid #eee
+  }
+  .cal-cell{
+    min-height:90px;
+    padding:5px
+  }
+  .calendar-week div{padding:7px 2px}
+  .cal-event{font-size:9px}
 }
 
 @media(max-width:550px){
- .four,.three,.two{grid-template-columns:1fr}
+  .four{grid-template-columns:1fr 1fr}
+  .calendar-grid .cal-cell{min-height:72px}
+  .day-number{width:24px;height:24px}
 }
 </style>
 </head>
@@ -139,2719 +557,4147 @@ th{font-size:11px;color:var(--muted)}
 <script>
 const SUPABASE_URL='https://jccryyxdxykomwsivtjy.supabase.co';
 const SUPABASE_KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const db=supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 const S={
- page:'dashboard',
- user:null,
- profile:null,
- profiles:[],
- channels:[],
- channel:null,
- conversation:null,
- conversations:[],
- conversationMembers:[],
- messages:[],
- notifications:[],
- docs:[],
- calendarEvents:[],
- leaveRequests:[],
- sidebar:false,
- modal:null,
- chatSearch:'',
- taskSearch:'',
- taskFilter:'',
- leaveFilter:'',
- pendingFile:null
+  page:'dashboard',
+  user:null,
+  profile:null,
+  profiles:[],
+  channels:[],
+  channel:null,
+  conversation:null,
+  messages:[],
+  notifications:[],
+  docs:[],
+  conversations:[],
+  conversationMembers:[],
+  calendarEvents:[],
+  sidebar:false,
+  modal:null,
+  chatSearch:'',
+  taskSearch:'',
+  taskFilter:'',
+  pendingFile:null,
+  calendarDate:new Date(),
+  search:''
 };
 
-let tasks=JSON.parse(localStorage.getItem('nona_tasks')||'null')||[
- {id:'t1',name:'Flite Product Shoot',category:'Content',priority:'High',status:'In Progress',dueDate:'2026-09-16',dueTime:'17:00',description:'Product shooting for Flite sandals.',notes:''},
- {id:'t2',name:'Social Media Content',category:'Content',priority:'Medium',status:'In Progress',dueDate:'2026-09-17',dueTime:'17:00',description:'Shoot and edit social media content.',notes:''},
- {id:'t3',name:'Live Setup',category:'Live',priority:'High',status:'Not Started',dueDate:'2026-09-18',dueTime:'12:00',description:'Prepare live setup quotation and requirements.',notes:''}
+let tasks=JSON.parse(
+  localStorage.getItem('nona_v22_tasks')||'null'
+)||[
+  {
+    id:'t1',
+    name:'Flite Product Shoot',
+    category:'Content',
+    priority:'High',
+    status:'In Progress',
+    progress:50,
+    dueDate:'2026-09-16',
+    dueTime:'17:00',
+    description:'Product shooting for Flite sandals.',
+    notes:''
+  },
+  {
+    id:'t2',
+    name:'Social Media Content',
+    category:'Content',
+    priority:'Medium',
+    status:'In Progress',
+    progress:40,
+    dueDate:'2026-09-17',
+    dueTime:'17:00',
+    description:'Shoot and edit social media content.',
+    notes:''
+  },
+  {
+    id:'t3',
+    name:'Live Setup',
+    category:'Live',
+    priority:'High',
+    status:'Not Started',
+    progress:0,
+    dueDate:'2026-09-18',
+    dueTime:'12:00',
+    description:'Prepare live setup quotation and requirements.',
+    notes:''
+  }
 ];
 
-let logs=JSON.parse(localStorage.getItem('nona_logs')||'null')||[
- {id:'l1',date:'2026-09-07',task:'Budget quotation presentation + Flite product shoot',description:'Presented completed budget quotation and carried out Flite product shooting.',startTime:'09:00',endTime:'17:00'},
- {id:'l2',date:'2026-09-08',task:'Product shooting + content brainstorming',description:'Continued product shooting and brainstormed social media content.',startTime:'09:00',endTime:'17:00'},
- {id:'l3',date:'2026-09-09',task:'Live setup quotation + social media shooting',description:'Presented live setup budget quotation and shot social media content.',startTime:'09:00',endTime:'17:00'},
- {id:'l4',date:'2026-09-10',task:'Content shooting + video editing',description:'Shot content and edited social media videos.',startTime:'09:00',endTime:'17:00'}
+let logs=JSON.parse(
+  localStorage.getItem('nona_v22_logs')||'null'
+)||[
+  {
+    id:'l1',
+    date:'2026-09-07',
+    task:'Budget quotation presentation + Flite product shoot',
+    description:'Presented completed budget quotation and carried out Flite product shooting.',
+    startTime:'',
+    endTime:''
+  },
+  {
+    id:'l2',
+    date:'2026-09-08',
+    task:'Product shooting + content brainstorming',
+    description:'Continued product shooting and brainstormed social media content.',
+    startTime:'',
+    endTime:''
+  },
+  {
+    id:'l3',
+    date:'2026-09-09',
+    task:'Live setup quotation + social media shooting',
+    description:'Presented live setup budget quotation and shot social media content.',
+    startTime:'',
+    endTime:''
+  },
+  {
+    id:'l4',
+    date:'2026-09-10',
+    task:'Content shooting + video editing',
+    description:'Shot content and edited social media videos.',
+    startTime:'',
+    endTime:''
+  }
 ];
-
-let attendance=JSON.parse(localStorage.getItem('nona_attendance')||'null')||[];
 
 const esc=x=>{
- const d=document.createElement('div');
- d.textContent=x??'';
- return d.innerHTML;
+  const d=document.createElement('div');
+  d.textContent=x??'';
+  return d.innerHTML;
 };
 
-const av=p=>p?.avatar_url||
- 'https://ui-avatars.com/api/?name='+encodeURIComponent(p?.full_name||'User')+
- '&background=edf3e4&color=5f7541';
+const av=p=>
+  p?.avatar_url||
+  'https://ui-avatars.com/api/?name='+
+  encodeURIComponent(p?.full_name||'User')+
+  '&background=edf3e4&color=5f7541';
 
 const me=()=>S.profile?.id;
 const isAdmin=()=>String(S.profile?.role||'').toLowerCase()==='admin';
 
-function save(){
- localStorage.setItem('nona_tasks',JSON.stringify(tasks));
- localStorage.setItem('nona_logs',JSON.stringify(logs));
- localStorage.setItem('nona_attendance',JSON.stringify(attendance));
+function saveLocal(){
+  localStorage.setItem('nona_v22_tasks',JSON.stringify(tasks));
+  localStorage.setItem('nona_v22_logs',JSON.stringify(logs));
 }
 
 function toast(x){
- const t=document.getElementById('toast');
- t.textContent=x;
- t.className='toast';
- setTimeout(()=>t.className='',2500);
+  const t=document.getElementById('toast');
+  t.textContent=x;
+  t.className='toast';
+  setTimeout(()=>t.className='',2500);
 }
 
 function date(x){
- if(!x)return '';
- return new Date(x+'T00:00:00').toLocaleDateString('en-MY',{
-  day:'numeric',month:'short',year:'numeric'
- });
+  if(!x)return'';
+  return new Date(x+'T00:00:00').toLocaleDateString(
+    'en-MY',
+    {day:'numeric',month:'short',year:'numeric'}
+  );
 }
 
 function dateTime(x){
- if(!x)return '';
- return new Date(x).toLocaleString('en-MY',{
-  day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'
- });
+  if(!x)return'';
+  return new Date(x).toLocaleString(
+    'en-MY',
+    {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}
+  );
 }
 
 function pclass(x){
- return x==='High'?'high':x==='Medium'?'medium':'low';
+  return x==='High'?'high':x==='Medium'?'medium':'low';
 }
 
 function sclass(x){
- return x==='Completed'?'green':
-        x==='In Progress'?'blue':
-        x==='Overdue'?'red':'';
+  if(x==='Completed')return'green';
+  if(x==='In Progress')return'blue';
+  if(x==='On Hold')return'orange';
+  return'';
 }
 
-function daysBetween(a,b){
- if(!a||!b)return 0;
- const start=new Date(a+'T00:00:00');
- const end=new Date(b+'T00:00:00');
- return Math.max(1,Math.floor((end-start)/86400000)+1);
+function statusProgress(status){
+  if(status==='Completed')return 100;
+  if(status==='In Progress')return 50;
+  if(status==='On Hold')return 25;
+  return 0;
 }
+
+/* AUTH */
 
 async function init(){
- const {data:{session}}=await db.auth.getSession();
+  const {
+    data:{session}
+  }=await db.auth.getSession();
 
- if(session) await enter(session.user);
- else loginPage();
-
- db.auth.onAuthStateChange(async(e,s)=>{
-  if(s&&!S.user) await enter(s.user);
-  if(!s&&S.user){
-   S.user=null;
-   S.profile=null;
-   loginPage();
+  if(session){
+    await enter(session.user);
+  }else{
+    loginPage();
   }
- });
+
+  db.auth.onAuthStateChange(
+    async(e,s)=>{
+      if(s&&!S.user)await enter(s.user);
+
+      if(!s&&S.user){
+        S.user=null;
+        S.profile=null;
+        loginPage();
+      }
+    }
+  );
 }
 
 async function enter(u){
- S.user=u;
-
- await profile();
-
- if(!S.profile){
-  const isA=(u.email||'').toLowerCase().includes('admin');
-
-  await db.from('profiles').insert({
-   id:u.id,
-   staff_code:isA?'ADMIN001':'NC001',
-   full_name:isA?'Admin':'Staff',
-   department:isA?'Management':'Digital',
-   position:isA?'Administrator':'Live Host Online & Offline',
-   role:isA?'admin':'staff',
-   status:'Active'
-  });
+  S.user=u;
 
   await profile();
- }
 
- await Promise.all([
-  profiles(),
-  channels(),
-  notifs(),
-  docs(),
-  loadConversations(),
-  loadCalendarEvents(),
-  loadLeaveRequests()
- ]);
+  if(!S.profile){
+    await db.from('profiles').insert({
+      id:u.id,
+      staff_code:(u.email||'').includes('admin')?'ADMIN001':'NC001',
+      full_name:(u.email||'').includes('admin')?'Admin':'Atikah',
+      department:(u.email||'').includes('admin')?'Management':'Digital',
+      position:(u.email||'').includes('admin')?
+        'Administrator':
+        'Live Host Online & Offline',
+      role:(u.email||'').includes('admin')?'admin':'staff',
+      status:'Active'
+    });
 
- subscribe();
- render();
+    await profile();
+  }
+
+  await Promise.all([
+    profiles(),
+    channels(),
+    notifs(),
+    docs(),
+    loadConversations(),
+    loadCalendarEvents()
+  ]);
+
+  subscribe();
+  render();
 }
 
 async function profile(){
- const r=await db.from('profiles').select('*').eq('id',S.user.id).maybeSingle();
- if(!r.error)S.profile=r.data;
+  const r=await db
+    .from('profiles')
+    .select('*')
+    .eq('id',S.user.id)
+    .maybeSingle();
+
+  if(!r.error)S.profile=r.data;
 }
 
 async function profiles(){
- const r=await db.from('profiles').select('*').order('full_name');
- if(!r.error)S.profiles=r.data||[];
+  const r=await db
+    .from('profiles')
+    .select('*')
+    .order('full_name');
+
+  if(!r.error)S.profiles=r.data||[];
 }
 
 async function channels(){
- const r=await db.from('channels').select('*').order('name');
- if(!r.error)S.channels=r.data||[];
+  const r=await db
+    .from('channels')
+    .select('*')
+    .order('name');
+
+  if(!r.error)S.channels=r.data||[];
 }
 
 async function notifs(){
- const r=await db.from('communication_notifications')
- .select('*')
- .eq('profile_id',me())
- .order('created_at',{ascending:false})
- .limit(50);
+  const r=await db
+    .from('communication_notifications')
+    .select('*')
+    .eq('profile_id',me())
+    .order('created_at',{ascending:false})
+    .limit(50);
 
- if(!r.error)S.notifications=r.data||[];
+  if(!r.error)S.notifications=r.data||[];
 }
 
 async function docs(){
- const r=await db.from('knowledge_documents')
- .select('*')
- .order('created_at',{ascending:false});
+  const r=await db
+    .from('knowledge_documents')
+    .select('*')
+    .order('created_at',{ascending:false});
 
- if(!r.error)S.docs=r.data||[];
+  if(!r.error)S.docs=r.data||[];
 }
 
 async function loadCalendarEvents(){
- const r=await db.from('calendar_events')
- .select('*')
- .order('event_date',{ascending:true});
+  const r=await db
+    .from('calendar_events')
+    .select('*')
+    .order('event_date',{ascending:true});
 
- if(!r.error)S.calendarEvents=r.data||[];
-}
-
-async function loadLeaveRequests(){
- let q=db.from('leave_requests')
- .select('*')
- .order('created_at',{ascending:false});
-
- if(!isAdmin())q=q.eq('user_id',me());
-
- const r=await q;
- if(!r.error)S.leaveRequests=r.data||[];
+  if(!r.error){
+    S.calendarEvents=r.data||[];
+  }else{
+    S.calendarEvents=[];
+  }
 }
 
 function subscribe(){
- db.channel('nona-portal')
- .on('postgres_changes',{event:'*',schema:'public',table:'messages'},
-  async()=>{
-   if(S.page==='communication'){
-    await chatLoad();
-    render();
-   }
-  })
- .on('postgres_changes',{event:'*',schema:'public',table:'calendar_events'},
-  async()=>{
-   await loadCalendarEvents();
-   if(S.page==='calendar')render();
-  })
- .on('postgres_changes',{event:'*',schema:'public',table:'leave_requests'},
-  async()=>{
-   await loadLeaveRequests();
-   if(S.page==='leave')render();
-  })
- .subscribe();
+  db.channel('nona-portal')
+    .on(
+      'postgres_changes',
+      {
+        event:'*',
+        schema:'public',
+        table:'messages'
+      },
+      async()=>{
+        if(S.page==='communication'){
+          await chatLoad();
+          render();
+        }
+      }
+    )
+    .on(
+      'postgres_changes',
+      {
+        event:'*',
+        schema:'public',
+        table:'communication_notifications'
+      },
+      async()=>{
+        await notifs();
+        render();
+      }
+    )
+    .on(
+      'postgres_changes',
+      {
+        event:'*',
+        schema:'public',
+        table:'calendar_events'
+      },
+      async()=>{
+        await loadCalendarEvents();
+        if(S.page==='calendar')render();
+      }
+    )
+    .subscribe();
 }
 
+/* LOGIN */
+
 function loginPage(err=''){
- document.getElementById('app').innerHTML=`
- <div class="login">
-  <div class="loginbox">
-   <b style="font-size:23px">Nona Costex</b>
-   <div class="small muted" style="margin:4px 0 22px">Staff Portal</div>
+  document.getElementById('app').innerHTML=`
+    <div class="login">
+      <div class="loginbox">
 
-   ${err?`<div class="error">${esc(err)}</div>`:''}
+        <div class="mini-icon" style="margin-bottom:15px">N</div>
 
-   <label class="small muted">Email</label>
-   <input id="email" type="email" placeholder="Supabase account email" style="margin:5px 0 13px">
+        <b style="font-size:24px">Nona Costex</b>
 
-   <label class="small muted">Password</label>
-   <input id="pass" type="password" placeholder="Password" style="margin:5px 0 16px">
+        <div class="small muted" style="margin:4px 0 24px">
+          Staff Portal
+        </div>
 
-   <button class="btn" style="width:100%" onclick="login()">Sign in</button>
-  </div>
- </div>`;
+        ${
+          err?
+          `<div class="error">${esc(err)}</div>`:
+          ''
+        }
+
+        <label class="small muted">Email</label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Supabase account email"
+          style="margin:5px 0 13px"
+        >
+
+        <label class="small muted">Password</label>
+
+        <input
+          id="pass"
+          type="password"
+          placeholder="Password"
+          style="margin:5px 0 17px"
+        >
+
+        <button
+          class="btn"
+          style="width:100%"
+          onclick="login()"
+        >
+          Sign in
+        </button>
+
+        <p
+          class="small muted"
+          style="text-align:center;margin-top:15px"
+        >
+          Use the account created in Supabase.
+        </p>
+
+      </div>
+    </div>
+  `;
 }
 
 async function login(){
- const email=document.getElementById('email').value.trim();
- const password=document.getElementById('pass').value;
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('pass').value;
 
- const r=await db.auth.signInWithPassword({email,password});
+  const r=await db.auth.signInWithPassword({
+    email,
+    password
+  });
 
- if(r.error)return loginPage(r.error.message);
+  if(r.error){
+    return loginPage(r.error.message);
+  }
 
- await enter(r.data.user);
+  await enter(r.data.user);
 }
 
 async function logout(){
- await db.auth.signOut();
+  await db.auth.signOut();
 }
 
+/* NAVIGATION */
+
 function nav(id,label,icon,b=0){
- return `
- <button class="${S.page===id?'active':''}" onclick="go('${id}')">
-  ${icon} &nbsp; ${label}
-  ${b?`<span class="pill red" style="float:right">${b}</span>`:''}
- </button>`;
+  return`
+    <button
+      class="${S.page===id?'active':''}"
+      onclick="go('${id}')"
+    >
+      ${icon}
+      &nbsp;
+      ${label}
+      ${
+        b?
+        `<span class="pill red" style="float:right">${b}</span>`:
+        ''
+      }
+    </button>
+  `;
 }
 
 function go(p){
- S.page=p;
- S.sidebar=false;
- S.modal=null;
+  S.page=p;
+  S.sidebar=false;
+  S.modal=null;
 
- if(p==='communication')chatLoad();
- if(p==='leave')loadLeaveRequests();
+  if(p==='communication')chatLoad();
 
- render();
+  render();
 }
 
+/* RENDER */
+
 function render(){
- if(!S.user)return loginPage();
+  if(!S.user){
+    loginPage();
+    return;
+  }
 
- const unread=S.notifications.filter(n=>!n.is_read).length;
+  const unread=S.notifications.filter(
+    n=>!n.is_read
+  ).length;
 
- document.getElementById('app').innerHTML=`
- <div class="app">
+  document.getElementById('app').innerHTML=`
 
-  <aside class="side ${S.sidebar?'open':''}">
-   <div class="brand">
-    Nona Costex
-    <small>Staff Portal</small>
-   </div>
+    <div class="app">
 
-   <div class="nav-title">Workspace</div>
-   <div class="nav">
-    ${nav('dashboard','Dashboard','⌂')}
-    ${nav('tasks','Tasks','✓')}
-    ${nav('worklogs','Work Logs','▤')}
-    ${nav('attendance','Attendance','◷')}
-    ${nav('leave','Leave','▱')}
-    ${nav('communication','Communication','◌',unread)}
-    ${nav('knowledge','Knowledge Hub','▥')}
-    ${nav('calendar','Calendar','□')}
-   </div>
+      <aside class="side ${S.sidebar?'open':''}">
 
-   ${isAdmin()?`
-   <div class="nav-title">Admin</div>
-   <div class="nav">
-    ${nav('staff','Staff Management','♙')}
-    ${nav('analytics','Analytics','▥')}
-    ${nav('data','Data Management','↥')}
-   </div>`:''}
+        <div class="brand">
+          Nona Costex
+          <small>Staff Portal</small>
+        </div>
 
-   <div class="nav-title">Account</div>
-   <div class="nav">
-    ${nav('profile','My Profile','○')}
-   </div>
+        <div class="nav-title">Workspace</div>
 
-   <div style="margin-top:18px">
-    <button style="width:100%;background:transparent;border:0;text-align:left;padding:10px;color:#777" onclick="logout()">
-     ↪ Log out
-    </button>
-   </div>
-  </aside>
+        <div class="nav">
+          ${nav('dashboard','Dashboard','⌂')}
+          ${nav('tasks','Tasks','✓')}
+          ${nav('worklogs','Work Logs','▤')}
+          ${nav('communication','Communication','◌',unread)}
+          ${nav('knowledge','Knowledge Hub','▥')}
+          ${nav('calendar','Calendar','□')}
+        </div>
 
-  <section class="main">
-   <header class="top">
-    <div class="row">
-     <button class="btn secondary mobile" onclick="S.sidebar=!S.sidebar;render()">☰</button>
-     <b>Nona Costex Staff Portal</b>
+        ${
+          isAdmin()?
+          `
+            <div class="nav-title">Admin</div>
+
+            <div class="nav">
+              ${nav('staff','Staff Management','♙')}
+              ${nav('analytics','Analytics','▥')}
+              ${nav('data','Data Management','↥')}
+            </div>
+          `:
+          ''
+        }
+
+        <div class="nav-title">Account</div>
+
+        <div class="nav">
+          ${nav('profile','My Profile','○')}
+        </div>
+
+        <div style="margin-top:18px">
+          <button
+            style="
+              width:100%;
+              background:transparent;
+              border:0;
+              text-align:left;
+              padding:11px 12px;
+              color:#778179
+            "
+            onclick="logout()"
+          >
+            ↪ Log out
+          </button>
+        </div>
+
+      </aside>
+
+      <section class="main">
+
+        <header class="top">
+
+          <div class="row">
+            <button
+              class="btn secondary mobile"
+              onclick="S.sidebar=!S.sidebar;render()"
+            >
+              ☰
+            </button>
+
+            <b>Nona Costex Staff Portal</b>
+          </div>
+
+          <div class="row">
+
+            <button
+              class="btn secondary small"
+              onclick="notifications()"
+            >
+              ♧ ${unread||''}
+            </button>
+
+            <div class="row hide">
+              <img
+                class="avatar"
+                src="${av(S.profile)}"
+              >
+
+              <div>
+                <b style="font-size:13px">
+                  ${esc(S.profile.full_name)}
+                </b>
+
+                <div class="small muted">
+                  ${esc(S.profile.role)}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </header>
+
+        <main class="content">
+          ${page()}
+        </main>
+
+      </section>
+
     </div>
 
-    <div class="row">
-     <button class="btn secondary small" onclick="notifications()">
-      🔔 ${unread||''}
-     </button>
-
-     <div class="row hide">
-      <img class="avatar" src="${av(S.profile)}">
-      <div>
-       <b style="font-size:13px">${esc(S.profile.full_name)}</b>
-       <div class="small muted">${esc(S.profile.role)}</div>
-      </div>
-     </div>
-    </div>
-   </header>
-
-   <main class="content">
-    ${page()}
-   </main>
-  </section>
-
- </div>
-
- ${S.modal?modal():''}
- `;
+    ${S.modal?modal():''}
+  `;
 }
 
 function page(){
- return S.page==='dashboard'?dashboard():
- S.page==='tasks'?tasksPage():
- S.page==='worklogs'?logsPage():
- S.page==='attendance'?attendancePage():
- S.page==='leave'?leavePage():
- S.page==='communication'?chatPage():
- S.page==='knowledge'?knowledge():
- S.page==='calendar'?calendar():
- S.page==='staff'?staff():
- S.page==='analytics'?analytics():
- S.page==='data'?dataPage():
- profilePage();
+  if(S.page==='dashboard')return dashboard();
+  if(S.page==='tasks')return tasksPage();
+  if(S.page==='worklogs')return logsPage();
+  if(S.page==='communication')return chatPage();
+  if(S.page==='knowledge')return knowledge();
+  if(S.page==='calendar')return calendar();
+  if(S.page==='staff')return staff();
+  if(S.page==='analytics')return analytics();
+  if(S.page==='data')return dataPage();
+  return profilePage();
 }
+
+/* DASHBOARD */
 
 function dashboard(){
- const done=tasks.filter(x=>x.status==='Completed').length;
- const pct=tasks.length?Math.round(done/tasks.length*100):0;
 
- return `
- <div class="grid">
+  const done=tasks.filter(
+    x=>x.status==='Completed'
+  ).length;
 
-  <div>
-   <h1 class="title">Dashboard</h1>
-   <p class="sub">Welcome back, ${esc((S.profile.full_name||'').split(' ')[0])}.</p>
-  </div>
+  const inProgress=tasks.filter(
+    x=>x.status==='In Progress'
+  ).length;
 
-  <div class="grid four">
-   <div class="card stat">
-    <b>${tasks.length}</b>
-    <span>Total Tasks</span>
-   </div>
+  const pending=tasks.filter(
+    x=>x.status==='Not Started'
+  ).length;
 
-   <div class="card stat">
-    <b>${done}</b>
-    <span>Completed</span>
-   </div>
+  const pct=tasks.length?
+    Math.round(
+      tasks.reduce(
+        (a,b)=>a+(Number(b.progress)||0),
+        0
+      )/tasks.length
+    ):
+    0;
 
-   <div class="card stat">
-    <b>${tasks.length-done}</b>
-    <span>Active</span>
-   </div>
+  return`
+    <div class="grid">
 
-   <div class="card stat">
-    <b>${S.notifications.filter(n=>!n.is_read).length}</b>
-    <span>Unread</span>
-   </div>
-  </div>
+      <div class="hero-card">
+        <div class="row between wrap">
+          <div>
+            <h1 class="title">
+              Dashboard
+            </h1>
 
-  <div class="grid two">
-   <div class="card">
-    <div class="row between">
-     <b>Task Progress</b>
-     <b>${pct}%</b>
+            <p class="sub">
+              Welcome back,
+              ${esc(S.profile.full_name.split(' ')[0])}.
+            </p>
+          </div>
+
+          <div class="mini-icon">
+            ✦
+          </div>
+        </div>
+      </div>
+
+      <div class="grid four">
+
+        <div class="card stat">
+          <b>${tasks.length}</b>
+          <span>Total Tasks</span>
+        </div>
+
+        <div class="card stat">
+          <b>${pending}</b>
+          <span>Pending</span>
+        </div>
+
+        <div class="card stat">
+          <b>${inProgress}</b>
+          <span>In Progress</span>
+        </div>
+
+        <div class="card stat">
+          <b>${done}</b>
+          <span>Completed</span>
+        </div>
+
+      </div>
+
+      <div class="grid two">
+
+        <div class="card">
+
+          <div class="row between">
+            <b>Overall Work Progress</b>
+            <b>${pct}%</b>
+          </div>
+
+          <div
+            class="progress"
+            style="margin-top:12px"
+          >
+            <i style="width:${pct}%"></i>
+          </div>
+
+          <div
+            class="small muted"
+            style="margin-top:8px"
+          >
+            Based on current task progress.
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <div class="row between">
+            <b>Communication</b>
+
+            <button
+              class="btn secondary small"
+              onclick="go('communication')"
+            >
+              Open
+            </button>
+          </div>
+
+          <div
+            class="small muted"
+            style="margin-top:10px"
+          >
+            ${
+              S.notifications.filter(n=>!n.is_read).length?
+              'You have unread notifications.':
+              'Everything is up to date.'
+            }
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="row between">
+          <b>Current Tasks</b>
+
+          <button
+            class="btn secondary small"
+            onclick="go('tasks')"
+          >
+            View Tasks
+          </button>
+        </div>
+
+        <div
+          class="grid three"
+          style="margin-top:15px"
+        >
+
+          ${
+            tasks.slice(0,6).map(t=>`
+              <div class="task-card">
+
+                <div class="row between">
+                  <b>${esc(t.name)}</b>
+
+                  <span class="pill ${sclass(t.status)}">
+                    ${esc(t.status)}
+                  </span>
+                </div>
+
+                <div
+                  class="small muted"
+                  style="margin-top:7px"
+                >
+                  ${esc(t.category)}
+                  ·
+                  Due ${date(t.dueDate)}
+                </div>
+
+                <div
+                  class="progress"
+                  style="margin-top:12px"
+                >
+                  <i style="width:${Number(t.progress)||0}%"></i>
+                </div>
+
+                <div
+                  class="row between small muted"
+                  style="margin-top:5px"
+                >
+                  <span>Progress</span>
+                  <span>${Number(t.progress)||0}%</span>
+                </div>
+
+              </div>
+            `).join('')||
+            `<div class="empty">No tasks yet.</div>`
+          }
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="row between">
+          <b>Recent Work</b>
+
+          <button
+            class="btn secondary small"
+            onclick="go('worklogs')"
+          >
+            View all
+          </button>
+        </div>
+
+        ${
+          logs.slice(-4).reverse().map(x=>`
+            <div class="knowledge-card" style="margin-top:10px">
+
+              <div class="doc-thumb">
+                ✓
+              </div>
+
+              <div style="flex:1">
+                <b>${esc(x.task)}</b>
+
+                <div class="small muted" style="margin-top:4px">
+                  ${date(x.date)}
+                </div>
+
+                <div class="small muted" style="margin-top:4px">
+                  ${esc(x.description)}
+                </div>
+              </div>
+
+            </div>
+          `).join('')||
+          `<div class="empty">No work logs yet.</div>`
+        }
+
+      </div>
+
     </div>
-
-    <div class="progress" style="margin-top:10px">
-     <i style="width:${pct}%"></i>
-    </div>
-   </div>
-
-   <div class="card">
-    <div class="row between">
-     <b>Attendance</b>
-     <button class="btn secondary small" onclick="go('attendance')">Open</button>
-    </div>
-    <p class="small muted">Check in and check out from the Attendance page.</p>
-   </div>
-  </div>
-
-  <div class="card">
-   <div class="row between">
-    <b>Recent Work Logs</b>
-    <button class="btn secondary small" onclick="go('worklogs')">View all</button>
-   </div>
-
-   ${logs.slice(-4).reverse().map(x=>`
-    <div class="knowledge">
-     <b style="font-size:13px">${esc(x.task)}</b>
-     <div class="small muted">${date(x.date)} · ${esc(x.description)}</div>
-    </div>
-   `).join('')}
-  </div>
-
- </div>`;
+  `;
 }
 
-/* =========================
-   TASKS
-========================= */
+/* TASKS */
 
 function tasksPage(){
- let a=[...tasks];
 
- if(S.taskFilter)a=a.filter(x=>x.status===S.taskFilter);
+  let a=[...tasks];
 
- if(S.taskSearch){
-  const q=S.taskSearch.toLowerCase();
-  a=a.filter(x=>
-   (x.name+' '+x.description+' '+x.category).toLowerCase().includes(q)
-  );
- }
+  if(S.taskFilter){
+    a=a.filter(x=>x.status===S.taskFilter);
+  }
 
- return `
- <div class="grid">
+  if(S.taskSearch){
+    const q=S.taskSearch.toLowerCase();
 
-  <div class="row between wrap">
-   <div>
-    <h1 class="title">Tasks</h1>
-    <p class="sub">Create, edit and manage tasks.</p>
-   </div>
+    a=a.filter(x=>
+      (
+        x.name+
+        x.description+
+        x.category+
+        x.status
+      ).toLowerCase().includes(q)
+    );
+  }
 
-   <button class="btn" onclick="openTask()">+ Add Task</button>
-  </div>
+  return`
+    <div class="grid">
 
-  <div class="row wrap">
-   <input style="max-width:280px"
-    placeholder="Search tasks..."
-    value="${esc(S.taskSearch)}"
-    oninput="S.taskSearch=this.value;render()">
+      <div class="row between wrap">
 
-   <select style="max-width:180px"
-    onchange="S.taskFilter=this.value;render()">
-    <option value="">All status</option>
-    ${['Not Started','In Progress','Completed','On Hold'].map(x=>
-     `<option ${S.taskFilter===x?'selected':''}>${x}</option>`
-    ).join('')}
-   </select>
-  </div>
+        <div>
+          <h1 class="title">Tasks</h1>
 
-  <div class="card" style="overflow:auto">
-   <table>
-    <thead>
-     <tr>
-      <th>Task</th>
-      <th>Priority</th>
-      <th>Due</th>
-      <th>Status</th>
-      <th>Action</th>
-     </tr>
-    </thead>
-
-    <tbody>
-     ${a.map(t=>`
-      <tr>
-       <td>
-        <b>${esc(t.name)}</b>
-        <div class="small muted">${esc(t.category)}</div>
-       </td>
-
-       <td>
-        <span class="pill ${pclass(t.priority)}">${t.priority}</span>
-       </td>
-
-       <td>${date(t.dueDate)} ${t.dueTime||''}</td>
-
-       <td>
-        <span class="pill ${sclass(t.status)}">${t.status}</span>
-       </td>
-
-       <td>
-        <div class="row wrap">
-         <button class="btn secondary small" onclick="openTask('${t.id}')">Edit</button>
-         <button class="btn danger small" onclick="deleteTask('${t.id}')">Delete</button>
+          <p class="sub">
+            Manage tasks and track work progress.
+          </p>
         </div>
-       </td>
-      </tr>
-     `).join('')}
-    </tbody>
-   </table>
-  </div>
 
- </div>`;
+        <button
+          class="btn"
+          onclick="openTask()"
+        >
+          + Add Task
+        </button>
+
+      </div>
+
+      <div class="row wrap">
+
+        <input
+          style="max-width:280px"
+          placeholder="Search tasks..."
+          value="${esc(S.taskSearch)}"
+          oninput="S.taskSearch=this.value;render()"
+        >
+
+        <select
+          style="max-width:180px"
+          onchange="S.taskFilter=this.value;render()"
+        >
+          <option value="">All Status</option>
+
+          ${
+            [
+              'Not Started',
+              'In Progress',
+              'Completed',
+              'On Hold'
+            ].map(x=>`
+              <option
+                value="${x}"
+                ${S.taskFilter===x?'selected':''}
+              >
+                ${x}
+              </option>
+            `).join('')
+          }
+
+        </select>
+
+      </div>
+
+      <div class="grid two">
+
+        ${
+          a.map(t=>`
+            <div class="task-card">
+
+              <div class="row between">
+
+                <div>
+                  <b>${esc(t.name)}</b>
+
+                  <div
+                    class="small muted"
+                    style="margin-top:5px"
+                  >
+                    ${esc(t.category)}
+                  </div>
+                </div>
+
+                <span class="pill ${pclass(t.priority)}">
+                  ${esc(t.priority)}
+                </span>
+
+              </div>
+
+              <div
+                class="small muted"
+                style="margin-top:12px"
+              >
+                ${esc(t.description||'No description')}
+              </div>
+
+              <div
+                class="row between"
+                style="margin-top:15px"
+              >
+
+                <span class="pill ${sclass(t.status)}">
+                  ${esc(t.status)}
+                </span>
+
+                <span class="small muted">
+                  Due ${date(t.dueDate)}
+                  ${t.dueTime||''}
+                </span>
+
+              </div>
+
+              <div
+                class="progress"
+                style="margin-top:13px"
+              >
+                <i style="width:${Number(t.progress)||0}%"></i>
+              </div>
+
+              <div
+                class="row between small"
+                style="margin-top:5px"
+              >
+                <span class="muted">Work Progress</span>
+                <b>${Number(t.progress)||0}%</b>
+              </div>
+
+              <div
+                class="row"
+                style="justify-content:flex-end;margin-top:13px"
+              >
+
+                <button
+                  class="btn secondary small"
+                  onclick="openTask('${t.id}')"
+                >
+                  Edit
+                </button>
+
+                <button
+                  class="btn danger small"
+                  onclick="deleteTask('${t.id}')"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+          `).join('')||
+          `<div class="card empty">No tasks found.</div>`
+        }
+
+      </div>
+
+    </div>
+  `;
 }
 
 function openTask(id){
- const t=id
-  ?tasks.find(x=>x.id===id)
-  :{
-   name:'',
-   description:'',
-   category:'General',
-   priority:'Medium',
-   status:'Not Started',
-   dueDate:'',
-   dueTime:'',
-   notes:''
+
+  const t=id?
+    tasks.find(x=>x.id===id):
+    {
+      name:'',
+      description:'',
+      category:'General',
+      priority:'Medium',
+      status:'Not Started',
+      progress:0,
+      dueDate:'',
+      dueTime:'',
+      notes:''
+    };
+
+  S.modal={
+    type:'task',
+    data:t
   };
 
- S.modal={type:'task',data:t};
- render();
+  render();
 }
 
 function saveTask(){
- const g=id=>document.getElementById(id).value;
 
- const id=g('task-id');
+  const g=id=>
+    document.getElementById(id).value;
 
- const d={
-  name:g('task-name'),
-  description:g('task-desc'),
-  category:g('task-cat'),
-  priority:g('task-pri'),
-  status:g('task-status'),
-  dueDate:g('task-date'),
-  dueTime:g('task-time'),
-  notes:g('task-notes')
- };
+  const d={
+    name:g('task-name').trim(),
+    description:g('task-desc'),
+    category:g('task-cat'),
+    priority:g('task-pri'),
+    status:g('task-status'),
+    progress:Number(g('task-progress')),
+    dueDate:g('task-date'),
+    dueTime:g('task-time'),
+    notes:g('task-notes')
+  };
 
- if(!d.name||!d.dueDate){
-  return toast('Task name and due date are required.');
- }
+  const id=g('task-id');
 
- if(id){
-  Object.assign(tasks.find(x=>x.id===id),d);
- }else{
-  tasks.push({...d,id:'t'+Date.now()});
- }
+  if(!d.name||!d.dueDate){
+    return toast(
+      'Task name and due date are required.'
+    );
+  }
 
- save();
- S.modal=null;
- toast('Task saved');
- render();
+  if(d.status==='Completed'){
+    d.progress=100;
+  }
+
+  if(id){
+    const existing=tasks.find(x=>x.id===id);
+
+    if(existing){
+      Object.assign(existing,d);
+    }
+  }else{
+    tasks.push({
+      ...d,
+      id:'t'+Date.now()
+    });
+  }
+
+  saveLocal();
+
+  S.modal=null;
+
+  toast('Task saved');
+
+  render();
 }
 
 function deleteTask(id){
- if(!confirm('Delete this task?'))return;
 
- tasks=tasks.filter(x=>x.id!==id);
- save();
- toast('Task deleted');
- render();
+  if(!confirm('Delete this task?'))return;
+
+  tasks=tasks.filter(x=>x.id!==id);
+
+  saveLocal();
+
+  toast('Task deleted');
+
+  render();
 }
 
-/* =========================
-   WORK LOGS
-========================= */
+/* WORK LOGS */
 
 function logsPage(){
- return `
- <div class="grid">
 
-  <div class="row between">
-   <div>
-    <h1 class="title">Work Logs</h1>
-    <p class="sub">Daily work records.</p>
-   </div>
+  return`
+    <div class="grid">
 
-   <button class="btn" onclick="openLog()">+ Add Log</button>
-  </div>
+      <div class="row between">
 
-  <div class="card" style="overflow:auto">
-   <table>
-    <thead>
-     <tr>
-      <th>Date</th>
-      <th>Activity</th>
-      <th>Description</th>
-      <th>Time</th>
-      <th>Total</th>
-      <th>Action</th>
-     </tr>
-    </thead>
+        <div>
+          <h1 class="title">Work Logs</h1>
 
-    <tbody>
-     ${logs.slice().reverse().map(x=>`
-      <tr>
-       <td>${date(x.date)}</td>
-
-       <td><b>${esc(x.task)}</b></td>
-
-       <td>${esc(x.description)}</td>
-
-       <td>${x.startTime||'-'} ${x.endTime?'→ '+x.endTime:''}</td>
-
-       <td>${calcHours(x.startTime,x.endTime)}</td>
-
-       <td>
-        <div class="row">
-         <button class="btn secondary small" onclick="openLog('${x.id}')">Edit</button>
-         <button class="btn danger small" onclick="delLog('${x.id}')">Delete</button>
+          <p class="sub">
+            Record and track your daily work.
+          </p>
         </div>
-       </td>
-      </tr>
-     `).join('')}
-    </tbody>
-   </table>
-  </div>
 
- </div>`;
-}
+        <button
+          class="btn"
+          onclick="openLog()"
+        >
+          + Add Work Log
+        </button>
 
-function calcHours(a,b){
- if(!a||!b)return '-';
+      </div>
 
- const [ah,am]=a.split(':').map(Number);
- const [bh,bm]=b.split(':').map(Number);
+      <div class="card">
 
- let mins=(bh*60+bm)-(ah*60+am);
+        ${
+          logs.map(x=>`
+            <div
+              class="knowledge-card"
+              style="margin-bottom:10px"
+            >
 
- if(mins<0)mins+=1440;
+              <div class="doc-thumb">
+                ✓
+              </div>
 
- return (mins/60).toFixed(1)+'h';
+              <div style="flex:1">
+
+                <div class="row between">
+                  <b>${esc(x.task)}</b>
+
+                  <span class="small muted">
+                    ${date(x.date)}
+                  </span>
+                </div>
+
+                <div
+                  class="small muted"
+                  style="margin-top:6px"
+                >
+                  ${esc(x.description)}
+                </div>
+
+                ${
+                  x.startTime||x.endTime?
+                  `
+                    <div
+                      class="small muted"
+                      style="margin-top:6px"
+                    >
+                      ${x.startTime||'--'}
+                      →
+                      ${x.endTime||'--'}
+                    </div>
+                  `:
+                  ''
+                }
+
+                <div
+                  class="row"
+                  style="justify-content:flex-end;margin-top:10px"
+                >
+
+                  <button
+                    class="btn secondary small"
+                    onclick="openLog('${x.id}')"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    class="btn danger small"
+                    onclick="delLog('${x.id}')"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          `).join('')||
+          `<div class="empty">No work logs yet.</div>`
+        }
+
+      </div>
+
+    </div>
+  `;
 }
 
 function openLog(id){
- const data=id
-  ?logs.find(x=>x.id===id)
-  :{
-   date:new Date().toISOString().slice(0,10),
-   task:'',
-   description:'',
-   startTime:'',
-   endTime:''
+
+  const data=id?
+    logs.find(x=>x.id===id):
+    {
+      date:new Date().toISOString().slice(0,10),
+      task:'',
+      description:'',
+      startTime:'',
+      endTime:''
+    };
+
+  S.modal={
+    type:'log',
+    data
   };
 
- S.modal={type:'log',data};
- render();
+  render();
 }
 
 function saveLog(){
- const id=document.getElementById('log-id').value;
 
- const d={
-  date:document.getElementById('log-date').value,
-  task:document.getElementById('log-task').value,
-  description:document.getElementById('log-desc').value,
-  startTime:document.getElementById('log-start').value,
-  endTime:document.getElementById('log-end').value
- };
+  const id=document.getElementById('log-id').value;
 
- if(!d.date||!d.task){
-  return toast('Date and activity are required.');
- }
+  const d={
+    date:document.getElementById('log-date').value,
+    task:document.getElementById('log-task').value.trim(),
+    description:document.getElementById('log-desc').value,
+    startTime:document.getElementById('log-start').value,
+    endTime:document.getElementById('log-end').value
+  };
 
- if(id){
-  Object.assign(logs.find(x=>x.id===id),d);
- }else{
-  logs.push({...d,id:'l'+Date.now()});
- }
+  if(!d.date||!d.task){
+    return toast(
+      'Date and activity are required.'
+    );
+  }
 
- save();
- S.modal=null;
- toast('Work log saved');
- render();
+  if(id){
+    const existing=logs.find(x=>x.id===id);
+
+    if(existing)Object.assign(existing,d);
+  }else{
+    logs.push({
+      ...d,
+      id:'l'+Date.now()
+    });
+  }
+
+  saveLocal();
+
+  S.modal=null;
+
+  toast('Work log saved');
+
+  render();
 }
 
 function delLog(id){
- if(!confirm('Delete this work log?'))return;
 
- logs=logs.filter(x=>x.id!==id);
- save();
- toast('Work log deleted');
- render();
+  if(!confirm('Delete this work log?'))return;
+
+  logs=logs.filter(x=>x.id!==id);
+
+  saveLocal();
+
+  render();
+
+  toast('Work log deleted');
 }
 
-/* =========================
-   ATTENDANCE
-========================= */
-
-function attendancePage(){
- const today=new Date().toISOString().slice(0,10);
- let a=attendance.find(x=>x.date===today&&x.user_id===me());
-
- if(!a){
-  a={date:today,user_id:me(),checkIn:null,checkOut:null};
- }
-
- return `
- <div class="grid">
-
-  <div>
-   <h1 class="title">Attendance</h1>
-   <p class="sub">Track your daily check in and check out.</p>
-  </div>
-
-  <div class="card attendance-status">
-   <div class="small muted">Today · ${date(today)}</div>
-
-   <div class="attendance-time" style="margin:10px 0">
-    ${new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
-   </div>
-
-   <div class="row wrap">
-    ${!a.checkIn?
-     `<button class="btn" onclick="checkIn()">Check In</button>`:
-     `<button class="btn secondary" disabled>Checked In ${a.checkIn}</button>`
-    }
-
-    ${a.checkIn&&!a.checkOut?
-     `<button class="btn danger" onclick="checkOut()">Check Out</button>`:''}
-
-    ${a.checkOut?
-     `<span class="pill green">Completed · ${a.checkOut}</span>`:''}
-   </div>
-  </div>
-
-  <div class="card">
-   <b>Attendance History</b>
-
-   <table style="margin-top:10px">
-    <thead>
-     <tr>
-      <th>Date</th>
-      <th>Check In</th>
-      <th>Check Out</th>
-     </tr>
-    </thead>
-
-    <tbody>
-     ${attendance
-      .filter(x=>x.user_id===me())
-      .slice()
-      .reverse()
-      .map(x=>`
-       <tr>
-        <td>${date(x.date)}</td>
-        <td>${x.checkIn||'-'}</td>
-        <td>${x.checkOut||'-'}</td>
-       </tr>
-      `).join('')||`
-       <tr>
-        <td colspan="3" class="empty">No attendance records yet.</td>
-       </tr>
-      `}
-    </tbody>
-   </table>
-  </div>
-
- </div>`;
-}
-
-function checkIn(){
- const today=new Date().toISOString().slice(0,10);
- const time=new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'});
-
- const existing=attendance.find(x=>x.date===today&&x.user_id===me());
-
- if(existing){
-  existing.checkIn=time;
- }else{
-  attendance.push({
-   id:'a'+Date.now(),
-   user_id:me(),
-   date:today,
-   checkIn:time,
-   checkOut:null
-  });
- }
-
- save();
- toast('Checked in');
- render();
-}
-
-function checkOut(){
- const today=new Date().toISOString().slice(0,10);
- const time=new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'});
-
- const existing=attendance.find(x=>x.date===today&&x.user_id===me());
-
- if(!existing)return;
-
- existing.checkOut=time;
-
- save();
- toast('Checked out');
- render();
-}
-
-/* =========================
-   LEAVE
-========================= */
-
-function leavePage(){
- const p=S.profile||{};
-
- const annual=Number(p.annual_leave??12);
- const medical=Number(p.medical_leave??14);
- const emergency=Number(p.emergency_leave??3);
- const unpaid=Number(p.unpaid_leave??0);
-
- return `
- <div class="grid">
-
-  <div class="row between wrap">
-   <div>
-    <h1 class="title">Leave</h1>
-    <p class="sub">Apply leave and check your remaining balance.</p>
-   </div>
-
-   <button class="btn" onclick="openLeave()">+ Apply Leave</button>
-  </div>
-
-  <div class="grid four">
-
-   <div class="leave-card">
-    <div class="small muted">Annual Leave</div>
-    <div class="leave-number">${annual}</div>
-    <div class="small muted">days remaining</div>
-   </div>
-
-   <div class="leave-card">
-    <div class="small muted">Medical Leave</div>
-    <div class="leave-number">${medical}</div>
-    <div class="small muted">days remaining</div>
-   </div>
-
-   <div class="leave-card">
-    <div class="small muted">Emergency Leave</div>
-    <div class="leave-number">${emergency}</div>
-    <div class="small muted">days remaining</div>
-   </div>
-
-   <div class="leave-card">
-    <div class="small muted">Unpaid Leave</div>
-    <div class="leave-number">${unpaid}</div>
-    <div class="small muted">days remaining</div>
-   </div>
-
-  </div>
-
-  <div class="card">
-   <div class="row between">
-    <b>Leave History</b>
-    <button class="btn secondary small" onclick="loadLeaveRequests().then(render)">Refresh</button>
-   </div>
-
-   <div style="overflow:auto;margin-top:10px">
-    <table>
-     <thead>
-      <tr>
-       ${isAdmin()?'<th>Staff</th>':''}
-       <th>Type</th>
-       <th>Date</th>
-       <th>Days</th>
-       <th>Reason</th>
-       <th>Status</th>
-       ${isAdmin()?'<th>Action</th>':''}
-      </tr>
-     </thead>
-
-     <tbody>
-      ${S.leaveRequests.map(r=>{
-       const staff=S.profiles.find(p=>p.id===r.user_id);
-
-       return `
-       <tr>
-        ${isAdmin()?`<td>${esc(staff?.full_name||r.user_id)}</td>`:''}
-
-        <td>${esc(r.leave_type)}</td>
-
-        <td>
-         ${date(r.start_date)}
-         ${r.start_date!==r.end_date?' → '+date(r.end_date):''}
-        </td>
-
-        <td>${daysBetween(r.start_date,r.end_date)}</td>
-
-        <td>${esc(r.reason||'-')}</td>
-
-        <td>
-         <span class="pill ${
-          r.status==='Approved'?'green':
-          r.status==='Rejected'?'red':'orange'
-         }">${esc(r.status)}</span>
-        </td>
-
-        ${isAdmin()?`
-        <td>
-         ${r.status==='Pending'?`
-         <div class="row wrap">
-          <button class="btn small" onclick="approveLeave('${r.id}')">Approve</button>
-          <button class="btn danger small" onclick="rejectLeave('${r.id}')">Reject</button>
-         </div>`:'-'}
-        </td>`:''}
-       </tr>`;
-      }).join('')||`
-       <tr>
-        <td colspan="${isAdmin()?7:6}" class="empty">No leave applications yet.</td>
-       </tr>`}
-     </tbody>
-    </table>
-   </div>
-  </div>
-
-  ${isAdmin()?adminLeaveManagement():''}
-
- </div>`;
-}
-
-function adminLeaveManagement(){
- return `
- <div class="card">
-  <div class="row between">
-   <div>
-    <b>Admin Leave Balance Management</b>
-    <div class="small muted">Edit each staff member's remaining leave days.</div>
-   </div>
-  </div>
-
-  <div style="overflow:auto;margin-top:14px">
-   <table>
-    <thead>
-     <tr>
-      <th>Staff</th>
-      <th>Annual</th>
-      <th>Medical</th>
-      <th>Emergency</th>
-      <th>Unpaid</th>
-      <th>Action</th>
-     </tr>
-    </thead>
-
-    <tbody>
-     ${S.profiles.map(p=>`
-      <tr>
-       <td>
-        <div class="row">
-         <img class="avatar" src="${av(p)}">
-         <div>
-          <b>${esc(p.full_name)}</b>
-          <div class="small muted">${esc(p.position||'')}</div>
-         </div>
-        </div>
-       </td>
-
-       <td>
-        <input id="annual-${p.id}" type="number" min="0" value="${Number(p.annual_leave??12)}" style="width:90px">
-       </td>
-
-       <td>
-        <input id="medical-${p.id}" type="number" min="0" value="${Number(p.medical_leave??14)}" style="width:90px">
-       </td>
-
-       <td>
-        <input id="emergency-${p.id}" type="number" min="0" value="${Number(p.emergency_leave??3)}" style="width:90px">
-       </td>
-
-       <td>
-        <input id="unpaid-${p.id}" type="number" min="0" value="${Number(p.unpaid_leave??0)}" style="width:90px">
-       </td>
-
-       <td>
-        <button class="btn small" onclick="saveLeaveBalance('${p.id}')">Save</button>
-       </td>
-      </tr>
-     `).join('')}
-    </tbody>
-   </table>
-  </div>
- </div>`;
-}
-
-function openLeave(){
- S.modal={
-  type:'leave',
-  data:{
-   leave_type:'Annual Leave',
-   start_date:'',
-   end_date:'',
-   reason:''
-  }
- };
-
- render();
-}
-
-async function submitLeave(){
- const d={
-  user_id:me(),
-  leave_type:document.getElementById('leave-type').value,
-  start_date:document.getElementById('leave-start').value,
-  end_date:document.getElementById('leave-end').value,
-  reason:document.getElementById('leave-reason').value,
-  status:'Pending'
- };
-
- if(!d.start_date||!d.end_date){
-  return toast('Please select the leave dates.');
- }
-
- if(d.end_date<d.start_date){
-  return toast('End date cannot be before start date.');
- }
-
- const r=await db.from('leave_requests').insert(d);
-
- if(r.error)return toast(r.error.message);
-
- await loadLeaveRequests();
-
- S.modal=null;
- toast('Leave application submitted');
- render();
-}
-
-async function approveLeave(id){
- const request=S.leaveRequests.find(x=>x.id===id);
- if(!request)return;
-
- if(!confirm('Approve this leave request?'))return;
-
- const r=await db.from('leave_requests')
- .update({
-  status:'Approved',
-  reviewed_by:me(),
-  reviewed_at:new Date().toISOString()
- })
- .eq('id',id);
-
- if(r.error)return toast(r.error.message);
-
- await loadLeaveRequests();
- toast('Leave approved');
- render();
-}
-
-async function rejectLeave(id){
- const note=prompt('Reason / admin note for rejection:','');
-
- const r=await db.from('leave_requests')
- .update({
-  status:'Rejected',
-  reviewed_by:me(),
-  reviewed_at:new Date().toISOString(),
-  admin_note:note||null
- })
- .eq('id',id);
-
- if(r.error)return toast(r.error.message);
-
- await loadLeaveRequests();
- toast('Leave rejected');
- render();
-}
-
-async function saveLeaveBalance(id){
- const annual=Math.max(0,Number(document.getElementById('annual-'+id).value||0));
- const medical=Math.max(0,Number(document.getElementById('medical-'+id).value||0));
- const emergency=Math.max(0,Number(document.getElementById('emergency-'+id).value||0));
- const unpaid=Math.max(0,Number(document.getElementById('unpaid-'+id).value||0));
-
- const r=await db.from('profiles')
- .update({
-  annual_leave:annual,
-  medical_leave:medical,
-  emergency_leave:emergency,
-  unpaid_leave:unpaid
- })
- .eq('id',id);
-
- if(r.error)return toast(r.error.message);
-
- await profiles();
-
- if(id===me())await profile();
-
- toast('Leave balance updated');
- render();
-}
-
-/* =========================
-   CALENDAR
-========================= */
+/* CALENDAR */
 
 function calendar(){
- const grouped={};
 
- S.calendarEvents.forEach(e=>{
-  if(!grouped[e.event_date])grouped[e.event_date]=[];
-  grouped[e.event_date].push(e);
- });
+  const year=S.calendarDate.getFullYear();
+  const month=S.calendarDate.getMonth();
 
- return `
- <div class="grid">
+  const first=new Date(year,month,1);
+  const last=new Date(year,month+1,0);
 
-  <div class="row between wrap">
-   <div>
-    <h1 class="title">Calendar</h1>
-    <p class="sub">Public holidays, company holidays and company events.</p>
-   </div>
+  const startDay=first.getDay();
+  const days=last.getDate();
 
-   ${isAdmin()?`
-   <button class="btn" onclick="openCalendarEvent()">+ Add Event</button>
-   `:''}
-  </div>
+  const monthName=new Intl.DateTimeFormat(
+    'en-MY',
+    {month:'long',year:'numeric'}
+  ).format(first);
 
-  <div class="card">
-   ${Object.keys(grouped).length?
-    Object.keys(grouped).sort().map(d=>`
-     <div style="margin-bottom:20px">
-      <b>${date(d)}</b>
+  const cells=[];
 
-      <div class="grid" style="margin-top:8px">
-       ${grouped[d].map(e=>`
-        <div class="calendar-event ${
-         e.event_type==='Public Holiday'?'public':
-         e.event_type==='Company Holiday'?'company':'event'
-        }">
+  for(let i=0;i<startDay;i++){
+    cells.push(`
+      <div class="cal-cell muted-day"></div>
+    `);
+  }
 
-         <div class="row between">
-          <div>
-           <b>${esc(e.title)}</b>
-           <div class="small muted">
-            ${esc(e.event_type)}
-            ${e.description?' · '+esc(e.description):''}
-           </div>
+  for(let day=1;day<=days;day++){
+
+    const dateKey=
+      `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+
+    const today=
+      new Date().toISOString().slice(0,10)===dateKey;
+
+    const events=S.calendarEvents.filter(
+      e=>e.event_date===dateKey
+    );
+
+    const dayLogs=logs.filter(
+      x=>x.date===dateKey
+    );
+
+    cells.push(`
+      <div
+        class="cal-cell ${today?'today':''}"
+        onclick="${isAdmin()?`openCalendarEvent(null,'${dateKey}')`:''}"
+      >
+
+        <div class="day-number">
+          ${day}
+        </div>
+
+        ${
+          events.map(e=>`
+            <div
+              class="cal-event ${
+                e.event_type==='Public Holiday'?
+                'event-public':
+                e.event_type==='Company Holiday'?
+                'event-company':
+                'event-other'
+              }"
+              title="${esc(e.title)}"
+              onclick="event.stopPropagation();viewCalendarEvent('${e.id}')"
+            >
+              ${esc(e.title)}
+            </div>
+          `).join('')
+        }
+
+        ${
+          dayLogs.map(l=>`
+            <div
+              class="cal-event event-other"
+              title="${esc(l.task)}"
+              onclick="event.stopPropagation()"
+            >
+              Work: ${esc(l.task)}
+            </div>
+          `).join('')
+        }
+
+      </div>
+    `);
+  }
+
+  return`
+    <div class="grid">
+
+      <div class="row between wrap">
+
+        <div>
+          <h1 class="title">Calendar</h1>
+
+          <p class="sub">
+            Public holidays, company holidays and work events.
+          </p>
+        </div>
+
+        ${
+          isAdmin()?
+          `
+            <button
+              class="btn"
+              onclick="openCalendarEvent()"
+            >
+              + Add Event
+            </button>
+          `:
+          ''
+        }
+
+      </div>
+
+      <div class="calendar-wrap">
+
+        <div class="calendar-head">
+
+          <div class="row between">
+
+            <button
+              class="btn secondary"
+              onclick="changeMonth(-1)"
+            >
+              ‹
+            </button>
+
+            <div style="text-align:center">
+              <b style="font-size:18px">
+                ${monthName}
+              </b>
+
+              <div
+                class="small muted"
+                style="margin-top:3px"
+              >
+                Click a date to view events
+              </div>
+            </div>
+
+            <button
+              class="btn secondary"
+              onclick="changeMonth(1)"
+            >
+              ›
+            </button>
+
           </div>
 
-          ${isAdmin()?`
-          <div class="row">
-           <button class="btn secondary small" onclick="openCalendarEvent('${e.id}')">Edit</button>
-           <button class="btn danger small" onclick="deleteCalendarEvent('${e.id}')">Delete</button>
-          </div>`:''}
-         </div>
+          <div
+            class="row"
+            style="justify-content:center;margin-top:14px"
+          >
+            <button
+              class="btn secondary small"
+              onclick="calendarToday()"
+            >
+              Today
+            </button>
+          </div>
 
         </div>
-       `).join('')}
-      </div>
-     </div>
-    `).join('')
-    :
-    '<div class="empty">No calendar events yet.</div>'
-   }
-  </div>
 
- </div>`;
+        <div class="calendar-week">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+
+        <div class="calendar-grid">
+          ${cells.join('')}
+        </div>
+
+      </div>
+
+      <div class="grid three">
+
+        <div class="card">
+          <div class="row">
+            <span class="comm-preview">◆</span>
+            <div>
+              <b>Public Holiday</b>
+              <div class="small muted">
+                Official public holidays
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <span class="comm-preview">●</span>
+            <div>
+              <b>Company Holiday</b>
+              <div class="small muted">
+                Nona Costex holidays
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <span class="comm-preview">✦</span>
+            <div>
+              <b>Company Event</b>
+              <div class="small muted">
+                Internal activities
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  `;
 }
 
-function openCalendarEvent(id){
- const e=id
-  ?S.calendarEvents.find(x=>x.id===id)
-  :{
-   title:'',
-   event_date:'',
-   event_type:'Public Holiday',
-   description:''
+function changeMonth(n){
+  S.calendarDate=new Date(
+    S.calendarDate.getFullYear(),
+    S.calendarDate.getMonth()+n,
+    1
+  );
+
+  render();
+}
+
+function calendarToday(){
+  S.calendarDate=new Date();
+  render();
+}
+
+function openCalendarEvent(id=null,dateKey=''){
+
+  if(!isAdmin()){
+    return viewCalendarEvent(id);
+  }
+
+  const event=id?
+    S.calendarEvents.find(x=>x.id===id):
+    {
+      id:'',
+      title:'',
+      event_date:dateKey,
+      event_type:'Company Event',
+      description:''
+    };
+
+  S.modal={
+    type:'calendar-event',
+    data:event
   };
 
- S.modal={type:'calendar-event',data:e};
- render();
+  render();
+}
+
+function viewCalendarEvent(id){
+
+  const e=S.calendarEvents.find(x=>x.id===id);
+
+  if(!e)return;
+
+  if(isAdmin()){
+    openCalendarEvent(id);
+    return;
+  }
+
+  S.modal={
+    type:'calendar-view',
+    data:e
+  };
+
+  render();
 }
 
 async function saveCalendarEvent(){
- const id=document.getElementById('cal-id').value;
 
- const d={
-  title:document.getElementById('cal-title').value.trim(),
-  event_date:document.getElementById('cal-date').value,
-  event_type:document.getElementById('cal-type').value,
-  description:document.getElementById('cal-desc').value
- };
+  const id=document.getElementById('cal-id').value;
 
- if(!d.title||!d.event_date){
-  return toast('Title and date are required.');
- }
+  const d={
+    title:document.getElementById('cal-title').value.trim(),
+    event_date:document.getElementById('cal-date').value,
+    event_type:document.getElementById('cal-type').value,
+    description:document.getElementById('cal-desc').value
+  };
 
- let r;
+  if(!d.title||!d.event_date){
+    return toast(
+      'Title and date are required.'
+    );
+  }
 
- if(id){
-  r=await db.from('calendar_events')
-   .update(d)
-   .eq('id',id);
- }else{
-  r=await db.from('calendar_events')
-   .insert({...d,created_by:me()});
- }
+  let r;
 
- if(r.error)return toast(r.error.message);
+  if(id){
+    r=await db
+      .from('calendar_events')
+      .update({
+        ...d,
+        updated_at:new Date().toISOString()
+      })
+      .eq('id',id);
+  }else{
+    r=await db
+      .from('calendar_events')
+      .insert({
+        ...d,
+        created_by:me()
+      });
+  }
 
- await loadCalendarEvents();
+  if(r.error){
+    return toast(r.error.message);
+  }
 
- S.modal=null;
- toast('Calendar event saved');
- render();
+  await loadCalendarEvents();
+
+  S.modal=null;
+
+  toast('Calendar event saved');
+
+  render();
 }
 
 async function deleteCalendarEvent(id){
- if(!confirm('Delete this calendar event?'))return;
 
- const r=await db.from('calendar_events')
- .delete()
- .eq('id',id);
+  if(!isAdmin())return;
 
- if(r.error)return toast(r.error.message);
+  if(!confirm('Delete this calendar event?'))return;
 
- await loadCalendarEvents();
- toast('Calendar event deleted');
- render();
+  const r=await db
+    .from('calendar_events')
+    .delete()
+    .eq('id',id);
+
+  if(r.error){
+    return toast(r.error.message);
+  }
+
+  await loadCalendarEvents();
+
+  S.modal=null;
+
+  render();
+
+  toast('Calendar event deleted');
 }
 
-/* =========================
-   COMMUNICATION
-========================= */
+/* COMMUNICATION */
 
 async function loadConversations(){
- const m=await db.from('conversation_members')
- .select('conversation_id,profile_id,role')
- .eq('profile_id',me());
 
- if(m.error){
-  S.conversations=[];
-  S.conversationMembers=[];
-  return;
- }
+  const m=await db
+    .from('conversation_members')
+    .select('conversation_id,profile_id,role')
+    .eq('profile_id',me());
 
- S.conversationMembers=m.data||[];
+  if(m.error){
+    S.conversations=[];
+    S.conversationMembers=[];
+    return;
+  }
 
- const ids=[...new Set(
-  S.conversationMembers.map(x=>x.conversation_id)
- )];
+  S.conversationMembers=m.data||[];
 
- if(!ids.length){
-  S.conversations=[];
-  return;
- }
+  const ids=[
+    ...new Set(
+      S.conversationMembers.map(
+        x=>x.conversation_id
+      )
+    )
+  ];
 
- const c=await db.from('conversations')
- .select('*')
- .in('id',ids)
- .order('updated_at',{ascending:false});
+  if(!ids.length){
+    S.conversations=[];
+    return;
+  }
 
- S.conversations=c.error?[]:(c.data||[]);
+  const c=await db
+    .from('conversations')
+    .select('*')
+    .in('id',ids)
+    .order('updated_at',{ascending:false});
+
+  S.conversations=c.error?
+    []:
+    (c.data||[]);
 }
 
 async function loadConversationMembers(cid){
- const r=await db.from('conversation_members')
- .select('conversation_id,profile_id,role')
- .eq('conversation_id',cid);
 
- S.conversationMembers=r.error?[]:(r.data||[]);
- return S.conversationMembers;
+  const r=await db
+    .from('conversation_members')
+    .select('conversation_id,profile_id,role')
+    .eq('conversation_id',cid);
+
+  S.conversationMembers=
+    r.error?
+    []:
+    (r.data||[]);
+
+  return S.conversationMembers;
 }
 
 function currentConversationRole(){
- if(!S.conversation)return 'member';
 
- return (
-  S.conversationMembers.find(x=>x.profile_id===me())||{}
- ).role||'member';
+  if(!S.conversation)return'member';
+
+  return(
+    S.conversationMembers.find(
+      x=>x.profile_id===me()
+    )||{}
+  ).role||'member';
 }
 
 function conversationName(c){
- if(!c)return '';
 
- if(c.type==='group'){
-  return c.name||'Unnamed Group';
- }
+  if(!c)return'';
 
- const ids=S.conversationMembers
-  .filter(x=>x.conversation_id===c.id)
-  .map(x=>x.profile_id)
-  .filter(x=>x!==me());
+  if(c.type==='group'){
+    return c.name||'Unnamed Group';
+  }
 
- const p=S.profiles.find(x=>x.id===ids[0]);
+  const ids=S.conversationMembers
+    .filter(
+      x=>
+        x.conversation_id===c.id&&
+        x.profile_id!==me()
+    )
+    .map(x=>x.profile_id);
 
- return p?.full_name||'Direct chat';
+  const p=S.profiles.find(
+    x=>x.id===ids[0]
+  );
+
+  return p?.full_name||'Direct chat';
 }
 
 async function chatLoad(){
- if(!S.channel&&!S.conversation){
-  S.messages=[];
-  return;
- }
 
- let q=db.from('messages')
-  .select('*')
-  .order('created_at',{ascending:true})
-  .limit(200);
+  if(!S.channel&&!S.conversation){
+    S.messages=[];
+    return;
+  }
 
- q=S.channel
-  ?q.eq('channel_id',S.channel.id)
-  :q.eq('conversation_id',S.conversation.id);
+  let q=db
+    .from('messages')
+    .select('*')
+    .order('created_at',{ascending:true})
+    .limit(200);
 
- const r=await q;
+  q=S.channel?
+    q.eq('channel_id',S.channel.id):
+    q.eq('conversation_id',S.conversation.id);
 
- if(!r.error)S.messages=r.data||[];
+  const r=await q;
+
+  if(!r.error){
+    S.messages=r.data||[];
+  }
 }
 
 async function selectConversation(cid){
- const c=S.conversations.find(x=>x.id===cid);
- if(!c)return;
 
- S.conversation={
-  id:cid,
-  group:c.type==='group'
- };
+  const c=S.conversations.find(
+    x=>x.id===cid
+  );
 
- S.channel=null;
+  if(!c)return;
 
- await loadConversationMembers(cid);
- await chatLoad();
+  S.conversation={
+    id:cid,
+    group:c.type==='group'
+  };
 
- render();
+  S.channel=null;
+
+  await loadConversationMembers(cid);
+  await chatLoad();
+
+  render();
 }
 
 async function createGroup(){
- S.modal={type:'group-create'};
- render();
+
+  S.modal={
+    type:'group-create'
+  };
+
+  render();
 }
 
 async function saveGroup(){
- const name=document.getElementById('group-name').value.trim();
 
- const selected=[
-  ...document.querySelectorAll('.group-member:checked')
- ].map(x=>x.value);
+  const name=
+    document.getElementById(
+      'group-name'
+    ).value.trim();
 
- if(!name)return toast('Group name is required.');
- if(!selected.length)return toast('Select at least one member.');
+  const selected=[
+    ...document.querySelectorAll(
+      '.group-member:checked'
+    )
+  ].map(x=>x.value);
 
- const c=await db.from('conversations')
- .insert({
-  name,
-  type:'group',
-  created_by:me()
- })
- .select()
- .single();
+  if(!name){
+    return toast('Group name is required.');
+  }
 
- if(c.error)return toast(c.error.message);
+  if(!selected.length){
+    return toast('Select at least one member.');
+  }
 
- const rows=[
-  {
-   conversation_id:c.data.id,
-   profile_id:me(),
-   role:'admin'
-  },
-  ...selected
-   .filter(x=>x!==me())
-   .map(x=>({
-    conversation_id:c.data.id,
-    profile_id:x,
-    role:'member'
-   }))
- ];
+  const c=await db
+    .from('conversations')
+    .insert({
+      name,
+      type:'group',
+      created_by:me()
+    })
+    .select()
+    .single();
 
- const r=await db.from('conversation_members').insert(rows);
+  if(c.error){
+    return toast(c.error.message);
+  }
 
- if(r.error){
-  await db.from('conversations').delete().eq('id',c.data.id);
-  return toast(r.error.message);
- }
+  const rows=[
+    {
+      conversation_id:c.data.id,
+      profile_id:me(),
+      role:'admin'
+    },
+    ...selected
+      .filter(x=>x!==me())
+      .map(x=>({
+        conversation_id:c.data.id,
+        profile_id:x,
+        role:'member'
+      }))
+  ];
 
- await loadConversations();
+  const r=await db
+    .from('conversation_members')
+    .insert(rows);
 
- S.modal=null;
+  if(r.error){
+    await db
+      .from('conversations')
+      .delete()
+      .eq('id',c.data.id);
 
- await selectConversation(c.data.id);
+    return toast(r.error.message);
+  }
+
+  await loadConversations();
+
+  S.modal=null;
+
+  await selectConversation(
+    c.data.id
+  );
 }
 
 async function renameGroup(){
- if(!S.conversation?.group||currentConversationRole()!=='admin'){
-  return toast('Only the group admin can rename this group.');
- }
 
- const current=conversationName(
-  S.conversations.find(x=>x.id===S.conversation.id)
- );
+  if(
+    !S.conversation?.group||
+    currentConversationRole()!=='admin'
+  ){
+    return toast(
+      'Only the group admin can rename this group.'
+    );
+  }
 
- const name=prompt('New group name',current);
+  const current=
+    conversationName(
+      S.conversations.find(
+        x=>x.id===S.conversation.id
+      )
+    );
 
- if(!name||!name.trim())return;
+  const name=prompt(
+    'New group name',
+    current
+  );
 
- const r=await db.from('conversations')
- .update({
-  name:name.trim(),
-  updated_at:new Date().toISOString()
- })
- .eq('id',S.conversation.id);
+  if(!name||!name.trim())return;
 
- if(r.error)return toast(r.error.message);
+  const r=await db
+    .from('conversations')
+    .update({
+      name:name.trim(),
+      updated_at:new Date().toISOString()
+    })
+    .eq('id',S.conversation.id);
 
- await loadConversations();
- render();
+  if(r.error){
+    return toast(r.error.message);
+  }
+
+  await loadConversations();
+
+  render();
 }
 
 async function addMember(){
- if(!S.conversation?.group||currentConversationRole()!=='admin'){
-  return toast('Only the group admin can add members.');
- }
 
- S.modal={type:'group-members'};
+  if(
+    !S.conversation?.group||
+    currentConversationRole()!=='admin'
+  ){
+    return toast(
+      'Only the group admin can add members.'
+    );
+  }
 
- await loadConversationMembers(S.conversation.id);
+  S.modal={
+    type:'group-members'
+  };
 
- render();
+  await loadConversationMembers(
+    S.conversation.id
+  );
+
+  render();
 }
 
 async function saveMembers(){
- const selected=[
-  ...document.querySelectorAll('.group-add-member:checked')
- ].map(x=>x.value);
 
- if(!selected.length)return toast('Select at least one member.');
+  const selected=[
+    ...document.querySelectorAll(
+      '.group-add-member:checked'
+    )
+  ].map(x=>x.value);
 
- const existing=new Set(
-  S.conversationMembers.map(x=>x.profile_id)
- );
+  if(!selected.length){
+    return toast(
+      'Select at least one member.'
+    );
+  }
 
- const rows=selected
-  .filter(x=>!existing.has(x))
-  .map(x=>({
-   conversation_id:S.conversation.id,
-   profile_id:x,
-   role:'member'
-  }));
+  const existing=new Set(
+    S.conversationMembers.map(
+      x=>x.profile_id
+    )
+  );
 
- if(!rows.length)return toast('Those members are already in the group.');
+  const rows=selected
+    .filter(x=>!existing.has(x))
+    .map(x=>({
+      conversation_id:S.conversation.id,
+      profile_id:x,
+      role:'member'
+    }));
 
- const r=await db.from('conversation_members').insert(rows);
+  if(!rows.length){
+    return toast(
+      'Those members are already in the group.'
+    );
+  }
 
- if(r.error)return toast(r.error.message);
+  const r=await db
+    .from('conversation_members')
+    .insert(rows);
 
- await loadConversationMembers(S.conversation.id);
- await loadConversations();
+  if(r.error){
+    return toast(r.error.message);
+  }
 
- S.modal=null;
- render();
+  await loadConversationMembers(
+    S.conversation.id
+  );
+
+  await loadConversations();
+
+  S.modal=null;
+
+  render();
 }
 
 async function removeMember(pid){
- if(!S.conversation?.group||currentConversationRole()!=='admin'){
-  return toast('Only the group admin can remove members.');
- }
 
- if(pid===me()){
-  return toast('Use Leave Group to leave the group.');
- }
+  if(
+    !S.conversation?.group||
+    currentConversationRole()!=='admin'
+  ){
+    return toast(
+      'Only the group admin can remove members.'
+    );
+  }
 
- if(!confirm('Remove this member from the group?'))return;
+  if(pid===me()){
+    return toast(
+      'Use Leave Group to leave the group.'
+    );
+  }
 
- const r=await db.from('conversation_members')
- .delete()
- .eq('conversation_id',S.conversation.id)
- .eq('profile_id',pid);
+  if(!confirm(
+    'Remove this member from the group?'
+  ))return;
 
- if(r.error)return toast(r.error.message);
+  const r=await db
+    .from('conversation_members')
+    .delete()
+    .eq(
+      'conversation_id',
+      S.conversation.id
+    )
+    .eq('profile_id',pid);
 
- await loadConversationMembers(S.conversation.id);
- await loadConversations();
+  if(r.error){
+    return toast(r.error.message);
+  }
 
- render();
+  await loadConversationMembers(
+    S.conversation.id
+  );
+
+  await loadConversations();
+
+  render();
 }
 
 async function leaveGroup(){
- if(!S.conversation?.group)return;
 
- const r=await db.from('conversation_members')
- .delete()
- .eq('conversation_id',S.conversation.id)
- .eq('profile_id',me());
+  if(!S.conversation?.group)return;
 
- if(r.error)return toast(r.error.message);
+  const r=await db
+    .from('conversation_members')
+    .delete()
+    .eq(
+      'conversation_id',
+      S.conversation.id
+    )
+    .eq('profile_id',me());
 
- S.conversation=null;
- S.messages=[];
+  if(r.error){
+    return toast(r.error.message);
+  }
 
- await loadConversations();
+  S.conversation=null;
+  S.messages=[];
 
- render();
+  await loadConversations();
+
+  render();
 }
 
 function chatPage(){
- const active=S.conversations.find(
-  x=>x.id===S.conversation?.id
- );
 
- const target=
-  S.channel?'# '+S.channel.name:
-  S.conversation?
-   (active?.type==='group'
-    ?active.name||'Unnamed Group'
-    :conversationName(active))
-   :'Select a channel or person';
+  const active=
+    S.conversations.find(
+      x=>x.id===S.conversation?.id
+    );
 
- const groupAdmin=
-  S.conversation?.group&&
-  currentConversationRole()==='admin';
+  const target=
+    S.channel?
+      '# '+S.channel.name:
+      S.conversation?
+        (
+          active?.type==='group'?
+          (
+            active.name||
+            'Unnamed Group'
+          ):
+          conversationName(active)
+        ):
+      'Select a channel or person';
 
- return `
- <div class="grid">
+  const groupAdmin=
+    S.conversation?.group&&
+    currentConversationRole()==='admin';
 
-  <div>
-   <h1 class="title">Communication</h1>
-   <p class="sub">Real-time team communication.</p>
-  </div>
-
-  <div class="card chat">
-
-   <div class="chatlist">
-
-    <div style="padding:12px">
-     <input
-      placeholder="Search..."
-      value="${esc(S.chatSearch)}"
-      oninput="S.chatSearch=this.value;render()">
-    </div>
-
-    <div class="small muted" style="padding:8px 12px">
-     CHANNELS
-    </div>
-
-    ${S.channels
-     .filter(c=>
-      !S.chatSearch||
-      c.name.toLowerCase().includes(S.chatSearch.toLowerCase())
-     )
-     .map(c=>`
-      <div
-       class="chatitem ${S.channel?.id===c.id?'active':''}"
-       onclick="selectChannel('${c.id}')">
-
-       <b># ${esc(c.name)}</b>
-
-       <div class="small muted">
-        ${esc(c.description||'')}
-       </div>
-
-      </div>
-     `).join('')}
-
-    <div class="row between" style="padding:14px 12px 8px">
-     <div class="small muted">GROUPS</div>
-     <button class="btn secondary small" onclick="createGroup()">+ Group</button>
-    </div>
-
-    ${S.conversations
-     .filter(c=>c.type==='group')
-     .filter(c=>
-      !S.chatSearch||
-      String(c.name||'')
-       .toLowerCase()
-       .includes(S.chatSearch.toLowerCase())
-     )
-     .map(c=>`
-      <div
-       class="chatitem ${S.conversation?.id===c.id?'active':''}"
-       onclick="selectConversation('${c.id}')">
-
-       <b>👥 ${esc(c.name||'Unnamed Group')}</b>
-       <div class="small muted">Group chat</div>
-
-      </div>
-     `).join('')}
-
-    <div class="small muted" style="padding:14px 12px 8px">
-     DIRECT CHAT
-    </div>
-
-    ${S.profiles
-     .filter(p=>p.id!==me())
-     .filter(p=>
-      !S.chatSearch||
-      p.full_name.toLowerCase().includes(S.chatSearch.toLowerCase())
-     )
-     .map(p=>`
-      <div
-       class="chatitem"
-       onclick="direct('${p.id}')">
-
-       <div class="row">
-        <img class="avatar" src="${av(p)}">
-
-        <div>
-         <b>${esc(p.full_name)}</b>
-         <div class="small muted">${esc(p.position||'')}</div>
-        </div>
-       </div>
-
-      </div>
-     `).join('')}
-
-   </div>
-
-   <div class="chatwindow">
-
-    <div style="padding:13px;border-bottom:1px solid #eee">
-
-     <div class="row between">
+  return`
+    <div class="grid">
 
       <div>
-       <b>${esc(target)}</b>
+        <h1 class="title">Communication</h1>
 
-       <div class="small muted">
-        ${S.channel?'Team channel':
-          S.conversation?.group?'Group chat':'Direct message'}
-       </div>
+        <p class="sub">
+          Team communication and group chats.
+        </p>
       </div>
 
-      ${groupAdmin?`
-       <div class="row wrap">
-        <button class="btn secondary small" onclick="renameGroup()">Rename</button>
-        <button class="btn secondary small" onclick="addMember()">Members</button>
-        <button class="btn danger small" onclick="leaveGroup()">Leave</button>
-       </div>
-      `:
-      S.conversation?.group?
-       `<button class="btn secondary small" onclick="leaveGroup()">Leave</button>`
-       :''}
+      <div class="card chat">
 
-     </div>
+        <div class="chatlist">
 
-    </div>
+          <div style="padding:13px">
 
-    <div class="messages">
+            <input
+              placeholder="Search people or groups..."
+              value="${esc(S.chatSearch)}"
+              oninput="S.chatSearch=this.value;render()"
+            >
 
-     ${S.messages.map(m=>`
-      <div class="bubble ${m.sender_id===me()?'mine':''}">
+          </div>
 
-       <div>${esc(m.message_text||'')}</div>
+          <div
+            class="small muted"
+            style="padding:8px 13px"
+          >
+            CHANNELS
+          </div>
 
-       ${m.attachment_name?
-        `<div class="small">📎 ${esc(m.attachment_name)}</div>`:''}
+          ${
+            S.channels
+              .filter(
+                c=>
+                  !S.chatSearch||
+                  c.name
+                    .toLowerCase()
+                    .includes(
+                      S.chatSearch.toLowerCase()
+                    )
+              )
+              .map(c=>`
+                <div
+                  class="chatitem ${
+                    S.channel?.id===c.id?
+                    'active':
+                    ''
+                  }"
+                  onclick="selectChannel('${c.id}')"
+                >
 
-       <div class="meta">
-        ${m.sender_id===me()
-         ?'You'
-         :esc(
-          S.profiles.find(p=>p.id===m.sender_id)?.full_name||'User'
-         )}
-        · ${dateTime(m.created_at)}
-       </div>
+                  <div class="row">
+
+                    <span class="comm-preview">
+                      #
+                    </span>
+
+                    <div>
+                      <b>${esc(c.name)}</b>
+
+                      <div class="small muted">
+                        ${esc(c.description||'Team channel')}
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              `).join('')
+          }
+
+          <div
+            class="row between"
+            style="padding:15px 13px 8px"
+          >
+            <div class="small muted">
+              GROUPS
+            </div>
+
+            <button
+              class="btn secondary small"
+              onclick="createGroup()"
+            >
+              + Group
+            </button>
+          </div>
+
+          ${
+            S.conversations
+              .filter(c=>c.type==='group')
+              .filter(
+                c=>
+                  !S.chatSearch||
+                  String(c.name||'')
+                    .toLowerCase()
+                    .includes(
+                      S.chatSearch.toLowerCase()
+                    )
+              )
+              .map(c=>`
+                <div
+                  class="chatitem ${
+                    S.conversation?.id===c.id?
+                    'active':
+                    ''
+                  }"
+                  onclick="selectConversation('${c.id}')"
+                >
+
+                  <div class="row">
+
+                    <span class="comm-preview">
+                      👥
+                    </span>
+
+                    <div>
+                      <b>${esc(c.name||'Unnamed Group')}</b>
+
+                      <div class="small muted">
+                        Group chat
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              `).join('')
+          }
+
+          <div
+            class="small muted"
+            style="padding:15px 13px 8px"
+          >
+            DIRECT CHAT
+          </div>
+
+          ${
+            S.profiles
+              .filter(p=>p.id!==me())
+              .filter(
+                p=>
+                  !S.chatSearch||
+                  p.full_name
+                    .toLowerCase()
+                    .includes(
+                      S.chatSearch.toLowerCase()
+                    )
+              )
+              .map(p=>`
+                <div
+                  class="chatitem"
+                  onclick="direct('${p.id}')"
+                >
+
+                  <div class="row">
+
+                    <img
+                      class="avatar"
+                      src="${av(p)}"
+                    >
+
+                    <div>
+                      <b>${esc(p.full_name)}</b>
+
+                      <div class="small muted">
+                        ${esc(p.position||'')}
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              `).join('')
+          }
+
+        </div>
+
+        <div class="chatwindow">
+
+          <div class="chat-header">
+
+            <div class="row between">
+
+              <div>
+                <b>${esc(target)}</b>
+
+                <div class="small muted">
+                  ${
+                    S.channel?
+                    'Team channel':
+                    S.conversation?.group?
+                    'Group chat':
+                    'Direct message'
+                  }
+                </div>
+              </div>
+
+              ${
+                groupAdmin?
+                `
+                  <div class="row wrap">
+
+                    <button
+                      class="btn secondary small"
+                      onclick="renameGroup()"
+                    >
+                      Rename
+                    </button>
+
+                    <button
+                      class="btn secondary small"
+                      onclick="addMember()"
+                    >
+                      Members
+                    </button>
+
+                    <button
+                      class="btn danger small"
+                      onclick="leaveGroup()"
+                    >
+                      Leave
+                    </button>
+
+                  </div>
+                `:
+                S.conversation?.group?
+                `
+                  <button
+                    class="btn secondary small"
+                    onclick="leaveGroup()"
+                  >
+                    Leave
+                  </button>
+                `:
+                ''
+              }
+
+            </div>
+
+          </div>
+
+          <div class="messages">
+
+            ${
+              S.messages.map(m=>`
+                <div
+                  class="bubble ${
+                    m.sender_id===me()?
+                    'mine':
+                    ''
+                  }"
+                >
+
+                  <div>
+                    ${esc(m.message_text||'')}
+                  </div>
+
+                  ${
+                    m.attachment_name?
+                    `
+                      <div class="small">
+                        📎 ${esc(m.attachment_name)}
+                      </div>
+                    `:
+                    ''
+                  }
+
+                  <div class="meta">
+                    ${
+                      m.sender_id===me()?
+                      'You':
+                      esc(
+                        S.profiles.find(
+                          p=>p.id===m.sender_id
+                        )?.full_name||
+                        'User'
+                      )
+                    }
+                    ·
+                    ${dateTime(m.created_at)}
+                  </div>
+
+                </div>
+              `).join('')||
+              `<div class="empty">
+                No messages yet.
+              </div>`
+            }
+
+          </div>
+
+          <div
+            style="
+              padding:12px;
+              border-top:1px solid #eee
+            "
+          >
+
+            <div class="row">
+
+              <input
+                id="msg"
+                placeholder="Write a message..."
+                onkeydown="
+                  if(event.key==='Enter'){
+                    send()
+                  }
+                "
+              >
+
+              <button
+                class="btn"
+                onclick="send()"
+              >
+                Send
+              </button>
+
+              <label class="btn secondary">
+                📎
+                <input
+                  type="file"
+                  hidden
+                  onchange="fileAttach(this)"
+                >
+              </label>
+
+            </div>
+
+            ${
+              S.pendingFile?
+              `
+                <div
+                  class="small muted"
+                  style="margin-top:5px"
+                >
+                  Attached:
+                  ${esc(S.pendingFile.name)}
+                </div>
+              `:
+              ''
+            }
+
+          </div>
+
+        </div>
 
       </div>
-     `).join('')||'<div class="empty">No messages yet.</div>'}
 
     </div>
-
-    <div style="padding:12px;border-top:1px solid #eee">
-
-     <div class="row">
-
-      <input
-       id="msg"
-       placeholder="Write a message..."
-       onkeydown="if(event.key==='Enter'){send()}">
-
-      <button class="btn" onclick="send()">Send</button>
-
-      <label class="btn secondary">
-       📎
-       <input
-        type="file"
-        hidden
-        onchange="fileAttach(this)">
-      </label>
-
-     </div>
-
-     ${S.pendingFile?
-      `<div class="small muted" style="margin-top:5px">
-       Attached: ${esc(S.pendingFile.name)}
-      </div>`:''}
-
-    </div>
-
-   </div>
-
-  </div>
- </div>`;
+  `;
 }
 
 async function selectChannel(id){
- S.channel=S.channels.find(x=>x.id===id);
- S.conversation=null;
 
- await chatLoad();
- render();
+  S.channel=
+    S.channels.find(x=>x.id===id);
+
+  S.conversation=null;
+
+  await chatLoad();
+
+  render();
 }
 
 async function direct(target){
- let cid=null;
 
- const cs=await db.from('conversations').select('id');
+  let cid=null;
 
- for(const c of cs.data||[]){
-  const mm=await db.from('conversation_members')
-   .select('profile_id')
-   .eq('conversation_id',c.id);
+  const cs=await db
+    .from('conversations')
+    .select('id');
 
-  const ids=(mm.data||[]).map(x=>x.profile_id);
+  for(const c of cs.data||[]){
 
-  if(ids.includes(me())&&ids.includes(target)&&ids.length===2){
-   cid=c.id;
-   break;
+    const mm=await db
+      .from('conversation_members')
+      .select('profile_id')
+      .eq(
+        'conversation_id',
+        c.id
+      );
+
+    const ids=(mm.data||[])
+      .map(x=>x.profile_id);
+
+    if(
+      ids.includes(me())&&
+      ids.includes(target)&&
+      ids.length===2
+    ){
+      cid=c.id;
+      break;
+    }
   }
- }
 
- if(!cid){
-  const c=await db.from('conversations')
-   .insert({})
-   .select()
-   .single();
+  if(!cid){
 
-  if(c.error)return toast(c.error.message);
+    const c=await db
+      .from('conversations')
+      .insert({})
+      .select()
+      .single();
 
-  cid=c.data.id;
+    if(c.error){
+      return toast(c.error.message);
+    }
 
-  const ins=await db.from('conversation_members')
-   .insert([
-    {conversation_id:cid,profile_id:me(),role:'member'},
-    {conversation_id:cid,profile_id:target,role:'member'}
-   ]);
+    cid=c.data.id;
 
-  if(ins.error)return toast(ins.error.message);
- }
+    const ins=await db
+      .from('conversation_members')
+      .insert([
+        {
+          conversation_id:cid,
+          profile_id:me()
+        },
+        {
+          conversation_id:cid,
+          profile_id:target
+        }
+      ]);
 
- S.conversation={
-  id:cid,
-  target,
-  group:false
- };
+    if(ins.error){
+      return toast(ins.error.message);
+    }
+  }
 
- S.channel=null;
+  S.conversation={
+    id:cid,
+    target
+  };
 
- await loadConversationMembers(cid);
- await chatLoad();
+  S.channel=null;
 
- render();
+  await loadConversationMembers(cid);
+  await chatLoad();
+
+  render();
 }
 
 async function send(){
- const i=document.getElementById('msg');
- const text=i.value.trim();
 
- if(!text&&!S.pendingFile)return;
+  const i=document.getElementById('msg');
+  const text=i.value.trim();
 
- if(!S.channel&&!S.conversation){
-  return toast('Select a channel or person first.');
- }
+  if(!text&&!S.pendingFile)return;
 
- const row={
-  sender_id:me(),
-  message_text:text||null
- };
+  if(!S.channel&&!S.conversation){
+    return toast(
+      'Select a channel or person first.'
+    );
+  }
 
- if(S.channel)row.channel_id=S.channel.id;
- else row.conversation_id=S.conversation.id;
+  const row={
+    sender_id:me(),
+    message_text:text||null
+  };
 
- if(S.pendingFile){
-  row.attachment_name=S.pendingFile.name;
-  row.attachment_url=S.pendingFile.url;
-  row.attachment_type=S.pendingFile.type;
- }
+  if(S.channel){
+    row.channel_id=S.channel.id;
+  }else{
+    row.conversation_id=
+      S.conversation.id;
+  }
 
- const r=await db.from('messages').insert(row);
+  if(S.pendingFile){
 
- if(r.error)return toast(r.error.message);
+    row.attachment_name=
+      S.pendingFile.name;
 
- i.value='';
- S.pendingFile=null;
+    row.attachment_url=
+      S.pendingFile.url;
 
- await chatLoad();
- render();
+    row.attachment_type=
+      S.pendingFile.type;
+  }
+
+  const r=await db
+    .from('messages')
+    .insert(row);
+
+  if(r.error){
+    return toast(r.error.message);
+  }
+
+  i.value='';
+  S.pendingFile=null;
+
+  await chatLoad();
+
+  render();
 }
 
 async function fileAttach(inp){
- const f=inp.files[0];
 
- if(!f)return;
+  const f=inp.files[0];
 
- if(f.size>10*1024*1024){
-  return toast('File must be under 10 MB.');
- }
+  if(!f)return;
 
- const path=
-  'chat/'+me()+'/'+Date.now()+
-  '-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  if(f.size>10*1024*1024){
+    return toast(
+      'File must be under 10 MB.'
+    );
+  }
 
- const r=await db.storage.from('nona-files').upload(path,f);
+  const path=
+    'chat/'+
+    me()+
+    '/'+
+    Date.now()+
+    '-'+
+    f.name.replace(
+      /[^a-zA-Z0-9._-]/g,
+      '_'
+    );
 
- if(r.error)return toast(r.error.message);
+  const r=await db
+    .storage
+    .from('nona-files')
+    .upload(path,f);
 
- const u=db.storage
-  .from('nona-files')
-  .getPublicUrl(path).data.publicUrl;
+  if(r.error){
+    return toast(r.error.message);
+  }
 
- S.pendingFile={
-  name:f.name,
-  type:f.type,
-  url:u
- };
+  const u=
+    db.storage
+      .from('nona-files')
+      .getPublicUrl(path)
+      .data.publicUrl;
 
- render();
+  S.pendingFile={
+    name:f.name,
+    type:f.type,
+    url:u
+  };
+
+  render();
 }
 
-/* =========================
-   KNOWLEDGE HUB
-========================= */
+/* KNOWLEDGE */
 
 function knowledge(){
- return `
- <div class="grid">
 
-  <div class="row between">
-   <div>
-    <h1 class="title">Knowledge Hub</h1>
-    <p class="sub">SOPs, guidelines and shared documents.</p>
-   </div>
+  const filtered=
+    S.docs.filter(
+      d=>
+        (
+          d.title+
+          ' '+
+          (d.category||'')
+        )
+        .toLowerCase()
+        .includes(
+          (S.search||'').toLowerCase()
+        )
+    );
 
-   ${isAdmin()?
-    `<button class="btn" onclick="uploadDoc()">+ Upload</button>`:''}
-  </div>
+  return`
+    <div class="grid">
 
-  <div class="card">
+      <div class="row between">
 
-   <input
-    placeholder="Search documents..."
-    oninput="S.search=this.value;render()">
+        <div>
+          <h1 class="title">
+            Knowledge Hub
+          </h1>
 
-   ${S.docs
-    .filter(d=>
-     (d.title+' '+(d.category||''))
-      .toLowerCase()
-      .includes((S.search||'').toLowerCase())
-    )
-    .map(d=>`
-     <div class="knowledge row">
+          <p class="sub">
+            SOPs, guidelines and shared documents.
+          </p>
+        </div>
 
-      <div style="font-size:24px">📄</div>
+        ${
+          isAdmin()?
+          `
+            <button
+              class="btn"
+              onclick="uploadDoc()"
+            >
+              + Upload
+            </button>
+          `:
+          ''
+        }
 
-      <div style="flex:1">
-       <b>${esc(d.title)}</b>
-       <div class="small muted">
-        ${esc(d.category||'General')}
-        · ${esc(d.description||'')}
-       </div>
       </div>
 
-      ${d.file_url?
-       `<a
-        class="btn secondary small"
-        href="${esc(d.file_url)}"
-        target="_blank">Open</a>`:''}
+      <div class="card">
 
-     </div>
-    `).join('')||
-    '<div class="empty">No documents yet.</div>'}
+        <input
+          placeholder="Search documents..."
+          value="${esc(S.search||'')}"
+          oninput="S.search=this.value;render()"
+        >
 
-  </div>
- </div>`;
+      </div>
+
+      <div class="grid two">
+
+        ${
+          filtered.map(d=>`
+            <div class="knowledge-card">
+
+              <div class="doc-thumb">
+                ${
+                  d.file_type?.includes('image')?
+                  '▧':
+                  d.file_type?.includes('pdf')?
+                  'PDF':
+                  '▤'
+                }
+              </div>
+
+              <div style="flex:1">
+
+                <b>${esc(d.title)}</b>
+
+                <div
+                  class="small muted"
+                  style="margin-top:5px"
+                >
+                  ${esc(d.category||'General')}
+                </div>
+
+                <div
+                  class="small muted"
+                  style="margin-top:5px"
+                >
+                  ${esc(d.description||'Shared document')}
+                </div>
+
+                ${
+                  d.file_url?
+                  `
+                    <a
+                      class="btn secondary small"
+                      href="${esc(d.file_url)}"
+                      target="_blank"
+                      style="
+                        display:inline-block;
+                        margin-top:10px;
+                        text-decoration:none
+                      "
+                    >
+                      Open
+                    </a>
+                  `:
+                  ''
+                }
+
+              </div>
+
+            </div>
+          `).join('')||
+          `<div class="card empty">
+            No documents yet.
+          </div>`
+        }
+
+      </div>
+
+    </div>
+  `;
 }
 
 async function uploadDoc(){
- const i=document.createElement('input');
- i.type='file';
 
- i.onchange=async()=>{
-  const f=i.files[0];
-  if(!f)return;
+  const i=document.createElement('input');
 
-  const title=prompt('Document title',f.name);
-  if(!title)return;
+  i.type='file';
 
-  const path=
-   'knowledge/'+me()+'/'+Date.now()+
-   '-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  i.onchange=async()=>{
 
-  const u=await db.storage
-   .from('nona-files')
-   .upload(path,f);
+    const f=i.files[0];
 
-  if(u.error)return toast(u.error.message);
+    if(!f)return;
 
-  const url=db.storage
-   .from('nona-files')
-   .getPublicUrl(path).data.publicUrl;
+    const title=prompt(
+      'Document title',
+      f.name
+    );
 
-  const r=await db.from('knowledge_documents').insert({
-   title,
-   category:'General',
-   file_name:f.name,
-   file_url:url,
-   file_type:f.type,
-   uploaded_by:me()
-  });
+    if(!title)return;
 
-  if(r.error)return toast(r.error.message);
+    const path=
+      'knowledge/'+
+      me()+
+      '/'+
+      Date.now()+
+      '-'+
+      f.name.replace(
+        /[^a-zA-Z0-9._-]/g,
+        '_'
+      );
 
-  await docs();
-  render();
- };
+    const u=await db
+      .storage
+      .from('nona-files')
+      .upload(path,f);
 
- i.click();
+    if(u.error){
+      return toast(u.error.message);
+    }
+
+    const url=
+      db.storage
+        .from('nona-files')
+        .getPublicUrl(path)
+        .data.publicUrl;
+
+    const r=await db
+      .from('knowledge_documents')
+      .insert({
+        title,
+        category:'General',
+        file_name:f.name,
+        file_url:url,
+        file_type:f.type,
+        uploaded_by:me()
+      });
+
+    if(r.error){
+      return toast(r.error.message);
+    }
+
+    await docs();
+
+    render();
+  };
+
+  i.click();
 }
 
-/* =========================
-   STAFF MANAGEMENT
-========================= */
+/* STAFF */
 
 function staff(){
- return `
- <div class="grid">
 
-  <div>
-   <h1 class="title">Staff Management</h1>
-   <p class="sub">Manage staff profiles and leave balances.</p>
-  </div>
+  return`
+    <div class="grid">
 
-  <div class="card" style="overflow:auto">
+      <div>
+        <h1 class="title">
+          Staff Management
+        </h1>
 
-   <table>
-    <thead>
-     <tr>
-      <th>Staff</th>
-      <th>User ID</th>
-      <th>Employee ID</th>
-      <th>Department</th>
-      <th>Position</th>
-      <th>Role</th>
-      <th>Status</th>
-      <th>Action</th>
-     </tr>
-    </thead>
+        <p class="sub">
+          Staff profiles connected to Supabase.
+        </p>
+      </div>
 
-    <tbody>
-     ${S.profiles.map(p=>`
-      <tr>
+      <div class="card" style="overflow:auto">
 
-       <td>
-        <div class="row">
-         <img class="avatar" src="${av(p)}">
-         <div>
-          <b>${esc(p.full_name)}</b>
-          <div class="small muted">${esc(p.email||'')}</div>
-         </div>
-        </div>
-       </td>
+        <table>
 
-       <td>
-        <span class="small">${esc(p.id)}</span>
-       </td>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Employee ID</th>
+              <th>Department</th>
+              <th>Position</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-       <td>${esc(p.employee_id||p.staff_code||'')}</td>
-       <td>${esc(p.department||'')}</td>
-       <td>${esc(p.position||'')}</td>
-       <td>${esc(p.role||'staff')}</td>
-       <td>${esc(p.status||'Active')}</td>
+          <tbody>
 
-       <td>
-        <button class="btn secondary small" onclick="openStaff('${p.id}')">
-         Edit
-        </button>
-       </td>
+            ${
+              S.profiles.map(p=>`
+                <tr>
 
-      </tr>
-     `).join('')}
-    </tbody>
-   </table>
+                  <td>
+                    <div class="row">
 
-  </div>
- </div>`;
+                      <img
+                        class="avatar"
+                        src="${av(p)}"
+                      >
+
+                      <b>
+                        ${esc(p.full_name)}
+                      </b>
+
+                    </div>
+                  </td>
+
+                  <td>
+                    ${esc(p.employee_id||p.staff_code||'')}
+                  </td>
+
+                  <td>
+                    ${esc(p.department||'')}
+                  </td>
+
+                  <td>
+                    ${esc(p.position||'')}
+                  </td>
+
+                  <td>
+                    <span class="pill">
+                      ${esc(p.role)}
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="pill green">
+                      ${esc(p.status||'Active')}
+                    </span>
+                  </td>
+
+                </tr>
+              `).join('')
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+  `;
 }
 
-function openStaff(id){
- const p=S.profiles.find(x=>x.id===id);
-
- if(!p)return;
-
- S.modal={
-  type:'staff',
-  data:p
- };
-
- render();
-}
-
-async function saveStaff(){
- const id=document.getElementById('staff-id').value;
-
- const d={
-  full_name:document.getElementById('staff-name').value,
-  email:document.getElementById('staff-email').value,
-  employee_id:document.getElementById('staff-employee').value,
-  department:document.getElementById('staff-department').value,
-  position:document.getElementById('staff-position').value,
-  phone:document.getElementById('staff-phone').value,
-  join_date:document.getElementById('staff-join').value||null,
-  role:document.getElementById('staff-role').value,
-  status:document.getElementById('staff-status').value
- };
-
- const r=await db.from('profiles')
- .update(d)
- .eq('id',id);
-
- if(r.error)return toast(r.error.message);
-
- await profiles();
-
- if(id===me())await profile();
-
- S.modal=null;
-
- toast('Staff profile updated');
- render();
-}
-
-/* =========================
-   ANALYTICS / DATA
-========================= */
+/* ANALYTICS */
 
 function analytics(){
- const done=tasks.filter(x=>x.status==='Completed').length;
 
- return `
- <div class="grid">
+  const done=
+    tasks.filter(
+      x=>x.status==='Completed'
+    ).length;
 
-  <h1 class="title">Analytics</h1>
+  const progress=
+    tasks.length?
+    Math.round(
+      tasks.reduce(
+        (a,b)=>a+(Number(b.progress)||0),
+        0
+      )/tasks.length
+    ):
+    0;
 
-  <div class="grid four">
+  return`
+    <div class="grid">
 
-   <div class="card stat">
-    <b>${tasks.length}</b>
-    <span>Tasks</span>
-   </div>
+      <h1 class="title">
+        Analytics
+      </h1>
 
-   <div class="card stat">
-    <b>${done}</b>
-    <span>Completed</span>
-   </div>
+      <div class="grid four">
 
-   <div class="card stat">
-    <b>${tasks.length?Math.round(done/tasks.length*100):0}%</b>
-    <span>Completion</span>
-   </div>
+        <div class="card stat">
+          <b>${tasks.length}</b>
+          <span>Total Tasks</span>
+        </div>
 
-   <div class="card stat">
-    <b>${logs.length}</b>
-    <span>Work Logs</span>
-   </div>
+        <div class="card stat">
+          <b>${done}</b>
+          <span>Completed</span>
+        </div>
 
-  </div>
+        <div class="card stat">
+          <b>${progress}%</b>
+          <span>Overall Progress</span>
+        </div>
 
-  <div class="card">
-   <button class="btn" onclick="window.print()">Print / Report</button>
-  </div>
+        <div class="card stat">
+          <b>${logs.length}</b>
+          <span>Work Logs</span>
+        </div>
 
- </div>`;
+      </div>
+
+      <div class="card">
+
+        <div class="row between">
+          <b>Task Progress</b>
+          <span>${progress}%</span>
+        </div>
+
+        <div
+          class="progress"
+          style="margin-top:12px"
+        >
+          <i style="width:${progress}%"></i>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <button
+          class="btn"
+          onclick="window.print()"
+        >
+          Print / Report
+        </button>
+      </div>
+
+    </div>
+  `;
 }
 
+/* DATA */
+
 function dataPage(){
- return `
- <div class="grid">
 
-  <h1 class="title">Data Management</h1>
+  return`
+    <div class="grid">
 
-  <div class="card">
+      <h1 class="title">
+        Data Management
+      </h1>
 
-   <b>Local Task / Work Log / Attendance Backup</b>
+      <div class="card">
 
-   <p class="small muted">
-    Communication, profiles, leave and calendar are stored in Supabase.
-    Tasks, work logs and attendance in this build are browser-local.
-   </p>
+        <b>Local Task & Work Log Backup</b>
 
-   <div class="row wrap">
-    <button class="btn secondary" onclick="backup()">Backup JSON</button>
+        <p class="small muted">
+          Tasks and work logs are currently stored
+          in this browser. Use backup before clearing
+          browser data.
+        </p>
 
-    <label class="btn secondary">
-     Restore
-     <input
-      type="file"
-      hidden
-      accept="application/json"
-      onchange="restore(this)">
-    </label>
-   </div>
+        <div class="row wrap">
 
-  </div>
- </div>`;
+          <button
+            class="btn secondary"
+            onclick="backup()"
+          >
+            Backup JSON
+          </button>
+
+          <label class="btn secondary">
+            Restore
+
+            <input
+              type="file"
+              hidden
+              accept="application/json"
+              onchange="restore(this)"
+            >
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
 }
 
 function backup(){
- const a=document.createElement('a');
 
- a.href=URL.createObjectURL(
-  new Blob(
-   [JSON.stringify({tasks,logs,attendance},null,2)],
-   {type:'application/json'}
-  )
- );
+  const a=document.createElement('a');
 
- a.download='nona-staff-portal-backup.json';
- a.click();
+  a.href=URL.createObjectURL(
+    new Blob(
+      [
+        JSON.stringify(
+          {tasks,logs},
+          null,
+          2
+        )
+      ],
+      {type:'application/json'}
+    )
+  );
+
+  a.download=
+    'nona-costex-portal-backup.json';
+
+  a.click();
 }
 
 function restore(i){
- const r=new FileReader();
 
- r.onload=()=>{
-  try{
-   const x=JSON.parse(r.result);
+  const r=new FileReader();
 
-   tasks=x.tasks||tasks;
-   logs=x.logs||logs;
-   attendance=x.attendance||attendance;
+  r.onload=()=>{
 
-   save();
-   render();
-   toast('Restored');
-  }catch(e){
-   toast('Invalid backup');
-  }
- };
+    try{
 
- r.readAsText(i.files[0]);
+      const x=JSON.parse(r.result);
+
+      tasks=x.tasks||tasks;
+      logs=x.logs||logs;
+
+      saveLocal();
+
+      render();
+
+      toast('Backup restored');
+
+    }catch(e){
+
+      toast('Invalid backup file');
+
+    }
+
+  };
+
+  r.readAsText(i.files[0]);
 }
 
-/* =========================
-   PROFILE
-========================= */
+/* PROFILE */
 
 function profilePage(){
- return `
- <div class="grid" style="max-width:750px">
 
-  <h1 class="title">My Profile</h1>
+  return`
+    <div
+      class="grid"
+      style="max-width:760px"
+    >
 
-  <div class="card">
+      <h1 class="title">
+        My Profile
+      </h1>
 
-   <div class="row">
-    <img
-     class="avatar"
-     style="width:70px;height:70px"
-     src="${av(S.profile)}">
+      <div class="card">
 
-    <div>
-     <h2 style="margin:0">${esc(S.profile.full_name)}</h2>
-     <div class="muted">${esc(S.profile.position||'')}</div>
+        <div class="row">
+
+          <img
+            class="avatar"
+            style="
+              width:72px;
+              height:72px
+            "
+            src="${av(S.profile)}"
+          >
+
+          <div>
+
+            <h2 style="margin:0">
+              ${esc(S.profile.full_name)}
+            </h2>
+
+            <div class="muted">
+              ${esc(S.profile.position||'')}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+          class="grid two"
+          style="margin-top:22px"
+        >
+
+          <div>
+            <label class="small muted">
+              Staff Code
+            </label>
+
+            <div>
+              ${esc(S.profile.staff_code||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Role
+            </label>
+
+            <div>
+              ${esc(S.profile.role||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Department
+            </label>
+
+            <div>
+              ${esc(S.profile.department||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Email
+            </label>
+
+            <div>
+              ${esc(S.user.email||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Employee ID
+            </label>
+
+            <div>
+              ${esc(S.profile.employee_id||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Phone
+            </label>
+
+            <div>
+              ${esc(S.profile.phone||'')}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-   </div>
-
-   <div class="grid two" style="margin-top:20px">
-
-    <div>
-     <label class="small muted">Staff Code</label>
-     <div>${esc(S.profile.staff_code||'')}</div>
-    </div>
-
-    <div>
-     <label class="small muted">Employee ID</label>
-     <div>${esc(S.profile.employee_id||'-')}</div>
-    </div>
-
-    <div>
-     <label class="small muted">Role</label>
-     <div>${esc(S.profile.role||'')}</div>
-    </div>
-
-    <div>
-     <label class="small muted">Department</label>
-     <div>${esc(S.profile.department||'')}</div>
-    </div>
-
-    <div>
-     <label class="small muted">Phone</label>
-     <div>${esc(S.profile.phone||'-')}</div>
-    </div>
-
-    <div>
-     <label class="small muted">Email</label>
-     <div>${esc(S.user.email||S.profile.email||'')}</div>
-    </div>
-
-   </div>
-  </div>
- </div>`;
+  `;
 }
 
-/* =========================
-   NOTIFICATIONS
-========================= */
+/* NOTIFICATIONS */
 
 function notifications(){
- S.modal={type:'notifications'};
- render();
+
+  S.modal={
+    type:'notifications'
+  };
+
+  render();
 }
 
 async function markRead(){
- await db.from('communication_notifications')
- .update({is_read:true})
- .eq('profile_id',me());
 
- await notifs();
+  await db
+    .from('communication_notifications')
+    .update({is_read:true})
+    .eq('profile_id',me());
 
- S.modal=null;
- render();
+  await notifs();
+
+  S.modal=null;
+
+  render();
 }
 
-/* =========================
-   MODALS
-========================= */
+/* MODALS */
 
 function modal(){
 
- const m=S.modal;
+  const m=S.modal;
 
- if(m.type==='notifications'){
-  return `
-  <div class="modalbg">
-   <div class="modal">
+  if(m.type==='notifications'){
 
-    <div class="row between">
-     <h2>Notifications</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
+    return`
+      <div class="modalbg">
 
-    ${S.notifications.map(n=>`
-     <div class="knowledge">
-      <b>${esc(n.title)}</b>
-      <div class="small muted">
-       ${esc(n.message||'')} · ${dateTime(n.created_at)}
+        <div class="modal">
+
+          <div class="row between">
+
+            <div>
+              <h2 style="margin:0">
+                Notifications
+              </h2>
+
+              <div
+                class="small muted"
+                style="margin-top:4px"
+              >
+                Updates and communication alerts
+              </div>
+            </div>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div style="margin-top:18px">
+
+            ${
+              S.notifications.map(n=>`
+                <div
+                  class="notification-card ${
+                    n.is_read?'':'unread'
+                  }"
+                >
+
+                  <div class="comm-preview">
+                    ${n.is_read?'✓':'●'}
+                  </div>
+
+                  <div style="flex:1">
+
+                    <b>${esc(n.title)}</b>
+
+                    <div
+                      class="small muted"
+                      style="margin-top:5px"
+                    >
+                      ${esc(n.message||'')}
+                    </div>
+
+                    <div
+                      class="small muted"
+                      style="margin-top:5px"
+                    >
+                      ${dateTime(n.created_at)}
+                    </div>
+
+                  </div>
+
+                </div>
+              `).join('')||
+              `
+                <div class="empty">
+                  No notifications.
+                </div>
+              `
+            }
+
+          </div>
+
+          <button
+            class="btn secondary small"
+            onclick="markRead()"
+          >
+            Mark all as read
+          </button>
+
+        </div>
+
       </div>
-     </div>
-    `).join('')||'<div class="empty">No notifications.</div>'}
-
-    <button class="btn secondary small" onclick="markRead()">
-     Mark all as read
-    </button>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='task'){
-  const t=m.data;
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>${t.id?'Edit':'Add'} Task</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <div class="grid two" style="margin-top:14px">
-
-     <div>
-      <label class="small muted">Task</label>
-      <input id="task-name" value="${esc(t.name)}">
-     </div>
-
-     <div>
-      <label class="small muted">Category</label>
-      <input id="task-cat" value="${esc(t.category)}">
-     </div>
-
-     <div>
-      <label class="small muted">Priority</label>
-      <select id="task-pri">
-       ${['High','Medium','Low'].map(x=>
-        `<option ${t.priority===x?'selected':''}>${x}</option>`
-       ).join('')}
-      </select>
-     </div>
-
-     <div>
-      <label class="small muted">Status</label>
-      <select id="task-status">
-       ${['Not Started','In Progress','Completed','On Hold'].map(x=>
-        `<option ${t.status===x?'selected':''}>${x}</option>`
-       ).join('')}
-      </select>
-     </div>
-
-     <div>
-      <label class="small muted">Due date</label>
-      <input id="task-date" type="date" value="${t.dueDate}">
-     </div>
-
-     <div>
-      <label class="small muted">Due time</label>
-      <input id="task-time" type="time" value="${t.dueTime||''}">
-     </div>
-
-    </div>
-
-    <label class="small muted">Description</label>
-    <textarea id="task-desc">${esc(t.description||'')}</textarea>
-
-    <label class="small muted">Notes</label>
-    <textarea id="task-notes">${esc(t.notes||'')}</textarea>
-
-    <input id="task-id" type="hidden" value="${esc(t.id||'')}">
-
-    <div class="row" style="justify-content:flex-end">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="saveTask()">Save</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='log'){
-  const x=m.data;
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>${x.id?'Edit':'Add'} Work Log</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <input id="log-id" type="hidden" value="${esc(x.id||'')}">
-
-    <label class="small muted">Date</label>
-    <input id="log-date" type="date" value="${x.date}">
-
-    <label class="small muted">Activity</label>
-    <input id="log-task" value="${esc(x.task)}">
-
-    <label class="small muted">Description</label>
-    <textarea id="log-desc">${esc(x.description||'')}</textarea>
-
-    <div class="grid two">
-     <div>
-      <label class="small muted">Start Time</label>
-      <input id="log-start" type="time" value="${x.startTime||''}">
-     </div>
-
-     <div>
-      <label class="small muted">End Time</label>
-      <input id="log-end" type="time" value="${x.endTime||''}">
-     </div>
-    </div>
-
-    <div class="row" style="justify-content:flex-end">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="saveLog()">Save</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='leave'){
-  const x=m.data;
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>Apply Leave</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <label class="small muted">Leave Type</label>
-    <select id="leave-type">
-     ${[
-      'Annual Leave',
-      'Medical Leave',
-      'Emergency Leave',
-      'Unpaid Leave',
-      'Other'
-     ].map(x=>`<option>${x}</option>`).join('')}
-    </select>
-
-    <div class="grid two">
-
-     <div>
-      <label class="small muted">Start Date</label>
-      <input id="leave-start" type="date">
-     </div>
-
-     <div>
-      <label class="small muted">End Date</label>
-      <input id="leave-end" type="date">
-     </div>
-
-    </div>
-
-    <label class="small muted">Reason</label>
-    <textarea id="leave-reason" placeholder="Reason for leave"></textarea>
-
-    <div class="row" style="justify-content:flex-end">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="submitLeave()">Submit Application</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='calendar-event'){
-  const e=m.data;
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>${e.id?'Edit':'Add'} Calendar Event</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <input id="cal-id" type="hidden" value="${esc(e.id||'')}">
-
-    <label class="small muted">Title</label>
-    <input id="cal-title" value="${esc(e.title||'')}">
-
-    <label class="small muted">Date</label>
-    <input id="cal-date" type="date" value="${e.event_date||''}">
-
-    <label class="small muted">Type</label>
-    <select id="cal-type">
-     ${[
-      'Public Holiday',
-      'Company Holiday',
-      'Company Event'
-     ].map(x=>
-      `<option ${e.event_type===x?'selected':''}>${x}</option>`
-     ).join('')}
-    </select>
-
-    <label class="small muted">Description</label>
-    <textarea id="cal-desc">${esc(e.description||'')}</textarea>
-
-    <div class="row" style="justify-content:flex-end">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="saveCalendarEvent()">Save</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='staff'){
-  const p=m.data;
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>Edit Staff Profile</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <input id="staff-id" type="hidden" value="${esc(p.id)}">
-
-    <div class="small muted" style="margin:8px 0">
-     User ID
-    </div>
-
-    <input value="${esc(p.id)}" disabled>
-
-    <div class="grid two">
-
-     <div>
-      <label class="small muted">Full Name</label>
-      <input id="staff-name" value="${esc(p.full_name||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Profile Email</label>
-      <input id="staff-email" type="email" value="${esc(p.email||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Employee ID</label>
-      <input id="staff-employee" value="${esc(p.employee_id||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Department</label>
-      <input id="staff-department" value="${esc(p.department||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Position</label>
-      <input id="staff-position" value="${esc(p.position||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Phone</label>
-      <input id="staff-phone" value="${esc(p.phone||'')}">
-     </div>
-
-     <div>
-      <label class="small muted">Join Date</label>
-      <input id="staff-join" type="date" value="${p.join_date||''}">
-     </div>
-
-     <div>
-      <label class="small muted">Role</label>
-      <select id="staff-role">
-       <option value="staff" ${p.role==='staff'?'selected':''}>Staff</option>
-       <option value="admin" ${p.role==='admin'?'selected':''}>Admin</option>
-      </select>
-     </div>
-
-     <div>
-      <label class="small muted">Status</label>
-      <select id="staff-status">
-       ${['Active','Inactive','On Leave'].map(x=>
-        `<option ${p.status===x?'selected':''}>${x}</option>`
-       ).join('')}
-      </select>
-     </div>
-
-    </div>
-
-    <div class="small muted" style="margin-top:10px">
-     Note: changing Profile Email does not change the Supabase Auth login email.
-    </div>
-
-    <div class="row" style="justify-content:flex-end;margin-top:16px">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="saveStaff()">Save Changes</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='group-create'){
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>Create Group</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <label class="small muted">Group Name</label>
-    <input id="group-name" placeholder="e.g. Digital Team">
-
-    <div class="small muted" style="margin:15px 0 8px">
-     Select Members
-    </div>
-
-    <div class="grid" style="max-height:330px;overflow:auto">
-
-     ${S.profiles
-      .filter(p=>p.id!==me())
-      .map(p=>`
-       <label
-        class="row"
-        style="padding:8px;border:1px solid #eee;border-radius:8px">
-
-        <input
-         class="group-member"
-         type="checkbox"
-         value="${p.id}"
-         style="width:auto">
-
-        <img class="avatar" src="${av(p)}">
-
-        <span>
-         ${esc(p.full_name)}
-         <small class="muted">${esc(p.position||'')}</small>
-        </span>
-
-       </label>
-      `).join('')}
-
-    </div>
-
-    <div class="row" style="justify-content:flex-end;margin-top:16px">
-     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
-     <button class="btn" onclick="saveGroup()">Create Group</button>
-    </div>
-
-   </div>
-  </div>`;
- }
-
- if(m.type==='group-members'){
-  const ids=new Set(
-   S.conversationMembers.map(x=>x.profile_id)
-  );
-
-  return `
-  <div class="modalbg">
-   <div class="modal">
-
-    <div class="row between">
-     <h2>Manage Members</h2>
-     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
-    </div>
-
-    <div class="small muted" style="margin:8px 0">
-     Current Members
-    </div>
-
-    ${S.conversationMembers.map(x=>{
-     const p=S.profiles.find(y=>y.id===x.profile_id);
-
-     return `
-     <div
-      class="row between"
-      style="padding:8px 0;border-bottom:1px solid #eee">
-
-      <div class="row">
-       <img class="avatar" src="${av(p)}">
-
-       <div>
-        <b>${esc(p?.full_name||'User')}</b>
-        <div class="small muted">${x.role}</div>
-       </div>
+    `;
+  }
+
+  if(m.type==='task'){
+
+    const t=m.data;
+
+    return`
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+
+            <div>
+              <h2 style="margin:0">
+                ${t.id?'Edit':'Add'} Task
+              </h2>
+
+              <div
+                class="small muted"
+                style="margin-top:4px"
+              >
+                Update task details and progress.
+              </div>
+            </div>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            class="grid two"
+            style="margin-top:18px"
+          >
+
+            <div>
+              <label class="small muted">
+                Task
+              </label>
+
+              <input
+                id="task-name"
+                value="${esc(t.name)}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Category
+              </label>
+
+              <input
+                id="task-cat"
+                value="${esc(t.category)}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Priority
+              </label>
+
+              <select id="task-pri">
+                ${
+                  ['High','Medium','Low']
+                    .map(x=>`
+                      <option
+                        ${t.priority===x?'selected':''}
+                      >
+                        ${x}
+                      </option>
+                    `).join('')
+                }
+              </select>
+            </div>
+
+            <div>
+              <label class="small muted">
+                Status
+              </label>
+
+              <select
+                id="task-status"
+                onchange="
+                  if(this.value==='Completed'){
+                    document.getElementById('task-progress').value=100
+                  }
+                "
+              >
+                ${
+                  [
+                    'Not Started',
+                    'In Progress',
+                    'Completed',
+                    'On Hold'
+                  ].map(x=>`
+                    <option
+                      ${t.status===x?'selected':''}
+                    >
+                      ${x}
+                    </option>
+                  `).join('')
+                }
+              </select>
+            </div>
+
+            <div>
+              <label class="small muted">
+                Progress %
+              </label>
+
+              <input
+                id="task-progress"
+                type="number"
+                min="0"
+                max="100"
+                value="${Number(t.progress)||0}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Due Date
+              </label>
+
+              <input
+                id="task-date"
+                type="date"
+                value="${t.dueDate||''}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Due Time
+              </label>
+
+              <input
+                id="task-time"
+                type="time"
+                value="${t.dueTime||''}"
+              >
+            </div>
+
+          </div>
+
+          <div style="margin-top:13px">
+
+            <label class="small muted">
+              Description
+            </label>
+
+            <textarea id="task-desc">${esc(
+              t.description||''
+            )}</textarea>
+
+          </div>
+
+          <div style="margin-top:13px">
+
+            <label class="small muted">
+              Notes
+            </label>
+
+            <textarea id="task-notes">${esc(
+              t.notes||''
+            )}</textarea>
+
+          </div>
+
+          <input
+            id="task-id"
+            type="hidden"
+            value="${esc(t.id||'')}"
+          >
+
+          <div
+            class="row"
+            style="
+              justify-content:flex-end;
+              margin-top:17px
+            "
+          >
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              Cancel
+            </button>
+
+            ${
+              t.id?
+              `
+                <button
+                  class="btn danger"
+                  onclick="
+                    S.modal=null;
+                    deleteTask('${t.id}')
+                  "
+                >
+                  Delete
+                </button>
+              `:
+              ''
+            }
+
+            <button
+              class="btn"
+              onclick="saveTask()"
+            >
+              Save Task
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
+    `;
+  }
 
-      ${x.profile_id!==me()
-       ?`<button class="btn danger small" onclick="removeMember('${x.profile_id}')">Remove</button>`
-       :'<span class="small muted">You</span>'}
+  if(m.type==='log'){
 
-     </div>`;
-    }).join('')}
+    const x=m.data;
 
-    <div class="small muted" style="margin:16px 0 8px">
-     Add Members
-    </div>
+    return`
+      <div class="modalbg">
 
-    <div class="grid" style="max-height:250px;overflow:auto">
+        <div class="modal">
 
-     ${S.profiles
-      .filter(p=>p.id!==me()&&!ids.has(p.id))
-      .map(p=>`
-       <label
-        class="row"
-        style="padding:8px;border:1px solid #eee;border-radius:8px">
+          <div class="row between">
 
-        <input
-         class="group-add-member"
-         type="checkbox"
-         value="${p.id}"
-         style="width:auto">
+            <h2 style="margin:0">
+              ${x.id?'Edit':'Add'} Work Log
+            </h2>
 
-        <img class="avatar" src="${av(p)}">
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
 
-        <span>${esc(p.full_name)}</span>
+          </div>
 
-       </label>
-      `).join('')||
-      '<div class="small muted">Everyone is already in this group.</div>'}
+          <div
+            class="grid two"
+            style="margin-top:18px"
+          >
 
-    </div>
+            <div>
+              <label class="small muted">
+                Date
+              </label>
 
-    <div class="row" style="justify-content:flex-end;margin-top:16px">
-     <button class="btn secondary" onclick="S.modal=null;render()">Close</button>
-     <button class="btn" onclick="saveMembers()">Add Selected</button>
-    </div>
+              <input
+                id="log-date"
+                type="date"
+                value="${x.date||''}"
+              >
+            </div>
 
-   </div>
-  </div>`;
- }
+            <div>
+              <label class="small muted">
+                Activity
+              </label>
 
- return '';
+              <input
+                id="log-task"
+                value="${esc(x.task||'')}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Start Time
+              </label>
+
+              <input
+                id="log-start"
+                type="time"
+                value="${x.startTime||''}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                End Time
+              </label>
+
+              <input
+                id="log-end"
+                type="time"
+                value="${x.endTime||''}"
+              >
+            </div>
+
+          </div>
+
+          <div style="margin-top:13px">
+
+            <label class="small muted">
+              Description
+            </label>
+
+            <textarea id="log-desc">${esc(
+              x.description||''
+            )}</textarea>
+
+          </div>
+
+          <input
+            id="log-id"
+            type="hidden"
+            value="${esc(x.id||'')}"
+          >
+
+          <div
+            class="row"
+            style="
+              justify-content:flex-end;
+              margin-top:17px
+            "
+          >
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              Cancel
+            </button>
+
+            <button
+              class="btn"
+              onclick="saveLog()"
+            >
+              Save Work Log
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(m.type==='calendar-event'){
+
+    const e=m.data;
+
+    return`
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+
+            <div>
+              <h2 style="margin:0">
+                ${e.id?'Edit':'Add'} Calendar Event
+              </h2>
+
+              <div
+                class="small muted"
+                style="margin-top:4px"
+              >
+                This event will be visible to all staff.
+              </div>
+            </div>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            class="grid two"
+            style="margin-top:18px"
+          >
+
+            <div>
+              <label class="small muted">
+                Event Title
+              </label>
+
+              <input
+                id="cal-title"
+                value="${esc(e.title||'')}"
+                placeholder="e.g. Malaysia Day"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Date
+              </label>
+
+              <input
+                id="cal-date"
+                type="date"
+                value="${e.event_date||''}"
+              >
+            </div>
+
+            <div>
+              <label class="small muted">
+                Event Type
+              </label>
+
+              <select id="cal-type">
+
+                ${
+                  [
+                    'Public Holiday',
+                    'Company Holiday',
+                    'Company Event'
+                  ].map(x=>`
+                    <option
+                      ${e.event_type===x?'selected':''}
+                    >
+                      ${x}
+                    </option>
+                  `).join('')
+                }
+
+              </select>
+            </div>
+
+          </div>
+
+          <div style="margin-top:13px">
+
+            <label class="small muted">
+              Description
+            </label>
+
+            <textarea
+              id="cal-desc"
+              placeholder="Optional description"
+            >${esc(e.description||'')}</textarea>
+
+          </div>
+
+          <input
+            id="cal-id"
+            type="hidden"
+            value="${esc(e.id||'')}"
+          >
+
+          <div
+            class="row"
+            style="
+              justify-content:flex-end;
+              margin-top:17px
+            "
+          >
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              Cancel
+            </button>
+
+            ${
+              e.id?
+              `
+                <button
+                  class="btn danger"
+                  onclick="deleteCalendarEvent('${e.id}')"
+                >
+                  Delete
+                </button>
+              `:
+              ''
+            }
+
+            <button
+              class="btn"
+              onclick="saveCalendarEvent()"
+            >
+              Save Event
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(m.type==='calendar-view'){
+
+    const e=m.data;
+
+    return`
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+
+            <div class="row">
+
+              <span class="comm-preview">
+                ✦
+              </span>
+
+              <div>
+
+                <h2 style="margin:0">
+                  ${esc(e.title)}
+                </h2>
+
+                <div
+                  class="small muted"
+                  style="margin-top:4px"
+                >
+                  ${esc(e.event_type)}
+                </div>
+
+              </div>
+
+            </div>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            class="card"
+            style="margin-top:18px;background:#f8faf7"
+          >
+
+            <b>
+              ${date(e.event_date)}
+            </b>
+
+            <p class="small muted">
+              ${esc(e.description||'No description.')}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(m.type==='group-create'){
+
+    return`
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+
+            <h2 style="margin:0">
+              Create Group
+            </h2>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <label
+            class="small muted"
+            style="display:block;margin-top:18px"
+          >
+            Group Name
+          </label>
+
+          <input
+            id="group-name"
+            placeholder="e.g. Digital Team"
+            style="margin-top:5px"
+          >
+
+          <div
+            class="small muted"
+            style="margin:17px 0 8px"
+          >
+            Select members
+          </div>
+
+          <div
+            class="grid"
+            style="
+              max-height:330px;
+              overflow:auto
+            "
+          >
+
+            ${
+              S.profiles
+                .filter(p=>p.id!==me())
+                .map(p=>`
+                  <label
+                    class="row"
+                    style="
+                      padding:9px;
+                      border:1px solid #e5ebe5;
+                      border-radius:10px
+                    "
+                  >
+
+                    <input
+                      class="group-member"
+                      type="checkbox"
+                      value="${p.id}"
+                      style="width:auto"
+                    >
+
+                    <img
+                      class="avatar"
+                      src="${av(p)}"
+                    >
+
+                    <span>
+                      <b>${esc(p.full_name)}</b>
+
+                      <small
+                        class="muted"
+                        style="display:block"
+                      >
+                        ${esc(p.position||'')}
+                      </small>
+                    </span>
+
+                  </label>
+                `).join('')
+            }
+
+          </div>
+
+          <div
+            class="row"
+            style="
+              justify-content:flex-end;
+              margin-top:17px
+            "
+          >
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              Cancel
+            </button>
+
+            <button
+              class="btn"
+              onclick="saveGroup()"
+            >
+              Create Group
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(m.type==='group-members'){
+
+    const ids=new Set(
+      S.conversationMembers.map(
+        x=>x.profile_id
+      )
+    );
+
+    return`
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+
+            <h2 style="margin:0">
+              Manage Members
+            </h2>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            class="small muted"
+            style="margin:16px 0 8px"
+          >
+            Current Members
+          </div>
+
+          ${
+            S.conversationMembers.map(x=>{
+
+              const p=S.profiles.find(
+                y=>y.id===x.profile_id
+              );
+
+              return`
+                <div
+                  class="row between"
+                  style="
+                    padding:9px 0;
+                    border-bottom:1px solid #eee
+                  "
+                >
+
+                  <div class="row">
+
+                    <img
+                      class="avatar"
+                      src="${av(p)}"
+                    >
+
+                    <div>
+                      <b>
+                        ${esc(p?.full_name||'User')}
+                      </b>
+
+                      <div class="small muted">
+                        ${x.role}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  ${
+                    x.profile_id!==me()?
+                    `
+                      <button
+                        class="btn danger small"
+                        onclick="removeMember('${x.profile_id}')"
+                      >
+                        Remove
+                      </button>
+                    `:
+                    `<span class="small muted">You</span>`
+                  }
+
+                </div>
+              `;
+            }).join('')
+          }
+
+          <div
+            class="small muted"
+            style="margin:17px 0 8px"
+          >
+            Add Members
+          </div>
+
+          <div
+            class="grid"
+            style="
+              max-height:250px;
+              overflow:auto
+            "
+          >
+
+            ${
+              S.profiles
+                .filter(
+                  p=>
+                    p.id!==me()&&
+                    !ids.has(p.id)
+                )
+                .map(p=>`
+                  <label
+                    class="row"
+                    style="
+                      padding:9px;
+                      border:1px solid #eee;
+                      border-radius:10px
+                    "
+                  >
+
+                    <input
+                      class="group-add-member"
+                      type="checkbox"
+                      value="${p.id}"
+                      style="width:auto"
+                    >
+
+                    <img
+                      class="avatar"
+                      src="${av(p)}"
+                    >
+
+                    <span>
+                      ${esc(p.full_name)}
+                    </span>
+
+                  </label>
+                `).join('')||
+                `
+                  <div class="small muted">
+                    Everyone is already in this group.
+                  </div>
+                `
+            }
+
+          </div>
+
+          <div
+            class="row"
+            style="
+              justify-content:flex-end;
+              margin-top:17px
+            "
+          >
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()"
+            >
+              Close
+            </button>
+
+            <button
+              class="btn"
+              onclick="saveMembers()"
+            >
+              Add Selected
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  return '';
 }
 
 init();
