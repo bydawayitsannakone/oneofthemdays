@@ -1,3190 +1,4399 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Nona Costex Staff Portal — V22</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nona Costex Staff Portal</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Helvetica,Arial,sans-serif;background:#f7f7f4;color:#222}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-input,select,textarea{width:100%;border:1px solid #e5e5df;border-radius:9px;padding:10px;background:#fff}
-textarea{min-height:90px;resize:vertical}
+:root{
+  --green:#16823a;
+  --green-dark:#10652d;
+  --green-light:#e8f5ec;
+  --green-soft:#f3faf5;
+  --border:#e2e8e4;
+  --text:#172019;
+  --muted:#718078;
+  --bg:#f7f9f7;
+  --white:#fff;
+  --danger:#c0392b;
+  --shadow:0 4px 20px rgba(0,0,0,.05);
+}
 
-.app{display:flex;min-height:100vh}
-.side{width:240px;position:fixed;inset:0 auto 0 0;background:#fff;border-right:1px solid #e5e5df;padding:18px 12px;z-index:20}
-.main{margin-left:240px;flex:1;min-width:0}
-.top{height:64px;background:#fff;border-bottom:1px solid #e5e5df;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:10}
-.content{padding:22px;max-width:1250px;margin:auto}
+*{
+  box-sizing:border-box;
+}
 
-.brand{font-weight:700;font-size:19px;padding:5px 10px 20px}
-.brand small{display:block;font-size:11px;color:#888;font-weight:400;margin-top:3px}
-.nav-title{font-size:10px;color:#aaa;text-transform:uppercase;padding:14px 10px 6px}
-.nav button{width:100%;background:transparent;border:0;text-align:left;padding:10px;border-radius:9px;color:#666}
-.nav button:hover,.nav button.active{background:#efeee9;color:#111}
+html,body{
+  margin:0;
+  padding:0;
+  font-family:Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
 
-.card{background:#fff;border:1px solid #e5e5df;border-radius:14px;padding:18px}
-.grid{display:grid;gap:14px}
-.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.row{display:flex;align-items:center;gap:10px}
-.between{justify-content:space-between}
-.wrap{flex-wrap:wrap}
+button,
+input,
+textarea,
+select{
+  font-family:inherit;
+}
 
-.title{font-size:24px;font-weight:700;margin:0}
-.sub{font-size:13px;color:#777;margin:5px 0 0}
-
-.btn{border:0;background:#222;color:#fff;padding:9px 14px;border-radius:9px}
-.btn.secondary{background:#efeee9;color:#222}
-.btn.danger{background:#fff0ef;color:#b42318}
-.btn.small{padding:7px 10px;font-size:12px}
-
-.stat{padding:15px}
-.stat b{display:block;font-size:24px}
-.stat span{font-size:12px;color:#777}
-
-.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:600;background:#efeee9}
-.high{background:#fee2e2;color:#991b1b}
-.medium{background:#fef3c7;color:#92400e}
-.low,.green{background:#dcfce7;color:#166534}
-.blue{background:#dbeafe;color:#1e40af}
-.red{background:#fee2e2;color:#991b1b}
-
-.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#ddd}
-.progress{height:8px;background:#e8e8e3;border-radius:99px;overflow:hidden}
-.progress i{display:block;height:100%;background:#222}
-
-.small{font-size:12px}
-.muted{color:#777}
-
-table{width:100%;border-collapse:collapse}
-th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
-th{font-size:11px;color:#777}
-
-.login{min-height:100vh;display:grid;place-items:center;background:#f0f0eb;padding:20px}
-.loginbox{width:min(410px,100%);background:#fff;padding:28px;border:1px solid #e5e5df;border-radius:18px}
-
-.error{background:#fff0ef;color:#b42318;padding:10px;border-radius:9px;font-size:13px;margin:10px 0}
-
-.modalbg{position:fixed;inset:0;background:#0006;display:grid;place-items:center;z-index:100;padding:18px}
-.modal{background:#fff;border-radius:16px;width:min(700px,100%);max-height:90vh;overflow:auto;padding:22px}
-
-.toast{position:fixed;right:18px;top:78px;z-index:200;background:#222;color:#fff;padding:11px 14px;border-radius:9px;font-size:13px}
-
-.chat{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 110px);min-height:550px;padding:0;overflow:hidden}
-.chatlist{border-right:1px solid #eee;overflow:auto}
-.chatitem{padding:12px;border-bottom:1px solid #eee;cursor:pointer}
-.chatitem:hover,.chatitem.active{background:#f5f5f0}
-
-.chatwindow{display:flex;flex-direction:column;min-width:0}
-.messages{flex:1;overflow:auto;padding:16px;background:#fafaf8}
-
-.bubble{max-width:75%;padding:9px 11px;border:1px solid #e7e7e2;background:#fff;border-radius:12px;margin-bottom:9px}
-.bubble.mine{margin-left:auto;background:#222;color:#fff;border-color:#222}
-.meta{font-size:10px;opacity:.6;margin-top:4px}
-
-.knowledge{padding:12px 0;border-bottom:1px solid #eee}
-.empty{text-align:center;color:#999;padding:40px 10px}
-.mobile{display:none}
-
-.member-check{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px;
-  border-bottom:1px solid #eee;
+button{
   cursor:pointer;
 }
-.member-check:hover{background:#f7f7f4}
-.member-check input{width:auto}
 
-@media(max-width:800px){
-.side{transform:translateX(-100%);transition:.2s}
-.side.open{transform:none}
-.main{margin-left:0}
-.mobile{display:block}
-.content{padding:14px}
-.four{grid-template-columns:1fr 1fr}
-.two{grid-template-columns:1fr}
-.chat{grid-template-columns:1fr;height:auto}
-.chatlist{max-height:300px;border-right:0;border-bottom:1px solid #eee}
-.hide{display:none}
-}
-</style>
-</head>
-
-<body>
-<div id="app"></div>
-<div id="toast"></div>
-
-<script>
-const SUPABASE_URL='https://jccryyxdxykomwsivtjy.supabase.co';
-const KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
-
-const db=supabase.createClient(SUPABASE_URL,KEY);
-
-const S={
- page:'dashboard',
- user:null,
- profile:null,
- profiles:[],
- channels:[],
- channel:null,
- conversation:null,
- conversations:[],
- conversationMembers:[],
- messages:[],
- notifications:[],
- docs:[],
- sidebar:false,
- modal:null,
- chatSearch:'',
- taskSearch:'',
- taskFilter:'',
- pendingFile:null
-};
-
-let tasks=JSON.parse(localStorage.getItem('nona_v22_tasks')||'null')||[
-{
- id:'t1',
- name:'Flite Product Shoot',
- category:'Content',
- priority:'High',
- status:'In Progress',
- dueDate:'2026-09-16',
- dueTime:'17:00',
- description:'Product shooting for Flite sandals.',
- notes:''
-},
-{
- id:'t2',
- name:'Social Media Content',
- category:'Content',
- priority:'Medium',
- status:'In Progress',
- dueDate:'2026-09-17',
- dueTime:'17:00',
- description:'Shoot and edit social media content.',
- notes:''
-},
-{
- id:'t3',
- name:'Live Setup',
- category:'Live',
- priority:'High',
- status:'Not Started',
- dueDate:'2026-09-18',
- dueTime:'12:00',
- description:'Prepare live setup quotation and requirements.',
- notes:''
-}
-];
-
-let logs=JSON.parse(localStorage.getItem('nona_v22_logs')||'null')||[
-{
- id:'l1',
- date:'2026-09-07',
- task:'Budget quotation presentation + Flite product shoot',
- description:'Presented completed budget quotation and carried out Flite product shooting.'
-},
-{
- id:'l2',
- date:'2026-09-08',
- task:'Product shooting + content brainstorming',
- description:'Continued product shooting and brainstormed social media content.'
-},
-{
- id:'l3',
- date:'2026-09-09',
- task:'Live setup quotation + social media shooting',
- description:'Presented live setup budget quotation and shot social media content.'
-},
-{
- id:'l4',
- date:'2026-09-10',
- task:'Content shooting + video editing',
- description:'Shot content and edited social media videos.'
-}
-];
-
-const esc=x=>{
- const d=document.createElement('div');
- d.textContent=x??'';
- return d.innerHTML;
-};
-
-const av=p=>
- p?.avatar_url||
- 'https://ui-avatars.com/api/?name='+
- encodeURIComponent(p?.full_name||'User')+
- '&background=e8e8e3&color=222';
-
-const me=()=>S.profile?.id;
-const admin=()=>S.profile?.role==='admin';
-
-function save(){
- localStorage.setItem('nona_v22_tasks',JSON.stringify(tasks));
- localStorage.setItem('nona_v22_logs',JSON.stringify(logs));
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-function toast(x){
- const t=document.getElementById('toast');
- t.textContent=x;
- t.className='toast';
- setTimeout(()=>t.className='',2500);
+/* =========================
+   LOGIN
+========================= */
+
+.login-wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  background:linear-gradient(135deg,#f3faf5,#fff);
 }
 
-function date(x){
- return x?
- new Date(x+'T00:00:00').toLocaleDateString('en-MY',{
-   day:'numeric',
-   month:'short',
-   year:'numeric'
- }):'';
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:38px;
+  box-shadow:var(--shadow);
 }
 
-function dateTime(x){
- return x?
- new Date(x).toLocaleString('en-MY',{
-   day:'numeric',
-   month:'short',
-   hour:'2-digit',
-   minute:'2-digit'
- }):'';
+.logo{
+  font-size:26px;
+  font-weight:700;
+  color:var(--green);
+  margin-bottom:5px;
 }
 
-function pclass(x){
- return x==='High'?'high':x==='Medium'?'medium':'low';
+.login-card h1{
+  margin:0 0 8px;
+  font-size:25px;
 }
 
-function sclass(x){
- return x==='Completed'?'green':
-        x==='In Progress'?'blue':
-        x==='Overdue'?'red':'';
+.login-card p{
+  color:var(--muted);
+  margin:0 0 28px;
 }
 
-async function init(){
- const {
-   data:{session}
- }=await db.auth.getSession();
+/* =========================
+   LAYOUT
+========================= */
 
- if(session){
-   await enter(session.user);
- }else{
-   loginPage();
- }
-
- db.auth.onAuthStateChange(async(e,s)=>{
-   if(s&&!S.user)await enter(s.user);
-
-   if(!s&&S.user){
-     S.user=null;
-     S.profile=null;
-     loginPage();
-   }
- });
+.app{
+  display:flex;
+  min-height:100vh;
 }
 
-async function enter(u){
- S.user=u;
-
- await profile();
-
- if(!S.profile){
-   await db.from('profiles').insert({
-     id:u.id,
-     staff_code:(u.email||'').includes('admin')?'ADMIN001':'NC001',
-     full_name:(u.email||'').includes('admin')?'Admin':'Atikah',
-     department:(u.email||'').includes('admin')?'Management':'Digital',
-     position:(u.email||'').includes('admin')?
-       'Administrator':
-       'Live Host Online & Offline',
-     role:(u.email||'').includes('admin')?'admin':'staff',
-     status:'Active'
-   });
-
-   await profile();
- }
-
- await Promise.all([
-   profiles(),
-   channels(),
-   notifs(),
-   docs(),
-   loadConversations()
- ]);
-
- subscribe();
- render();
+.sidebar{
+  width:245px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  overflow-y:auto;
+  z-index:20;
 }
 
-async function profile(){
- const r=await db
-   .from('profiles')
-   .select('*')
-   .eq('id',S.user.id)
-   .maybeSingle();
-
- if(!r.error)S.profile=r.data;
+.brand{
+  padding:25px 22px 20px;
+  border-bottom:1px solid var(--border);
 }
 
-async function profiles(){
- const r=await db
-   .from('profiles')
-   .select('*')
-   .order('full_name');
-
- if(!r.error)S.profiles=r.data||[];
+.brand-title{
+  color:var(--green);
+  font-weight:700;
+  font-size:21px;
 }
 
-async function channels(){
- const r=await db
-   .from('channels')
-   .select('*')
-   .order('name');
-
- if(!r.error)S.channels=r.data||[];
+.brand-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
 }
 
-async function notifs(){
- const r=await db
-   .from('communication_notifications')
-   .select('*')
-   .eq('profile_id',me())
-   .order('created_at',{ascending:false})
-   .limit(50);
-
- if(!r.error)S.notifications=r.data||[];
+.nav{
+  padding:18px 12px;
 }
 
-async function docs(){
- const r=await db
-   .from('knowledge_documents')
-   .select('*')
-   .order('created_at',{ascending:false});
-
- if(!r.error)S.docs=r.data||[];
+.nav-section{
+  font-size:11px;
+  color:#9aa59e;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:18px 10px 8px;
 }
 
-function subscribe(){
- db.channel('nona-v22')
- .on(
-   'postgres_changes',
-   {
-     event:'*',
-     schema:'public',
-     table:'messages'
-   },
-   async()=>{
-     if(S.page==='communication'){
-       await chatLoad();
-       render();
-     }
-   }
- )
- .on(
-   'postgres_changes',
-   {
-     event:'*',
-     schema:'public',
-     table:'communication_notifications'
-   },
-   async()=>{
-     await notifs();
-     render();
-   }
- )
- .subscribe();
+.nav button{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  margin-bottom:3px;
+  color:#46524a;
+  font-size:14px;
+  transition:.15s;
 }
 
-function loginPage(err=''){
- document.getElementById('app').innerHTML=`
- <div class="login">
-   <div class="loginbox">
-     <b style="font-size:23px">Nona Costex</b>
-     <div class="small muted" style="margin:4px 0 22px">
-       Staff Portal V22
-     </div>
-
-     ${err?`<div class="error">${esc(err)}</div>`:''}
-
-     <label class="small muted">Email</label>
-     <input
-       id="email"
-       type="email"
-       placeholder="Supabase account email"
-       style="margin:5px 0 13px"
-     >
-
-     <label class="small muted">Password</label>
-     <input
-       id="pass"
-       type="password"
-       placeholder="Password"
-       style="margin:5px 0 16px"
-     >
-
-     <button
-       class="btn"
-       style="width:100%"
-       onclick="login()"
-     >
-       Sign in
-     </button>
-
-     <p
-       class="small muted"
-       style="text-align:center;margin-top:14px"
-     >
-       Use the accounts created in Supabase.
-     </p>
-   </div>
- </div>`;
+.nav button:hover{
+  background:var(--green-light);
+  color:var(--green-dark);
 }
 
-async function login(){
- const email=document.getElementById('email').value.trim();
- const password=document.getElementById('pass').value;
-
- const r=await db.auth.signInWithPassword({
-   email,
-   password
- });
-
- if(r.error){
-   return loginPage(r.error.message);
- }
-
- await enter(r.data.user);
+.nav button.active{
+  background:var(--green-light);
+  color:var(--green-dark);
+  font-weight:600;
 }
 
-async function logout(){
- await db.auth.signOut();
+.nav-icon{
+  display:inline-block;
+  width:25px;
 }
 
-function nav(id,label,icon,b=0){
- return `
- <button
-   class="${S.page===id?'active':''}"
-   onclick="go('${id}')"
- >
-   ${icon} &nbsp; ${label}
-   ${b?
-     `<span class="pill red" style="float:right">${b}</span>`:
-     ''
-   }
- </button>`;
+.main{
+  margin-left:245px;
+  width:calc(100% - 245px);
+  min-height:100vh;
 }
 
-function go(p){
- S.page=p;
- S.sidebar=false;
- S.modal=null;
-
- if(p==='communication'){
-   loadConversations();
-   chatLoad();
- }
-
- render();
+.topbar{
+  height:68px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-function render(){
- if(!S.user)return loginPage();
-
- const unread=
-   S.notifications.filter(n=>!n.is_read).length;
-
- document.getElementById('app').innerHTML=`
- <div class="app">
-
-   <aside class="side ${S.sidebar?'open':''}">
-
-     <div class="brand">
-       Nona Costex
-       <small>Staff Portal V22</small>
-     </div>
-
-     <div class="nav-title">Workspace</div>
-
-     <div class="nav">
-       ${nav('dashboard','Dashboard','⌂')}
-       ${nav('tasks','Tasks','✓')}
-       ${nav('worklogs','Work Logs','▤')}
-       ${nav('communication','Communication','◌',unread)}
-       ${nav('knowledge','Knowledge Hub','▥')}
-       ${nav('calendar','Calendar','□')}
-     </div>
-
-     ${admin()?
-       `
-       <div class="nav-title">Admin</div>
-       <div class="nav">
-         ${nav('staff','Staff Management','♙')}
-         ${nav('analytics','Analytics','▥')}
-         ${nav('data','Data Management','↥')}
-       </div>
-       `:
-       ''
-     }
-
-     <div class="nav-title">Account</div>
-
-     <div class="nav">
-       ${nav('profile','My Profile','○')}
-     </div>
-
-     <div style="margin-top:18px">
-       <button
-         style="width:100%;background:transparent;border:0;text-align:left;padding:10px;color:#777"
-         onclick="logout()"
-       >
-         ↪ Log out
-       </button>
-     </div>
-
-   </aside>
-
-   <section class="main">
-
-     <header class="top">
-
-       <div class="row">
-         <button
-           class="btn secondary mobile"
-           onclick="S.sidebar=!S.sidebar;render()"
-         >
-           ☰
-         </button>
-
-         <b>Nona Costex Staff Portal</b>
-       </div>
-
-       <div class="row">
-
-         <button
-           class="btn secondary small"
-           onclick="notifications()"
-         >
-           🔔 ${unread||''}
-         </button>
-
-         <div class="row hide">
-           <img
-             class="avatar"
-             src="${av(S.profile)}"
-           >
-
-           <div>
-             <b style="font-size:13px">
-               ${esc(S.profile.full_name)}
-             </b>
-
-             <div class="small muted">
-               ${esc(S.profile.role)}
-             </div>
-           </div>
-         </div>
-
-       </div>
-
-     </header>
-
-     <main class="content">
-       ${page()}
-     </main>
-
-   </section>
- </div>
-
- ${S.modal?modal():''}
- `;
+.topbar-title{
+  font-size:18px;
+  font-weight:600;
 }
 
-function page(){
- return S.page==='dashboard'?dashboard():
-        S.page==='tasks'?tasksPage():
-        S.page==='worklogs'?logsPage():
-        S.page==='communication'?chatPage():
-        S.page==='knowledge'?knowledge():
-        S.page==='calendar'?calendar():
-        S.page==='staff'?staff():
-        S.page==='analytics'?analytics():
-        S.page==='data'?dataPage():
-        profilePage();
+.top-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
-function dashboard(){
- const done=tasks.filter(x=>x.status==='Completed').length;
- const pct=tasks.length?
-   Math.round(done/tasks.length*100):0;
-
- return `
- <div class="grid">
-
-   <div>
-     <h1 class="title">Dashboard</h1>
-     <p class="sub">
-       Welcome back, ${esc(S.profile.full_name.split(' ')[0])}.
-     </p>
-   </div>
-
-   <div class="grid four">
-
-     <div class="card stat">
-       <b>${tasks.length}</b>
-       <span>Total Tasks</span>
-     </div>
-
-     <div class="card stat">
-       <b>${done}</b>
-       <span>Completed</span>
-     </div>
-
-     <div class="card stat">
-       <b>${tasks.length-done}</b>
-       <span>Active</span>
-     </div>
-
-     <div class="card stat">
-       <b>${S.notifications.filter(n=>!n.is_read).length}</b>
-       <span>Unread</span>
-     </div>
-
-   </div>
-
-   <div class="grid two">
-
-     <div class="card">
-       <div class="row between">
-         <b>Task Progress</b>
-         <b>${pct}%</b>
-       </div>
-
-       <div
-         class="progress"
-         style="margin-top:10px"
-       >
-         <i style="width:${pct}%"></i>
-       </div>
-     </div>
-
-     <div class="card">
-       <div class="row between">
-         <b>Communication</b>
-
-         <button
-           class="btn secondary small"
-           onclick="go('communication')"
-         >
-           Open
-         </button>
-       </div>
-
-       <p class="small muted">
-         ${S.notifications.filter(n=>!n.is_read).length?
-           'You have unread communication notifications.':
-           'Nothing unread.'
-         }
-       </p>
-     </div>
-
-   </div>
-
-   <div class="card">
-
-     <div class="row between">
-       <b>Recent Work Logs</b>
-
-       <button
-         class="btn secondary small"
-         onclick="go('worklogs')"
-       >
-         View all
-       </button>
-     </div>
-
-     ${logs.slice(-4).reverse().map(x=>`
-       <div class="knowledge">
-         <b style="font-size:13px">
-           ${esc(x.task)}
-         </b>
-
-         <div class="small muted">
-           ${date(x.date)} · ${esc(x.description)}
-         </div>
-       </div>
-     `).join('')}
-
-   </div>
-
- </div>`;
+.content{
+  padding:28px;
+  max-width:1500px;
+  margin:auto;
 }
 
-function tasksPage(){
- let a=[...tasks];
+/* =========================
+   BUTTONS
+========================= */
 
- if(S.taskFilter)
-   a=a.filter(x=>x.status===S.taskFilter);
-
- if(S.taskSearch){
-   const q=S.taskSearch.toLowerCase();
-
-   a=a.filter(x=>
-     (x.name+x.description+x.category)
-       .toLowerCase()
-       .includes(q)
-   );
- }
-
- return `
- <div class="grid">
-
-   <div class="row between wrap">
-
-     <div>
-       <h1 class="title">Tasks</h1>
-       <p class="sub">
-         Task management from the existing portal workflow.
-       </p>
-     </div>
-
-     <button
-       class="btn"
-       onclick="openTask()"
-     >
-       + Add Task
-     </button>
-
-   </div>
-
-   <div class="row wrap">
-
-     <input
-       style="max-width:260px"
-       placeholder="Search tasks..."
-       value="${esc(S.taskSearch)}"
-       oninput="S.taskSearch=this.value;render()"
-     >
-
-     <select
-       style="max-width:170px"
-       onchange="S.taskFilter=this.value;render()"
-     >
-       <option value="">All status</option>
-
-       ${[
-         'Not Started',
-         'In Progress',
-         'Completed',
-         'On Hold'
-       ].map(x=>`
-         <option
-           ${S.taskFilter===x?'selected':''}
-         >
-           ${x}
-         </option>
-       `).join('')}
-
-     </select>
-
-   </div>
-
-   <div class="card" style="overflow:auto">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>Task</th>
-           <th>Priority</th>
-           <th>Due</th>
-           <th>Status</th>
-           <th></th>
-         </tr>
-       </thead>
-
-       <tbody>
-
-       ${a.map(t=>`
-         <tr>
-
-           <td>
-             <b>${esc(t.name)}</b>
-             <div class="small muted">
-               ${esc(t.category)}
-             </div>
-           </td>
-
-           <td>
-             <span class="pill ${pclass(t.priority)}">
-               ${t.priority}
-             </span>
-           </td>
-
-           <td>
-             ${date(t.dueDate)} ${t.dueTime||''}
-           </td>
-
-           <td>
-             <span class="pill ${sclass(t.status)}">
-               ${t.status}
-             </span>
-           </td>
-
-           <td>
-             <button
-               class="btn secondary small"
-               onclick="openTask('${t.id}')"
-             >
-               Edit
-             </button>
-           </td>
-
-         </tr>
-       `).join('')}
-
-       </tbody>
-
-     </table>
-
-   </div>
-
- </div>`;
+.btn{
+  border:0;
+  background:var(--green);
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  transition:.15s;
 }
 
-function openTask(id){
- const t=id?
-   tasks.find(x=>x.id===id):
-   {
-     name:'',
-     description:'',
-     category:'General',
-     priority:'Medium',
-     status:'Not Started',
-     dueDate:'',
-     dueTime:'',
-     notes:''
-   };
-
- S.modal={
-   type:'task',
-   data:t
- };
-
- render();
+.btn:hover{
+  background:var(--green-dark);
 }
 
-function saveTask(){
- const g=id=>document.getElementById(id).value;
-
- const id=g('task-id');
-
- const d={
-   name:g('task-name'),
-   description:g('task-desc'),
-   category:g('task-cat'),
-   priority:g('task-pri'),
-   status:g('task-status'),
-   dueDate:g('task-date'),
-   dueTime:g('task-time'),
-   notes:g('task-notes')
- };
-
- if(!d.name||!d.dueDate)
-   return toast('Task name and due date are required.');
-
- if(id)
-   Object.assign(tasks.find(x=>x.id===id),d);
- else
-   tasks.push({
-     ...d,
-     id:'t'+Date.now()
-   });
-
- save();
-
- S.modal=null;
-
- toast('Task saved');
- render();
+.btn.secondary{
+  background:#eef5f0;
+  color:var(--green-dark);
 }
 
-function logsPage(){
- return `
- <div class="grid">
-
-   <div class="row between">
-
-     <div>
-       <h1 class="title">Work Logs</h1>
-       <p class="sub">Daily work records.</p>
-     </div>
-
-     <button
-       class="btn"
-       onclick="openLog()"
-     >
-       + Add Log
-     </button>
-
-   </div>
-
-   <div class="card">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>Date</th>
-           <th>Activity</th>
-           <th>Description</th>
-           <th></th>
-         </tr>
-       </thead>
-
-       <tbody>
-
-       ${logs.map(x=>`
-         <tr>
-
-           <td>${date(x.date)}</td>
-
-           <td>
-             <b>${esc(x.task)}</b>
-           </td>
-
-           <td>
-             ${esc(x.description)}
-           </td>
-
-           <td>
-             <button
-               class="btn danger small"
-               onclick="delLog('${x.id}')"
-             >
-               Delete
-             </button>
-           </td>
-
-         </tr>
-       `).join('')}
-
-       </tbody>
-
-     </table>
-
-   </div>
-
- </div>`;
+.btn.secondary:hover{
+  background:#dfeee4;
 }
 
-function openLog(){
- S.modal={
-   type:'log',
-   data:{
-     date:new Date().toISOString().slice(0,10),
-     task:'',
-     description:''
-   }
- };
-
- render();
+.btn.danger{
+  background:#fff0ee;
+  color:var(--danger);
 }
 
-function saveLog(){
- const d={
-   date:document.getElementById('log-date').value,
-   task:document.getElementById('log-task').value,
-   description:document.getElementById('log-desc').value
- };
-
- if(!d.date||!d.task)
-   return toast('Date and activity are required.');
-
- logs.push({
-   ...d,
-   id:'l'+Date.now()
- });
-
- save();
-
- S.modal=null;
-
- toast('Work log added');
- render();
+.btn.danger:hover{
+  background:#ffe1dc;
 }
 
-function delLog(id){
- if(confirm('Delete this work log?')){
-   logs=logs.filter(x=>x.id!==id);
-   save();
-   render();
- }
+.btn.small{
+  padding:7px 11px;
+  font-size:12px;
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.025);
+}
+
+.grid{
+  display:grid;
+  gap:18px;
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.grid-4{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+  gap:15px;
+}
+
+.page-head h1{
+  margin:0;
+  font-size:24px;
+}
+
+.page-head p{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.stat{
+  padding:20px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.stat-value{
+  font-size:27px;
+  font-weight:700;
+}
+
+.stat-icon{
+  float:right;
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--green-light);
+  color:var(--green);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:7px;
+  color:#48534d;
+}
+
+.input,
+textarea,
+select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px 12px;
+  outline:none;
+  background:#fff;
+  font-size:13px;
+}
+
+.input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(22,130,58,.08);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+
+th{
+  text-align:left;
+  background:#f7faf8;
+  color:#69756d;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+th,td{
+  padding:13px 12px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+tr:hover td{
+  background:#fbfdfb;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:600;
+  background:#eef3ef;
+  color:#536057;
+}
+
+.badge.green{
+  background:var(--green-light);
+  color:var(--green-dark);
+}
+
+.badge.red{
+  background:#fff0ee;
+  color:var(--danger);
+}
+
+.badge.yellow{
+  background:#fff7df;
+  color:#987000;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+  height:8px;
+  background:#edf1ee;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:var(--green);
+  border-radius:99px;
+}
+
+/* =========================
+   TASKS
+========================= */
+
+.task-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.task-item{
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.task-item:hover{
+  border-color:#bdd9c5;
+}
+
+.task-title{
+  font-weight:600;
+  font-size:14px;
+}
+
+.task-meta{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:7px;
 }
 
 /* =========================
    CHAT
 ========================= */
 
-async function chatLoad(){
-
- if(!S.channel&&!S.conversation){
-   S.messages=[];
-   return;
- }
-
- let q=db
-   .from('messages')
-   .select('*')
-   .order('created_at',{ascending:true})
-   .limit(200);
-
- q=S.channel?
-   q.eq('channel_id',S.channel.id):
-   q.eq('conversation_id',S.conversation.id);
-
- const r=await q;
-
- if(!r.error)
-   S.messages=r.data||[];
+.chat-layout{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  height:calc(100vh - 124px);
+  min-height:550px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
 }
 
-async function loadConversations(){
-
- const m=await db
-   .from('conversation_members')
-   .select('conversation_id,profile_id,role')
-   .eq('profile_id',me());
-
- if(m.error){
-   S.conversations=[];
-   return;
- }
-
- const ids=[
-   ...new Set(
-     (m.data||[]).map(x=>x.conversation_id)
-   )
- ];
-
- if(!ids.length){
-   S.conversations=[];
-   return;
- }
-
- const c=await db
-   .from('conversations')
-   .select('*')
-   .in('id',ids)
-   .order('created_at',{ascending:false});
-
- S.conversations=
-   c.error?
-   []:
-   (c.data||[]);
+.chat-sidebar{
+  border-right:1px solid var(--border);
+  overflow-y:auto;
 }
 
-async function loadConversationMembers(cid){
-
- const r=await db
-   .from('conversation_members')
-   .select('profile_id,role,joined_at')
-   .eq('conversation_id',cid);
-
- S.conversationMembers=
-   r.error?
-   []:
-   (r.data||[]);
-
- return S.conversationMembers;
+.chat-sidebar-head{
+  padding:15px;
+  border-bottom:1px solid var(--border);
 }
 
-function memberName(id){
- return S.profiles.find(p=>p.id===id)?.full_name||'User';
+.chat-list{
+  padding:8px;
 }
 
-function isGroup(){
- return S.conversation?.type==='group';
+.chat-item{
+  padding:12px;
+  border-radius:9px;
+  cursor:pointer;
+  margin-bottom:3px;
 }
 
-async function selectConversation(c){
-
- S.conversation={...c};
- S.channel=null;
-
- await loadConversationMembers(c.id);
- await chatLoad();
-
- render();
+.chat-item:hover,
+.chat-item.active{
+  background:var(--green-light);
 }
 
-async function selectChannel(id){
-
- S.channel=
-   S.channels.find(x=>x.id===id);
-
- S.conversation=null;
- S.conversationMembers=[];
-
- await chatLoad();
-
- render();
+.chat-item-title{
+  font-weight:600;
+  font-size:13px;
 }
 
-async function direct(target){
+.chat-item-sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+}
 
- let cid=null;
+.chat-main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
 
- const mine=await db
-   .from('conversation_members')
-   .select('conversation_id')
-   .eq('profile_id',me());
+.chat-header{
+  padding:15px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
- if(mine.error)
-   return toast(mine.error.message);
+.chat-messages{
+  flex:1;
+  overflow-y:auto;
+  padding:20px;
+  background:#fbfcfb;
+}
 
- const myIds=
-   (mine.data||[]).map(x=>x.conversation_id);
+.message{
+  margin-bottom:13px;
+  max-width:70%;
+}
 
- if(myIds.length){
+.message.mine{
+  margin-left:auto;
+}
 
-   const others=await db
-     .from('conversation_members')
-     .select('conversation_id')
-     .eq('profile_id',target)
-     .in('conversation_id',myIds);
+.message-name{
+  font-size:10px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
 
-   for(const x of others.data||[]){
+.message-bubble{
+  display:inline-block;
+  padding:10px 12px;
+  border-radius:11px;
+  background:#fff;
+  border:1px solid var(--border);
+  font-size:13px;
+}
 
-     const c=await db
-       .from('conversations')
-       .select('*')
-       .eq('id',x.conversation_id)
-       .maybeSingle();
+.message.mine .message-bubble{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
 
-     if(
-       !c.error &&
-       c.data &&
-       (c.data.type==='direct'||!c.data.type)
-     ){
+.message-time{
+  font-size:9px;
+  color:#9aa39e;
+  margin-top:4px;
+}
 
-       const mm=await db
-         .from('conversation_members')
-         .select('profile_id')
-         .eq('conversation_id',x.conversation_id);
+.chat-input{
+  border-top:1px solid var(--border);
+  padding:12px;
+  display:flex;
+  gap:8px;
+}
 
-       if((mm.data||[]).length===2){
-         cid=x.conversation_id;
-         break;
-       }
-     }
-   }
- }
-
- if(!cid){
-
-   const c=await db
-     .from('conversations')
-     .insert({
-       type:'direct',
-       created_by:me()
-     })
-     .select()
-     .single();
-
-   if(c.error)
-     return toast(c.error.message);
-
-   cid=c.data.id;
-
-   const first=await db
-     .from('conversation_members')
-     .insert({
-       conversation_id:cid,
-       profile_id:me(),
-       role:'admin'
-     });
-
-   if(first.error)
-     return toast(first.error.message);
-
-   const second=await db
-     .from('conversation_members')
-     .insert({
-       conversation_id:cid,
-       profile_id:target,
-       role:'member'
-     });
-
-   if(second.error)
-     return toast(second.error.message);
- }
-
- const c=await db
-   .from('conversations')
-   .select('*')
-   .eq('id',cid)
-   .single();
-
- S.conversation={
-   ...(c.data||{
-     id:cid,
-     type:'direct'
-   }),
-   target
- };
-
- S.channel=null;
-
- await loadConversationMembers(cid);
- await chatLoad();
-
- render();
+.chat-input input{
+  flex:1;
 }
 
 /* =========================
-   GROUP CREATE
+   ATTENDANCE
 ========================= */
 
-function createGroupModal(){
- S.modal={
-   type:'createGroup'
- };
+.attendance-clock{
+  text-align:center;
+  padding:30px;
+}
 
- render();
+.clock-time{
+  font-size:38px;
+  font-weight:700;
+  color:var(--green);
+}
+
+.clock-date{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.attendance-status{
+  padding:20px;
+  border-radius:12px;
+  background:var(--green-soft);
+  border:1px solid #d9ebde;
+}
+
+.attendance-status h3{
+  margin:0 0 6px;
+}
+
+.attendance-time{
+  font-size:25px;
+  font-weight:700;
+  color:var(--green);
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  border-top:1px solid var(--border);
+  border-left:1px solid var(--border);
+}
+
+.calendar-day{
+  min-height:100px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:9px;
+}
+
+.calendar-day strong{
+  font-size:12px;
+}
+
+.calendar-event{
+  margin-top:7px;
+  padding:5px;
+  background:var(--green-light);
+  color:var(--green-dark);
+  border-radius:5px;
+  font-size:10px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(20,30,23,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:20px;
+}
+
+.modal{
+  width:100%;
+  max-width:560px;
+  background:#fff;
+  border-radius:15px;
+  padding:23px;
+  box-shadow:0 20px 60px rgba(0,0,0,.18);
+  max-height:90vh;
+  overflow:auto;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.modal-head h2{
+  margin:0;
+  font-size:18px;
+}
+
+.close{
+  border:0;
+  background:transparent;
+  font-size:22px;
+  color:#7b857f;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:20px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-avatar{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:var(--green-light);
+  color:var(--green-dark);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+  .sidebar{
+    width:200px;
+  }
+
+  .main{
+    margin-left:200px;
+    width:calc(100% - 200px);
+  }
+
+  .grid-4{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-3{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+
+  .chat-layout{
+    grid-template-columns:1fr;
+  }
+
+  .chat-sidebar{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+<div id="modalRoot"></div>
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://jccryyxdxykomwsivtjy.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM";
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const S = {
+  page:"dashboard",
+  user:null,
+  profile:null,
+  profiles:[],
+  channels:[],
+  conversations:[],
+  conversationMembers:[],
+  messages:[],
+  notifications:[],
+  docs:[],
+  channel:null,
+  conversation:null,
+  sidebar:true,
+  modal:null,
+  chatSearch:"",
+  taskSearch:"",
+  taskFilter:"all",
+  pendingFile:null
+};
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function esc(value){
+  if(value === null || value === undefined) return "";
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function me(){
+  return S.user?.id || null;
+}
+
+function today(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function nowTime(){
+  return new Date().toLocaleTimeString("en-MY",{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function formatDate(d){
+  if(!d) return "-";
+
+  return new Date(d).toLocaleDateString("en-MY",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function initials(name){
+  if(!name) return "?";
+
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0,2)
+    .map(x=>x[0])
+    .join("")
+    .toUpperCase();
+}
+
+function nameOf(p){
+  return p?.full_name ||
+         p?.name ||
+         p?.email ||
+         "Unknown";
+}
+
+function currentProfile(){
+  return S.profile || {};
+}
+
+function notify(msg){
+  alert(msg);
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function login(){
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if(!email || !password){
+    notify("Please enter email and password.");
+    return;
+  }
+
+  const {data,error} =
+    await db.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+    notify(error.message);
+    return;
+  }
+
+  S.user = data.user;
+
+  await initData();
+
+  render();
+}
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  S.user = null;
+  S.profile = null;
+  S.page = "dashboard";
+
+  render();
+}
+
+function loginPage(){
+
+  return `
+    <div class="login-wrap">
+
+      <div class="login-card">
+
+        <div class="logo">Nona Costex</div>
+
+        <h1>Staff Portal</h1>
+
+        <p>
+          Sign in to access your staff workspace.
+        </p>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input
+            id="loginEmail"
+            class="input"
+            type="email"
+            placeholder="your@email.com"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            id="loginPassword"
+            class="input"
+            type="password"
+            placeholder="••••••••"
+            onkeydown="if(event.key==='Enter') login()"
+          >
+        </div>
+
+        <button
+          class="btn"
+          style="width:100%"
+          onclick="login()"
+        >
+          Sign In
+        </button>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   SUPABASE DATA
+========================================================= */
+
+async function profile(){
+
+  if(!me()) return;
+
+  let {data,error} =
+    await db
+      .from("profiles")
+      .select("*")
+      .eq("id",me())
+      .maybeSingle();
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  if(!data){
+
+    const {data:newProfile,error:createError} =
+      await db
+        .from("profiles")
+        .insert({
+          id:me(),
+          email:S.user.email,
+          full_name:S.user.email?.split("@")[0] || "Staff",
+          role:"staff"
+        })
+        .select()
+        .single();
+
+    if(createError){
+      console.error(createError);
+      return;
+    }
+
+    data = newProfile;
+  }
+
+  S.profile = data;
+}
+
+async function profiles(){
+
+  const {data,error} =
+    await db
+      .from("profiles")
+      .select("*")
+      .order("full_name");
+
+  if(!error){
+    S.profiles = data || [];
+  }
+}
+
+async function channels(){
+
+  const {data,error} =
+    await db
+      .from("channels")
+      .select("*")
+      .order("created_at");
+
+  if(!error){
+    S.channels = data || [];
+  }
+}
+
+async function notifs(){
+
+  if(!me()) return;
+
+  const {data,error} =
+    await db
+      .from("communication_notifications")
+      .select("*")
+      .eq("user_id",me())
+      .order("created_at",{ascending:false});
+
+  if(!error){
+    S.notifications = data || [];
+  }
+}
+
+async function docs(){
+
+  const {data,error} =
+    await db
+      .from("knowledge_documents")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  if(!error){
+    S.docs = data || [];
+  }
+}
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+async function initData(){
+
+  await profile();
+  await profiles();
+  await channels();
+  await notifs();
+  await docs();
+  await loadConversations();
+}
+
+async function init(){
+
+  const {
+    data:{
+      session
+    }
+  } = await db.auth.getSession();
+
+  if(session){
+
+    S.user = session.user;
+
+    await initData();
+  }
+
+  render();
+}
+
+db.auth.onAuthStateChange(
+  async (_event,session)=>{
+
+    if(session && !S.user){
+
+      S.user = session.user;
+
+      await initData();
+
+      render();
+
+    }else if(!session){
+
+      S.user = null;
+
+      render();
+    }
+  }
+);
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function nav(page,label,icon){
+
+  return `
+    <button
+      class="${S.page===page ? "active":""}"
+      onclick="go('${page}')"
+    >
+      <span class="nav-icon">${icon}</span>
+      ${label}
+    </button>
+  `;
+}
+
+function go(page){
+
+  S.page = page;
+
+  if(page !== "communication"){
+    S.conversation = null;
+    S.channel = null;
+  }
+
+  render();
+}
+
+
+/* =========================================================
+   APP SHELL
+========================================================= */
+
+function shell(){
+
+  const profileName =
+    nameOf(currentProfile());
+
+  return `
+    <div class="app">
+
+      <aside class="sidebar">
+
+        <div class="brand">
+          <div class="brand-title">
+            Nona Costex
+          </div>
+
+          <div class="brand-sub">
+            Staff Portal
+          </div>
+        </div>
+
+        <div class="nav">
+
+          <div class="nav-section">
+            Workspace
+          </div>
+
+          ${nav("dashboard","Dashboard","⌂")}
+          ${nav("attendance","Attendance","◷")}
+          ${nav("tasks","Tasks","✓")}
+          ${nav("logs","Work Logs","▤")}
+
+          <div class="nav-section">
+            Communication
+          </div>
+
+          ${nav("communication","Communication","◉")}
+          ${nav("knowledge","Knowledge Hub","▧")}
+          ${nav("calendar","Calendar","□")}
+
+          <div class="nav-section">
+            Management
+          </div>
+
+          ${nav("staff","Staff","♙")}
+          ${nav("analytics","Analytics","◒")}
+          ${nav("data","Data & Backup","◫")}
+
+          <div class="nav-section">
+            Account
+          </div>
+
+          ${nav("profile","My Profile","○")}
+
+          <button onclick="logout()">
+            <span class="nav-icon">↪</span>
+            Logout
+          </button>
+
+        </div>
+
+      </aside>
+
+
+      <main class="main">
+
+        <header class="topbar">
+
+          <div class="topbar-title">
+            ${pageTitle()}
+          </div>
+
+          <div class="top-actions">
+
+            <button
+              class="btn secondary small"
+              onclick="notifications()"
+            >
+              🔔
+              ${S.notifications.filter(n=>!n.read_at).length || ""}
+            </button>
+
+            <button
+              class="btn small"
+              onclick="go('profile')"
+            >
+              ${esc(profileName)}
+            </button>
+
+          </div>
+
+        </header>
+
+        <section class="content">
+
+          ${page()}
+
+        </section>
+
+      </main>
+
+    </div>
+  `;
+}
+
+function pageTitle(){
+
+  const titles = {
+    dashboard:"Dashboard",
+    attendance:"Attendance",
+    tasks:"Tasks",
+    logs:"Work Logs",
+    communication:"Communication",
+    knowledge:"Knowledge Hub",
+    calendar:"Calendar",
+    staff:"Staff",
+    analytics:"Analytics",
+    data:"Data & Backup",
+    profile:"My Profile"
+  };
+
+  return titles[S.page] || "Dashboard";
+}
+
+function page(){
+
+  if(S.page==="dashboard") return dashboard();
+  if(S.page==="attendance") return attendancePage();
+  if(S.page==="tasks") return tasksPage();
+  if(S.page==="logs") return logsPage();
+  if(S.page==="communication") return chatPage();
+  if(S.page==="knowledge") return knowledge();
+  if(S.page==="calendar") return calendar();
+  if(S.page==="staff") return staff();
+  if(S.page==="analytics") return analytics();
+  if(S.page==="data") return dataPage();
+  if(S.page==="profile") return profilePage();
+
+  return dashboard();
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+  const root =
+    document.getElementById("app");
+
+  if(!S.user){
+
+    root.innerHTML = loginPage();
+    return;
+  }
+
+  root.innerHTML = shell();
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function dashboard(){
+
+  const tasks =
+    JSON.parse(localStorage.getItem("nona_tasks") || "[]");
+
+  const logs =
+    JSON.parse(localStorage.getItem("nona_logs") || "[]");
+
+  const attendance =
+    JSON.parse(
+      localStorage.getItem(
+        `nona_attendance_${me()}_${today()}`
+      ) || "null"
+    );
+
+  const completed =
+    tasks.filter(t=>t.status==="Completed").length;
+
+  return `
+
+    <div class="page-head">
+      <div>
+        <h1>Dashboard</h1>
+        <p>
+          Welcome back, ${esc(nameOf(currentProfile()))}.
+        </p>
+      </div>
+
+      <button
+        class="btn"
+        onclick="openTask()"
+      >
+        + New Task
+      </button>
+    </div>
+
+
+    <div class="grid grid-4">
+
+      <div class="card stat">
+        <div class="stat-icon">✓</div>
+        <div class="stat-label">Total Tasks</div>
+        <div class="stat-value">${tasks.length}</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-icon">◉</div>
+        <div class="stat-label">Completed</div>
+        <div class="stat-value">${completed}</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-icon">▤</div>
+        <div class="stat-label">Work Logs</div>
+        <div class="stat-value">${logs.length}</div>
+      </div>
+
+      <div class="card stat">
+        <div class="stat-icon">◷</div>
+        <div class="stat-label">Today's Attendance</div>
+        <div class="stat-value">
+          ${attendance?.checkIn ? "Present" : "—"}
+        </div>
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <div class="grid grid-2">
+
+      <div class="card">
+
+        <div class="page-head">
+          <div>
+            <h3 style="margin:0">Today's Attendance</h3>
+            <p>
+              ${new Date().toLocaleDateString("en-MY",{
+                weekday:"long",
+                day:"numeric",
+                month:"long"
+              })}
+            </p>
+          </div>
+
+          <button
+            class="btn small"
+            onclick="go('attendance')"
+          >
+            View
+          </button>
+        </div>
+
+        <div class="attendance-status">
+
+          ${
+            attendance?.checkIn
+            ?
+            `
+              <h3>Checked In</h3>
+              <div class="attendance-time">
+                ${attendance.checkIn}
+              </div>
+
+              ${
+                attendance.checkOut
+                ?
+                `
+                  <div style="margin-top:10px">
+                    Checked out at
+                    <strong>${attendance.checkOut}</strong>
+                  </div>
+                `
+                :
+                `
+                  <div style="margin-top:10px">
+                    You are currently working.
+                  </div>
+                `
+              }
+            `
+            :
+            `
+              <h3>Not Checked In</h3>
+              <div style="margin-top:10px;color:var(--muted)">
+                Don't forget to check in today.
+              </div>
+            `
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 style="margin-top:0">
+          Quick Actions
+        </h3>
+
+        <div class="grid grid-2">
+
+          <button
+            class="btn"
+            onclick="go('attendance')"
+          >
+            Attendance
+          </button>
+
+          <button
+            class="btn"
+            onclick="openTask()"
+          >
+            Add Task
+          </button>
+
+          <button
+            class="btn"
+            onclick="openLog()"
+          >
+            Add Work Log
+          </button>
+
+          <button
+            class="btn"
+            onclick="go('communication')"
+          >
+            Open Chat
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <div class="card">
+
+      <h3 style="margin-top:0">
+        Recent Tasks
+      </h3>
+
+      ${
+        tasks.length
+        ?
+        `
+          <div class="task-list">
+            ${tasks.slice(-5).reverse().map(task=>`
+              <div
+                class="task-item"
+                onclick="openTask(${task.id})"
+              >
+                <div class="task-title">
+                  ${esc(task.title)}
+                </div>
+
+                <div class="task-meta">
+                  ${esc(task.status || "Pending")}
+                  ·
+                  ${esc(task.due || "No due date")}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `
+        :
+        `
+          <p style="color:var(--muted)">
+            No tasks yet.
+          </p>
+        `
+      }
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+function getAttendance(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      `nona_attendance_${me()}_${today()}`
+    ) || "null"
+  );
+}
+
+function saveAttendance(data){
+
+  localStorage.setItem(
+    `nona_attendance_${me()}_${today()}`,
+    JSON.stringify(data)
+  );
+}
+
+function attendancePage(){
+
+  const record = getAttendance();
+
+  const date =
+    new Date().toLocaleDateString("en-MY",{
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    });
+
+  return `
+
+    <div class="page-head">
+
+      <div>
+        <h1>Attendance</h1>
+        <p>
+          Track your daily check-in and check-out.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="grid grid-2">
+
+      <div class="card attendance-clock">
+
+        <div class="clock-time" id="liveClock">
+          ${nowTime()}
+        </div>
+
+        <div class="clock-date">
+          ${date}
+        </div>
+
+        <br>
+
+        ${
+          !record?.checkIn
+          ?
+          `
+            <button
+              class="btn"
+              onclick="attendanceCheckIn()"
+            >
+              Check In
+            </button>
+          `
+          :
+          !record.checkOut
+          ?
+          `
+            <button
+              class="btn"
+              onclick="attendanceCheckOut()"
+            >
+              Check Out
+            </button>
+          `
+          :
+          `
+            <span class="badge green">
+              Attendance Completed
+            </span>
+          `
+        }
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 style="margin-top:0">
+          Today's Record
+        </h3>
+
+        <div class="attendance-status">
+
+          <div style="margin-bottom:16px">
+
+            <div class="stat-label">
+              Check In
+            </div>
+
+            <div class="attendance-time">
+              ${record?.checkIn || "--:--"}
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <div class="stat-label">
+              Check Out
+            </div>
+
+            <div class="attendance-time">
+              ${record?.checkOut || "--:--"}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="card">
+
+      <h3 style="margin-top:0">
+        Staff Information
+      </h3>
+
+      <div class="grid grid-2">
+
+        <div>
+          <div class="stat-label">
+            Name
+          </div>
+
+          <strong>
+            ${esc(nameOf(currentProfile()))}
+          </strong>
+        </div>
+
+        <div>
+          <div class="stat-label">
+            Role
+          </div>
+
+          <strong>
+            ${esc(currentProfile().role || "Staff")}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function attendanceCheckIn(){
+
+  const record =
+    getAttendance() || {};
+
+  if(record.checkIn){
+    notify("You have already checked in.");
+    return;
+  }
+
+  record.checkIn = nowTime();
+
+  saveAttendance(record);
+
+  render();
+}
+
+function attendanceCheckOut(){
+
+  const record =
+    getAttendance() || {};
+
+  if(!record.checkIn){
+    notify("Please check in first.");
+    return;
+  }
+
+  if(record.checkOut){
+    notify("You have already checked out.");
+    return;
+  }
+
+  record.checkOut = nowTime();
+
+  saveAttendance(record);
+
+  render();
+}
+
+
+/* =========================================================
+   TASKS
+========================================================= */
+
+function getTasks(){
+
+  return JSON.parse(
+    localStorage.getItem("nona_tasks") || "[]"
+  );
+}
+
+function setTasks(tasks){
+
+  localStorage.setItem(
+    "nona_tasks",
+    JSON.stringify(tasks)
+  );
+}
+
+function tasksPage(){
+
+  let tasks = getTasks();
+
+  const search =
+    S.taskSearch.toLowerCase();
+
+  if(search){
+
+    tasks =
+      tasks.filter(t=>
+        String(t.title || "")
+          .toLowerCase()
+          .includes(search)
+      );
+  }
+
+  if(S.taskFilter !== "all"){
+
+    tasks =
+      tasks.filter(t=>
+        t.status === S.taskFilter
+      );
+  }
+
+  return `
+
+    <div class="page-head">
+
+      <div>
+        <h1>Tasks</h1>
+        <p>
+          Manage your work tasks.
+        </p>
+      </div>
+
+      <button
+        class="btn"
+        onclick="openTask()"
+      >
+        + New Task
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div
+        style="
+          display:flex;
+          gap:10px;
+          margin-bottom:18px;
+        "
+      >
+
+        <input
+          class="input"
+          placeholder="Search tasks..."
+          value="${esc(S.taskSearch)}"
+          oninput="
+            S.taskSearch=this.value;
+            tasksPageRefresh()
+          "
+        >
+
+        <select
+          class="input"
+          style="max-width:180px"
+          onchange="
+            S.taskFilter=this.value;
+            tasksPageRefresh()
+          "
+        >
+          <option value="all">All</option>
+          <option value="Pending"
+            ${S.taskFilter==="Pending"?"selected":""}>
+            Pending
+          </option>
+          <option value="In Progress"
+            ${S.taskFilter==="In Progress"?"selected":""}>
+            In Progress
+          </option>
+          <option value="Completed"
+            ${S.taskFilter==="Completed"?"selected":""}>
+            Completed
+          </option>
+        </select>
+
+      </div>
+
+
+      <div class="task-list">
+
+        ${
+          tasks.length
+          ?
+          tasks.map(t=>`
+
+            <div
+              class="task-item"
+              onclick="openTask(${t.id})"
+            >
+
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  gap:10px;
+                "
+              >
+
+                <div class="task-title">
+                  ${esc(t.title)}
+                </div>
+
+                <span class="badge ${
+                  t.status==="Completed"
+                  ? "green"
+                  :
+                  t.status==="In Progress"
+                  ? "yellow"
+                  : ""
+                }">
+                  ${esc(t.status || "Pending")}
+                </span>
+
+              </div>
+
+              <div class="task-meta">
+                ${esc(t.description || "")}
+              </div>
+
+              <div class="task-meta">
+                Due:
+                ${esc(t.due || "No due date")}
+              </div>
+
+            </div>
+
+          `).join("")
+          :
+          `
+            <p style="color:var(--muted)">
+              No tasks found.
+            </p>
+          `
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+function tasksPageRefresh(){
+
+  const area =
+    document.querySelector(".content");
+
+  if(area){
+    area.innerHTML = tasksPage();
+  }
+}
+
+function openTask(id=null){
+
+  const tasks = getTasks();
+
+  const task =
+    id
+    ? tasks.find(t=>t.id===id)
+    : null;
+
+  modal(`
+    <div class="modal-head">
+      <h2>${task ? "Edit Task" : "New Task"}</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-group">
+      <label>Task Title</label>
+      <input
+        id="taskTitle"
+        class="input"
+        value="${esc(task?.title || "")}"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="taskDescription">${esc(task?.description || "")}</textarea>
+    </div>
+
+    <div class="grid grid-2">
+
+      <div class="form-group">
+        <label>Status</label>
+
+        <select id="taskStatus" class="input">
+
+          <option
+            ${task?.status==="Pending" || !task ? "selected":""}
+          >
+            Pending
+          </option>
+
+          <option
+            ${task?.status==="In Progress" ? "selected":""}
+          >
+            In Progress
+          </option>
+
+          <option
+            ${task?.status==="Completed" ? "selected":""}
+          >
+            Completed
+          </option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Due Date</label>
+
+        <input
+          id="taskDue"
+          class="input"
+          type="date"
+          value="${esc(task?.due || "")}"
+        >
+      </div>
+
+    </div>
+
+    <div class="modal-actions">
+
+      ${
+        task
+        ?
+        `
+          <button
+            class="btn danger"
+            onclick="deleteTask(${task.id})"
+          >
+            Delete
+          </button>
+        `
+        :
+        ""
+      }
+
+      <button
+        class="btn"
+        onclick="saveTask(${id || "null"})"
+      >
+        Save
+      </button>
+
+    </div>
+  `);
+}
+
+function saveTask(id){
+
+  const tasks = getTasks();
+
+  const data = {
+    id:id || Date.now(),
+    title:document.getElementById("taskTitle").value,
+    description:document.getElementById("taskDescription").value,
+    status:document.getElementById("taskStatus").value,
+    due:document.getElementById("taskDue").value,
+    created_at:new Date().toISOString()
+  };
+
+  if(!data.title.trim()){
+    notify("Please enter a task title.");
+    return;
+  }
+
+  const index =
+    tasks.findIndex(t=>t.id===id);
+
+  if(index >= 0){
+    tasks[index] = data;
+  }else{
+    tasks.push(data);
+  }
+
+  setTasks(tasks);
+
+  closeModal();
+  render();
+}
+
+function deleteTask(id){
+
+  if(!confirm("Delete this task?")) return;
+
+  const tasks =
+    getTasks().filter(t=>t.id!==id);
+
+  setTasks(tasks);
+
+  closeModal();
+  render();
+}
+
+
+/* =========================================================
+   WORK LOGS
+========================================================= */
+
+function getLogs(){
+
+  return JSON.parse(
+    localStorage.getItem("nona_logs") || "[]"
+  );
+}
+
+function setLogs(logs){
+
+  localStorage.setItem(
+    "nona_logs",
+    JSON.stringify(logs)
+  );
+}
+
+function logsPage(){
+
+  const logs =
+    getLogs()
+      .filter(l=>l.user_id===me());
+
+  return `
+
+    <div class="page-head">
+
+      <div>
+        <h1>Work Logs</h1>
+        <p>
+          Record your daily work activities.
+        </p>
+      </div>
+
+      <button
+        class="btn"
+        onclick="openLog()"
+      >
+        + Add Log
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Activity</th>
+              <th>Details</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              logs.length
+              ?
+              logs
+                .sort((a,b)=>
+                  String(b.date)
+                    .localeCompare(String(a.date))
+                )
+                .map(l=>`
+
+                  <tr>
+
+                    <td>
+                      ${esc(l.date)}
+                    </td>
+
+                    <td>
+                      <strong>
+                        ${esc(l.activity)}
+                      </strong>
+                    </td>
+
+                    <td>
+                      ${esc(l.details || "")}
+                    </td>
+
+                    <td>
+                      <button
+                        class="btn danger small"
+                        onclick="delLog(${l.id})"
+                      >
+                        Delete
+                      </button>
+                    </td>
+
+                  </tr>
+
+                `).join("")
+              :
+              `
+                <tr>
+                  <td colspan="4">
+                    No work logs yet.
+                  </td>
+                </tr>
+              `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function openLog(){
+
+  modal(`
+
+    <div class="modal-head">
+      <h2>Add Work Log</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form-group">
+
+      <label>Date</label>
+
+      <input
+        id="logDate"
+        class="input"
+        type="date"
+        value="${today()}"
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Activity</label>
+
+      <input
+        id="logActivity"
+        class="input"
+        placeholder="e.g. Product shooting"
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Details</label>
+
+      <textarea
+        id="logDetails"
+        placeholder="Describe what you worked on..."
+      ></textarea>
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="saveLog()"
+      >
+        Save Log
+      </button>
+
+    </div>
+  `);
+}
+
+function saveLog(){
+
+  const logs = getLogs();
+
+  logs.push({
+    id:Date.now(),
+    user_id:me(),
+    date:document.getElementById("logDate").value,
+    activity:document.getElementById("logActivity").value,
+    details:document.getElementById("logDetails").value
+  });
+
+  setLogs(logs);
+
+  closeModal();
+  render();
+}
+
+function delLog(id){
+
+  if(!confirm("Delete this work log?")) return;
+
+  setLogs(
+    getLogs().filter(l=>l.id!==id)
+  );
+
+  render();
+}
+
+
+/* =========================================================
+   COMMUNICATION
+========================================================= */
+
+async function loadConversations(){
+
+  if(!me()) return;
+
+  const {data,error} =
+    await db
+      .from("conversation_members")
+      .select(`
+        conversation_id,
+        role,
+        conversations(*)
+      `)
+      .eq("user_id",me());
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  S.conversations =
+    (data || [])
+      .map(x=>({
+        ...x.conversations,
+        member_role:x.role
+      }))
+      .filter(Boolean);
+}
+
+async function loadConversationMembers(id){
+
+  const {data,error} =
+    await db
+      .from("conversation_members")
+      .select("*")
+      .eq("conversation_id",id);
+
+  if(!error){
+    S.conversationMembers = data || [];
+  }
+}
+
+async function loadMessages(){
+
+  if(!S.conversation && !S.channel){
+    S.messages = [];
+    return;
+  }
+
+  let query =
+    db
+      .from("messages")
+      .select("*")
+      .order("created_at");
+
+  if(S.conversation){
+
+    query =
+      query.eq(
+        "conversation_id",
+        S.conversation.id
+      );
+
+  }else if(S.channel){
+
+    query =
+      query.eq(
+        "channel_id",
+        S.channel.id
+      );
+  }
+
+  const {data,error} =
+    await query;
+
+  if(!error){
+    S.messages = data || [];
+  }
+}
+
+function memberName(id){
+
+  const p =
+    S.profiles.find(x=>x.id===id);
+
+  return nameOf(p);
+}
+
+function isGroup(c){
+
+  return c?.type === "group";
+}
+
+async function selectConversationById(id){
+
+  const c =
+    S.conversations.find(x=>x.id===id);
+
+  if(!c) return;
+
+  S.conversation = c;
+  S.channel = null;
+
+  await loadConversationMembers(c.id);
+  await loadMessages();
+
+  render();
+}
+
+async function selectChannelById(id){
+
+  const c =
+    S.channels.find(x=>x.id===id);
+
+  if(!c) return;
+
+  S.channel = c;
+  S.conversation = null;
+
+  await loadMessages();
+
+  render();
+}
+
+async function direct(targetId){
+
+  if(!targetId || targetId===me()) return;
+
+  const {data:mine} =
+    await db
+      .from("conversation_members")
+      .select("conversation_id")
+      .eq("user_id",me());
+
+  const myIds =
+    (mine || [])
+      .map(x=>x.conversation_id);
+
+  if(myIds.length){
+
+    const {data:members} =
+      await db
+        .from("conversation_members")
+        .select("*")
+        .in("conversation_id",myIds);
+
+    const grouped = {};
+
+    (members || []).forEach(m=>{
+
+      grouped[m.conversation_id] =
+        grouped[m.conversation_id] || [];
+
+      grouped[m.conversation_id].push(m.user_id);
+    });
+
+    for(const id of Object.keys(grouped)){
+
+      const users =
+        grouped[id];
+
+      const c =
+        S.conversations.find(x=>x.id===id);
+
+      if(
+        c &&
+        c.type==="direct" &&
+        users.length===2 &&
+        users.includes(targetId) &&
+        users.includes(me())
+      ){
+
+        await selectConversationById(id);
+        return;
+      }
+    }
+  }
+
+  const {
+    data:c,
+    error
+  } =
+    await db
+      .from("conversations")
+      .insert({
+        type:"direct",
+        created_by:me()
+      })
+      .select()
+      .single();
+
+  if(error){
+    notify(error.message);
+    return;
+  }
+
+  await db
+    .from("conversation_members")
+    .insert([
+      {
+        conversation_id:c.id,
+        user_id:me(),
+        role:"admin"
+      },
+      {
+        conversation_id:c.id,
+        user_id:targetId,
+        role:"member"
+      }
+    ]);
+
+  await loadConversations();
+
+  await selectConversationById(c.id);
+}
+
+
+/* =========================================================
+   GROUP CHAT
+========================================================= */
+
+function createGroupModal(){
+
+  const staff =
+    S.profiles.filter(p=>p.id!==me());
+
+  modal(`
+
+    <div class="modal-head">
+
+      <h2>Create Group</h2>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Group Name</label>
+
+      <input
+        id="groupName"
+        class="input"
+        placeholder="e.g. Digital Team"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>Select Members</label>
+
+      <div style="
+        max-height:250px;
+        overflow:auto;
+        border:1px solid var(--border);
+        border-radius:8px;
+        padding:8px;
+      ">
+
+        ${
+          staff.map(p=>`
+
+            <label
+              style="
+                display:flex;
+                gap:10px;
+                align-items:center;
+                padding:9px;
+              "
+            >
+
+              <input
+                type="checkbox"
+                value="${p.id}"
+                class="groupMember"
+              >
+
+              <span>
+                ${esc(nameOf(p))}
+              </span>
+
+            </label>
+
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="createGroup()"
+      >
+        Create Group
+      </button>
+
+    </div>
+  `);
 }
 
 async function createGroup(){
 
- const name=
-   document
-   .getElementById('group-name')
-   ?.value
-   .trim();
+  const name =
+    document
+      .getElementById("groupName")
+      .value
+      .trim();
 
- const selected=[
-   ...document.querySelectorAll('.group-member:checked')
- ].map(x=>x.value);
+  if(!name){
+    notify("Please enter a group name.");
+    return;
+  }
 
- if(!name)
-   return toast('Group name is required.');
+  const members =
+    [...document.querySelectorAll(".groupMember:checked")]
+      .map(x=>x.value);
 
- if(!selected.length)
-   return toast('Select at least one staff member.');
+  const {
+    data:c,
+    error
+  } =
+    await db
+      .from("conversations")
+      .insert({
+        name,
+        type:"group",
+        created_by:me()
+      })
+      .select()
+      .single();
 
- const c=await db
-   .from('conversations')
-   .insert({
-     name,
-     type:'group',
-     created_by:me()
-   })
-   .select()
-   .single();
+  if(error){
+    notify(error.message);
+    return;
+  }
 
- if(c.error)
-   return toast(c.error.message);
+  const rows = [
+    {
+      conversation_id:c.id,
+      user_id:me(),
+      role:"admin"
+    }
+  ];
 
- const self=await db
-   .from('conversation_members')
-   .insert({
-     conversation_id:c.data.id,
-     profile_id:me(),
-     role:'admin'
-   });
+  members.forEach(id=>{
 
- if(self.error){
-   await db
-     .from('conversations')
-     .delete()
-     .eq('id',c.data.id);
+    rows.push({
+      conversation_id:c.id,
+      user_id:id,
+      role:"member"
+    });
 
-   return toast(self.error.message);
- }
+  });
 
- const rows=
-   selected
-   .filter(x=>x!==me())
-   .map(profile_id=>({
-     conversation_id:c.data.id,
-     profile_id,
-     role:'member'
-   }));
+  const result =
+    await db
+      .from("conversation_members")
+      .insert(rows);
 
- if(rows.length){
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
-   const ins=await db
-     .from('conversation_members')
-     .insert(rows);
+  await loadConversations();
 
-   if(ins.error)
-     return toast(ins.error.message);
- }
+  closeModal();
 
- await loadConversations();
-
- await selectConversation(c.data);
-
- toast('Group created');
+  await selectConversationById(c.id);
 }
-
-/* =========================
-   GROUP SETTINGS
-========================= */
 
 function groupManageModal(){
 
- const c=S.conversation;
- const members=S.conversationMembers||[];
+  if(!S.conversation) return;
 
- const mine=
-   members.find(x=>x.profile_id===me());
+  const c = S.conversation;
 
- const can=
-   mine?.role==='admin';
+  const mine =
+    S.conversationMembers
+      .find(x=>x.user_id===me());
 
- return `
- <div class="modalbg">
+  const isAdmin =
+    mine?.role==="admin";
 
-   <div class="modal">
+  modal(`
 
-     <div class="row between">
+    <div class="modal-head">
 
-       <div>
-         <h2>Group settings</h2>
+      <h2>Group Settings</h2>
 
-         <div class="small muted">
-           ${esc(c.name||'Group')}
-         </div>
-       </div>
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
 
-       <button
-         class="btn secondary"
-         onclick="S.modal=null;render()"
-       >
-         ×
-       </button>
+    </div>
 
-     </div>
 
-     ${can?
-       `
-       <label class="small muted">
-         Group name
-       </label>
+    <div class="form-group">
 
-       <div class="row">
+      <label>Group Name</label>
 
-         <input
-           id="rename-group"
-           value="${esc(c.name||'')}"
-         >
+      <input
+        id="renameGroupInput"
+        class="input"
+        value="${esc(c.name || "")}"
+        ${!isAdmin ? "disabled":""}
+      >
 
-         <button
-           class="btn small"
-           onclick="renameGroup()"
-         >
-           Save
-         </button>
+    </div>
 
-       </div>
-       `:
-       ''
-     }
 
-     <div
-       class="row between"
-       style="margin-top:20px"
-     >
-       <b>
-         Members (${members.length})
-       </b>
-     </div>
+    <div style="margin-bottom:18px">
 
-     ${members.map(m=>`
-       <div class="knowledge row">
+      <label
+        style="
+          display:block;
+          font-size:12px;
+          font-weight:600;
+          margin-bottom:8px;
+        "
+      >
+        Members
+      </label>
 
-         <img
-           class="avatar"
-           src="${av(
-             S.profiles.find(
-               p=>p.id===m.profile_id
-             )
-           )}"
-         >
+      ${
+        S.conversationMembers
+          .map(m=>`
 
-         <div style="flex:1">
+            <div
+              style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                padding:9px;
+                border-bottom:1px solid var(--border);
+              "
+            >
 
-           <b>
-             ${esc(memberName(m.profile_id))}
-           </b>
+              <div>
 
-           <div class="small muted">
-             ${m.role==='admin'?'Admin':'Member'}
-           </div>
+                <strong>
+                  ${esc(memberName(m.user_id))}
+                </strong>
 
-         </div>
+                <div
+                  style="
+                    font-size:10px;
+                    color:var(--muted);
+                  "
+                >
+                  ${esc(m.role || "member")}
+                </div>
 
-         ${can&&m.profile_id!==me()?
-           `
-           <button
-             class="btn danger small"
-             onclick="removeMember('${m.profile_id}')"
-           >
-             Remove
-           </button>
-           `:
-           ''
-         }
+              </div>
 
-       </div>
-     `).join('')}
+              ${
+                isAdmin && m.user_id!==me()
+                ?
+                `
+                  <button
+                    class="btn danger small"
+                    onclick="removeMember('${m.user_id}')"
+                  >
+                    Remove
+                  </button>
+                `
+                :
+                ""
+              }
 
-     ${can?
-       `
-       <div style="margin-top:18px">
+            </div>
 
-         <label class="small muted">
-           Add member
-         </label>
+          `).join("")
+      }
 
-         <select id="add-member">
+    </div>
 
-           <option value="">
-             Select staff
-           </option>
 
-           ${S.profiles
-             .filter(
-               p=>
-                 !members.some(
-                   m=>m.profile_id===p.id
-                 )
-             )
-             .map(p=>`
-               <option value="${p.id}">
-                 ${esc(p.full_name)}
-               </option>
-             `).join('')}
+    ${
+      isAdmin
+      ?
+      `
+        <div class="form-group">
 
-         </select>
+          <label>
+            Add Member
+          </label>
 
-         <button
-           class="btn secondary small"
-           style="margin-top:8px"
-           onclick="addMember()"
-         >
-           Add member
-         </button>
+          <select
+            id="newGroupMember"
+            class="input"
+          >
 
-       </div>
-       `:
-       ''
-     }
+            <option value="">
+              Select staff
+            </option>
 
-     <div
-       class="row"
-       style="justify-content:flex-end;margin-top:20px"
-     >
+            ${
+              S.profiles
+                .filter(p=>
+                  !S.conversationMembers
+                    .some(m=>m.user_id===p.id)
+                )
+                .map(p=>`
+                  <option value="${p.id}">
+                    ${esc(nameOf(p))}
+                  </option>
+                `)
+                .join("")
+            }
 
-       <button
-         class="btn danger"
-         onclick="leaveGroup()"
-       >
-         Leave group
-       </button>
+          </select>
 
-     </div>
+        </div>
 
-   </div>
+        <button
+          class="btn secondary"
+          onclick="addMember()"
+        >
+          Add Member
+        </button>
 
- </div>`;
+        <div style="height:15px"></div>
+
+        <button
+          class="btn"
+          onclick="renameGroup()"
+        >
+          Save Group Name
+        </button>
+      `
+      :
+      ""
+    }
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn danger"
+        onclick="leaveGroup()"
+      >
+        Leave Group
+      </button>
+
+    </div>
+  `);
 }
 
 async function addMember(){
 
- const id=
-   document
-   .getElementById('add-member')
-   ?.value;
+  const userId =
+    document.getElementById("newGroupMember").value;
 
- if(!id)
-   return toast('Select a staff member.');
+  if(!userId) return;
 
- const r=await db
-   .from('conversation_members')
-   .insert({
-     conversation_id:S.conversation.id,
-     profile_id:id,
-     role:'member'
-   });
+  const result =
+    await db
+      .from("conversation_members")
+      .insert({
+        conversation_id:S.conversation.id,
+        user_id:userId,
+        role:"member"
+      });
 
- if(r.error)
-   return toast(r.error.message);
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
- await loadConversationMembers(
-   S.conversation.id
- );
+  await loadConversationMembers(
+    S.conversation.id
+  );
 
- await loadConversations();
-
- render();
-
- toast('Member added');
+  groupManageModal();
 }
 
-async function removeMember(id){
+async function removeMember(userId){
 
- if(!confirm(
-   'Remove this member from the group?'
- ))return;
+  if(!confirm("Remove this member from the group?")){
+    return;
+  }
 
- const r=await db
-   .from('conversation_members')
-   .delete()
-   .eq('conversation_id',S.conversation.id)
-   .eq('profile_id',id);
+  const result =
+    await db
+      .from("conversation_members")
+      .delete()
+      .eq(
+        "conversation_id",
+        S.conversation.id
+      )
+      .eq(
+        "user_id",
+        userId
+      );
 
- if(r.error)
-   return toast(r.error.message);
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
- await loadConversationMembers(
-   S.conversation.id
- );
+  await loadConversationMembers(
+    S.conversation.id
+  );
 
- await loadConversations();
-
- render();
-
- toast('Member removed');
+  groupManageModal();
 }
 
 async function renameGroup(){
 
- const name=
-   document
-   .getElementById('rename-group')
-   ?.value
-   .trim();
+  const name =
+    document
+      .getElementById("renameGroupInput")
+      .value
+      .trim();
 
- if(!name)
-   return toast('Group name is required.');
+  if(!name) return;
 
- const r=await db
-   .from('conversations')
-   .update({
-     name,
-     updated_at:new Date().toISOString()
-   })
-   .eq('id',S.conversation.id);
+  const result =
+    await db
+      .from("conversations")
+      .update({name})
+      .eq("id",S.conversation.id);
 
- if(r.error)
-   return toast(r.error.message);
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
- S.conversation.name=name;
+  S.conversation.name = name;
 
- await loadConversations();
+  await loadConversations();
 
- render();
+  closeModal();
 
- toast('Group renamed');
+  render();
 }
 
 async function leaveGroup(){
 
- if(!confirm('Leave this group?'))
-   return;
+  if(!confirm("Leave this group?")){
+    return;
+  }
 
- const members=
-   await loadConversationMembers(
-     S.conversation.id
-   );
+  const members =
+    S.conversationMembers
+      .filter(m=>m.user_id!==me());
 
- const mine=
-   members.find(
-     x=>x.profile_id===me()
-   );
+  const mine =
+    S.conversationMembers
+      .find(m=>m.user_id===me());
 
- /*
-   If the only admin leaves,
-   automatically promote the first
-   remaining member to admin.
- */
- if(
-   mine?.role==='admin' &&
-   members.filter(
-     x=>x.profile_id!==me()
-   ).length
- ){
+  if(mine?.role==="admin" && members.length){
 
-   const admins=
-     members.filter(
-       x=>
-         x.role==='admin' &&
-         x.profile_id!==me()
-     );
+    await db
+      .from("conversation_members")
+      .update({role:"admin"})
+      .eq(
+        "conversation_id",
+        S.conversation.id
+      )
+      .eq(
+        "user_id",
+        members[0].user_id
+      );
+  }
 
-   if(!admins.length){
+  const result =
+    await db
+      .from("conversation_members")
+      .delete()
+      .eq(
+        "conversation_id",
+        S.conversation.id
+      )
+      .eq(
+        "user_id",
+        me()
+      );
 
-     const next=
-       members.find(
-         x=>x.profile_id!==me()
-       );
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
-     if(next){
+  S.conversation = null;
 
-       await db
-         .from('conversation_members')
-         .update({
-           role:'admin'
-         })
-         .eq(
-           'conversation_id',
-           S.conversation.id
-         )
-         .eq(
-           'profile_id',
-           next.profile_id
-         );
-     }
-   }
- }
+  await loadConversations();
 
- const r=await db
-   .from('conversation_members')
-   .delete()
-   .eq('conversation_id',S.conversation.id)
-   .eq('profile_id',me());
+  closeModal();
 
- if(r.error)
-   return toast(r.error.message);
-
- S.conversation=null;
- S.conversationMembers=[];
-
- await loadConversations();
- await chatLoad();
-
- render();
-
- toast('You left the group');
+  render();
 }
 
-/* =========================
+
+/* =========================================================
    SEND MESSAGE
-========================= */
+========================================================= */
 
 async function send(){
 
- const i=document.getElementById('msg');
+  const input =
+    document.getElementById("chatMessage");
 
- const text=i.value.trim();
+  if(!input) return;
 
- if(!text&&!S.pendingFile)
-   return;
+  const text =
+    input.value.trim();
 
- if(!S.channel&&!S.conversation)
-   return toast(
-     'Select a channel, group or person first.'
-   );
+  if(!text) return;
 
- const row={
-   sender_id:me(),
-   message_text:text||null
- };
+  const row = {
+    sender_id:me(),
+    content:text
+  };
 
- if(S.channel)
-   row.channel_id=S.channel.id;
- else
-   row.conversation_id=S.conversation.id;
+  if(S.conversation){
+    row.conversation_id =
+      S.conversation.id;
+  }
 
- if(S.pendingFile){
+  if(S.channel){
+    row.channel_id =
+      S.channel.id;
+  }
 
-   row.attachment_name=
-     S.pendingFile.name;
+  const result =
+    await db
+      .from("messages")
+      .insert(row);
 
-   row.attachment_url=
-     S.pendingFile.url;
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
 
-   row.attachment_type=
-     S.pendingFile.type;
- }
+  input.value = "";
 
- const r=await db
-   .from('messages')
-   .insert(row);
+  await loadMessages();
 
- if(r.error)
-   return toast(r.error.message);
-
- i.value='';
- S.pendingFile=null;
-
- await chatLoad();
-
- render();
+  render();
 }
 
-async function fileAttach(inp){
+function fileAttach(){
 
- const f=inp.files[0];
+  const input =
+    document.createElement("input");
 
- if(!f)return;
+  input.type="file";
 
- if(f.size>10*1024*1024)
-   return toast(
-     'File must be under 10 MB.'
-   );
+  input.onchange =
+    e=>{
 
- const path=
-   'chat/'+
-   me()+'/'+
-   Date.now()+'-'+
-   f.name.replace(
-     /[^a-zA-Z0-9._-]/g,
-     '_'
-   );
+      const file =
+        e.target.files[0];
 
- const r=
-   await db
-   .storage
-   .from('nona-files')
-   .upload(path,f);
+      if(!file) return;
 
- if(r.error)
-   return toast(r.error.message);
+      S.pendingFile = file;
 
- const u=
-   db
-   .storage
-   .from('nona-files')
-   .getPublicUrl(path)
-   .data
-   .publicUrl;
+      notify(
+        `Selected file: ${file.name}`
+      );
+    };
 
- S.pendingFile={
-   name:f.name,
-   type:f.type,
-   url:u
- };
-
- render();
+  input.click();
 }
 
-/* =========================
+
+/* =========================================================
    CHAT PAGE
-========================= */
+========================================================= */
 
 function chatPage(){
 
- const target=
-   S.channel?
-     '# '+S.channel.name:
-   S.conversation?
-     (
-       isGroup()?
-       S.conversation.name:
-       memberName(S.conversation.target)
-     ):
-   'Select a channel or person';
-
- const q=
-   (S.chatSearch||'')
-   .toLowerCase();
-
- const groups=
-   S.conversations
-   .filter(c=>
-     c.type==='group' &&
-     (
-       !q ||
-       (c.name||'')
-       .toLowerCase()
-       .includes(q)
-     )
-   );
-
- const directPeople=
-   S.profiles
-   .filter(p=>p.id!==me())
-   .filter(p=>
-     !q ||
-     p.full_name
-     .toLowerCase()
-     .includes(q)
-   );
-
- return `
- <div class="grid">
-
-   <div class="row between wrap">
-
-     <div>
-       <h1 class="title">
-         Communication
-       </h1>
-
-       <p class="sub">
-         Real-time team communication.
-       </p>
-     </div>
-
-     <button
-       class="btn"
-       onclick="createGroupModal()"
-     >
-       + Create Group
-     </button>
-
-   </div>
-
-   <div class="card chat">
-
-     <div class="chatlist">
-
-       <div style="padding:12px">
-
-         <input
-           placeholder="Search..."
-           value="${esc(S.chatSearch)}"
-           oninput="
-             S.chatSearch=this.value;
-             render()
-           "
-         >
-
-       </div>
-
-       <div
-         class="small muted"
-         style="padding:8px 12px"
-       >
-         CHANNELS
-       </div>
-
-       ${S.channels
-         .filter(c=>
-           !q||
-           c.name
-           .toLowerCase()
-           .includes(q)
-         )
-         .map(c=>`
-           <div
-             class="chatitem ${
-               S.channel?.id===c.id?'active':''
-             }"
-             onclick="
-               selectChannel('${c.id}')
-             "
-           >
-
-             <b>
-               # ${esc(c.name)}
-             </b>
-
-             <div class="small muted">
-               ${esc(c.description||'')}
-             </div>
-
-           </div>
-         `).join('')}
-
-       <div
-         class="small muted"
-         style="padding:14px 12px 8px"
-       >
-         GROUPS
-       </div>
-
-       ${groups.map(c=>`
-         <div
-           class="chatitem ${
-             S.conversation?.id===c.id?
-             'active':
-             ''
-           }"
-           onclick="
-             selectConversation(
-               ${JSON.stringify(c)
-                 .replace(/"/g,'&quot;')}
-             )
-           "
-         >
-
-           <div class="row">
-
-             <div style="font-size:22px">
-               👥
-             </div>
-
-             <div>
-
-               <b>
-                 ${esc(c.name||'Group')}
-               </b>
-
-               <div class="small muted">
-                 Group chat
-               </div>
-
-             </div>
-
-           </div>
-
-         </div>
-       `).join('')||
-       `
-       <div
-         class="small muted"
-         style="padding:8px 12px"
-       >
-         No groups yet.
-       </div>
-       `}
-
-       <div
-         class="small muted"
-         style="padding:14px 12px 8px"
-       >
-         DIRECT CHAT
-       </div>
-
-       ${directPeople.map(p=>`
-         <div
-           class="chatitem ${
-             S.conversation?.type==='direct' &&
-             S.conversation?.target===p.id?
-             'active':
-             ''
-           }"
-           onclick="
-             direct('${p.id}')
-           "
-         >
-
-           <div class="row">
-
-             <img
-               class="avatar"
-               src="${av(p)}"
-             >
-
-             <div>
-
-               <b>
-                 ${esc(p.full_name)}
-               </b>
-
-               <div class="small muted">
-                 ${esc(p.position||'')}
-               </div>
-
-             </div>
-
-           </div>
-
-         </div>
-       `).join('')}
-
-     </div>
-
-     <div class="chatwindow">
-
-       <div
-         style="
-           padding:13px;
-           border-bottom:1px solid #eee
-         "
-       >
-
-         <div class="row between">
-
-           <div>
-
-             <b>
-               ${esc(target)}
-             </b>
-
-             <div class="small muted">
-
-               ${
-                 S.channel?
-                 'Team channel':
-                 isGroup()?
-                 'Group chat':
-                 'Direct message'
-               }
-
-             </div>
-
-           </div>
-
-           ${
-             isGroup()?
-             `
-             <button
-               class="btn secondary small"
-               onclick="
-                 S.modal={type:'groupManage'};
-                 render()
-               "
-             >
-               Manage
-             </button>
-             `:
-             ''
-           }
-
-         </div>
-
-       </div>
-
-       <div class="messages">
-
-         ${
-           S.messages.map(m=>`
-             <div
-               class="bubble ${
-                 m.sender_id===me()?'mine':''
-               }"
-             >
-
-               <div>
-                 ${esc(m.message_text||'')}
-               </div>
-
-               ${
-                 m.attachment_name?
-                 `
-                 <div class="small">
-                   📎 ${esc(m.attachment_name)}
-                 </div>
-                 `:
-                 ''
-               }
-
-               <div class="meta">
-
-                 ${
-                   m.sender_id===me()?
-                   'You':
-                   esc(memberName(m.sender_id))
-                 }
-
-                 ·
-
-                 ${dateTime(m.created_at)}
-
-               </div>
-
-             </div>
-           `).join('')||
-           `
-           <div class="empty">
-             No messages yet.
-           </div>
-           `
-         }
-
-       </div>
-
-       <div
-         style="
-           padding:12px;
-           border-top:1px solid #eee
-         "
-       >
-
-         <div class="row">
-
-           <input
-             id="msg"
-             placeholder="Write a message..."
-             onkeydown="
-               if(event.key==='Enter'){
-                 send()
-               }
-             "
-           >
-
-           <button
-             class="btn"
-             onclick="send()"
-           >
-             Send
-           </button>
-
-           <label class="btn secondary">
-
-             📎
-
-             <input
-               type="file"
-               hidden
-               onchange="fileAttach(this)"
-             >
-
-           </label>
-
-         </div>
-
-         ${
-           S.pendingFile?
-           `
-           <div
-             class="small muted"
-             style="margin-top:5px"
-           >
-             Attached:
-             ${esc(S.pendingFile.name)}
-           </div>
-           `:
-           ''
-         }
-
-       </div>
-
-     </div>
-
-   </div>
-
- </div>`;
+  const conversations =
+    S.conversations.filter(c=>{
+
+      if(!S.chatSearch) return true;
+
+      const term =
+        S.chatSearch.toLowerCase();
+
+      return String(c.name || "")
+        .toLowerCase()
+        .includes(term);
+    });
+
+  const staff =
+    S.profiles.filter(p=>p.id!==me());
+
+  return `
+
+    <div class="page-head">
+
+      <div>
+
+        <h1>Communication</h1>
+
+        <p>
+          Chat with your team.
+        </p>
+
+      </div>
+
+      <div style="display:flex;gap:8px">
+
+        <button
+          class="btn secondary"
+          onclick="createGroupModal()"
+        >
+          + Group
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="chat-layout">
+
+      <aside class="chat-sidebar">
+
+        <div class="chat-sidebar-head">
+
+          <input
+            class="input"
+            placeholder="Search chats..."
+            value="${esc(S.chatSearch)}"
+            oninput="
+              S.chatSearch=this.value;
+              render()
+            "
+          >
+
+        </div>
+
+
+        <div class="chat-list">
+
+          <div
+            style="
+              font-size:10px;
+              color:var(--muted);
+              text-transform:uppercase;
+              padding:8px;
+            "
+          >
+            Conversations
+          </div>
+
+
+          ${
+            conversations.map(c=>`
+
+              <div
+                class="
+                  chat-item
+                  ${
+                    S.conversation?.id===c.id
+                    ? "active"
+                    : ""
+                  }
+                "
+                onclick="
+                  selectConversationById('${c.id}')
+                "
+              >
+
+                <div class="chat-item-title">
+
+                  ${
+                    c.type==="group"
+                    ? "👥 "
+                    : "● "
+                  }
+
+                  ${esc(
+                    c.type==="group"
+                    ? c.name
+                    : directChatName(c)
+                  )}
+
+                </div>
+
+                <div class="chat-item-sub">
+                  ${c.type==="group" ? "Group chat" : "Direct message"}
+                </div>
+
+              </div>
+
+            `).join("")
+          }
+
+
+          <div
+            style="
+              font-size:10px;
+              color:var(--muted);
+              text-transform:uppercase;
+              padding:18px 8px 8px;
+            "
+          >
+            Start Chat
+          </div>
+
+
+          ${
+            staff.map(p=>`
+
+              <div
+                class="chat-item"
+                onclick="direct('${p.id}')"
+              >
+
+                <div class="chat-item-title">
+                  ${esc(nameOf(p))}
+                </div>
+
+                <div class="chat-item-sub">
+                  ${esc(p.role || "Staff")}
+                </div>
+
+              </div>
+
+            `).join("")
+          }
+
+        </div>
+
+      </aside>
+
+
+      <section class="chat-main">
+
+        ${
+          S.conversation || S.channel
+          ?
+          `
+            <div class="chat-header">
+
+              <div>
+
+                <strong>
+
+                  ${
+                    S.conversation
+                    ?
+                    esc(
+                      S.conversation.type==="group"
+                      ? S.conversation.name
+                      : directChatName(
+                          S.conversation
+                        )
+                    )
+                    :
+                    `# ${esc(S.channel.name)}`
+                  }
+
+                </strong>
+
+                <div
+                  style="
+                    color:var(--muted);
+                    font-size:10px;
+                    margin-top:3px;
+                  "
+                >
+
+                  ${
+                    S.conversation
+                    ?
+                    S.conversation.type==="group"
+                    ? `${S.conversationMembers.length} members`
+                    : "Direct message"
+                    :
+                    "Channel"
+                  }
+
+                </div>
+
+              </div>
+
+
+              ${
+                S.conversation?.type==="group"
+                ?
+                `
+                  <button
+                    class="btn secondary small"
+                    onclick="groupManageModal()"
+                  >
+                    Group Settings
+                  </button>
+                `
+                :
+                ""
+              }
+
+            </div>
+
+
+            <div class="chat-messages">
+
+              ${
+                S.messages.length
+                ?
+                S.messages.map(m=>`
+
+                  <div
+                    class="
+                      message
+                      ${m.sender_id===me() ? "mine":""}
+                    "
+                  >
+
+                    <div class="message-name">
+
+                      ${
+                        m.sender_id===me()
+                        ? "You"
+                        : esc(memberName(m.sender_id))
+                      }
+
+                    </div>
+
+                    <div class="message-bubble">
+                      ${esc(m.content || "")}
+                    </div>
+
+                    <div class="message-time">
+                      ${formatDate(m.created_at)}
+                    </div>
+
+                  </div>
+
+                `).join("")
+                :
+                `
+                  <div
+                    style="
+                      text-align:center;
+                      color:var(--muted);
+                      padding:50px;
+                    "
+                  >
+                    No messages yet.
+                  </div>
+                `
+              }
+
+            </div>
+
+
+            <div class="chat-input">
+
+              <button
+                class="btn secondary"
+                onclick="fileAttach()"
+              >
+                📎
+              </button>
+
+              <input
+                id="chatMessage"
+                class="input"
+                placeholder="Type a message..."
+                onkeydown="
+                  if(event.key==='Enter' && !event.shiftKey){
+                    event.preventDefault();
+                    send();
+                  }
+                "
+              >
+
+              <button
+                class="btn"
+                onclick="send()"
+              >
+                Send
+              </button>
+
+            </div>
+
+          `
+          :
+          `
+            <div
+              style="
+                flex:1;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:var(--muted);
+                text-align:center;
+              "
+            >
+
+              <div>
+
+                <div
+                  style="
+                    font-size:40px;
+                    margin-bottom:12px;
+                  "
+                >
+                  ◉
+                </div>
+
+                <strong>
+                  Select a conversation
+                </strong>
+
+                <div style="font-size:12px;margin-top:5px">
+                  Or start a new chat with a staff member.
+                </div>
+
+              </div>
+
+            </div>
+          `
+        }
+
+      </section>
+
+    </div>
+  `;
 }
 
-/* =========================
+function directChatName(c){
+
+  if(!c) return "Chat";
+
+  const members =
+    S.conversationMembers
+      .filter(m=>m.conversation_id===c.id);
+
+  const other =
+    members.find(m=>m.user_id!==me());
+
+  if(other){
+    return memberName(other.user_id);
+  }
+
+  return "Direct Chat";
+}
+
+
+/* =========================================================
    KNOWLEDGE HUB
-========================= */
+========================================================= */
 
 function knowledge(){
 
- return `
- <div class="grid">
+  return `
 
-   <div class="row between">
+    <div class="page-head">
 
-     <div>
-       <h1 class="title">
-         Knowledge Hub
-       </h1>
+      <div>
+        <h1>Knowledge Hub</h1>
+        <p>
+          Shared documents and resources.
+        </p>
+      </div>
 
-       <p class="sub">
-         SOPs, guidelines and shared documents.
-       </p>
-     </div>
+      <button
+        class="btn"
+        onclick="uploadDoc()"
+      >
+        + Upload
+      </button>
 
-     ${
-       admin()?
-       `
-       <button
-         class="btn"
-         onclick="uploadDoc()"
-       >
-         + Upload
-       </button>
-       `:
-       ''
-     }
+    </div>
 
-   </div>
 
-   <div class="card">
+    <div class="grid grid-3">
 
-     <input
-       placeholder="Search documents..."
-       oninput="
-         S.search=this.value;
-         render()
-       "
-     >
+      ${
+        S.docs.length
+        ?
+        S.docs.map(d=>`
 
-     ${
-       S.docs
-       .filter(d=>
-         (
-           d.title+
-           ' '+
-           (d.category||'')
-         )
-         .toLowerCase()
-         .includes(
-           (S.search||'').toLowerCase()
-         )
-       )
-       .map(d=>`
-         <div class="knowledge row">
+          <div class="card">
 
-           <div style="font-size:24px">
-             📄
-           </div>
+            <div
+              style="
+                font-size:28px;
+                margin-bottom:12px;
+              "
+            >
+              📄
+            </div>
 
-           <div style="flex:1">
+            <strong>
+              ${esc(d.title || d.name || "Document")}
+            </strong>
 
-             <b>
-               ${esc(d.title)}
-             </b>
+            <p
+              style="
+                color:var(--muted);
+                font-size:12px;
+              "
+            >
+              ${esc(d.description || "")}
+            </p>
 
-             <div class="small muted">
-               ${esc(d.category||'General')}
-               ·
-               ${esc(d.description||'')}
-             </div>
+            <span class="badge">
+              ${esc(d.category || "General")}
+            </span>
 
-           </div>
+          </div>
 
-           ${
-             d.file_url?
-             `
-             <a
-               class="btn secondary small"
-               href="${esc(d.file_url)}"
-               target="_blank"
-             >
-               Open
-             </a>
-             `:
-             ''
-           }
+        `).join("")
+        :
+        `
+          <div class="card">
+            <p style="color:var(--muted)">
+              No documents available.
+            </p>
+          </div>
+        `
+      }
 
-         </div>
-       `).join('')||
-       `
-       <div class="empty">
-         No documents yet.
-       </div>
-       `
-     }
-
-   </div>
-
- </div>`;
+    </div>
+  `;
 }
 
-async function uploadDoc(){
+function uploadDoc(){
 
- const i=document.createElement('input');
+  modal(`
 
- i.type='file';
+    <div class="modal-head">
 
- i.onchange=async()=>{
+      <h2>Add Document</h2>
 
-   const f=i.files[0];
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
 
-   if(!f)return;
+    </div>
 
-   const title=prompt(
-     'Document title',
-     f.name
-   );
+    <div class="form-group">
 
-   if(!title)return;
+      <label>Title</label>
 
-   const path=
-     'knowledge/'+
-     me()+'/'+
-     Date.now()+'-'+
-     f.name.replace(
-       /[^a-zA-Z0-9._-]/g,
-       '_'
-     );
+      <input
+        id="docTitle"
+        class="input"
+      >
 
-   const u=
-     await db
-     .storage
-     .from('nona-files')
-     .upload(path,f);
+    </div>
 
-   if(u.error)
-     return toast(u.error.message);
+    <div class="form-group">
 
-   const url=
-     db
-     .storage
-     .from('nona-files')
-     .getPublicUrl(path)
-     .data
-     .publicUrl;
+      <label>Description</label>
 
-   const r=
-     await db
-     .from('knowledge_documents')
-     .insert({
-       title,
-       category:'General',
-       file_name:f.name,
-       file_url:url,
-       file_type:f.type,
-       uploaded_by:me()
-     });
+      <textarea id="docDescription"></textarea>
 
-   if(r.error)
-     return toast(r.error.message);
+    </div>
 
-   await docs();
+    <div class="form-group">
 
-   render();
- };
+      <label>Category</label>
 
- i.click();
+      <input
+        id="docCategory"
+        class="input"
+        placeholder="General"
+      >
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="saveDoc()"
+      >
+        Save
+      </button>
+
+    </div>
+  `);
 }
+
+async function saveDoc(){
+
+  const title =
+    document.getElementById("docTitle").value.trim();
+
+  const description =
+    document.getElementById("docDescription").value;
+
+  const category =
+    document.getElementById("docCategory").value || "General";
+
+  if(!title){
+    notify("Please enter a title.");
+    return;
+  }
+
+  const result =
+    await db
+      .from("knowledge_documents")
+      .insert({
+        title,
+        description,
+        category,
+        created_by:me()
+      });
+
+  if(result.error){
+    notify(result.error.message);
+    return;
+  }
+
+  await docs();
+
+  closeModal();
+
+  render();
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
 
 function calendar(){
 
- return `
- <div class="grid">
+  const date =
+    new Date();
 
-   <div>
-     <h1 class="title">
-       Calendar
-     </h1>
+  const year =
+    date.getFullYear();
 
-     <p class="sub">
-       Current work log dates.
-     </p>
-   </div>
+  const month =
+    date.getMonth();
 
-   <div class="grid two">
+  const first =
+    new Date(year,month,1);
 
-     ${
-       [
-         ...new Set(
-           logs.map(x=>x.date)
-         )
-       ]
-       .sort()
-       .reverse()
-       .map(d=>`
-         <div class="card">
+  const last =
+    new Date(year,month+1,0);
 
-           <b>
-             ${date(d)}
-           </b>
+  const start =
+    first.getDay();
 
-           ${
-             logs
-             .filter(x=>x.date===d)
-             .map(l=>`
-               <div class="knowledge small">
-                 ${esc(l.task)}
-               </div>
-             `)
-             .join('')
-           }
+  let cells = "";
 
-         </div>
-       `)
-       .join('')||
-       `
-       <div class="card empty">
-         No entries.
-       </div>
-       `
-     }
+  for(let i=0;i<start;i++){
 
-   </div>
+    cells += `
+      <div class="calendar-day"></div>
+    `;
+  }
 
- </div>`;
+  for(let d=1;d<=last.getDate();d++){
+
+    cells += `
+      <div class="calendar-day">
+
+        <strong>${d}</strong>
+
+        ${
+          d===date.getDate()
+          ?
+          `
+            <div class="calendar-event">
+              Today
+            </div>
+          `
+          :
+          ""
+        }
+
+      </div>
+    `;
+  }
+
+  return `
+
+    <div class="page-head">
+
+      <div>
+
+        <h1>Calendar</h1>
+
+        <p>
+          ${date.toLocaleDateString("en-MY",{
+            month:"long",
+            year:"numeric"
+          })}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="calendar-grid">
+
+        ${cells}
+
+      </div>
+
+    </div>
+  `;
 }
+
+
+/* =========================================================
+   STAFF
+========================================================= */
 
 function staff(){
 
- return `
- <div class="grid">
+  return `
 
-   <div>
-     <h1 class="title">
-       Staff Management
-     </h1>
+    <div class="page-head">
 
-     <p class="sub">
-       Profiles connected to Supabase.
-     </p>
-   </div>
+      <div>
+        <h1>Staff</h1>
+        <p>
+          Nona Costex team directory.
+        </p>
+      </div>
 
-   <div
-     class="card"
-     style="overflow:auto"
-   >
+    </div>
 
-     <table>
 
-       <thead>
+    <div class="grid grid-3">
 
-         <tr>
-           <th>Name</th>
-           <th>Code</th>
-           <th>Department</th>
-           <th>Position</th>
-           <th>Role</th>
-         </tr>
+      ${
+        S.profiles.map(p=>`
 
-       </thead>
+          <div class="card">
 
-       <tbody>
+            <div class="profile-avatar">
+              ${initials(nameOf(p))}
+            </div>
 
-         ${S.profiles.map(p=>`
-           <tr>
+            <strong>
+              ${esc(nameOf(p))}
+            </strong>
 
-             <td>
+            <div
+              style="
+                color:var(--muted);
+                font-size:12px;
+                margin-top:5px;
+              "
+            >
+              ${esc(p.role || "Staff")}
+            </div>
 
-               <div class="row">
+            ${
+              p.id!==me()
+              ?
+              `
+                <div style="margin-top:15px">
 
-                 <img
-                   class="avatar"
-                   src="${av(p)}"
-                 >
+                  <button
+                    class="btn secondary small"
+                    onclick="direct('${p.id}');go('communication')"
+                  >
+                    Message
+                  </button>
 
-                 <b>
-                   ${esc(p.full_name)}
-                 </b>
+                </div>
+              `
+              :
+              ""
+            }
 
-               </div>
+          </div>
 
-             </td>
+        `).join("")
+      }
 
-             <td>
-               ${esc(p.staff_code)}
-             </td>
-
-             <td>
-               ${esc(p.department||'')}
-             </td>
-
-             <td>
-               ${esc(p.position||'')}
-             </td>
-
-             <td>
-               ${esc(p.role)}
-             </td>
-
-           </tr>
-         `).join('')}
-
-       </tbody>
-
-     </table>
-
-   </div>
-
- </div>`;
+    </div>
+  `;
 }
+
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
 
 function analytics(){
 
- const done=
-   tasks.filter(
-     x=>x.status==='Completed'
-   ).length;
+  const tasks = getTasks();
 
- return `
- <div class="grid">
+  const completed =
+    tasks.filter(
+      t=>t.status==="Completed"
+    ).length;
 
-   <h1 class="title">
-     Analytics
-   </h1>
+  const progress =
+    tasks.length
+    ? Math.round(
+        completed/tasks.length*100
+      )
+    : 0;
 
-   <div class="grid four">
+  const logs =
+    getLogs()
+      .filter(l=>l.user_id===me());
 
-     <div class="card stat">
-       <b>${tasks.length}</b>
-       <span>Tasks</span>
-     </div>
+  return `
 
-     <div class="card stat">
-       <b>${done}</b>
-       <span>Completed</span>
-     </div>
+    <div class="page-head">
 
-     <div class="card stat">
-       <b>
-         ${
-           tasks.length?
-           Math.round(
-             done/tasks.length*100
-           ):
-           0
-         }%
-       </b>
-       <span>Completion</span>
-     </div>
+      <div>
 
-     <div class="card stat">
-       <b>${logs.length}</b>
-       <span>Work Logs</span>
-     </div>
+        <h1>Analytics</h1>
 
-   </div>
+        <p>
+          Your current activity overview.
+        </p>
 
-   <div class="card">
+      </div>
 
-     <button
-       class="btn"
-       onclick="window.print()"
-     >
-       Print / Report
-     </button>
+    </div>
 
-   </div>
 
- </div>`;
+    <div class="grid grid-3">
+
+      <div class="card stat">
+
+        <div class="stat-label">
+          Total Tasks
+        </div>
+
+        <div class="stat-value">
+          ${tasks.length}
+        </div>
+
+      </div>
+
+
+      <div class="card stat">
+
+        <div class="stat-label">
+          Completed Tasks
+        </div>
+
+        <div class="stat-value">
+          ${completed}
+        </div>
+
+      </div>
+
+
+      <div class="card stat">
+
+        <div class="stat-label">
+          Work Logs
+        </div>
+
+        <div class="stat-value">
+          ${logs.length}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="card">
+
+      <h3 style="margin-top:0">
+        Task Completion
+      </h3>
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:8px;
+        "
+      >
+
+        <span>
+          Progress
+        </span>
+
+        <strong>
+          ${progress}%
+        </strong>
+
+      </div>
+
+      <div class="progress">
+
+        <i style="width:${progress}%"></i>
+
+      </div>
+
+    </div>
+  `;
 }
+
+
+/* =========================================================
+   DATA
+========================================================= */
 
 function dataPage(){
 
- return `
- <div class="grid">
+  return `
 
-   <h1 class="title">
-     Data Management
-   </h1>
+    <div class="page-head">
 
-   <div class="card">
+      <div>
 
-     <b>
-       Local task/log backup
-     </b>
+        <h1>Data & Backup</h1>
 
-     <p class="small muted">
-       Communication data is stored in Supabase.
-       Task and work-log data remain browser-local
-       in this V22 build.
-     </p>
+        <p>
+          Export and restore local portal data.
+        </p>
 
-     <button
-       class="btn secondary"
-       onclick="backup()"
-     >
-       Backup JSON
-     </button>
+      </div>
 
-     <label class="btn secondary">
+    </div>
 
-       Restore
 
-       <input
-         type="file"
-         hidden
-         accept="application/json"
-         onchange="restore(this)"
-       >
+    <div class="grid grid-2">
 
-     </label>
+      <div class="card">
 
-   </div>
+        <h3 style="margin-top:0">
+          Backup
+        </h3>
 
- </div>`;
+        <p
+          style="
+            color:var(--muted);
+            font-size:13px;
+          "
+        >
+          Download your local tasks, work logs
+          and attendance records.
+        </p>
+
+        <button
+          class="btn"
+          onclick="backup()"
+        >
+          Export Backup
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 style="margin-top:0">
+          Restore
+        </h3>
+
+        <p
+          style="
+            color:var(--muted);
+            font-size:13px;
+          "
+        >
+          Restore a previous portal backup.
+        </p>
+
+        <input
+          id="restoreFile"
+          type="file"
+          accept=".json"
+          class="input"
+          onchange="restore(event)"
+        >
+
+      </div>
+
+    </div>
+  `;
 }
 
 function backup(){
 
- const a=document.createElement('a');
+  const data = {
 
- a.href=
-   window.URL.createObjectURL(
-     new Blob(
-       [
-         JSON.stringify(
-           {tasks,logs},
-           null,
-           2
-         )
-       ],
-       {
-         type:'application/json'
-       }
-     )
-   );
+    tasks:getTasks(),
 
- a.download='nona-v22-backup.json';
+    logs:getLogs(),
 
- a.click();
+    attendance:Object.keys(localStorage)
+      .filter(k=>
+        k.startsWith("nona_attendance_")
+      )
+      .reduce((o,k)=>{
+        o[k]=localStorage.getItem(k);
+        return o;
+      },{}),
+
+    exported_at:new Date().toISOString()
+
+  };
+
+  const blob =
+    new Blob(
+      [JSON.stringify(data,null,2)],
+      {type:"application/json"}
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href=url;
+  a.download=
+    `nona-costex-backup-${today()}.json`;
+
+  a.click();
+
+  URL.revokeObjectURL(url);
 }
 
-function restore(i){
+function restore(event){
 
- const r=new FileReader();
+  const file =
+    event.target.files[0];
 
- r.onload=()=>{
+  if(!file) return;
 
-   try{
+  const reader =
+    new FileReader();
 
-     const x=
-       JSON.parse(r.result);
+  reader.onload = e=>{
 
-     tasks=x.tasks||tasks;
-     logs=x.logs||logs;
+    try{
 
-     save();
+      const data =
+        JSON.parse(e.target.result);
 
-     render();
+      if(data.tasks){
+        setTasks(data.tasks);
+      }
 
-     toast('Restored');
+      if(data.logs){
+        setLogs(data.logs);
+      }
 
-   }catch(e){
+      if(data.attendance){
 
-     toast('Invalid backup');
+        Object.entries(
+          data.attendance
+        ).forEach(([key,value])=>{
+          localStorage.setItem(key,value);
+        });
 
-   }
- };
+      }
 
- r.readAsText(i.files[0]);
+      notify("Backup restored successfully.");
+
+      render();
+
+    }catch(err){
+
+      notify(
+        "Invalid backup file."
+      );
+
+    }
+
+  };
+
+  reader.readAsText(file);
 }
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
 
 function profilePage(){
 
- return `
- <div
-   class="grid"
-   style="max-width:700px"
- >
+  const p =
+    currentProfile();
 
-   <h1 class="title">
-     My Profile
-   </h1>
+  return `
 
-   <div class="card">
+    <div class="page-head">
 
-     <div class="row">
+      <div>
 
-       <img
-         class="avatar"
-         style="width:70px;height:70px"
-         src="${av(S.profile)}"
-       >
+        <h1>My Profile</h1>
 
-       <div>
+        <p>
+          Manage your staff information.
+        </p>
 
-         <h2 style="margin:0">
-           ${esc(S.profile.full_name)}
-         </h2>
+      </div>
 
-         <div class="muted">
-           ${esc(S.profile.position||'')}
-         </div>
+    </div>
 
-       </div>
 
-     </div>
+    <div class="card">
 
-     <div
-       class="grid two"
-       style="margin-top:20px"
-     >
+      <div class="profile-avatar">
+        ${initials(nameOf(p))}
+      </div>
 
-       <div>
-         <label class="small muted">
-           Staff Code
-         </label>
+      <div class="grid grid-2">
 
-         <div>
-           ${esc(S.profile.staff_code)}
-         </div>
-       </div>
+        <div>
 
-       <div>
-         <label class="small muted">
-           Role
-         </label>
+          <div class="stat-label">
+            Full Name
+          </div>
 
-         <div>
-           ${esc(S.profile.role)}
-         </div>
-       </div>
+          <strong>
+            ${esc(nameOf(p))}
+          </strong>
 
-       <div>
-         <label class="small muted">
-           Department
-         </label>
+        </div>
 
-         <div>
-           ${esc(S.profile.department||'')}
-         </div>
-       </div>
 
-       <div>
-         <label class="small muted">
-           Email
-         </label>
+        <div>
 
-         <div>
-           ${esc(S.user.email||'')}
-         </div>
-       </div>
+          <div class="stat-label">
+            Email
+          </div>
 
-     </div>
+          <strong>
+            ${esc(p.email || S.user?.email || "")}
+          </strong>
 
-   </div>
+        </div>
 
- </div>`;
+
+        <div>
+
+          <div class="stat-label">
+            Role
+          </div>
+
+          <strong>
+            ${esc(p.role || "Staff")}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <div class="stat-label">
+            User ID
+          </div>
+
+          <strong
+            style="
+              font-size:11px;
+              word-break:break-all;
+            "
+          >
+            ${esc(me())}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
 }
 
-/* =========================
-   MODALS
-========================= */
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
 
 function notifications(){
 
- S.modal={
-   type:'notifications'
- };
+  modal(`
 
- render();
+    <div class="modal-head">
+
+      <h2>Notifications</h2>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    ${
+      S.notifications.length
+      ?
+      S.notifications.map(n=>`
+
+        <div
+          style="
+            padding:12px;
+            border-bottom:1px solid var(--border);
+          "
+        >
+
+          <strong>
+            ${esc(n.title || "Notification")}
+          </strong>
+
+          <div
+            style="
+              color:var(--muted);
+              font-size:12px;
+              margin-top:4px;
+            "
+          >
+            ${esc(n.message || n.content || "")}
+          </div>
+
+        </div>
+
+      `).join("")
+      :
+      `
+        <p style="color:var(--muted)">
+          No notifications.
+        </p>
+      `
+    }
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn secondary"
+        onclick="markRead()"
+      >
+        Mark All Read
+      </button>
+
+    </div>
+
+  `);
 }
 
 async function markRead(){
 
- await db
-   .from('communication_notifications')
-   .update({
-     is_read:true
-   })
-   .eq('profile_id',me());
+  if(!me()) return;
 
- await notifs();
+  await db
+    .from("communication_notifications")
+    .update({
+      read_at:new Date().toISOString()
+    })
+    .eq("user_id",me())
+    .is("read_at",null);
 
- S.modal=null;
+  await notifs();
 
- render();
+  closeModal();
+
+  render();
 }
 
-function modal(){
 
- const m=S.modal;
+/* =========================================================
+   MODAL
+========================================================= */
 
- if(m.type==='notifications'){
+function modal(content){
 
-   return `
-   <div class="modalbg">
+  S.modal = true;
 
-     <div class="modal">
+  document.getElementById("modalRoot").innerHTML = `
 
-       <div class="row between">
+    <div
+      class="modal-overlay"
+      onclick="
+        if(event.target===this) closeModal()
+      "
+    >
 
-         <h2>
-           Notifications
-         </h2>
+      <div class="modal">
 
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           ×
-         </button>
+        ${content}
 
-       </div>
+      </div>
 
-       ${
-         S.notifications
-         .map(n=>`
-           <div class="knowledge">
-
-             <b>
-               ${esc(n.title)}
-             </b>
-
-             <div class="small muted">
-               ${esc(n.message||'')}
-               ·
-               ${dateTime(n.created_at)}
-             </div>
-
-           </div>
-         `)
-         .join('')||
-         `
-         <div class="empty">
-           No notifications.
-         </div>
-         `
-       }
-
-       <button
-         class="btn secondary small"
-         onclick="markRead()"
-       >
-         Mark all as read
-       </button>
-
-     </div>
-
-   </div>`;
- }
-
- if(m.type==='createGroup'){
-
-   return `
-   <div class="modalbg">
-
-     <div class="modal">
-
-       <div class="row between">
-
-         <h2>
-           Create Group
-         </h2>
-
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           ×
-         </button>
-
-       </div>
-
-       <label class="small muted">
-         Group name
-       </label>
-
-       <input
-         id="group-name"
-         placeholder="e.g. Digital Team"
-       >
-
-       <div style="margin-top:18px">
-         <b>
-           Select staff
-         </b>
-       </div>
-
-       <div
-         style="
-           margin-top:8px;
-           border:1px solid #eee;
-           border-radius:10px;
-           overflow:hidden
-         "
-       >
-
-         ${
-           S.profiles
-           .filter(p=>p.id!==me())
-           .map(p=>`
-             <label class="member-check">
-
-               <input
-                 class="group-member"
-                 type="checkbox"
-                 value="${p.id}"
-               >
-
-               <img
-                 class="avatar"
-                 src="${av(p)}"
-               >
-
-               <span>
-                 ${esc(p.full_name)}
-               </span>
-
-             </label>
-           `)
-           .join('')||
-           `
-           <div class="empty">
-             No other staff accounts found.
-           </div>
-           `
-         }
-
-       </div>
-
-       <div
-         class="row"
-         style="
-           justify-content:flex-end;
-           margin-top:18px
-         "
-       >
-
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           Cancel
-         </button>
-
-         <button
-           class="btn"
-           onclick="createGroup()"
-         >
-           Create Group
-         </button>
-
-       </div>
-
-     </div>
-
-   </div>`;
- }
-
- if(m.type==='groupManage')
-   return groupManageModal();
-
- if(m.type==='task'){
-
-   const t=m.data;
-
-   return `
-   <div class="modalbg">
-
-     <div class="modal">
-
-       <div class="row between">
-
-         <h2>
-           ${t.id?'Edit':'Add'} Task
-         </h2>
-
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           ×
-         </button>
-
-       </div>
-
-       <div
-         class="grid two"
-         style="margin-top:14px"
-       >
-
-         <div>
-           <label class="small muted">
-             Task
-           </label>
-
-           <input
-             id="task-name"
-             value="${esc(t.name)}"
-           >
-         </div>
-
-         <div>
-           <label class="small muted">
-             Category
-           </label>
-
-           <input
-             id="task-cat"
-             value="${esc(t.category)}"
-           >
-         </div>
-
-         <div>
-
-           <label class="small muted">
-             Priority
-           </label>
-
-           <select id="task-pri">
-
-             ${[
-               'High',
-               'Medium',
-               'Low'
-             ].map(x=>`
-               <option
-                 ${t.priority===x?'selected':''}
-               >
-                 ${x}
-               </option>
-             `).join('')}
-
-           </select>
-
-         </div>
-
-         <div>
-
-           <label class="small muted">
-             Status
-           </label>
-
-           <select id="task-status">
-
-             ${[
-               'Not Started',
-               'In Progress',
-               'Completed',
-               'On Hold'
-             ].map(x=>`
-               <option
-                 ${t.status===x?'selected':''}
-               >
-                 ${x}
-               </option>
-             `).join('')}
-
-           </select>
-
-         </div>
-
-         <div>
-
-           <label class="small muted">
-             Due date
-           </label>
-
-           <input
-             id="task-date"
-             type="date"
-             value="${t.dueDate}"
-           >
-
-         </div>
-
-         <div>
-
-           <label class="small muted">
-             Due time
-           </label>
-
-           <input
-             id="task-time"
-             type="time"
-             value="${t.dueTime||''}"
-           >
-
-         </div>
-
-       </div>
-
-       <label class="small muted">
-         Description
-       </label>
-
-       <textarea id="task-desc">
-${esc(t.description||'')}
-       </textarea>
-
-       <label class="small muted">
-         Notes
-       </label>
-
-       <textarea id="task-notes">
-${esc(t.notes||'')}
-       </textarea>
-
-       <input
-         id="task-id"
-         type="hidden"
-         value="${esc(t.id||'')}"
-       >
-
-       <div
-         class="row"
-         style="justify-content:flex-end"
-       >
-
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           Cancel
-         </button>
-
-         <button
-           class="btn"
-           onclick="saveTask()"
-         >
-           Save
-         </button>
-
-       </div>
-
-     </div>
-
-   </div>`;
- }
-
- if(m.type==='log'){
-
-   return `
-   <div class="modalbg">
-
-     <div class="modal">
-
-       <h2>
-         Add Work Log
-       </h2>
-
-       <label class="small muted">
-         Date
-       </label>
-
-       <input
-         id="log-date"
-         type="date"
-         value="${m.data.date}"
-       >
-
-       <label class="small muted">
-         Activity
-       </label>
-
-       <input id="log-task">
-
-       <label class="small muted">
-         Description
-       </label>
-
-       <textarea id="log-desc"></textarea>
-
-       <div
-         class="row"
-         style="justify-content:flex-end"
-       >
-
-         <button
-           class="btn secondary"
-           onclick="
-             S.modal=null;
-             render()
-           "
-         >
-           Cancel
-         </button>
-
-         <button
-           class="btn"
-           onclick="saveLog()"
-         >
-           Save
-         </button>
-
-       </div>
-
-     </div>
-
-   </div>`;
- }
-
- return '';
+    </div>
+  `;
 }
+
+function closeModal(){
+
+  S.modal = null;
+
+  document.getElementById(
+    "modalRoot"
+  ).innerHTML = "";
+}
+
+
+/* =========================================================
+   LIVE CLOCK
+========================================================= */
+
+setInterval(()=>{
+
+  const clock =
+    document.getElementById("liveClock");
+
+  if(clock){
+    clock.textContent =
+      new Date().toLocaleTimeString(
+        "en-MY",
+        {
+          hour:"2-digit",
+          minute:"2-digit",
+          second:"2-digit"
+        }
+      );
+  }
+
+},1000);
+
+
+/* =========================================================
+   START
+========================================================= */
 
 init();
+
 </script>
 
 </body>
