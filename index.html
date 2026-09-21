@@ -551,9 +551,10 @@ th{
 <div id="toast"></div>
 
 <script>
-const URL='https://jccryyxdxykomwsivtjy.supabase.co';
-const KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
-const db=supabase.createClient(URL,KEY);
+const SUPABASE_URL = 'https://jccryyxdxykomwsivtjy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const S={
   page:'dashboard',
