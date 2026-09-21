@@ -1,4487 +1,2860 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nona Costex Staff Portal</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Helvetica,Arial,sans-serif;background:#f7f9f7;color:#172019}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+input,select,textarea{width:100%;border:1px solid #e2e8e4;border-radius:9px;padding:10px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+
 :root{
-  --green:#9fb873;
-  --green-dark:#7f9a58;
-  --green-light:#edf3e4;
-  --green-soft:#f6f8f1;
-  --border:#e2e8e4;
-  --text:#172019;
-  --muted:#718078;
-  --bg:#f7f9f7;
-  --white:#fff;
-  --danger:#c0392b;
-  --warning:#d79a28;
-  --shadow:0 8px 30px rgba(35,50,40,.06);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Helvetica,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-
-button,input,select,textarea{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* LOGIN */
-
-.login-screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--bg);
-  padding:24px;
-}
-
-.login-card{
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:38px;
-  box-shadow:var(--shadow);
-}
-
-.logo-box{
-  width:54px;
-  height:54px;
-  border-radius:15px;
-  background:var(--green);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  font-size:21px;
-  margin-bottom:20px;
-}
-
-.login-card h1{
-  font-size:25px;
-  margin-bottom:7px;
-}
-
-.login-card p{
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:26px;
-}
-
-/* APP */
-
-.app{
-  min-height:100vh;
-  display:flex;
-}
-
-.sidebar{
-  width:245px;
-  background:#fff;
-  border-right:1px solid var(--border);
-  padding:22px 15px;
-  position:fixed;
-  top:0;
-  bottom:0;
-  left:0;
-  overflow-y:auto;
-  z-index:20;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:5px 10px 27px;
-}
-
-.brand-icon{
-  width:39px;
-  height:39px;
-  border-radius:11px;
-  background:var(--green);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.brand-text{
-  font-weight:700;
-  font-size:15px;
-}
-
-.brand-sub{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-}
-
-.nav-title{
-  color:#a0aaa4;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.8px;
-  padding:13px 11px 7px;
-}
-
-.nav button{
-  width:100%;
-  border:0;
-  background:transparent;
-  padding:10px 11px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  color:#5e6962;
-  font-size:13px;
-  text-align:left;
-  margin:2px 0;
-}
-
-.nav button:hover,
-.nav button.active{
-  background:var(--green-light);
-  color:#5f7541;
-}
-
-.nav-icon{
-  width:20px;
-  text-align:center;
-}
-
-.sidebar-bottom{
-  position:absolute;
-  bottom:15px;
-  left:15px;
-  right:15px;
-  border-top:1px solid var(--border);
-  padding-top:14px;
-}
-
-.user-mini{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:7px;
-}
-
-.avatar{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:var(--green-light);
-  color:#5f7541;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:12px;
-}
-
-.user-mini-info{
-  min-width:0;
-  flex:1;
-}
-
-.user-mini-name{
-  font-size:12px;
-  font-weight:600;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.user-mini-role{
-  color:var(--muted);
-  font-size:10px;
-}
-
-.logout-btn{
-  width:100%;
-  border:1px solid var(--border);
-  background:#fff;
-  padding:9px;
-  border-radius:9px;
-  color:#66716a;
-  font-size:12px;
-  margin-top:8px;
-}
-
-.main{
-  margin-left:245px;
-  width:calc(100% - 245px);
-  min-height:100vh;
-}
-
-.topbar{
-  height:68px;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-.topbar-title{
-  font-size:17px;
-  font-weight:600;
-}
-
-.topbar-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.icon-btn{
-  width:36px;
-  height:36px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:9px;
-  position:relative;
-}
-
-.notification-dot{
-  position:absolute;
-  width:7px;
-  height:7px;
-  background:#d95d5d;
-  border-radius:50%;
-  top:7px;
-  right:7px;
-}
-
-.content{
-  padding:28px 30px 50px;
-  max-width:1500px;
-  margin:auto;
-}
-
-/* COMMON */
-
-.page-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:25px;
-}
-
-.page-head h1{
-  font-size:24px;
-  margin-bottom:5px;
-}
-
-.page-head p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.btn{
-  border:0;
-  background:var(--green);
-  color:#fff;
-  border-radius:9px;
-  padding:10px 15px;
-  font-size:12px;
-  font-weight:600;
-}
-
-.btn:hover{
-  background:var(--green-dark);
-}
-
-.btn.secondary{
-  background:var(--green-light);
-  color:#5f7541;
-}
-
-.btn.outline{
-  background:#fff;
-  border:1px solid var(--border);
-  color:#5e6962;
-}
-
-.btn.danger{
-  background:#f9e9e7;
-  color:var(--danger);
-}
-
-.btn.small{
-  padding:7px 10px;
-  font-size:11px;
-}
-
-.input,
-select,
-textarea{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:10px 12px;
-  outline:none;
-  background:#fff;
-  color:var(--text);
-  font-size:13px;
-}
-
-.input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--green);
-}
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  font-size:11px;
-  font-weight:600;
-  margin-bottom:6px;
-  color:#59645d;
-}
-
-.grid{
-  display:grid;
-  gap:15px;
-}
-
-.grid-2{
-  grid-template-columns:repeat(2,minmax(0,1fr));
-}
-
-.grid-3{
-  grid-template-columns:repeat(3,minmax(0,1fr));
-}
-
-.grid-4{
-  grid-template-columns:repeat(4,minmax(0,1fr));
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-}
-
-.card-pad{
-  padding:19px;
-}
-
-.card-title{
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:14px;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.empty{
-  padding:35px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-
-/* DASHBOARD */
-
-.stat-card{
-  padding:18px;
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:9px;
-}
-
-.stat-value{
-  font-size:27px;
-  font-weight:600;
-}
-
-.stat-small{
-  font-size:10px;
-  color:var(--muted);
-  margin-top:5px;
-}
-
-.dashboard-grid{
-  margin-top:18px;
-}
-
-.progress{
-  height:7px;
-  background:#edf0ed;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:9px;
-}
-
-.progress i{
-  display:block;
-  height:100%;
-  background:var(--green);
-  border-radius:20px;
-}
-
-/* TABLE */
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th{
-  text-align:left;
-  font-size:10px;
-  color:#89938d;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  padding:12px;
-  border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
-
-td{
-  padding:13px 12px;
-  font-size:12px;
-  border-bottom:1px solid #eef1ef;
-  vertical-align:middle;
-}
-
-tr:last-child td{
-  border-bottom:0;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  border-radius:20px;
-  padding:5px 9px;
-  font-size:10px;
-  font-weight:600;
-}
-
-.badge.green{
-  background:var(--green-light);
-  color:#5f7541;
-}
-
-.badge.gray{
-  background:#f0f2f1;
-  color:#6e7872;
-}
-
-.badge.red{
-  background:#fae9e7;
-  color:#a94b40;
-}
-
-.badge.yellow{
-  background:#fff5df;
-  color:#9a7027;
-}
-
-/* ATTENDANCE */
-
-.attendance-status{
-  padding:22px;
-  background:var(--green-soft);
-  border:1px solid #dce6ca;
-  border-radius:14px;
-  margin-bottom:16px;
-}
-
-.attendance-time{
-  color:var(--green-dark);
-  font-size:31px;
-  font-weight:600;
-  margin:7px 0;
-}
-
-.clock-time{
-  color:var(--green-dark);
-  font-size:24px;
-  font-weight:600;
-}
-
-.attendance-actions{
-  display:flex;
-  gap:9px;
-  margin-top:15px;
-}
-
-/* TASKS */
-
-.task-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px;
-  border-bottom:1px solid #eef1ef;
-}
-
-.task-row:last-child{
-  border-bottom:0;
-}
-
-.task-check{
-  width:18px;
-  height:18px;
-  accent-color:var(--green);
-}
-
-.task-info{
-  flex:1;
-}
-
-.task-title{
-  font-size:12px;
-  font-weight:600;
-}
-
-.task-meta{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-/* CHAT */
-
-.chat-layout{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  min-height:600px;
-}
-
-.chat-list{
-  border-right:1px solid var(--border);
-}
-
-.chat-list-head{
-  padding:15px;
-  border-bottom:1px solid var(--border);
-}
-
-.chat-item{
-  width:100%;
-  border:0;
-  background:#fff;
-  padding:13px 15px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-align:left;
-  border-bottom:1px solid #f0f2f1;
-}
-
-.chat-item:hover,
-.chat-item.active{
-  background:var(--green-soft);
-}
-
-.chat-item-info{
-  min-width:0;
-  flex:1;
-}
-
-.chat-item-name{
-  font-size:12px;
-  font-weight:600;
-}
-
-.chat-item-preview{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.chat-main{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-
-.chat-head{
-  padding:16px 18px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.chat-head-name{
-  font-size:13px;
-  font-weight:600;
-}
-
-.messages{
-  flex:1;
-  min-height:450px;
-  max-height:550px;
-  overflow-y:auto;
-  padding:20px;
-  background:#fafbfa;
-}
-
-.message{
-  display:flex;
-  margin-bottom:12px;
-}
-
-.message.mine{
-  justify-content:flex-end;
-}
-
-.message-bubble{
-  max-width:65%;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:9px 12px;
-  font-size:12px;
-}
-
-.message.mine .message-bubble{
-  background:var(--green-light);
-  border-color:#dce6ca;
-}
-
-.message-name{
-  font-size:9px;
-  color:var(--muted);
-  margin-bottom:4px;
-}
-
-.message-time{
-  color:#9ba49e;
-  font-size:8px;
-  margin-top:5px;
-}
-
-.chat-input{
-  border-top:1px solid var(--border);
-  padding:12px;
-  display:flex;
-  gap:8px;
-}
-
-.chat-input input{
-  flex:1;
-}
-
-/* KNOWLEDGE */
-
-.doc-card{
-  padding:17px;
-}
-
-.doc-icon{
-  width:38px;
-  height:38px;
-  background:var(--green-light);
-  color:#5f7541;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:12px;
-}
-
-.doc-title{
-  font-size:13px;
-  font-weight:600;
-}
-
-.doc-meta{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
-}
-
-/* PROFILE */
-
-.profile-avatar{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  background:var(--green-light);
-  color:#5f7541;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:23px;
-  font-weight:bold;
-}
-
-/* MODAL */
-
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(20,28,23,.42);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:100;
-}
-
-.modal{
-  width:100%;
-  max-width:560px;
-  max-height:90vh;
-  overflow-y:auto;
-  background:#fff;
-  border-radius:17px;
-  box-shadow:0 25px 70px rgba(0,0,0,.16);
-}
-
-.modal-head{
-  padding:18px 20px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.modal-head h3{
-  font-size:15px;
-}
-
-.modal-close{
-  border:0;
-  background:transparent;
-  font-size:20px;
-  color:#88928c;
-}
-
-.modal-body{
-  padding:20px;
-}
-
-.modal-foot{
-  padding:15px 20px;
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-}
-
-/* LEAVE */
-
-.leave-card{
-  padding:17px;
-}
-
-.leave-summary{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.leave-type{
-  font-size:13px;
-  font-weight:600;
-}
-
-.leave-date{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
-}
-
-.leave-reason{
-  font-size:11px;
-  color:#68736c;
-  margin-top:9px;
-  line-height:1.5;
-}
-
-/* CALENDAR */
-
-.calendar{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-}
-
-.calendar-day-head{
-  background:var(--green-soft);
-  padding:10px;
-  font-size:10px;
-  color:#68736c;
-  text-align:center;
-}
-
-.calendar-cell{
-  min-height:95px;
-  border-top:1px solid var(--border);
-  border-right:1px solid var(--border);
-  padding:9px;
-  font-size:11px;
-}
-
-.calendar-cell:nth-child(7n){
-  border-right:0;
-}
-
-.calendar-number{
-  font-weight:600;
-}
-
-.today{
-  width:24px;
-  height:24px;
-  background:var(--green);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-}
-
-.event{
-  margin-top:7px;
-  padding:4px 6px;
-  background:var(--green-light);
-  color:#5f7541;
-  border-radius:5px;
-  font-size:9px;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:25px;
-  bottom:25px;
-  background:#202721;
-  color:#fff;
-  padding:12px 16px;
-  border-radius:9px;
-  font-size:12px;
-  z-index:300;
-  box-shadow:var(--shadow);
-}
-
-/* MOBILE */
-
-.mobile-menu{
-  display:none;
-}
-
-@media(max-width:900px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.2s;
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-    width:100%;
-  }
-
-  .mobile-menu{
-    display:block;
-  }
-
-  .grid-4{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid-3{
-    grid-template-columns:1fr;
-  }
-
-  .chat-layout{
-    grid-template-columns:1fr;
-  }
-
-  .chat-list{
-    display:none;
-  }
-
-  .chat-list.mobile-show{
-    display:block;
-  }
-}
-
-@media(max-width:600px){
-  .content{
-    padding:20px 15px 40px;
-  }
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .grid-2,
-  .grid-4{
-    grid-template-columns:1fr;
-  }
-
-  .page-head{
-    flex-direction:column;
-  }
-
-  .page-head .btn{
-    width:100%;
-  }
+ --green:#9fb873;
+ --green-dark:#7f9a58;
+ --green-light:#edf3e4;
+ --green-soft:#f6f8f1;
+ --border:#e2e8e4;
+ --text:#172019;
+ --muted:#718078;
+ --bg:#f7f9f7;
+ --white:#fff;
+ --danger:#c0392b;
+}
+
+.app{display:flex;min-height:100vh}
+.side{width:240px;position:fixed;inset:0 auto 0 0;background:#fff;border-right:1px solid var(--border);padding:18px 12px;z-index:20}
+.main{margin-left:240px;flex:1;min-width:0}
+.top{height:64px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:10}
+.content{padding:22px;max-width:1300px;margin:auto}
+
+.brand{font-weight:700;font-size:19px;padding:5px 10px 20px}
+.brand small{display:block;font-size:11px;color:#888;font-weight:400;margin-top:3px}
+.nav-title{font-size:10px;color:#aaa;text-transform:uppercase;padding:14px 10px 6px}
+.nav button{width:100%;background:transparent;border:0;text-align:left;padding:10px;border-radius:9px;color:#718078}
+.nav button:hover,.nav button.active{background:var(--green-light);color:#5f7541}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+.grid{display:grid;gap:14px}
+.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.row{display:flex;align-items:center;gap:10px}
+.between{justify-content:space-between}
+.wrap{flex-wrap:wrap}
+
+.title{font-size:24px;font-weight:700;margin:0}
+.sub{font-size:13px;color:var(--muted);margin:5px 0 0}
+.small{font-size:12px}
+.muted{color:var(--muted)}
+
+.btn{border:0;background:var(--green);color:#fff;padding:9px 14px;border-radius:9px}
+.btn:hover{background:var(--green-dark)}
+.btn.secondary{background:var(--green-light);color:#5f7541}
+.btn.danger{background:#fff0ef;color:var(--danger)}
+.btn.small{padding:7px 10px;font-size:12px}
+
+.stat{padding:15px}
+.stat b{display:block;font-size:24px}
+.stat span{font-size:12px;color:var(--muted)}
+
+.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:600;background:#eef1ee}
+.high{background:#fee2e2;color:#991b1b}
+.medium{background:#fef3c7;color:#92400e}
+.low,.green{background:var(--green-light);color:#5f7541}
+.blue{background:#dbeafe;color:#1e40af}
+.red{background:#fee2e2;color:#991b1b}
+.orange{background:#fff3cd;color:#856404}
+
+.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#edf3e4}
+.progress{height:8px;background:#e8eee5;border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--green)}
+
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:middle}
+th{font-size:11px;color:var(--muted)}
+
+.empty{text-align:center;color:#999;padding:40px 10px}
+.knowledge{padding:12px 0;border-bottom:1px solid #eee}
+
+.login{min-height:100vh;display:grid;place-items:center;background:#f0f4ed;padding:20px}
+.loginbox{width:min(410px,100%);background:#fff;padding:28px;border:1px solid var(--border);border-radius:18px}
+.error{background:#fff0ef;color:#b42318;padding:10px;border-radius:9px;font-size:13px;margin:10px 0}
+
+.modalbg{position:fixed;inset:0;background:#0006;display:grid;place-items:center;z-index:100;padding:18px}
+.modal{background:#fff;border-radius:16px;width:min(760px,100%);max-height:90vh;overflow:auto;padding:22px}
+
+.toast{position:fixed;right:18px;top:78px;z-index:200;background:#172019;color:#fff;padding:11px 14px;border-radius:9px;font-size:13px}
+
+.attendance-status{background:var(--green-soft);border:1px solid #dce6ca;border-radius:12px;padding:18px}
+.attendance-time,.clock-time{color:var(--green-dark);font-size:28px;font-weight:700}
+
+.chat{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 110px);min-height:550px;padding:0;overflow:hidden}
+.chatlist{border-right:1px solid #eee;overflow:auto}
+.chatitem{padding:12px;border-bottom:1px solid #eee;cursor:pointer}
+.chatitem:hover,.chatitem.active{background:var(--green-soft)}
+.chatwindow{display:flex;flex-direction:column;min-width:0}
+.messages{flex:1;overflow:auto;padding:16px;background:#fafcf9}
+.bubble{max-width:75%;padding:9px 11px;border:1px solid #e7e7e2;background:#fff;border-radius:12px;margin-bottom:9px}
+.bubble.mine{margin-left:auto;background:var(--green);color:#fff;border-color:var(--green)}
+.meta{font-size:10px;opacity:.6;margin-top:4px}
+
+.mobile{display:none}
+
+.calendar-event{border-left:4px solid var(--green);padding:10px 12px;background:var(--green-soft);border-radius:8px}
+.calendar-event.public{border-left-color:#78909c}
+.calendar-event.company{border-left-color:var(--green)}
+.calendar-event.event{border-left-color:#d5a84c}
+
+.leave-card{padding:16px;border:1px solid var(--border);border-radius:12px;background:#fff}
+.leave-number{font-size:28px;font-weight:700;color:var(--green-dark)}
+
+@media(max-width:800px){
+ .side{transform:translateX(-100%);transition:.2s}
+ .side.open{transform:none}
+ .main{margin-left:0}
+ .mobile{display:block}
+ .content{padding:14px}
+ .four,.three,.two{grid-template-columns:1fr 1fr}
+ .chat{grid-template-columns:1fr;height:auto}
+ .chatlist{max-height:250px;border-right:0;border-bottom:1px solid #eee}
+ .hide{display:none}
+}
+
+@media(max-width:550px){
+ .four,.three,.two{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
-
-<div id="loginScreen" class="login-screen">
-  <div class="login-card">
-    <div class="logo-box">NC</div>
-    <h1>Nona Costex</h1>
-    <p>Staff Portal</p>
-
-    <div class="form-group">
-      <label>Email</label>
-      <input id="loginEmail" class="input" type="email" placeholder="Enter your email">
-    </div>
-
-    <div class="form-group">
-      <label>Password</label>
-      <input id="loginPassword" class="input" type="password" placeholder="Enter your password">
-    </div>
-
-    <button class="btn" style="width:100%" onclick="login()">Sign In</button>
-
-    <div id="loginError" style="margin-top:12px;color:#c0392b;font-size:11px"></div>
-  </div>
-</div>
-
-
-<div id="app" class="app hidden">
-
-  <aside class="sidebar" id="sidebar">
-
-    <div class="brand">
-      <div class="brand-icon">NC</div>
-      <div>
-        <div class="brand-text">Nona Costex</div>
-        <div class="brand-sub">Staff Portal</div>
-      </div>
-    </div>
-
-    <div class="nav">
-
-      <div class="nav-title">Main</div>
-
-      <button onclick="go('dashboard')" data-nav="dashboard">
-        <span class="nav-icon">⌂</span> Dashboard
-      </button>
-
-      <button onclick="go('attendance')" data-nav="attendance">
-        <span class="nav-icon">◷</span> Attendance
-      </button>
-
-      <button onclick="go('tasks')" data-nav="tasks">
-        <span class="nav-icon">✓</span> Tasks
-      </button>
-
-      <button onclick="go('logs')" data-nav="logs">
-        <span class="nav-icon">▤</span> Work Logs
-      </button>
-
-      <button onclick="go('leave')" data-nav="leave">
-        <span class="nav-icon">▱</span> Leave
-      </button>
-
-      <div class="nav-title">Communication</div>
-
-      <button onclick="go('chat')" data-nav="chat">
-        <span class="nav-icon">◌</span> Chat
-      </button>
-
-      <button onclick="go('knowledge')" data-nav="knowledge">
-        <span class="nav-icon">▧</span> Knowledge Hub
-      </button>
-
-      <button onclick="go('calendar')" data-nav="calendar">
-        <span class="nav-icon">□</span> Calendar
-      </button>
-
-      <div id="adminNav">
-        <div class="nav-title">Administration</div>
-
-        <button onclick="go('staff')" data-nav="staff">
-          <span class="nav-icon">♙</span> Staff Management
-        </button>
-
-        <button onclick="go('analytics')" data-nav="analytics">
-          <span class="nav-icon">◒</span> Analytics
-        </button>
-
-        <button onclick="go('data')" data-nav="data">
-          <span class="nav-icon">▦</span> Data
-        </button>
-      </div>
-
-      <div class="nav-title">Account</div>
-
-      <button onclick="go('profile')" data-nav="profile">
-        <span class="nav-icon">○</span> Profile
-      </button>
-
-      <button onclick="go('notifications')" data-nav="notifications">
-        <span class="nav-icon">♧</span> Notifications
-      </button>
-
-    </div>
-
-    <div class="sidebar-bottom">
-      <div class="user-mini">
-        <div class="avatar" id="sideAvatar">U</div>
-        <div class="user-mini-info">
-          <div class="user-mini-name" id="sideName">User</div>
-          <div class="user-mini-role" id="sideRole">Staff</div>
-        </div>
-      </div>
-
-      <button class="logout-btn" onclick="logout()">Sign Out</button>
-    </div>
-
-  </aside>
-
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div style="display:flex;align-items:center;gap:10px">
-        <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
-        <div class="topbar-title" id="topTitle">Dashboard</div>
-      </div>
-
-      <div class="topbar-right">
-        <button class="icon-btn" onclick="go('notifications')">
-          ♧
-          <span class="notification-dot hidden" id="notificationDot"></span>
-        </button>
-      </div>
-
-    </header>
-
-    <section class="content" id="content"></section>
-
-  </main>
-
-</div>
-
-
-<div id="modalRoot"></div>
-<div id="toastRoot"></div>
-
+<div id="app"></div>
+<div id="toast"></div>
 
 <script>
+const SUPABASE_URL='https://jccryyxdxykomwsivtjy.supabase.co';
+const SUPABASE_KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-const SUPABASE_URL = "https://jccryyxdxykomwsivtjy.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM";
-
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-const S = {
-  user:null,
-  profile:null,
-  profiles:[],
-  page:"dashboard",
-  messages:[],
-  conversations:[],
-  conversation:null,
-  channels:[],
-  channel:null,
-  notifications:[],
-  tasks:[],
-  logs:[],
-  leaveRequests:[],
-  selectedStaff:null,
-  calendarDate:new Date()
+const S={
+ page:'dashboard',
+ user:null,
+ profile:null,
+ profiles:[],
+ channels:[],
+ channel:null,
+ conversation:null,
+ conversations:[],
+ conversationMembers:[],
+ messages:[],
+ notifications:[],
+ docs:[],
+ calendarEvents:[],
+ leaveRequests:[],
+ sidebar:false,
+ modal:null,
+ chatSearch:'',
+ taskSearch:'',
+ taskFilter:'',
+ leaveFilter:'',
+ pendingFile:null
 };
 
+let tasks=JSON.parse(localStorage.getItem('nona_tasks')||'null')||[
+ {id:'t1',name:'Flite Product Shoot',category:'Content',priority:'High',status:'In Progress',dueDate:'2026-09-16',dueTime:'17:00',description:'Product shooting for Flite sandals.',notes:''},
+ {id:'t2',name:'Social Media Content',category:'Content',priority:'Medium',status:'In Progress',dueDate:'2026-09-17',dueTime:'17:00',description:'Shoot and edit social media content.',notes:''},
+ {id:'t3',name:'Live Setup',category:'Live',priority:'High',status:'Not Started',dueDate:'2026-09-18',dueTime:'12:00',description:'Prepare live setup quotation and requirements.',notes:''}
+];
 
-/* =========================================================
-   HELPERS
-========================================================= */
+let logs=JSON.parse(localStorage.getItem('nona_logs')||'null')||[
+ {id:'l1',date:'2026-09-07',task:'Budget quotation presentation + Flite product shoot',description:'Presented completed budget quotation and carried out Flite product shooting.',startTime:'09:00',endTime:'17:00'},
+ {id:'l2',date:'2026-09-08',task:'Product shooting + content brainstorming',description:'Continued product shooting and brainstormed social media content.',startTime:'09:00',endTime:'17:00'},
+ {id:'l3',date:'2026-09-09',task:'Live setup quotation + social media shooting',description:'Presented live setup budget quotation and shot social media content.',startTime:'09:00',endTime:'17:00'},
+ {id:'l4',date:'2026-09-10',task:'Content shooting + video editing',description:'Shot content and edited social media videos.',startTime:'09:00',endTime:'17:00'}
+];
 
-function esc(value){
-  if(value === null || value === undefined) return "";
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+let attendance=JSON.parse(localStorage.getItem('nona_attendance')||'null')||[];
+
+const esc=x=>{
+ const d=document.createElement('div');
+ d.textContent=x??'';
+ return d.innerHTML;
+};
+
+const av=p=>p?.avatar_url||
+ 'https://ui-avatars.com/api/?name='+encodeURIComponent(p?.full_name||'User')+
+ '&background=edf3e4&color=5f7541';
+
+const me=()=>S.profile?.id;
+const isAdmin=()=>String(S.profile?.role||'').toLowerCase()==='admin';
+
+function save(){
+ localStorage.setItem('nona_tasks',JSON.stringify(tasks));
+ localStorage.setItem('nona_logs',JSON.stringify(logs));
+ localStorage.setItem('nona_attendance',JSON.stringify(attendance));
 }
 
-function initials(name){
-  if(!name) return "U";
-
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0,2)
-    .map(x => x[0])
-    .join("")
-    .toUpperCase();
+function toast(x){
+ const t=document.getElementById('toast');
+ t.textContent=x;
+ t.className='toast';
+ setTimeout(()=>t.className='',2500);
 }
 
-function isAdmin(){
-  return S.profile?.role?.toLowerCase() === "admin";
+function date(x){
+ if(!x)return '';
+ return new Date(x+'T00:00:00').toLocaleDateString('en-MY',{
+  day:'numeric',month:'short',year:'numeric'
+ });
 }
 
-function formatDate(date){
-  if(!date) return "-";
-
-  return new Date(date).toLocaleDateString("en-MY",{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
+function dateTime(x){
+ if(!x)return '';
+ return new Date(x).toLocaleString('en-MY',{
+  day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'
+ });
 }
 
-function formatDateTime(date){
-  if(!date) return "-";
-
-  return new Date(date).toLocaleString("en-MY",{
-    day:"numeric",
-    month:"short",
-    year:"numeric",
-    hour:"2-digit",
-    minute:"2-digit"
-  });
+function pclass(x){
+ return x==='High'?'high':x==='Medium'?'medium':'low';
 }
 
-function today(){
-  return new Date().toISOString().split("T")[0];
+function sclass(x){
+ return x==='Completed'?'green':
+        x==='In Progress'?'blue':
+        x==='Overdue'?'red':'';
 }
 
-function toast(message){
-  const root = document.getElementById("toastRoot");
-
-  root.innerHTML = `
-    <div class="toast">${esc(message)}</div>
-  `;
-
-  setTimeout(()=>{
-    root.innerHTML="";
-  },3000);
+function daysBetween(a,b){
+ if(!a||!b)return 0;
+ const start=new Date(a+'T00:00:00');
+ const end=new Date(b+'T00:00:00');
+ return Math.max(1,Math.floor((end-start)/86400000)+1);
 }
 
-function modal(title,body,footer=""){
-  document.getElementById("modalRoot").innerHTML = `
-    <div class="modal-backdrop" onclick="closeModal(event)">
-      <div class="modal" onclick="event.stopPropagation()">
-        <div class="modal-head">
-          <h3>${title}</h3>
-          <button class="modal-close" onclick="closeModal()">×</button>
-        </div>
+async function init(){
+ const {data:{session}}=await db.auth.getSession();
 
-        <div class="modal-body">
-          ${body}
-        </div>
+ if(session) await enter(session.user);
+ else loginPage();
 
-        ${footer ? `<div class="modal-foot">${footer}</div>` : ""}
-      </div>
-    </div>
-  `;
-}
-
-function closeModal(event){
-  if(event && event.target?.classList?.contains("modal-backdrop") === false){
-    return;
+ db.auth.onAuthStateChange(async(e,s)=>{
+  if(s&&!S.user) await enter(s.user);
+  if(!s&&S.user){
+   S.user=null;
+   S.profile=null;
+   loginPage();
   }
-
-  document.getElementById("modalRoot").innerHTML="";
+ });
 }
 
-function closeModalForce(){
-  document.getElementById("modalRoot").innerHTML="";
-}
+async function enter(u){
+ S.user=u;
 
-function toggleSidebar(){
-  document.getElementById("sidebar").classList.toggle("open");
-}
+ await profile();
 
+ if(!S.profile){
+  const isA=(u.email||'').toLowerCase().includes('admin');
 
-/* =========================================================
-   AUTH
-========================================================= */
-
-async function login(){
-
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-
-  document.getElementById("loginError").textContent="";
-
-  if(!email || !password){
-    document.getElementById("loginError").textContent =
-      "Please enter your email and password.";
-    return;
-  }
-
-  const {data,error} = await db.auth.signInWithPassword({
-    email,
-    password
+  await db.from('profiles').insert({
+   id:u.id,
+   staff_code:isA?'ADMIN001':'NC001',
+   full_name:isA?'Admin':'Staff',
+   department:isA?'Management':'Digital',
+   position:isA?'Administrator':'Live Host Online & Offline',
+   role:isA?'admin':'staff',
+   status:'Active'
   });
 
-  if(error){
-    document.getElementById("loginError").textContent = error.message;
-    return;
-  }
+  await profile();
+ }
 
-  await startApp(data.user);
+ await Promise.all([
+  profiles(),
+  channels(),
+  notifs(),
+  docs(),
+  loadConversations(),
+  loadCalendarEvents(),
+  loadLeaveRequests()
+ ]);
+
+ subscribe();
+ render();
 }
 
-async function logout(){
-
-  await db.auth.signOut();
-
-  S.user=null;
-  S.profile=null;
-
-  document.getElementById("app").classList.add("hidden");
-  document.getElementById("loginScreen").classList.remove("hidden");
+async function profile(){
+ const r=await db.from('profiles').select('*').eq('id',S.user.id).maybeSingle();
+ if(!r.error)S.profile=r.data;
 }
 
-async function startApp(user){
-
-  S.user=user;
-
-  const {data,error} = await db
-    .from("profiles")
-    .select("*")
-    .eq("id",user.id)
-    .single();
-
-  if(error){
-    console.error(error);
-
-    S.profile={
-      id:user.id,
-      email:user.email,
-      full_name:user.email?.split("@")[0] || "User",
-      role:"staff"
-    };
-  }else{
-    S.profile=data;
-  }
-
-  await loadProfiles();
-
-  document.getElementById("loginScreen").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-
-  updateUserUI();
-
-  go("dashboard");
+async function profiles(){
+ const r=await db.from('profiles').select('*').order('full_name');
+ if(!r.error)S.profiles=r.data||[];
 }
 
-function updateUserUI(){
-
-  const name =
-    S.profile?.full_name ||
-    S.user?.email ||
-    "User";
-
-  document.getElementById("sideName").textContent=name;
-  document.getElementById("sideRole").textContent=
-    S.profile?.position ||
-    S.profile?.role ||
-    "Staff";
-
-  document.getElementById("sideAvatar").textContent=initials(name);
-
-  document.getElementById("adminNav").style.display =
-    isAdmin() ? "block" : "none";
+async function channels(){
+ const r=await db.from('channels').select('*').order('name');
+ if(!r.error)S.channels=r.data||[];
 }
 
+async function notifs(){
+ const r=await db.from('communication_notifications')
+ .select('*')
+ .eq('profile_id',me())
+ .order('created_at',{ascending:false})
+ .limit(50);
 
-/* =========================================================
-   DATABASE
-========================================================= */
-
-async function loadProfiles(){
-
-  const {data,error} = await db
-    .from("profiles")
-    .select("*")
-    .order("full_name");
-
-  if(!error){
-    S.profiles=data || [];
-  }
+ if(!r.error)S.notifications=r.data||[];
 }
 
-async function loadNotifications(){
+async function docs(){
+ const r=await db.from('knowledge_documents')
+ .select('*')
+ .order('created_at',{ascending:false});
 
-  if(!S.user) return;
-
-  const {data,error} = await db
-    .from("communication_notifications")
-    .select("*")
-    .eq("user_id",S.user.id)
-    .order("created_at",{ascending:false});
-
-  if(!error){
-    S.notifications=data || [];
-  }
-
-  document
-    .getElementById("notificationDot")
-    ?.classList.toggle(
-      "hidden",
-      !S.notifications.some(x=>!x.is_read)
-    );
+ if(!r.error)S.docs=r.data||[];
 }
 
-async function loadTasks(){
-
-  try{
-
-    const {data,error}=await db
-      .from("tasks")
-      .select("*")
-      .order("created_at",{ascending:false});
-
-    if(!error && data){
-      S.tasks=data;
-      return;
-    }
-
-  }catch(e){}
-
-  const local=localStorage.getItem("nona_tasks");
-
-  S.tasks=local ? JSON.parse(local) : [];
-}
-
-async function loadLogs(){
-
-  try{
-
-    const {data,error}=await db
-      .from("work_logs")
-      .select("*")
-      .order("created_at",{ascending:false});
-
-    if(!error && data){
-      S.logs=data;
-      return;
-    }
-
-  }catch(e){}
-
-  const local=localStorage.getItem("nona_logs");
-
-  S.logs=local ? JSON.parse(local) : [];
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-async function go(page){
-
-  S.page=page;
-
-  document.querySelectorAll("[data-nav]").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.nav===page
-    );
-  });
-
-  const titles={
-    dashboard:"Dashboard",
-    attendance:"Attendance",
-    tasks:"Tasks",
-    logs:"Work Logs",
-    leave:"Leave",
-    chat:"Chat",
-    knowledge:"Knowledge Hub",
-    calendar:"Calendar",
-    staff:"Staff Management",
-    analytics:"Analytics",
-    data:"Data",
-    profile:"Profile",
-    notifications:"Notifications"
-  };
-
-  document.getElementById("topTitle").textContent =
-    titles[page] || "Dashboard";
-
-  document.getElementById("sidebar").classList.remove("open");
-
-  if(page==="dashboard") await dashboardPage();
-  else if(page==="attendance") attendancePage();
-  else if(page==="tasks") await tasksPage();
-  else if(page==="logs") await logsPage();
-  else if(page==="leave") await leavePage();
-  else if(page==="chat") await chatPage();
-  else if(page==="knowledge") await knowledgePage();
-  else if(page==="calendar") calendarPage();
-  else if(page==="staff") await staffPage();
-  else if(page==="analytics") await analyticsPage();
-  else if(page==="data") dataPage();
-  else if(page==="profile") profilePage();
-  else if(page==="notifications") await notificationsPage();
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-async function dashboardPage(){
-
-  await loadTasks();
-  await loadLogs();
-
-  const completed =
-    S.tasks.filter(t=>t.status==="Completed").length;
-
-  const pending =
-    S.tasks.filter(t=>t.status!=="Completed").length;
-
-  const myTasks =
-    S.tasks.filter(t=>t.user_id===S.user?.id).length;
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-      <div>
-        <h1>Good ${new Date().getHours()<12?"morning":new Date().getHours()<18?"afternoon":"evening"}, ${esc(S.profile?.full_name?.split(" ")[0] || "there")}.</h1>
-        <p>Here's what's happening in your workspace today.</p>
-      </div>
-
-      <button class="btn" onclick="go('tasks')">
-        + View Tasks
-      </button>
-    </div>
-
-
-    <div class="grid grid-4">
-
-      <div class="card stat-card">
-        <div class="stat-label">My Tasks</div>
-        <div class="stat-value">${myTasks}</div>
-        <div class="stat-small">Assigned to you</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Completed</div>
-        <div class="stat-value">${completed}</div>
-        <div class="stat-small">Tasks completed</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Pending</div>
-        <div class="stat-value">${pending}</div>
-        <div class="stat-small">Tasks remaining</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Today</div>
-        <div class="stat-value">${new Date().getDate()}</div>
-        <div class="stat-small">${new Date().toLocaleDateString("en-MY",{month:"long",year:"numeric"})}</div>
-      </div>
-
-    </div>
-
-
-    <div class="grid grid-2 dashboard-grid">
-
-      <div class="card card-pad">
-
-        <div class="card-title">Today's Attendance</div>
-
-        <div class="attendance-status">
-          <div class="muted" style="font-size:11px">
-            Current status
-          </div>
-
-          <div class="attendance-time" id="dashboardClock">
-            ${new Date().toLocaleTimeString("en-MY",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}
-          </div>
-
-          <div style="font-size:11px;color:#66716a">
-            ${new Date().toLocaleDateString("en-MY",{weekday:"long",day:"numeric",month:"long"})}
-          </div>
-        </div>
-
-        <button class="btn secondary" onclick="go('attendance')">
-          Open Attendance
-        </button>
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="card-title">Quick Actions</div>
-
-        <div class="grid grid-2">
-
-          <button class="btn secondary" onclick="applyLeaveModal()">
-            Apply Leave
-          </button>
-
-          <button class="btn secondary" onclick="newTaskModal()">
-            Add Task
-          </button>
-
-          <button class="btn secondary" onclick="newLogModal()">
-            Add Work Log
-          </button>
-
-          <button class="btn secondary" onclick="go('chat')">
-            Open Chat
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card card-pad" style="margin-top:15px">
-
-      <div class="card-title">Recent Tasks</div>
-
-      ${
-        S.tasks.length
-        ?
-        S.tasks.slice(0,5).map(taskRowHTML).join("")
-        :
-        `<div class="empty">No tasks yet.</div>`
-      }
-
-    </div>
-  `;
-
-  setInterval(()=>{
-    const el=document.getElementById("dashboardClock");
-
-    if(el){
-      el.textContent =
-        new Date().toLocaleTimeString("en-MY",{
-          hour:"2-digit",
-          minute:"2-digit",
-          second:"2-digit"
-        });
-    }
-  },1000);
-}
-
-function taskRowHTML(task){
-
-  return `
-    <div class="task-row">
-
-      <input
-        type="checkbox"
-        class="task-check"
-        ${task.status==="Completed"?"checked":""}
-        onchange="toggleTask('${esc(task.id)}')"
-      >
-
-      <div class="task-info">
-
-        <div class="task-title">
-          ${esc(task.title)}
-        </div>
-
-        <div class="task-meta">
-          ${esc(task.due_date || "No due date")}
-        </div>
-
-      </div>
-
-      <span class="badge ${
-        task.status==="Completed"
-        ?"green"
-        :"yellow"
-      }">
-        ${esc(task.status || "Pending")}
-      </span>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   ATTENDANCE
-========================================================= */
-
-function attendancePage(){
-
-  const key=`attendance_${S.user?.id}_${today()}`;
-
-  const saved=JSON.parse(
-    localStorage.getItem(key) || "{}"
-  );
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-      <div>
-        <h1>Attendance</h1>
-        <p>Track your daily check-in and check-out.</p>
-      </div>
-    </div>
-
-
-    <div class="grid grid-2">
-
-      <div class="card card-pad">
-
-        <div class="card-title">Today's Attendance</div>
-
-        <div class="attendance-status">
-
-          <div style="font-size:11px;color:#718078">
-            ${new Date().toLocaleDateString("en-MY",{
-              weekday:"long",
-              day:"numeric",
-              month:"long",
-              year:"numeric"
-            })}
-          </div>
-
-          <div class="clock-time" id="liveClock">
-            ${new Date().toLocaleTimeString("en-MY")}
-          </div>
-
-          <div style="font-size:12px;margin-top:8px">
-            Status:
-            <b>${saved.checkIn ? (saved.checkOut ? "Completed" : "Checked In") : "Not Checked In"}</b>
-          </div>
-
-        </div>
-
-        <div class="attendance-actions">
-
-          <button
-            class="btn"
-            onclick="checkIn()"
-            ${saved.checkIn?"disabled":""}
-          >
-            Check In
-          </button>
-
-          <button
-            class="btn secondary"
-            onclick="checkOut()"
-            ${!saved.checkIn || saved.checkOut?"disabled":""}
-          >
-            Check Out
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="card-title">Today's Record</div>
-
-        <div style="padding:12px 0;border-bottom:1px solid var(--border)">
-          <div class="muted" style="font-size:10px">Check In</div>
-          <div style="font-size:17px;margin-top:4px">
-            ${saved.checkIn || "—"}
-          </div>
-        </div>
-
-        <div style="padding:12px 0">
-          <div class="muted" style="font-size:10px">Check Out</div>
-          <div style="font-size:17px;margin-top:4px">
-            ${saved.checkOut || "—"}
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card card-pad" style="margin-top:15px">
-
-      <div class="card-title">Attendance Notes</div>
-
-      <p class="muted" style="font-size:12px;line-height:1.6">
-        Please make sure to check in when you start work and check out before leaving.
-      </p>
-
-    </div>
-  `;
-
-  setInterval(()=>{
-    const el=document.getElementById("liveClock");
-
-    if(el){
-      el.textContent =
-        new Date().toLocaleTimeString("en-MY");
-    }
-  },1000);
-}
-
-function checkIn(){
-
-  const key=`attendance_${S.user.id}_${today()}`;
-
-  const saved=JSON.parse(
-    localStorage.getItem(key) || "{}"
-  );
-
-  if(saved.checkIn) return;
-
-  saved.checkIn=new Date().toLocaleTimeString("en-MY");
-
-  localStorage.setItem(key,JSON.stringify(saved));
-
-  toast("Checked in successfully.");
-
-  attendancePage();
-}
-
-function checkOut(){
-
-  const key=`attendance_${S.user.id}_${today()}`;
-
-  const saved=JSON.parse(
-    localStorage.getItem(key) || "{}"
-  );
-
-  if(!saved.checkIn || saved.checkOut) return;
-
-  saved.checkOut=new Date().toLocaleTimeString("en-MY");
-
-  localStorage.setItem(key,JSON.stringify(saved));
-
-  toast("Checked out successfully.");
-
-  attendancePage();
-}
-
-
-/* =========================================================
-   TASKS
-========================================================= */
-
-async function tasksPage(){
-
-  await loadTasks();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Tasks</h1>
-        <p>Manage your tasks and daily work.</p>
-      </div>
-
-      <button class="btn" onclick="newTaskModal()">
-        + Add Task
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      ${
-        S.tasks.length
-        ?
-        S.tasks.map(taskRowHTML).join("")
-        :
-        `<div class="empty">No tasks found.</div>`
-      }
-
-    </div>
-  `;
-}
-
-function newTaskModal(){
-
-  modal(
-    "Add Task",
-    `
-      <div class="form-group">
-        <label>Task</label>
-        <input id="taskTitle" class="input" placeholder="Task name">
-      </div>
-
-      <div class="form-group">
-        <label>Due Date</label>
-        <input id="taskDue" class="input" type="date">
-      </div>
-
-      <div class="form-group">
-        <label>Status</label>
-        <select id="taskStatus">
-          <option>Pending</option>
-          <option>In Progress</option>
-          <option>Completed</option>
-        </select>
-      </div>
-    `,
-    `
-      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
-      <button class="btn" onclick="saveTask()">Save Task</button>
-    `
-  );
-}
-
-async function saveTask(){
-
-  const title=document.getElementById("taskTitle").value.trim();
-  const due=document.getElementById("taskDue").value;
-  const status=document.getElementById("taskStatus").value;
-
-  if(!title){
-    toast("Please enter a task.");
-    return;
-  }
-
-  const task={
-    title,
-    due_date:due || null,
-    status,
-    user_id:S.user.id
-  };
-
-  try{
-
-    const {data,error}=await db
-      .from("tasks")
-      .insert(task)
-      .select()
-      .single();
-
-    if(!error && data){
-      S.tasks.unshift(data);
-    }else{
-      task.id=Date.now().toString();
-      S.tasks.unshift(task);
-
-      localStorage.setItem(
-        "nona_tasks",
-        JSON.stringify(S.tasks)
-      );
-    }
-
-  }catch(e){
-
-    task.id=Date.now().toString();
-    S.tasks.unshift(task);
-
-    localStorage.setItem(
-      "nona_tasks",
-      JSON.stringify(S.tasks)
-    );
-  }
-
-  closeModalForce();
-
-  toast("Task added.");
-
-  tasksPage();
-}
-
-async function toggleTask(id){
-
-  const task=S.tasks.find(x=>String(x.id)===String(id));
-
-  if(!task) return;
-
-  const next=
-    task.status==="Completed"
-    ?"Pending"
-    :"Completed";
-
-  try{
-
-    await db
-      .from("tasks")
-      .update({status:next})
-      .eq("id",id);
-
-  }catch(e){}
-
-  task.status=next;
-
-  localStorage.setItem(
-    "nona_tasks",
-    JSON.stringify(S.tasks)
-  );
-
-  if(S.page==="tasks") tasksPage();
-}
-
-
-/* =========================================================
-   WORK LOGS
-========================================================= */
-
-async function logsPage(){
-
-  await loadLogs();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Work Logs</h1>
-        <p>Keep track of your daily work activities.</p>
-      </div>
-
-      <button class="btn" onclick="newLogModal()">
-        + Add Work Log
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      ${
-        S.logs.length
-        ?
-        S.logs.map(log=>`
-
-          <div style="padding:17px;border-bottom:1px solid var(--border)">
-
-            <div style="display:flex;justify-content:space-between;gap:15px">
-
-              <div>
-                <div style="font-size:13px;font-weight:600">
-                  ${esc(log.title || log.activity || "Work Log")}
-                </div>
-
-                <div style="font-size:11px;color:var(--muted);margin-top:5px">
-                  ${esc(log.log_date || formatDate(log.created_at))}
-                </div>
-              </div>
-
-            </div>
-
-            <div style="font-size:12px;color:#68736c;line-height:1.6;margin-top:10px">
-              ${esc(log.description || "")}
-            </div>
-
-          </div>
-
-        `).join("")
-        :
-        `<div class="empty">No work logs yet.</div>`
-      }
-
-    </div>
-  `;
-}
-
-function newLogModal(){
-
-  modal(
-    "Add Work Log",
-    `
-      <div class="form-group">
-        <label>Date</label>
-        <input id="logDate" class="input" type="date" value="${today()}">
-      </div>
-
-      <div class="form-group">
-        <label>Title</label>
-        <input id="logTitle" class="input" placeholder="e.g. Product shooting">
-      </div>
-
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="logDescription" placeholder="Describe what you worked on..."></textarea>
-      </div>
-    `,
-    `
-      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
-      <button class="btn" onclick="saveLog()">Save Log</button>
-    `
-  );
-}
-
-async function saveLog(){
-
-  const log={
-    user_id:S.user.id,
-    log_date:document.getElementById("logDate").value,
-    title:document.getElementById("logTitle").value.trim(),
-    description:document.getElementById("logDescription").value.trim()
-  };
-
-  if(!log.title){
-    toast("Please enter a title.");
-    return;
-  }
-
-  try{
-
-    const {data,error}=await db
-      .from("work_logs")
-      .insert(log)
-      .select()
-      .single();
-
-    if(!error && data){
-      S.logs.unshift(data);
-    }else{
-      log.id=Date.now().toString();
-      log.created_at=new Date().toISOString();
-
-      S.logs.unshift(log);
-
-      localStorage.setItem(
-        "nona_logs",
-        JSON.stringify(S.logs)
-      );
-    }
-
-  }catch(e){
-
-    log.id=Date.now().toString();
-    log.created_at=new Date().toISOString();
-
-    S.logs.unshift(log);
-
-    localStorage.setItem(
-      "nona_logs",
-      JSON.stringify(S.logs)
-    );
-  }
-
-  closeModalForce();
-
-  toast("Work log added.");
-
-  logsPage();
-}
-
-
-/* =========================================================
-   LEAVE
-========================================================= */
-
-async function leavePage(){
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Leave</h1>
-        <p>Apply for leave and view your leave requests.</p>
-      </div>
-
-      <button class="btn" onclick="applyLeaveModal()">
-        + Apply Leave
-      </button>
-
-    </div>
-
-    <div class="grid grid-3" style="margin-bottom:15px">
-
-      <div class="card stat-card">
-        <div class="stat-label">Pending</div>
-        <div class="stat-value" id="leavePending">0</div>
-        <div class="stat-small">Awaiting review</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Approved</div>
-        <div class="stat-value" id="leaveApproved">0</div>
-        <div class="stat-small">Approved requests</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Rejected</div>
-        <div class="stat-value" id="leaveRejected">0</div>
-        <div class="stat-small">Rejected requests</div>
-      </div>
-
-    </div>
-
-    <div id="leaveList" class="card">
-      <div class="empty">Loading leave requests...</div>
-    </div>
-
-    ${
-      isAdmin()
-      ?
-      `
-        <div class="card card-pad" style="margin-top:15px">
-          <div class="card-title">Admin Leave Management</div>
-          <p class="muted" style="font-size:12px">
-            As an admin, you can review and approve or reject staff leave requests.
-          </p>
-        </div>
-      `
-      :""
-    }
-  `;
-
-  await loadLeaveRequests();
-
-  renderLeaveList();
+async function loadCalendarEvents(){
+ const r=await db.from('calendar_events')
+ .select('*')
+ .order('event_date',{ascending:true});
+
+ if(!r.error)S.calendarEvents=r.data||[];
 }
 
 async function loadLeaveRequests(){
+ let q=db.from('leave_requests')
+ .select('*')
+ .order('created_at',{ascending:false});
 
-  if(!S.user) return;
+ if(!isAdmin())q=q.eq('user_id',me());
 
-  let query=db
-    .from("leave_requests")
-    .select("*")
-    .order("created_at",{ascending:false});
+ const r=await q;
+ if(!r.error)S.leaveRequests=r.data||[];
+}
 
-  if(!isAdmin()){
-    query=query.eq("user_id",S.user.id);
-  }
+function subscribe(){
+ db.channel('nona-portal')
+ .on('postgres_changes',{event:'*',schema:'public',table:'messages'},
+  async()=>{
+   if(S.page==='communication'){
+    await chatLoad();
+    render();
+   }
+  })
+ .on('postgres_changes',{event:'*',schema:'public',table:'calendar_events'},
+  async()=>{
+   await loadCalendarEvents();
+   if(S.page==='calendar')render();
+  })
+ .on('postgres_changes',{event:'*',schema:'public',table:'leave_requests'},
+  async()=>{
+   await loadLeaveRequests();
+   if(S.page==='leave')render();
+  })
+ .subscribe();
+}
 
-  const {data,error}=await query;
+function loginPage(err=''){
+ document.getElementById('app').innerHTML=`
+ <div class="login">
+  <div class="loginbox">
+   <b style="font-size:23px">Nona Costex</b>
+   <div class="small muted" style="margin:4px 0 22px">Staff Portal</div>
 
-  if(error){
+   ${err?`<div class="error">${esc(err)}</div>`:''}
 
-    console.error(error);
+   <label class="small muted">Email</label>
+   <input id="email" type="email" placeholder="Supabase account email" style="margin:5px 0 13px">
 
-    S.leaveRequests=[];
+   <label class="small muted">Password</label>
+   <input id="pass" type="password" placeholder="Password" style="margin:5px 0 16px">
 
-    const el=document.getElementById("leaveList");
+   <button class="btn" style="width:100%" onclick="login()">Sign in</button>
+  </div>
+ </div>`;
+}
 
-    if(el){
-      el.innerHTML=`
-        <div class="empty">
-          Leave table is not available yet.<br>
-          Please run the Leave SQL setup in Supabase first.
+async function login(){
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('pass').value;
+
+ const r=await db.auth.signInWithPassword({email,password});
+
+ if(r.error)return loginPage(r.error.message);
+
+ await enter(r.data.user);
+}
+
+async function logout(){
+ await db.auth.signOut();
+}
+
+function nav(id,label,icon,b=0){
+ return `
+ <button class="${S.page===id?'active':''}" onclick="go('${id}')">
+  ${icon} &nbsp; ${label}
+  ${b?`<span class="pill red" style="float:right">${b}</span>`:''}
+ </button>`;
+}
+
+function go(p){
+ S.page=p;
+ S.sidebar=false;
+ S.modal=null;
+
+ if(p==='communication')chatLoad();
+ if(p==='leave')loadLeaveRequests();
+
+ render();
+}
+
+function render(){
+ if(!S.user)return loginPage();
+
+ const unread=S.notifications.filter(n=>!n.is_read).length;
+
+ document.getElementById('app').innerHTML=`
+ <div class="app">
+
+  <aside class="side ${S.sidebar?'open':''}">
+   <div class="brand">
+    Nona Costex
+    <small>Staff Portal</small>
+   </div>
+
+   <div class="nav-title">Workspace</div>
+   <div class="nav">
+    ${nav('dashboard','Dashboard','⌂')}
+    ${nav('tasks','Tasks','✓')}
+    ${nav('worklogs','Work Logs','▤')}
+    ${nav('attendance','Attendance','◷')}
+    ${nav('leave','Leave','▱')}
+    ${nav('communication','Communication','◌',unread)}
+    ${nav('knowledge','Knowledge Hub','▥')}
+    ${nav('calendar','Calendar','□')}
+   </div>
+
+   ${isAdmin()?`
+   <div class="nav-title">Admin</div>
+   <div class="nav">
+    ${nav('staff','Staff Management','♙')}
+    ${nav('analytics','Analytics','▥')}
+    ${nav('data','Data Management','↥')}
+   </div>`:''}
+
+   <div class="nav-title">Account</div>
+   <div class="nav">
+    ${nav('profile','My Profile','○')}
+   </div>
+
+   <div style="margin-top:18px">
+    <button style="width:100%;background:transparent;border:0;text-align:left;padding:10px;color:#777" onclick="logout()">
+     ↪ Log out
+    </button>
+   </div>
+  </aside>
+
+  <section class="main">
+   <header class="top">
+    <div class="row">
+     <button class="btn secondary mobile" onclick="S.sidebar=!S.sidebar;render()">☰</button>
+     <b>Nona Costex Staff Portal</b>
+    </div>
+
+    <div class="row">
+     <button class="btn secondary small" onclick="notifications()">
+      🔔 ${unread||''}
+     </button>
+
+     <div class="row hide">
+      <img class="avatar" src="${av(S.profile)}">
+      <div>
+       <b style="font-size:13px">${esc(S.profile.full_name)}</b>
+       <div class="small muted">${esc(S.profile.role)}</div>
+      </div>
+     </div>
+    </div>
+   </header>
+
+   <main class="content">
+    ${page()}
+   </main>
+  </section>
+
+ </div>
+
+ ${S.modal?modal():''}
+ `;
+}
+
+function page(){
+ return S.page==='dashboard'?dashboard():
+ S.page==='tasks'?tasksPage():
+ S.page==='worklogs'?logsPage():
+ S.page==='attendance'?attendancePage():
+ S.page==='leave'?leavePage():
+ S.page==='communication'?chatPage():
+ S.page==='knowledge'?knowledge():
+ S.page==='calendar'?calendar():
+ S.page==='staff'?staff():
+ S.page==='analytics'?analytics():
+ S.page==='data'?dataPage():
+ profilePage();
+}
+
+function dashboard(){
+ const done=tasks.filter(x=>x.status==='Completed').length;
+ const pct=tasks.length?Math.round(done/tasks.length*100):0;
+
+ return `
+ <div class="grid">
+
+  <div>
+   <h1 class="title">Dashboard</h1>
+   <p class="sub">Welcome back, ${esc((S.profile.full_name||'').split(' ')[0])}.</p>
+  </div>
+
+  <div class="grid four">
+   <div class="card stat">
+    <b>${tasks.length}</b>
+    <span>Total Tasks</span>
+   </div>
+
+   <div class="card stat">
+    <b>${done}</b>
+    <span>Completed</span>
+   </div>
+
+   <div class="card stat">
+    <b>${tasks.length-done}</b>
+    <span>Active</span>
+   </div>
+
+   <div class="card stat">
+    <b>${S.notifications.filter(n=>!n.is_read).length}</b>
+    <span>Unread</span>
+   </div>
+  </div>
+
+  <div class="grid two">
+   <div class="card">
+    <div class="row between">
+     <b>Task Progress</b>
+     <b>${pct}%</b>
+    </div>
+
+    <div class="progress" style="margin-top:10px">
+     <i style="width:${pct}%"></i>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="row between">
+     <b>Attendance</b>
+     <button class="btn secondary small" onclick="go('attendance')">Open</button>
+    </div>
+    <p class="small muted">Check in and check out from the Attendance page.</p>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="row between">
+    <b>Recent Work Logs</b>
+    <button class="btn secondary small" onclick="go('worklogs')">View all</button>
+   </div>
+
+   ${logs.slice(-4).reverse().map(x=>`
+    <div class="knowledge">
+     <b style="font-size:13px">${esc(x.task)}</b>
+     <div class="small muted">${date(x.date)} · ${esc(x.description)}</div>
+    </div>
+   `).join('')}
+  </div>
+
+ </div>`;
+}
+
+/* =========================
+   TASKS
+========================= */
+
+function tasksPage(){
+ let a=[...tasks];
+
+ if(S.taskFilter)a=a.filter(x=>x.status===S.taskFilter);
+
+ if(S.taskSearch){
+  const q=S.taskSearch.toLowerCase();
+  a=a.filter(x=>
+   (x.name+' '+x.description+' '+x.category).toLowerCase().includes(q)
+  );
+ }
+
+ return `
+ <div class="grid">
+
+  <div class="row between wrap">
+   <div>
+    <h1 class="title">Tasks</h1>
+    <p class="sub">Create, edit and manage tasks.</p>
+   </div>
+
+   <button class="btn" onclick="openTask()">+ Add Task</button>
+  </div>
+
+  <div class="row wrap">
+   <input style="max-width:280px"
+    placeholder="Search tasks..."
+    value="${esc(S.taskSearch)}"
+    oninput="S.taskSearch=this.value;render()">
+
+   <select style="max-width:180px"
+    onchange="S.taskFilter=this.value;render()">
+    <option value="">All status</option>
+    ${['Not Started','In Progress','Completed','On Hold'].map(x=>
+     `<option ${S.taskFilter===x?'selected':''}>${x}</option>`
+    ).join('')}
+   </select>
+  </div>
+
+  <div class="card" style="overflow:auto">
+   <table>
+    <thead>
+     <tr>
+      <th>Task</th>
+      <th>Priority</th>
+      <th>Due</th>
+      <th>Status</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+
+    <tbody>
+     ${a.map(t=>`
+      <tr>
+       <td>
+        <b>${esc(t.name)}</b>
+        <div class="small muted">${esc(t.category)}</div>
+       </td>
+
+       <td>
+        <span class="pill ${pclass(t.priority)}">${t.priority}</span>
+       </td>
+
+       <td>${date(t.dueDate)} ${t.dueTime||''}</td>
+
+       <td>
+        <span class="pill ${sclass(t.status)}">${t.status}</span>
+       </td>
+
+       <td>
+        <div class="row wrap">
+         <button class="btn secondary small" onclick="openTask('${t.id}')">Edit</button>
+         <button class="btn danger small" onclick="deleteTask('${t.id}')">Delete</button>
         </div>
-      `;
+       </td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  </div>
+
+ </div>`;
+}
+
+function openTask(id){
+ const t=id
+  ?tasks.find(x=>x.id===id)
+  :{
+   name:'',
+   description:'',
+   category:'General',
+   priority:'Medium',
+   status:'Not Started',
+   dueDate:'',
+   dueTime:'',
+   notes:''
+  };
+
+ S.modal={type:'task',data:t};
+ render();
+}
+
+function saveTask(){
+ const g=id=>document.getElementById(id).value;
+
+ const id=g('task-id');
+
+ const d={
+  name:g('task-name'),
+  description:g('task-desc'),
+  category:g('task-cat'),
+  priority:g('task-pri'),
+  status:g('task-status'),
+  dueDate:g('task-date'),
+  dueTime:g('task-time'),
+  notes:g('task-notes')
+ };
+
+ if(!d.name||!d.dueDate){
+  return toast('Task name and due date are required.');
+ }
+
+ if(id){
+  Object.assign(tasks.find(x=>x.id===id),d);
+ }else{
+  tasks.push({...d,id:'t'+Date.now()});
+ }
+
+ save();
+ S.modal=null;
+ toast('Task saved');
+ render();
+}
+
+function deleteTask(id){
+ if(!confirm('Delete this task?'))return;
+
+ tasks=tasks.filter(x=>x.id!==id);
+ save();
+ toast('Task deleted');
+ render();
+}
+
+/* =========================
+   WORK LOGS
+========================= */
+
+function logsPage(){
+ return `
+ <div class="grid">
+
+  <div class="row between">
+   <div>
+    <h1 class="title">Work Logs</h1>
+    <p class="sub">Daily work records.</p>
+   </div>
+
+   <button class="btn" onclick="openLog()">+ Add Log</button>
+  </div>
+
+  <div class="card" style="overflow:auto">
+   <table>
+    <thead>
+     <tr>
+      <th>Date</th>
+      <th>Activity</th>
+      <th>Description</th>
+      <th>Time</th>
+      <th>Total</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+
+    <tbody>
+     ${logs.slice().reverse().map(x=>`
+      <tr>
+       <td>${date(x.date)}</td>
+
+       <td><b>${esc(x.task)}</b></td>
+
+       <td>${esc(x.description)}</td>
+
+       <td>${x.startTime||'-'} ${x.endTime?'→ '+x.endTime:''}</td>
+
+       <td>${calcHours(x.startTime,x.endTime)}</td>
+
+       <td>
+        <div class="row">
+         <button class="btn secondary small" onclick="openLog('${x.id}')">Edit</button>
+         <button class="btn danger small" onclick="delLog('${x.id}')">Delete</button>
+        </div>
+       </td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  </div>
+
+ </div>`;
+}
+
+function calcHours(a,b){
+ if(!a||!b)return '-';
+
+ const [ah,am]=a.split(':').map(Number);
+ const [bh,bm]=b.split(':').map(Number);
+
+ let mins=(bh*60+bm)-(ah*60+am);
+
+ if(mins<0)mins+=1440;
+
+ return (mins/60).toFixed(1)+'h';
+}
+
+function openLog(id){
+ const data=id
+  ?logs.find(x=>x.id===id)
+  :{
+   date:new Date().toISOString().slice(0,10),
+   task:'',
+   description:'',
+   startTime:'',
+   endTime:''
+  };
+
+ S.modal={type:'log',data};
+ render();
+}
+
+function saveLog(){
+ const id=document.getElementById('log-id').value;
+
+ const d={
+  date:document.getElementById('log-date').value,
+  task:document.getElementById('log-task').value,
+  description:document.getElementById('log-desc').value,
+  startTime:document.getElementById('log-start').value,
+  endTime:document.getElementById('log-end').value
+ };
+
+ if(!d.date||!d.task){
+  return toast('Date and activity are required.');
+ }
+
+ if(id){
+  Object.assign(logs.find(x=>x.id===id),d);
+ }else{
+  logs.push({...d,id:'l'+Date.now()});
+ }
+
+ save();
+ S.modal=null;
+ toast('Work log saved');
+ render();
+}
+
+function delLog(id){
+ if(!confirm('Delete this work log?'))return;
+
+ logs=logs.filter(x=>x.id!==id);
+ save();
+ toast('Work log deleted');
+ render();
+}
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+function attendancePage(){
+ const today=new Date().toISOString().slice(0,10);
+ let a=attendance.find(x=>x.date===today&&x.user_id===me());
+
+ if(!a){
+  a={date:today,user_id:me(),checkIn:null,checkOut:null};
+ }
+
+ return `
+ <div class="grid">
+
+  <div>
+   <h1 class="title">Attendance</h1>
+   <p class="sub">Track your daily check in and check out.</p>
+  </div>
+
+  <div class="card attendance-status">
+   <div class="small muted">Today · ${date(today)}</div>
+
+   <div class="attendance-time" style="margin:10px 0">
+    ${new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+   </div>
+
+   <div class="row wrap">
+    ${!a.checkIn?
+     `<button class="btn" onclick="checkIn()">Check In</button>`:
+     `<button class="btn secondary" disabled>Checked In ${a.checkIn}</button>`
     }
 
-    return;
-  }
+    ${a.checkIn&&!a.checkOut?
+     `<button class="btn danger" onclick="checkOut()">Check Out</button>`:''}
 
-  S.leaveRequests=data || [];
+    ${a.checkOut?
+     `<span class="pill green">Completed · ${a.checkOut}</span>`:''}
+   </div>
+  </div>
+
+  <div class="card">
+   <b>Attendance History</b>
+
+   <table style="margin-top:10px">
+    <thead>
+     <tr>
+      <th>Date</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+     </tr>
+    </thead>
+
+    <tbody>
+     ${attendance
+      .filter(x=>x.user_id===me())
+      .slice()
+      .reverse()
+      .map(x=>`
+       <tr>
+        <td>${date(x.date)}</td>
+        <td>${x.checkIn||'-'}</td>
+        <td>${x.checkOut||'-'}</td>
+       </tr>
+      `).join('')||`
+       <tr>
+        <td colspan="3" class="empty">No attendance records yet.</td>
+       </tr>
+      `}
+    </tbody>
+   </table>
+  </div>
+
+ </div>`;
 }
 
-function renderLeaveList(){
+function checkIn(){
+ const today=new Date().toISOString().slice(0,10);
+ const time=new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'});
 
-  const list=document.getElementById("leaveList");
+ const existing=attendance.find(x=>x.date===today&&x.user_id===me());
 
-  if(!list) return;
+ if(existing){
+  existing.checkIn=time;
+ }else{
+  attendance.push({
+   id:'a'+Date.now(),
+   user_id:me(),
+   date:today,
+   checkIn:time,
+   checkOut:null
+  });
+ }
 
-  const pending=S.leaveRequests.filter(x=>x.status==="Pending").length;
-  const approved=S.leaveRequests.filter(x=>x.status==="Approved").length;
-  const rejected=S.leaveRequests.filter(x=>x.status==="Rejected").length;
-
-  document.getElementById("leavePending").textContent=pending;
-  document.getElementById("leaveApproved").textContent=approved;
-  document.getElementById("leaveRejected").textContent=rejected;
-
-  if(!S.leaveRequests.length){
-
-    list.innerHTML=`
-      <div class="empty">
-        No leave requests yet.
-      </div>
-    `;
-
-    return;
-  }
-
-  list.innerHTML=S.leaveRequests.map(leave=>{
-
-    const staff=S.profiles.find(
-      p=>p.id===leave.user_id
-    );
-
-    const canReview =
-      isAdmin() &&
-      leave.status==="Pending";
-
-    return `
-      <div class="leave-card" style="border-bottom:1px solid var(--border)">
-
-        <div class="leave-summary">
-
-          <div>
-
-            ${
-              isAdmin()
-              ?
-              `
-                <div class="leave-type">
-                  ${esc(staff?.full_name || "Staff")}
-                </div>
-
-                <div class="leave-date">
-                  ${esc(staff?.position || "")}
-                </div>
-              `
-              :
-              ""
-            }
-
-            <div class="leave-type" style="${isAdmin()?"margin-top:10px":""}">
-              ${esc(leave.leave_type)}
-            </div>
-
-            <div class="leave-date">
-              ${formatDate(leave.start_date)}
-              -
-              ${formatDate(leave.end_date)}
-            </div>
-
-          </div>
-
-          <span class="badge ${
-            leave.status==="Approved"
-            ?"green"
-            :
-            leave.status==="Rejected"
-            ?"red"
-            :"yellow"
-          }">
-            ${esc(leave.status)}
-          </span>
-
-        </div>
-
-        ${
-          leave.reason
-          ?
-          `<div class="leave-reason">${esc(leave.reason)}</div>`
-          :""
-        }
-
-        ${
-          leave.admin_note
-          ?
-          `
-            <div style="margin-top:9px;padding:9px;background:#f7f8f7;border-radius:7px;font-size:10px">
-              <b>Admin note:</b> ${esc(leave.admin_note)}
-            </div>
-          `
-          :""
-        }
-
-        ${
-          canReview
-          ?
-          `
-            <div style="display:flex;gap:7px;margin-top:13px">
-
-              <button
-                class="btn small"
-                onclick="reviewLeave('${leave.id}','Approved')"
-              >
-                Approve
-              </button>
-
-              <button
-                class="btn small danger"
-                onclick="reviewLeave('${leave.id}','Rejected')"
-              >
-                Reject
-              </button>
-
-            </div>
-          `
-          :""
-        }
-
-      </div>
-    `;
-
-  }).join("");
+ save();
+ toast('Checked in');
+ render();
 }
 
-function applyLeaveModal(){
+function checkOut(){
+ const today=new Date().toISOString().slice(0,10);
+ const time=new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'});
 
-  modal(
-    "Apply Leave",
-    `
-      <div class="form-group">
-        <label>Leave Type</label>
+ const existing=attendance.find(x=>x.date===today&&x.user_id===me());
 
-        <select id="leaveType">
+ if(!existing)return;
 
-          <option>Annual Leave</option>
-          <option>Medical Leave</option>
-          <option>Emergency Leave</option>
-          <option>Unpaid Leave</option>
-          <option>Other</option>
+ existing.checkOut=time;
 
-        </select>
-      </div>
+ save();
+ toast('Checked out');
+ render();
+}
 
+/* =========================
+   LEAVE
+========================= */
 
-      <div class="grid grid-2">
+function leavePage(){
+ const p=S.profile||{};
 
-        <div class="form-group">
-          <label>Start Date</label>
-          <input
-            id="leaveStart"
-            class="input"
-            type="date"
-            value="${today()}"
-          >
+ const annual=Number(p.annual_leave??12);
+ const medical=Number(p.medical_leave??14);
+ const emergency=Number(p.emergency_leave??3);
+ const unpaid=Number(p.unpaid_leave??0);
+
+ return `
+ <div class="grid">
+
+  <div class="row between wrap">
+   <div>
+    <h1 class="title">Leave</h1>
+    <p class="sub">Apply leave and check your remaining balance.</p>
+   </div>
+
+   <button class="btn" onclick="openLeave()">+ Apply Leave</button>
+  </div>
+
+  <div class="grid four">
+
+   <div class="leave-card">
+    <div class="small muted">Annual Leave</div>
+    <div class="leave-number">${annual}</div>
+    <div class="small muted">days remaining</div>
+   </div>
+
+   <div class="leave-card">
+    <div class="small muted">Medical Leave</div>
+    <div class="leave-number">${medical}</div>
+    <div class="small muted">days remaining</div>
+   </div>
+
+   <div class="leave-card">
+    <div class="small muted">Emergency Leave</div>
+    <div class="leave-number">${emergency}</div>
+    <div class="small muted">days remaining</div>
+   </div>
+
+   <div class="leave-card">
+    <div class="small muted">Unpaid Leave</div>
+    <div class="leave-number">${unpaid}</div>
+    <div class="small muted">days remaining</div>
+   </div>
+
+  </div>
+
+  <div class="card">
+   <div class="row between">
+    <b>Leave History</b>
+    <button class="btn secondary small" onclick="loadLeaveRequests().then(render)">Refresh</button>
+   </div>
+
+   <div style="overflow:auto;margin-top:10px">
+    <table>
+     <thead>
+      <tr>
+       ${isAdmin()?'<th>Staff</th>':''}
+       <th>Type</th>
+       <th>Date</th>
+       <th>Days</th>
+       <th>Reason</th>
+       <th>Status</th>
+       ${isAdmin()?'<th>Action</th>':''}
+      </tr>
+     </thead>
+
+     <tbody>
+      ${S.leaveRequests.map(r=>{
+       const staff=S.profiles.find(p=>p.id===r.user_id);
+
+       return `
+       <tr>
+        ${isAdmin()?`<td>${esc(staff?.full_name||r.user_id)}</td>`:''}
+
+        <td>${esc(r.leave_type)}</td>
+
+        <td>
+         ${date(r.start_date)}
+         ${r.start_date!==r.end_date?' → '+date(r.end_date):''}
+        </td>
+
+        <td>${daysBetween(r.start_date,r.end_date)}</td>
+
+        <td>${esc(r.reason||'-')}</td>
+
+        <td>
+         <span class="pill ${
+          r.status==='Approved'?'green':
+          r.status==='Rejected'?'red':'orange'
+         }">${esc(r.status)}</span>
+        </td>
+
+        ${isAdmin()?`
+        <td>
+         ${r.status==='Pending'?`
+         <div class="row wrap">
+          <button class="btn small" onclick="approveLeave('${r.id}')">Approve</button>
+          <button class="btn danger small" onclick="rejectLeave('${r.id}')">Reject</button>
+         </div>`:'-'}
+        </td>`:''}
+       </tr>`;
+      }).join('')||`
+       <tr>
+        <td colspan="${isAdmin()?7:6}" class="empty">No leave applications yet.</td>
+       </tr>`}
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  ${isAdmin()?adminLeaveManagement():''}
+
+ </div>`;
+}
+
+function adminLeaveManagement(){
+ return `
+ <div class="card">
+  <div class="row between">
+   <div>
+    <b>Admin Leave Balance Management</b>
+    <div class="small muted">Edit each staff member's remaining leave days.</div>
+   </div>
+  </div>
+
+  <div style="overflow:auto;margin-top:14px">
+   <table>
+    <thead>
+     <tr>
+      <th>Staff</th>
+      <th>Annual</th>
+      <th>Medical</th>
+      <th>Emergency</th>
+      <th>Unpaid</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+
+    <tbody>
+     ${S.profiles.map(p=>`
+      <tr>
+       <td>
+        <div class="row">
+         <img class="avatar" src="${av(p)}">
+         <div>
+          <b>${esc(p.full_name)}</b>
+          <div class="small muted">${esc(p.position||'')}</div>
+         </div>
         </div>
+       </td>
 
-        <div class="form-group">
-          <label>End Date</label>
-          <input
-            id="leaveEnd"
-            class="input"
-            type="date"
-            value="${today()}"
-          >
-        </div>
+       <td>
+        <input id="annual-${p.id}" type="number" min="0" value="${Number(p.annual_leave??12)}" style="width:90px">
+       </td>
 
-      </div>
+       <td>
+        <input id="medical-${p.id}" type="number" min="0" value="${Number(p.medical_leave??14)}" style="width:90px">
+       </td>
 
+       <td>
+        <input id="emergency-${p.id}" type="number" min="0" value="${Number(p.emergency_leave??3)}" style="width:90px">
+       </td>
 
-      <div class="form-group">
-        <label>Reason</label>
+       <td>
+        <input id="unpaid-${p.id}" type="number" min="0" value="${Number(p.unpaid_leave??0)}" style="width:90px">
+       </td>
 
-        <textarea
-          id="leaveReason"
-          placeholder="Enter your reason..."
-        ></textarea>
+       <td>
+        <button class="btn small" onclick="saveLeaveBalance('${p.id}')">Save</button>
+       </td>
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+  </div>
+ </div>`;
+}
 
-      </div>
-    `,
-    `
-      <button class="btn outline" onclick="closeModalForce()">
-        Cancel
-      </button>
+function openLeave(){
+ S.modal={
+  type:'leave',
+  data:{
+   leave_type:'Annual Leave',
+   start_date:'',
+   end_date:'',
+   reason:''
+  }
+ };
 
-      <button class="btn" onclick="submitLeave()">
-        Submit Leave
-      </button>
-    `
-  );
+ render();
 }
 
 async function submitLeave(){
+ const d={
+  user_id:me(),
+  leave_type:document.getElementById('leave-type').value,
+  start_date:document.getElementById('leave-start').value,
+  end_date:document.getElementById('leave-end').value,
+  reason:document.getElementById('leave-reason').value,
+  status:'Pending'
+ };
 
-  const leaveType=document.getElementById("leaveType").value;
-  const start=document.getElementById("leaveStart").value;
-  const end=document.getElementById("leaveEnd").value;
-  const reason=document.getElementById("leaveReason").value.trim();
+ if(!d.start_date||!d.end_date){
+  return toast('Please select the leave dates.');
+ }
 
-  if(!start || !end){
-    toast("Please select your leave dates.");
-    return;
-  }
+ if(d.end_date<d.start_date){
+  return toast('End date cannot be before start date.');
+ }
 
-  if(end < start){
-    toast("End date cannot be before start date.");
-    return;
-  }
+ const r=await db.from('leave_requests').insert(d);
 
-  const payload={
-    user_id:S.user.id,
-    leave_type:leaveType,
-    start_date:start,
-    end_date:end,
-    reason:reason || null,
-    status:"Pending"
+ if(r.error)return toast(r.error.message);
+
+ await loadLeaveRequests();
+
+ S.modal=null;
+ toast('Leave application submitted');
+ render();
+}
+
+async function approveLeave(id){
+ const request=S.leaveRequests.find(x=>x.id===id);
+ if(!request)return;
+
+ if(!confirm('Approve this leave request?'))return;
+
+ const r=await db.from('leave_requests')
+ .update({
+  status:'Approved',
+  reviewed_by:me(),
+  reviewed_at:new Date().toISOString()
+ })
+ .eq('id',id);
+
+ if(r.error)return toast(r.error.message);
+
+ await loadLeaveRequests();
+ toast('Leave approved');
+ render();
+}
+
+async function rejectLeave(id){
+ const note=prompt('Reason / admin note for rejection:','');
+
+ const r=await db.from('leave_requests')
+ .update({
+  status:'Rejected',
+  reviewed_by:me(),
+  reviewed_at:new Date().toISOString(),
+  admin_note:note||null
+ })
+ .eq('id',id);
+
+ if(r.error)return toast(r.error.message);
+
+ await loadLeaveRequests();
+ toast('Leave rejected');
+ render();
+}
+
+async function saveLeaveBalance(id){
+ const annual=Math.max(0,Number(document.getElementById('annual-'+id).value||0));
+ const medical=Math.max(0,Number(document.getElementById('medical-'+id).value||0));
+ const emergency=Math.max(0,Number(document.getElementById('emergency-'+id).value||0));
+ const unpaid=Math.max(0,Number(document.getElementById('unpaid-'+id).value||0));
+
+ const r=await db.from('profiles')
+ .update({
+  annual_leave:annual,
+  medical_leave:medical,
+  emergency_leave:emergency,
+  unpaid_leave:unpaid
+ })
+ .eq('id',id);
+
+ if(r.error)return toast(r.error.message);
+
+ await profiles();
+
+ if(id===me())await profile();
+
+ toast('Leave balance updated');
+ render();
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+function calendar(){
+ const grouped={};
+
+ S.calendarEvents.forEach(e=>{
+  if(!grouped[e.event_date])grouped[e.event_date]=[];
+  grouped[e.event_date].push(e);
+ });
+
+ return `
+ <div class="grid">
+
+  <div class="row between wrap">
+   <div>
+    <h1 class="title">Calendar</h1>
+    <p class="sub">Public holidays, company holidays and company events.</p>
+   </div>
+
+   ${isAdmin()?`
+   <button class="btn" onclick="openCalendarEvent()">+ Add Event</button>
+   `:''}
+  </div>
+
+  <div class="card">
+   ${Object.keys(grouped).length?
+    Object.keys(grouped).sort().map(d=>`
+     <div style="margin-bottom:20px">
+      <b>${date(d)}</b>
+
+      <div class="grid" style="margin-top:8px">
+       ${grouped[d].map(e=>`
+        <div class="calendar-event ${
+         e.event_type==='Public Holiday'?'public':
+         e.event_type==='Company Holiday'?'company':'event'
+        }">
+
+         <div class="row between">
+          <div>
+           <b>${esc(e.title)}</b>
+           <div class="small muted">
+            ${esc(e.event_type)}
+            ${e.description?' · '+esc(e.description):''}
+           </div>
+          </div>
+
+          ${isAdmin()?`
+          <div class="row">
+           <button class="btn secondary small" onclick="openCalendarEvent('${e.id}')">Edit</button>
+           <button class="btn danger small" onclick="deleteCalendarEvent('${e.id}')">Delete</button>
+          </div>`:''}
+         </div>
+
+        </div>
+       `).join('')}
+      </div>
+     </div>
+    `).join('')
+    :
+    '<div class="empty">No calendar events yet.</div>'
+   }
+  </div>
+
+ </div>`;
+}
+
+function openCalendarEvent(id){
+ const e=id
+  ?S.calendarEvents.find(x=>x.id===id)
+  :{
+   title:'',
+   event_date:'',
+   event_type:'Public Holiday',
+   description:''
   };
 
-  const {error}=await db
-    .from("leave_requests")
-    .insert(payload);
-
-  if(error){
-
-    console.error(error);
-
-    toast("Could not submit leave. Please check the Leave table setup.");
-
-    return;
-  }
-
-  closeModalForce();
-
-  toast("Leave application submitted.");
-
-  await leavePage();
+ S.modal={type:'calendar-event',data:e};
+ render();
 }
 
-async function reviewLeave(id,status){
+async function saveCalendarEvent(){
+ const id=document.getElementById('cal-id').value;
 
-  let note="";
+ const d={
+  title:document.getElementById('cal-title').value.trim(),
+  event_date:document.getElementById('cal-date').value,
+  event_type:document.getElementById('cal-type').value,
+  description:document.getElementById('cal-desc').value
+ };
 
-  if(status==="Rejected"){
+ if(!d.title||!d.event_date){
+  return toast('Title and date are required.');
+ }
 
-    note=prompt(
-      "Reason / note for rejecting this leave:",
-      ""
-    );
+ let r;
 
-    if(note===null) return;
-  }
+ if(id){
+  r=await db.from('calendar_events')
+   .update(d)
+   .eq('id',id);
+ }else{
+  r=await db.from('calendar_events')
+   .insert({...d,created_by:me()});
+ }
 
-  const {error}=await db
-    .from("leave_requests")
-    .update({
-      status,
-      reviewed_by:S.user.id,
-      reviewed_at:new Date().toISOString(),
-      admin_note:note || null
-    })
-    .eq("id",id);
+ if(r.error)return toast(r.error.message);
 
-  if(error){
+ await loadCalendarEvents();
 
-    console.error(error);
-
-    toast(error.message);
-
-    return;
-  }
-
-  toast(
-    status==="Approved"
-    ?"Leave approved."
-    :"Leave rejected."
-  );
-
-  await leavePage();
+ S.modal=null;
+ toast('Calendar event saved');
+ render();
 }
 
+async function deleteCalendarEvent(id){
+ if(!confirm('Delete this calendar event?'))return;
 
-/* =========================================================
-   CHAT
-========================================================= */
+ const r=await db.from('calendar_events')
+ .delete()
+ .eq('id',id);
 
-async function chatPage(){
+ if(r.error)return toast(r.error.message);
 
-  await loadConversations();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Chat</h1>
-        <p>Communicate with your teammates.</p>
-      </div>
-
-      <button class="btn" onclick="newChatModal()">
-        + New Chat
-      </button>
-
-    </div>
-
-
-    <div class="card chat-layout">
-
-      <div class="chat-list">
-
-        <div class="chat-list-head">
-
-          <input
-            class="input"
-            placeholder="Search chat..."
-            oninput="filterChats(this.value)"
-          >
-
-        </div>
-
-        <div id="chatListItems">
-
-          ${chatListHTML()}
-
-        </div>
-
-      </div>
-
-
-      <div class="chat-main">
-
-        ${
-          S.conversation
-          ?
-          `
-            <div class="chat-head">
-
-              <div>
-                <div class="chat-head-name">
-                  ${esc(conversationName(S.conversation))}
-                </div>
-
-                <div style="font-size:10px;color:var(--muted)">
-                  ${S.conversation.is_group ? "Group chat" : "Direct chat"}
-                </div>
-              </div>
-
-              ${
-                S.conversation.is_group
-                ?
-                `
-                  <button class="btn secondary small" onclick="groupManageModal()">
-                    Manage Group
-                  </button>
-                `
-                :""
-              }
-
-            </div>
-
-            <div id="messages" class="messages">
-              <div class="empty">Loading messages...</div>
-            </div>
-
-            <div class="chat-input">
-
-              <input
-                id="messageInput"
-                placeholder="Write a message..."
-                onkeydown="if(event.key==='Enter')sendMessage()"
-              >
-
-              <button class="btn" onclick="sendMessage()">
-                Send
-              </button>
-
-            </div>
-          `
-          :
-          `
-            <div class="empty" style="margin:auto">
-              Select a conversation to start chatting.
-            </div>
-          `
-        }
-
-      </div>
-
-    </div>
-  `;
-
-  if(S.conversation){
-    await loadMessages();
-  }
+ await loadCalendarEvents();
+ toast('Calendar event deleted');
+ render();
 }
+
+/* =========================
+   COMMUNICATION
+========================= */
 
 async function loadConversations(){
+ const m=await db.from('conversation_members')
+ .select('conversation_id,profile_id,role')
+ .eq('profile_id',me());
 
-  if(!S.user) return;
+ if(m.error){
+  S.conversations=[];
+  S.conversationMembers=[];
+  return;
+ }
 
-  const {data,error}=await db
-    .from("conversation_members")
-    .select(`
-      conversation_id,
-      role,
-      conversations(
-        id,
-        name,
-        is_group,
-        created_at
-      )
-    `)
-    .eq("user_id",S.user.id);
+ S.conversationMembers=m.data||[];
 
-  if(error){
+ const ids=[...new Set(
+  S.conversationMembers.map(x=>x.conversation_id)
+ )];
 
-    console.error(error);
+ if(!ids.length){
+  S.conversations=[];
+  return;
+ }
 
-    S.conversations=[];
+ const c=await db.from('conversations')
+ .select('*')
+ .in('id',ids)
+ .order('updated_at',{ascending:false});
 
-    return;
-  }
-
-  S.conversations=(data || [])
-    .map(x=>({
-      ...(x.conversations || {}),
-      member_role:x.role
-    }))
-    .filter(x=>x.id);
+ S.conversations=c.error?[]:(c.data||[]);
 }
 
-function chatListHTML(){
+async function loadConversationMembers(cid){
+ const r=await db.from('conversation_members')
+ .select('conversation_id,profile_id,role')
+ .eq('conversation_id',cid);
 
-  if(!S.conversations.length){
-    return `<div class="empty">No conversations yet.</div>`;
-  }
-
-  return S.conversations.map(c=>`
-
-    <button
-      class="chat-item ${S.conversation?.id===c.id?"active":""}"
-      onclick="openConversation('${c.id}')"
-    >
-
-      <div class="avatar">
-        ${c.is_group ? "G" : "U"}
-      </div>
-
-      <div class="chat-item-info">
-
-        <div class="chat-item-name">
-          ${esc(conversationName(c))}
-        </div>
-
-        <div class="chat-item-preview">
-          ${c.is_group ? "Group conversation" : "Direct conversation"}
-        </div>
-
-      </div>
-
-    </button>
-
-  `).join("");
+ S.conversationMembers=r.error?[]:(r.data||[]);
+ return S.conversationMembers;
 }
 
-function filterChats(value){
+function currentConversationRole(){
+ if(!S.conversation)return 'member';
 
-  const q=value.toLowerCase();
-
-  document.querySelectorAll(".chat-item").forEach(item=>{
-    item.style.display =
-      item.textContent.toLowerCase().includes(q)
-      ?"flex"
-      :"none";
-  });
+ return (
+  S.conversationMembers.find(x=>x.profile_id===me())||{}
+ ).role||'member';
 }
 
 function conversationName(c){
+ if(!c)return '';
 
-  if(c.is_group){
-    return c.name || "Unnamed Group";
-  }
+ if(c.type==='group'){
+  return c.name||'Unnamed Group';
+ }
 
-  if(c.name){
-    return c.name;
-  }
+ const ids=S.conversationMembers
+  .filter(x=>x.conversation_id===c.id)
+  .map(x=>x.profile_id)
+  .filter(x=>x!==me());
 
-  return "Conversation";
+ const p=S.profiles.find(x=>x.id===ids[0]);
+
+ return p?.full_name||'Direct chat';
 }
 
-async function openConversation(id){
+async function chatLoad(){
+ if(!S.channel&&!S.conversation){
+  S.messages=[];
+  return;
+ }
 
-  const c=S.conversations.find(x=>x.id===id);
+ let q=db.from('messages')
+  .select('*')
+  .order('created_at',{ascending:true})
+  .limit(200);
 
-  if(!c) return;
+ q=S.channel
+  ?q.eq('channel_id',S.channel.id)
+  :q.eq('conversation_id',S.conversation.id);
 
-  S.conversation=c;
+ const r=await q;
 
-  await chatPage();
+ if(!r.error)S.messages=r.data||[];
 }
 
-async function loadMessages(){
+async function selectConversation(cid){
+ const c=S.conversations.find(x=>x.id===cid);
+ if(!c)return;
 
-  const box=document.getElementById("messages");
+ S.conversation={
+  id:cid,
+  group:c.type==='group'
+ };
 
-  if(!box || !S.conversation) return;
+ S.channel=null;
 
-  const {data,error}=await db
-    .from("messages")
-    .select("*")
-    .eq("conversation_id",S.conversation.id)
-    .order("created_at",{ascending:true});
+ await loadConversationMembers(cid);
+ await chatLoad();
 
-  if(error){
-
-    box.innerHTML=`
-      <div class="empty">
-        Unable to load messages.
-      </div>
-    `;
-
-    return;
-  }
-
-  S.messages=data || [];
-
-  if(!S.messages.length){
-
-    box.innerHTML=`
-      <div class="empty">
-        No messages yet. Say hi 👋
-      </div>
-    `;
-
-    return;
-  }
-
-  box.innerHTML=S.messages.map(message=>{
-
-    const mine=message.user_id===S.user.id;
-
-    const profile=S.profiles.find(
-      p=>p.id===message.user_id
-    );
-
-    return `
-      <div class="message ${mine?"mine":""}">
-
-        <div class="message-bubble">
-
-          ${
-            !mine
-            ?
-            `<div class="message-name">
-              ${esc(profile?.full_name || "User")}
-            </div>`
-            :""
-          }
-
-          <div>
-            ${esc(message.content || "")}
-          </div>
-
-          <div class="message-time">
-            ${formatDateTime(message.created_at)}
-          </div>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-
-  box.scrollTop=box.scrollHeight;
+ render();
 }
 
-async function sendMessage(){
-
-  const input=document.getElementById("messageInput");
-
-  if(!input || !S.conversation) return;
-
-  const content=input.value.trim();
-
-  if(!content) return;
-
-  const {error}=await db
-    .from("messages")
-    .insert({
-      conversation_id:S.conversation.id,
-      user_id:S.user.id,
-      content
-    });
-
-  if(error){
-
-    console.error(error);
-
-    toast(error.message);
-
-    return;
-  }
-
-  input.value="";
-
-  await loadMessages();
+async function createGroup(){
+ S.modal={type:'group-create'};
+ render();
 }
 
-function newChatModal(){
+async function saveGroup(){
+ const name=document.getElementById('group-name').value.trim();
 
-  const staff=S.profiles.filter(
-    p=>p.id!==S.user.id
-  );
+ const selected=[
+  ...document.querySelectorAll('.group-member:checked')
+ ].map(x=>x.value);
 
-  modal(
-    "New Conversation",
-    `
+ if(!name)return toast('Group name is required.');
+ if(!selected.length)return toast('Select at least one member.');
 
-      <div class="form-group">
-        <label>Conversation Type</label>
+ const c=await db.from('conversations')
+ .insert({
+  name,
+  type:'group',
+  created_by:me()
+ })
+ .select()
+ .single();
 
-        <select id="chatType" onchange="toggleChatTypeFields()">
+ if(c.error)return toast(c.error.message);
 
-          <option value="direct">Personal Chat</option>
-          <option value="group">Group Chat</option>
+ const rows=[
+  {
+   conversation_id:c.data.id,
+   profile_id:me(),
+   role:'admin'
+  },
+  ...selected
+   .filter(x=>x!==me())
+   .map(x=>({
+    conversation_id:c.data.id,
+    profile_id:x,
+    role:'member'
+   }))
+ ];
 
-        </select>
-      </div>
+ const r=await db.from('conversation_members').insert(rows);
 
+ if(r.error){
+  await db.from('conversations').delete().eq('id',c.data.id);
+  return toast(r.error.message);
+ }
 
-      <div id="directField" class="form-group">
+ await loadConversations();
 
-        <label>Select Staff</label>
+ S.modal=null;
 
-        <select id="directStaff">
-
-          ${
-            staff.map(p=>`
-              <option value="${p.id}">
-                ${esc(p.full_name || p.email)}
-              </option>
-            `).join("")
-          }
-
-        </select>
-
-      </div>
-
-
-      <div id="groupFields" class="hidden">
-
-        <div class="form-group">
-
-          <label>Group Name</label>
-
-          <input
-            id="groupName"
-            class="input"
-            placeholder="e.g. Digital Team"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Select Members</label>
-
-          <div style="border:1px solid var(--border);border-radius:9px;max-height:180px;overflow:auto">
-
-            ${
-              staff.map(p=>`
-
-                <label style="display:flex;align-items:center;gap:8px;padding:9px 11px;border-bottom:1px solid #f0f2f1;font-size:12px">
-
-                  <input
-                    type="checkbox"
-                    class="group-member"
-                    value="${p.id}"
-                  >
-
-                  ${esc(p.full_name || p.email)}
-
-                </label>
-
-              `).join("")
-            }
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `,
-    `
-      <button class="btn outline" onclick="closeModalForce()">
-        Cancel
-      </button>
-
-      <button class="btn" onclick="createConversation()">
-        Create
-      </button>
-    `
-  );
+ await selectConversation(c.data.id);
 }
 
-function toggleChatTypeFields(){
+async function renameGroup(){
+ if(!S.conversation?.group||currentConversationRole()!=='admin'){
+  return toast('Only the group admin can rename this group.');
+ }
 
-  const type=document.getElementById("chatType").value;
+ const current=conversationName(
+  S.conversations.find(x=>x.id===S.conversation.id)
+ );
 
-  document
-    .getElementById("directField")
-    .classList.toggle("hidden",type!=="direct");
+ const name=prompt('New group name',current);
 
-  document
-    .getElementById("groupFields")
-    .classList.toggle("hidden",type!=="group");
+ if(!name||!name.trim())return;
+
+ const r=await db.from('conversations')
+ .update({
+  name:name.trim(),
+  updated_at:new Date().toISOString()
+ })
+ .eq('id',S.conversation.id);
+
+ if(r.error)return toast(r.error.message);
+
+ await loadConversations();
+ render();
 }
 
-async function createConversation(){
+async function addMember(){
+ if(!S.conversation?.group||currentConversationRole()!=='admin'){
+  return toast('Only the group admin can add members.');
+ }
 
-  const type=document.getElementById("chatType").value;
+ S.modal={type:'group-members'};
 
-  if(type==="direct"){
+ await loadConversationMembers(S.conversation.id);
 
-    const target=document.getElementById("directStaff").value;
-
-    if(!target){
-      toast("Please select a staff member.");
-      return;
-    }
-
-    const {data,error}=await db
-      .from("conversations")
-      .insert({
-        name:null,
-        is_group:false
-      })
-      .select()
-      .single();
-
-    if(error){
-
-      toast(error.message);
-      return;
-    }
-
-    await db
-      .from("conversation_members")
-      .insert([
-        {
-          conversation_id:data.id,
-          user_id:S.user.id,
-          role:"admin"
-        },
-        {
-          conversation_id:data.id,
-          user_id:target,
-          role:"member"
-        }
-      ]);
-
-    closeModalForce();
-
-    await loadConversations();
-
-    S.conversation=data;
-
-    await chatPage();
-
-    return;
-  }
-
-
-  const name=document
-    .getElementById("groupName")
-    .value.trim();
-
-  const members=[
-    ...document.querySelectorAll(".group-member:checked")
-  ].map(x=>x.value);
-
-  if(!name){
-    toast("Please enter a group name.");
-    return;
-  }
-
-  if(!members.length){
-    toast("Please select at least one member.");
-    return;
-  }
-
-  const {data,error}=await db
-    .from("conversations")
-    .insert({
-      name,
-      is_group:true
-    })
-    .select()
-    .single();
-
-  if(error){
-
-    toast(error.message);
-    return;
-  }
-
-  const rows=[
-    {
-      conversation_id:data.id,
-      user_id:S.user.id,
-      role:"admin"
-    },
-    ...members.map(id=>({
-      conversation_id:data.id,
-      user_id:id,
-      role:"member"
-    }))
-  ];
-
-  const memberResult=await db
-    .from("conversation_members")
-    .insert(rows);
-
-  if(memberResult.error){
-
-    console.error(memberResult.error);
-
-    toast(memberResult.error.message);
-
-    return;
-  }
-
-  closeModalForce();
-
-  await loadConversations();
-
-  S.conversation=data;
-
-  await chatPage();
+ render();
 }
 
-async function groupManageModal(){
+async function saveMembers(){
+ const selected=[
+  ...document.querySelectorAll('.group-add-member:checked')
+ ].map(x=>x.value);
 
-  if(!S.conversation?.is_group) return;
+ if(!selected.length)return toast('Select at least one member.');
 
-  const {data,error}=await db
-    .from("conversation_members")
-    .select("*")
-    .eq("conversation_id",S.conversation.id);
+ const existing=new Set(
+  S.conversationMembers.map(x=>x.profile_id)
+ );
 
-  if(error){
+ const rows=selected
+  .filter(x=>!existing.has(x))
+  .map(x=>({
+   conversation_id:S.conversation.id,
+   profile_id:x,
+   role:'member'
+  }));
 
-    toast(error.message);
-    return;
-  }
+ if(!rows.length)return toast('Those members are already in the group.');
 
-  const members=data || [];
+ const r=await db.from('conversation_members').insert(rows);
 
-  modal(
-    "Manage Group",
-    `
+ if(r.error)return toast(r.error.message);
 
-      <div class="form-group">
+ await loadConversationMembers(S.conversation.id);
+ await loadConversations();
 
-        <label>Group Name</label>
-
-        <input
-          id="editGroupName"
-          class="input"
-          value="${esc(S.conversation.name || "")}"
-        >
-
-      </div>
-
-
-      <div style="font-size:11px;font-weight:600;margin-bottom:8px">
-        Members
-      </div>
-
-
-      <div style="border:1px solid var(--border);border-radius:9px">
-
-        ${
-          members.map(member=>{
-
-            const p=S.profiles.find(
-              x=>x.id===member.user_id
-            );
-
-            return `
-
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #f0f2f1">
-
-                <div style="display:flex;align-items:center;gap:9px">
-
-                  <div class="avatar">
-                    ${initials(p?.full_name)}
-                  </div>
-
-                  <div>
-
-                    <div style="font-size:11px;font-weight:600">
-                      ${esc(p?.full_name || "User")}
-                    </div>
-
-                    <div style="font-size:9px;color:var(--muted)">
-                      ${esc(member.role || "member")}
-                    </div>
-
-                  </div>
-
-                </div>
-
-                ${
-                  member.user_id===S.user.id
-                  ?
-                  `<span class="badge green">You</span>`
-                  :
-                  isAdmin()
-                  ?
-                  `
-                    <button
-                      class="btn small danger"
-                      onclick="removeGroupMember('${member.user_id}')"
-                    >
-                      Remove
-                    </button>
-                  `
-                  :""
-                }
-
-              </div>
-
-            `;
-
-          }).join("")
-        }
-
-      </div>
-
-
-      <div style="margin-top:17px">
-
-        <button
-          class="btn secondary"
-          style="width:100%"
-          onclick="addGroupMemberModal()"
-        >
-          + Add Member
-        </button>
-
-      </div>
-
-    `,
-    `
-
-      <button
-        class="btn danger"
-        onclick="leaveGroup()"
-      >
-        Leave Group
-      </button>
-
-      <button
-        class="btn"
-        onclick="saveGroupDetails()"
-      >
-        Save Changes
-      </button>
-
-    `
-  );
+ S.modal=null;
+ render();
 }
 
-async function saveGroupDetails(){
+async function removeMember(pid){
+ if(!S.conversation?.group||currentConversationRole()!=='admin'){
+  return toast('Only the group admin can remove members.');
+ }
 
-  const name=document
-    .getElementById("editGroupName")
-    .value.trim();
+ if(pid===me()){
+  return toast('Use Leave Group to leave the group.');
+ }
 
-  if(!name){
-    toast("Group name cannot be empty.");
-    return;
-  }
+ if(!confirm('Remove this member from the group?'))return;
 
-  const {error}=await db
-    .from("conversations")
-    .update({name})
-    .eq("id",S.conversation.id);
+ const r=await db.from('conversation_members')
+ .delete()
+ .eq('conversation_id',S.conversation.id)
+ .eq('profile_id',pid);
 
-  if(error){
+ if(r.error)return toast(r.error.message);
 
-    toast(error.message);
-    return;
-  }
+ await loadConversationMembers(S.conversation.id);
+ await loadConversations();
 
-  S.conversation.name=name;
-
-  closeModalForce();
-
-  toast("Group updated.");
-
-  await chatPage();
-}
-
-async function addGroupMemberModal(){
-
-  const existing=await db
-    .from("conversation_members")
-    .select("user_id")
-    .eq("conversation_id",S.conversation.id);
-
-  const ids=(existing.data || []).map(x=>x.user_id);
-
-  const available=S.profiles.filter(
-    p=>!ids.includes(p.id)
-  );
-
-  if(!available.length){
-
-    toast("Everyone is already in this group.");
-
-    return;
-  }
-
-  modal(
-    "Add Member",
-    `
-
-      <div class="form-group">
-
-        <label>Staff Member</label>
-
-        <select id="newGroupMember">
-
-          ${
-            available.map(p=>`
-              <option value="${p.id}">
-                ${esc(p.full_name || p.email)}
-              </option>
-            `).join("")
-          }
-
-        </select>
-
-      </div>
-
-    `,
-    `
-
-      <button
-        class="btn outline"
-        onclick="closeModalForce()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="btn"
-        onclick="addGroupMember()"
-      >
-        Add Member
-      </button>
-
-    `
-  );
-}
-
-async function addGroupMember(){
-
-  const userId=document
-    .getElementById("newGroupMember")
-    .value;
-
-  const {error}=await db
-    .from("conversation_members")
-    .insert({
-      conversation_id:S.conversation.id,
-      user_id:userId,
-      role:"member"
-    });
-
-  if(error){
-
-    toast(error.message);
-
-    return;
-  }
-
-  closeModalForce();
-
-  toast("Member added.");
-
-  groupManageModal();
-}
-
-async function removeGroupMember(userId){
-
-  if(!confirm("Remove this member from the group?")){
-    return;
-  }
-
-  const {error}=await db
-    .from("conversation_members")
-    .delete()
-    .eq("conversation_id",S.conversation.id)
-    .eq("user_id",userId);
-
-  if(error){
-
-    toast(error.message);
-
-    return;
-  }
-
-  toast("Member removed.");
-
-  groupManageModal();
+ render();
 }
 
 async function leaveGroup(){
+ if(!S.conversation?.group)return;
 
-  if(!confirm("Leave this group?")){
-    return;
-  }
+ const r=await db.from('conversation_members')
+ .delete()
+ .eq('conversation_id',S.conversation.id)
+ .eq('profile_id',me());
 
-  const {error}=await db
-    .from("conversation_members")
-    .delete()
-    .eq("conversation_id",S.conversation.id)
-    .eq("user_id",S.user.id);
+ if(r.error)return toast(r.error.message);
 
-  if(error){
+ S.conversation=null;
+ S.messages=[];
 
-    toast(error.message);
+ await loadConversations();
 
-    return;
-  }
-
-  closeModalForce();
-
-  S.conversation=null;
-
-  await loadConversations();
-
-  await chatPage();
-
-  toast("You left the group.");
+ render();
 }
 
+function chatPage(){
+ const active=S.conversations.find(
+  x=>x.id===S.conversation?.id
+ );
 
-/* =========================================================
-   KNOWLEDGE HUB
-========================================================= */
+ const target=
+  S.channel?'# '+S.channel.name:
+  S.conversation?
+   (active?.type==='group'
+    ?active.name||'Unnamed Group'
+    :conversationName(active))
+   :'Select a channel or person';
 
-async function knowledgePage(){
+ const groupAdmin=
+  S.conversation?.group&&
+  currentConversationRole()==='admin';
 
-  const {data,error}=await db
-    .from("knowledge_documents")
-    .select("*")
-    .order("created_at",{ascending:false});
+ return `
+ <div class="grid">
 
-  const docs=error ? [] : (data || []);
+  <div>
+   <h1 class="title">Communication</h1>
+   <p class="sub">Real-time team communication.</p>
+  </div>
 
-  document.getElementById("content").innerHTML=`
+  <div class="card chat">
 
-    <div class="page-head">
+   <div class="chatlist">
 
-      <div>
-        <h1>Knowledge Hub</h1>
-        <p>Important documents and resources for the team.</p>
-      </div>
-
-      ${
-        isAdmin()
-        ?
-        `
-          <button class="btn" onclick="addDocModal()">
-            + Add Document
-          </button>
-        `
-        :""
-      }
-
+    <div style="padding:12px">
+     <input
+      placeholder="Search..."
+      value="${esc(S.chatSearch)}"
+      oninput="S.chatSearch=this.value;render()">
     </div>
 
-
-    <div class="grid grid-3">
-
-      ${
-        docs.length
-        ?
-        docs.map(doc=>`
-
-          <div class="card doc-card">
-
-            <div class="doc-icon">▧</div>
-
-            <div class="doc-title">
-              ${esc(doc.title || "Document")}
-            </div>
-
-            <div class="doc-meta">
-              ${esc(doc.category || "General")}
-            </div>
-
-            ${
-              doc.description
-              ?
-              `
-                <div style="font-size:11px;color:#718078;line-height:1.5;margin-top:10px">
-                  ${esc(doc.description)}
-                </div>
-              `
-              :""
-            }
-
-          </div>
-
-        `).join("")
-        :
-        `<div class="card" style="grid-column:1/-1">
-          <div class="empty">No documents available.</div>
-        </div>`
-      }
-
-    </div>
-  `;
-}
-
-function addDocModal(){
-
-  modal(
-    "Add Document",
-    `
-      <div class="form-group">
-        <label>Title</label>
-        <input id="docTitle" class="input">
-      </div>
-
-      <div class="form-group">
-        <label>Category</label>
-        <input id="docCategory" class="input" placeholder="General">
-      </div>
-
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="docDescription"></textarea>
-      </div>
-    `,
-    `
-      <button class="btn outline" onclick="closeModalForce()">Cancel</button>
-      <button class="btn" onclick="saveDoc()">Save</button>
-    `
-  );
-}
-
-async function saveDoc(){
-
-  const title=document.getElementById("docTitle").value.trim();
-  const category=document.getElementById("docCategory").value.trim();
-  const description=document.getElementById("docDescription").value.trim();
-
-  if(!title){
-    toast("Please enter a title.");
-    return;
-  }
-
-  const {error}=await db
-    .from("knowledge_documents")
-    .insert({
-      title,
-      category:category || "General",
-      description
-    });
-
-  if(error){
-
-    toast(error.message);
-
-    return;
-  }
-
-  closeModalForce();
-
-  toast("Document added.");
-
-  knowledgePage();
-}
-
-
-/* =========================================================
-   CALENDAR
-========================================================= */
-
-function calendarPage(){
-
-  const d=S.calendarDate;
-
-  const year=d.getFullYear();
-  const month=d.getMonth();
-
-  const first=new Date(year,month,1);
-  const last=new Date(year,month+1,0);
-
-  const start=first.getDay();
-
-  let cells="";
-
-  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-    .forEach(day=>{
-      cells+=`
-        <div class="calendar-day-head">
-          ${day}
-        </div>
-      `;
-    });
-
-  for(let i=0;i<start;i++){
-
-    cells+=`
-      <div class="calendar-cell"></div>
-    `;
-  }
-
-  for(let day=1;day<=last.getDate();day++){
-
-    const isToday =
-      day===new Date().getDate() &&
-      month===new Date().getMonth() &&
-      year===new Date().getFullYear();
-
-    cells+=`
-
-      <div class="calendar-cell">
-
-        <div class="${isToday?"today":"calendar-number"}">
-          ${day}
-        </div>
-
-      </div>
-
-    `;
-  }
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Calendar</h1>
-        <p>Keep track of important dates.</p>
-      </div>
-
-      <div style="display:flex;gap:7px">
-
-        <button class="btn secondary" onclick="changeMonth(-1)">
-          ←
-        </button>
-
-        <button class="btn secondary" onclick="changeMonth(1)">
-          →
-        </button>
-
-      </div>
-
+    <div class="small muted" style="padding:8px 12px">
+     CHANNELS
     </div>
 
+    ${S.channels
+     .filter(c=>
+      !S.chatSearch||
+      c.name.toLowerCase().includes(S.chatSearch.toLowerCase())
+     )
+     .map(c=>`
+      <div
+       class="chatitem ${S.channel?.id===c.id?'active':''}"
+       onclick="selectChannel('${c.id}')">
 
-    <div class="card card-pad">
+       <b># ${esc(c.name)}</b>
 
-      <div style="font-size:17px;font-weight:600;margin-bottom:17px">
-        ${d.toLocaleDateString("en-MY",{month:"long",year:"numeric"})}
+       <div class="small muted">
+        ${esc(c.description||'')}
+       </div>
+
       </div>
+     `).join('')}
 
-      <div class="calendar">
-        ${cells}
-      </div>
-
-    </div>
-  `;
-}
-
-function changeMonth(offset){
-
-  S.calendarDate.setMonth(
-    S.calendarDate.getMonth()+offset
-  );
-
-  calendarPage();
-}
-
-
-/* =========================================================
-   STAFF MANAGEMENT
-========================================================= */
-
-async function staffPage(){
-
-  await loadProfiles();
-
-  if(!isAdmin()){
-
-    document.getElementById("content").innerHTML=`
-      <div class="card">
-        <div class="empty">
-          You do not have permission to access Staff Management.
-        </div>
-      </div>
-    `;
-
-    return;
-  }
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Staff Management</h1>
-        <p>View and update staff information.</p>
-      </div>
-
+    <div class="row between" style="padding:14px 12px 8px">
+     <div class="small muted">GROUPS</div>
+     <button class="btn secondary small" onclick="createGroup()">+ Group</button>
     </div>
 
+    ${S.conversations
+     .filter(c=>c.type==='group')
+     .filter(c=>
+      !S.chatSearch||
+      String(c.name||'')
+       .toLowerCase()
+       .includes(S.chatSearch.toLowerCase())
+     )
+     .map(c=>`
+      <div
+       class="chatitem ${S.conversation?.id===c.id?'active':''}"
+       onclick="selectConversation('${c.id}')">
 
-    <div class="card">
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>Staff</th>
-              <th>User ID</th>
-              <th>Position</th>
-              <th>Department</th>
-              <th>Employee ID</th>
-              <th>Phone</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Action</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            ${
-              S.profiles.map(staff=>`
-
-                <tr>
-
-                  <td>
-
-                    <div style="display:flex;align-items:center;gap:8px">
-
-                      <div class="avatar">
-                        ${initials(staff.full_name)}
-                      </div>
-
-                      <div>
-
-                        <div style="font-weight:600;font-size:12px">
-                          ${esc(staff.full_name || "Unnamed")}
-                        </div>
-
-                        <div style="font-size:9px;color:var(--muted)">
-                          ${esc(staff.email || "")}
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </td>
-
-
-                  <td>
-
-                    <div style="max-width:100px;overflow:hidden;text-overflow:ellipsis;font-size:9px;color:var(--muted)">
-                      ${esc(staff.id)}
-                    </div>
-
-                  </td>
-
-
-                  <td>
-                    ${esc(staff.position || "—")}
-                  </td>
-
-
-                  <td>
-                    ${esc(staff.department || "—")}
-                  </td>
-
-
-                  <td>
-                    ${esc(staff.employee_id || "—")}
-                  </td>
-
-
-                  <td>
-                    ${esc(staff.phone || "—")}
-                  </td>
-
-
-                  <td>
-
-                    <span class="badge ${
-                      staff.role==="admin"
-                      ?"green"
-                      :"gray"
-                    }">
-                      ${esc(staff.role || "staff")}
-                    </span>
-
-                  </td>
-
-
-                  <td>
-
-                    <span class="badge ${
-                      staff.status==="Inactive"
-                      ?"red"
-                      :
-                      staff.status==="On Leave"
-                      ?"yellow"
-                      :"green"
-                    }">
-                      ${esc(staff.status || "Active")}
-                    </span>
-
-                  </td>
-
-
-                  <td>
-
-                    <button
-                      class="btn small"
-                      onclick="editStaff('${staff.id}')"
-                    >
-                      Edit
-                    </button>
-
-                  </td>
-
-                </tr>
-
-              `).join("")
-
-            }
-
-          </tbody>
-
-        </table>
+       <b>👥 ${esc(c.name||'Unnamed Group')}</b>
+       <div class="small muted">Group chat</div>
 
       </div>
+     `).join('')}
 
-    </div>
-  `;
-}
-
-function editStaff(id){
-
-  const staff=S.profiles.find(
-    x=>x.id===id
-  );
-
-  if(!staff) return;
-
-  modal(
-    "Edit Staff Information",
-    `
-
-      <div class="form-group">
-
-        <label>User ID</label>
-
-        <input
-          class="input"
-          value="${esc(staff.id)}"
-          disabled
-        >
-
-        <div style="font-size:9px;color:var(--muted);margin-top:5px">
-          User ID is the Supabase Auth ID and cannot be changed.
-        </div>
-
-      </div>
-
-
-      <div class="grid grid-2">
-
-        <div class="form-group">
-
-          <label>Full Name</label>
-
-          <input
-            id="editFullName"
-            class="input"
-            value="${esc(staff.full_name || "")}"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Profile Email</label>
-
-          <input
-            id="editEmail"
-            class="input"
-            type="email"
-            value="${esc(staff.email || "")}"
-          >
-
-          <div style="font-size:9px;color:var(--muted);margin-top:5px">
-            This updates the profile information, not the Supabase login email.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="grid grid-2">
-
-        <div class="form-group">
-
-          <label>Position</label>
-
-          <input
-            id="editPosition"
-            class="input"
-            value="${esc(staff.position || "")}"
-            placeholder="e.g. Digital Marketing Executive"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Department</label>
-
-          <input
-            id="editDepartment"
-            class="input"
-            value="${esc(staff.department || "")}"
-            placeholder="e.g. Digital"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="grid grid-2">
-
-        <div class="form-group">
-
-          <label>Employee ID</label>
-
-          <input
-            id="editEmployeeId"
-            class="input"
-            value="${esc(staff.employee_id || "")}"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Phone</label>
-
-          <input
-            id="editPhone"
-            class="input"
-            value="${esc(staff.phone || "")}"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="grid grid-2">
-
-        <div class="form-group">
-
-          <label>Join Date</label>
-
-          <input
-            id="editJoinDate"
-            class="input"
-            type="date"
-            value="${esc(staff.join_date || "")}"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>Role</label>
-
-          <select id="editRole">
-
-            <option value="staff" ${staff.role==="staff"?"selected":""}>
-              Staff
-            </option>
-
-            <option value="admin" ${staff.role==="admin"?"selected":""}>
-              Admin
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Status</label>
-
-        <select id="editStatus">
-
-          <option value="Active" ${staff.status==="Active"?"selected":""}>
-            Active
-          </option>
-
-          <option value="Inactive" ${staff.status==="Inactive"?"selected":""}>
-            Inactive
-          </option>
-
-          <option value="On Leave" ${staff.status==="On Leave"?"selected":""}>
-            On Leave
-          </option>
-
-        </select>
-
-      </div>
-
-    `,
-    `
-
-      <button
-        class="btn outline"
-        onclick="closeModalForce()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="btn"
-        onclick="saveStaff('${staff.id}')"
-      >
-        Save Changes
-      </button>
-
-    `
-  );
-}
-
-async function saveStaff(id){
-
-  const updates={
-
-    full_name:
-      document.getElementById("editFullName").value.trim(),
-
-    email:
-      document.getElementById("editEmail").value.trim(),
-
-    position:
-      document.getElementById("editPosition").value.trim(),
-
-    department:
-      document.getElementById("editDepartment").value.trim(),
-
-    employee_id:
-      document.getElementById("editEmployeeId").value.trim(),
-
-    phone:
-      document.getElementById("editPhone").value.trim(),
-
-    join_date:
-      document.getElementById("editJoinDate").value || null,
-
-    role:
-      document.getElementById("editRole").value,
-
-    status:
-      document.getElementById("editStatus").value
-  };
-
-  const {data,error}=await db
-    .from("profiles")
-    .update(updates)
-    .eq("id",id)
-    .select()
-    .single();
-
-  if(error){
-
-    console.error(error);
-
-    toast(error.message);
-
-    return;
-  }
-
-  const index=S.profiles.findIndex(
-    x=>x.id===id
-  );
-
-  if(index!==-1){
-    S.profiles[index]=data;
-  }
-
-  if(id===S.user.id){
-    S.profile=data;
-    updateUserUI();
-  }
-
-  closeModalForce();
-
-  toast("Staff information updated.");
-
-  await staffPage();
-}
-
-
-/* =========================================================
-   ANALYTICS
-========================================================= */
-
-async function analyticsPage(){
-
-  await loadTasks();
-
-  const total=S.tasks.length;
-
-  const completed=
-    S.tasks.filter(x=>x.status==="Completed").length;
-
-  const progress=
-    total
-    ?Math.round((completed/total)*100)
-    :0;
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Analytics</h1>
-        <p>Overview of workspace activity.</p>
-      </div>
-
+    <div class="small muted" style="padding:14px 12px 8px">
+     DIRECT CHAT
     </div>
 
+    ${S.profiles
+     .filter(p=>p.id!==me())
+     .filter(p=>
+      !S.chatSearch||
+      p.full_name.toLowerCase().includes(S.chatSearch.toLowerCase())
+     )
+     .map(p=>`
+      <div
+       class="chatitem"
+       onclick="direct('${p.id}')">
 
-    <div class="grid grid-3">
-
-      <div class="card stat-card">
-
-        <div class="stat-label">Total Tasks</div>
-
-        <div class="stat-value">
-          ${total}
-        </div>
-
-      </div>
-
-
-      <div class="card stat-card">
-
-        <div class="stat-label">Completed Tasks</div>
-
-        <div class="stat-value">
-          ${completed}
-        </div>
-
-      </div>
-
-
-      <div class="card stat-card">
-
-        <div class="stat-label">Completion Rate</div>
-
-        <div class="stat-value">
-          ${progress}%
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card card-pad" style="margin-top:15px">
-
-      <div class="card-title">
-        Task Completion
-      </div>
-
-      <div style="font-size:30px;font-weight:600">
-        ${progress}%
-      </div>
-
-      <div class="progress">
-        <i style="width:${progress}%"></i>
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   DATA
-========================================================= */
-
-function dataPage(){
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Data</h1>
-        <p>Workspace data overview.</p>
-      </div>
-
-    </div>
-
-
-    <div class="grid grid-3">
-
-      <div class="card stat-card">
-        <div class="stat-label">Staff</div>
-        <div class="stat-value">${S.profiles.length}</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Conversations</div>
-        <div class="stat-value">${S.conversations.length}</div>
-      </div>
-
-      <div class="card stat-card">
-        <div class="stat-label">Notifications</div>
-        <div class="stat-value">${S.notifications.length}</div>
-      </div>
-
-    </div>
-
-
-    <div class="card card-pad" style="margin-top:15px">
-
-      <div class="card-title">
-        Supabase Connection
-      </div>
-
-      <div style="font-size:12px;color:#68736c;line-height:1.7">
+       <div class="row">
+        <img class="avatar" src="${av(p)}">
 
         <div>
-          Status:
-          <span class="badge green">Connected</span>
+         <b>${esc(p.full_name)}</b>
+         <div class="small muted">${esc(p.position||'')}</div>
         </div>
-
-        <div style="margin-top:7px">
-          Project:
-          ${esc(SUPABASE_URL)}
-        </div>
+       </div>
 
       </div>
+     `).join('')}
+
+   </div>
+
+   <div class="chatwindow">
+
+    <div style="padding:13px;border-bottom:1px solid #eee">
+
+     <div class="row between">
+
+      <div>
+       <b>${esc(target)}</b>
+
+       <div class="small muted">
+        ${S.channel?'Team channel':
+          S.conversation?.group?'Group chat':'Direct message'}
+       </div>
+      </div>
+
+      ${groupAdmin?`
+       <div class="row wrap">
+        <button class="btn secondary small" onclick="renameGroup()">Rename</button>
+        <button class="btn secondary small" onclick="addMember()">Members</button>
+        <button class="btn danger small" onclick="leaveGroup()">Leave</button>
+       </div>
+      `:
+      S.conversation?.group?
+       `<button class="btn secondary small" onclick="leaveGroup()">Leave</button>`
+       :''}
+
+     </div>
 
     </div>
-  `;
+
+    <div class="messages">
+
+     ${S.messages.map(m=>`
+      <div class="bubble ${m.sender_id===me()?'mine':''}">
+
+       <div>${esc(m.message_text||'')}</div>
+
+       ${m.attachment_name?
+        `<div class="small">📎 ${esc(m.attachment_name)}</div>`:''}
+
+       <div class="meta">
+        ${m.sender_id===me()
+         ?'You'
+         :esc(
+          S.profiles.find(p=>p.id===m.sender_id)?.full_name||'User'
+         )}
+        · ${dateTime(m.created_at)}
+       </div>
+
+      </div>
+     `).join('')||'<div class="empty">No messages yet.</div>'}
+
+    </div>
+
+    <div style="padding:12px;border-top:1px solid #eee">
+
+     <div class="row">
+
+      <input
+       id="msg"
+       placeholder="Write a message..."
+       onkeydown="if(event.key==='Enter'){send()}">
+
+      <button class="btn" onclick="send()">Send</button>
+
+      <label class="btn secondary">
+       📎
+       <input
+        type="file"
+        hidden
+        onchange="fileAttach(this)">
+      </label>
+
+     </div>
+
+     ${S.pendingFile?
+      `<div class="small muted" style="margin-top:5px">
+       Attached: ${esc(S.pendingFile.name)}
+      </div>`:''}
+
+    </div>
+
+   </div>
+
+  </div>
+ </div>`;
 }
 
+async function selectChannel(id){
+ S.channel=S.channels.find(x=>x.id===id);
+ S.conversation=null;
 
-/* =========================================================
+ await chatLoad();
+ render();
+}
+
+async function direct(target){
+ let cid=null;
+
+ const cs=await db.from('conversations').select('id');
+
+ for(const c of cs.data||[]){
+  const mm=await db.from('conversation_members')
+   .select('profile_id')
+   .eq('conversation_id',c.id);
+
+  const ids=(mm.data||[]).map(x=>x.profile_id);
+
+  if(ids.includes(me())&&ids.includes(target)&&ids.length===2){
+   cid=c.id;
+   break;
+  }
+ }
+
+ if(!cid){
+  const c=await db.from('conversations')
+   .insert({})
+   .select()
+   .single();
+
+  if(c.error)return toast(c.error.message);
+
+  cid=c.data.id;
+
+  const ins=await db.from('conversation_members')
+   .insert([
+    {conversation_id:cid,profile_id:me(),role:'member'},
+    {conversation_id:cid,profile_id:target,role:'member'}
+   ]);
+
+  if(ins.error)return toast(ins.error.message);
+ }
+
+ S.conversation={
+  id:cid,
+  target,
+  group:false
+ };
+
+ S.channel=null;
+
+ await loadConversationMembers(cid);
+ await chatLoad();
+
+ render();
+}
+
+async function send(){
+ const i=document.getElementById('msg');
+ const text=i.value.trim();
+
+ if(!text&&!S.pendingFile)return;
+
+ if(!S.channel&&!S.conversation){
+  return toast('Select a channel or person first.');
+ }
+
+ const row={
+  sender_id:me(),
+  message_text:text||null
+ };
+
+ if(S.channel)row.channel_id=S.channel.id;
+ else row.conversation_id=S.conversation.id;
+
+ if(S.pendingFile){
+  row.attachment_name=S.pendingFile.name;
+  row.attachment_url=S.pendingFile.url;
+  row.attachment_type=S.pendingFile.type;
+ }
+
+ const r=await db.from('messages').insert(row);
+
+ if(r.error)return toast(r.error.message);
+
+ i.value='';
+ S.pendingFile=null;
+
+ await chatLoad();
+ render();
+}
+
+async function fileAttach(inp){
+ const f=inp.files[0];
+
+ if(!f)return;
+
+ if(f.size>10*1024*1024){
+  return toast('File must be under 10 MB.');
+ }
+
+ const path=
+  'chat/'+me()+'/'+Date.now()+
+  '-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+
+ const r=await db.storage.from('nona-files').upload(path,f);
+
+ if(r.error)return toast(r.error.message);
+
+ const u=db.storage
+  .from('nona-files')
+  .getPublicUrl(path).data.publicUrl;
+
+ S.pendingFile={
+  name:f.name,
+  type:f.type,
+  url:u
+ };
+
+ render();
+}
+
+/* =========================
+   KNOWLEDGE HUB
+========================= */
+
+function knowledge(){
+ return `
+ <div class="grid">
+
+  <div class="row between">
+   <div>
+    <h1 class="title">Knowledge Hub</h1>
+    <p class="sub">SOPs, guidelines and shared documents.</p>
+   </div>
+
+   ${isAdmin()?
+    `<button class="btn" onclick="uploadDoc()">+ Upload</button>`:''}
+  </div>
+
+  <div class="card">
+
+   <input
+    placeholder="Search documents..."
+    oninput="S.search=this.value;render()">
+
+   ${S.docs
+    .filter(d=>
+     (d.title+' '+(d.category||''))
+      .toLowerCase()
+      .includes((S.search||'').toLowerCase())
+    )
+    .map(d=>`
+     <div class="knowledge row">
+
+      <div style="font-size:24px">📄</div>
+
+      <div style="flex:1">
+       <b>${esc(d.title)}</b>
+       <div class="small muted">
+        ${esc(d.category||'General')}
+        · ${esc(d.description||'')}
+       </div>
+      </div>
+
+      ${d.file_url?
+       `<a
+        class="btn secondary small"
+        href="${esc(d.file_url)}"
+        target="_blank">Open</a>`:''}
+
+     </div>
+    `).join('')||
+    '<div class="empty">No documents yet.</div>'}
+
+  </div>
+ </div>`;
+}
+
+async function uploadDoc(){
+ const i=document.createElement('input');
+ i.type='file';
+
+ i.onchange=async()=>{
+  const f=i.files[0];
+  if(!f)return;
+
+  const title=prompt('Document title',f.name);
+  if(!title)return;
+
+  const path=
+   'knowledge/'+me()+'/'+Date.now()+
+   '-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+
+  const u=await db.storage
+   .from('nona-files')
+   .upload(path,f);
+
+  if(u.error)return toast(u.error.message);
+
+  const url=db.storage
+   .from('nona-files')
+   .getPublicUrl(path).data.publicUrl;
+
+  const r=await db.from('knowledge_documents').insert({
+   title,
+   category:'General',
+   file_name:f.name,
+   file_url:url,
+   file_type:f.type,
+   uploaded_by:me()
+  });
+
+  if(r.error)return toast(r.error.message);
+
+  await docs();
+  render();
+ };
+
+ i.click();
+}
+
+/* =========================
+   STAFF MANAGEMENT
+========================= */
+
+function staff(){
+ return `
+ <div class="grid">
+
+  <div>
+   <h1 class="title">Staff Management</h1>
+   <p class="sub">Manage staff profiles and leave balances.</p>
+  </div>
+
+  <div class="card" style="overflow:auto">
+
+   <table>
+    <thead>
+     <tr>
+      <th>Staff</th>
+      <th>User ID</th>
+      <th>Employee ID</th>
+      <th>Department</th>
+      <th>Position</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+
+    <tbody>
+     ${S.profiles.map(p=>`
+      <tr>
+
+       <td>
+        <div class="row">
+         <img class="avatar" src="${av(p)}">
+         <div>
+          <b>${esc(p.full_name)}</b>
+          <div class="small muted">${esc(p.email||'')}</div>
+         </div>
+        </div>
+       </td>
+
+       <td>
+        <span class="small">${esc(p.id)}</span>
+       </td>
+
+       <td>${esc(p.employee_id||p.staff_code||'')}</td>
+       <td>${esc(p.department||'')}</td>
+       <td>${esc(p.position||'')}</td>
+       <td>${esc(p.role||'staff')}</td>
+       <td>${esc(p.status||'Active')}</td>
+
+       <td>
+        <button class="btn secondary small" onclick="openStaff('${p.id}')">
+         Edit
+        </button>
+       </td>
+
+      </tr>
+     `).join('')}
+    </tbody>
+   </table>
+
+  </div>
+ </div>`;
+}
+
+function openStaff(id){
+ const p=S.profiles.find(x=>x.id===id);
+
+ if(!p)return;
+
+ S.modal={
+  type:'staff',
+  data:p
+ };
+
+ render();
+}
+
+async function saveStaff(){
+ const id=document.getElementById('staff-id').value;
+
+ const d={
+  full_name:document.getElementById('staff-name').value,
+  email:document.getElementById('staff-email').value,
+  employee_id:document.getElementById('staff-employee').value,
+  department:document.getElementById('staff-department').value,
+  position:document.getElementById('staff-position').value,
+  phone:document.getElementById('staff-phone').value,
+  join_date:document.getElementById('staff-join').value||null,
+  role:document.getElementById('staff-role').value,
+  status:document.getElementById('staff-status').value
+ };
+
+ const r=await db.from('profiles')
+ .update(d)
+ .eq('id',id);
+
+ if(r.error)return toast(r.error.message);
+
+ await profiles();
+
+ if(id===me())await profile();
+
+ S.modal=null;
+
+ toast('Staff profile updated');
+ render();
+}
+
+/* =========================
+   ANALYTICS / DATA
+========================= */
+
+function analytics(){
+ const done=tasks.filter(x=>x.status==='Completed').length;
+
+ return `
+ <div class="grid">
+
+  <h1 class="title">Analytics</h1>
+
+  <div class="grid four">
+
+   <div class="card stat">
+    <b>${tasks.length}</b>
+    <span>Tasks</span>
+   </div>
+
+   <div class="card stat">
+    <b>${done}</b>
+    <span>Completed</span>
+   </div>
+
+   <div class="card stat">
+    <b>${tasks.length?Math.round(done/tasks.length*100):0}%</b>
+    <span>Completion</span>
+   </div>
+
+   <div class="card stat">
+    <b>${logs.length}</b>
+    <span>Work Logs</span>
+   </div>
+
+  </div>
+
+  <div class="card">
+   <button class="btn" onclick="window.print()">Print / Report</button>
+  </div>
+
+ </div>`;
+}
+
+function dataPage(){
+ return `
+ <div class="grid">
+
+  <h1 class="title">Data Management</h1>
+
+  <div class="card">
+
+   <b>Local Task / Work Log / Attendance Backup</b>
+
+   <p class="small muted">
+    Communication, profiles, leave and calendar are stored in Supabase.
+    Tasks, work logs and attendance in this build are browser-local.
+   </p>
+
+   <div class="row wrap">
+    <button class="btn secondary" onclick="backup()">Backup JSON</button>
+
+    <label class="btn secondary">
+     Restore
+     <input
+      type="file"
+      hidden
+      accept="application/json"
+      onchange="restore(this)">
+    </label>
+   </div>
+
+  </div>
+ </div>`;
+}
+
+function backup(){
+ const a=document.createElement('a');
+
+ a.href=URL.createObjectURL(
+  new Blob(
+   [JSON.stringify({tasks,logs,attendance},null,2)],
+   {type:'application/json'}
+  )
+ );
+
+ a.download='nona-staff-portal-backup.json';
+ a.click();
+}
+
+function restore(i){
+ const r=new FileReader();
+
+ r.onload=()=>{
+  try{
+   const x=JSON.parse(r.result);
+
+   tasks=x.tasks||tasks;
+   logs=x.logs||logs;
+   attendance=x.attendance||attendance;
+
+   save();
+   render();
+   toast('Restored');
+  }catch(e){
+   toast('Invalid backup');
+  }
+ };
+
+ r.readAsText(i.files[0]);
+}
+
+/* =========================
    PROFILE
-========================================================= */
+========================= */
 
 function profilePage(){
+ return `
+ <div class="grid" style="max-width:750px">
 
-  const p=S.profile || {};
+  <h1 class="title">My Profile</h1>
 
-  document.getElementById("content").innerHTML=`
+  <div class="card">
 
-    <div class="page-head">
+   <div class="row">
+    <img
+     class="avatar"
+     style="width:70px;height:70px"
+     src="${av(S.profile)}">
 
-      <div>
-        <h1>Profile</h1>
-        <p>Your staff information.</p>
-      </div>
+    <div>
+     <h2 style="margin:0">${esc(S.profile.full_name)}</h2>
+     <div class="muted">${esc(S.profile.position||'')}</div>
+    </div>
+   </div>
 
+   <div class="grid two" style="margin-top:20px">
+
+    <div>
+     <label class="small muted">Staff Code</label>
+     <div>${esc(S.profile.staff_code||'')}</div>
     </div>
 
-
-    <div class="grid grid-2">
-
-      <div class="card card-pad">
-
-        <div style="display:flex;align-items:center;gap:15px">
-
-          <div class="profile-avatar">
-            ${initials(p.full_name)}
-          </div>
-
-          <div>
-
-            <div style="font-size:18px;font-weight:600">
-              ${esc(p.full_name || "User")}
-            </div>
-
-            <div style="font-size:11px;color:var(--muted);margin-top:4px">
-              ${esc(p.position || p.role || "Staff")}
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="card-title">
-          Personal Information
-        </div>
-
-        ${profileField("Full Name",p.full_name)}
-        ${profileField("Email",p.email)}
-        ${profileField("Phone",p.phone)}
-        ${profileField("Employee ID",p.employee_id)}
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="card-title">
-          Work Information
-        </div>
-
-        ${profileField("Position",p.position)}
-        ${profileField("Department",p.department)}
-        ${profileField("Role",p.role)}
-        ${profileField("Join Date",p.join_date ? formatDate(p.join_date) : "")}
-        ${profileField("Status",p.status || "Active")}
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="card-title">
-          User ID
-        </div>
-
-        <div style="font-size:10px;color:var(--muted);word-break:break-all">
-          ${esc(p.id)}
-        </div>
-
-        <div style="font-size:10px;color:var(--muted);margin-top:8px">
-          This is your Supabase Auth user ID.
-        </div>
-
-      </div>
-
+    <div>
+     <label class="small muted">Employee ID</label>
+     <div>${esc(S.profile.employee_id||'-')}</div>
     </div>
-  `;
+
+    <div>
+     <label class="small muted">Role</label>
+     <div>${esc(S.profile.role||'')}</div>
+    </div>
+
+    <div>
+     <label class="small muted">Department</label>
+     <div>${esc(S.profile.department||'')}</div>
+    </div>
+
+    <div>
+     <label class="small muted">Phone</label>
+     <div>${esc(S.profile.phone||'-')}</div>
+    </div>
+
+    <div>
+     <label class="small muted">Email</label>
+     <div>${esc(S.user.email||S.profile.email||'')}</div>
+    </div>
+
+   </div>
+  </div>
+ </div>`;
 }
 
-function profileField(label,value){
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function notifications(){
+ S.modal={type:'notifications'};
+ render();
+}
+
+async function markRead(){
+ await db.from('communication_notifications')
+ .update({is_read:true})
+ .eq('profile_id',me());
+
+ await notifs();
+
+ S.modal=null;
+ render();
+}
+
+/* =========================
+   MODALS
+========================= */
+
+function modal(){
+
+ const m=S.modal;
+
+ if(m.type==='notifications'){
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>Notifications</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    ${S.notifications.map(n=>`
+     <div class="knowledge">
+      <b>${esc(n.title)}</b>
+      <div class="small muted">
+       ${esc(n.message||'')} · ${dateTime(n.created_at)}
+      </div>
+     </div>
+    `).join('')||'<div class="empty">No notifications.</div>'}
+
+    <button class="btn secondary small" onclick="markRead()">
+     Mark all as read
+    </button>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='task'){
+  const t=m.data;
 
   return `
-    <div style="padding:9px 0;border-bottom:1px solid #f0f2f1">
+  <div class="modalbg">
+   <div class="modal">
 
-      <div style="font-size:9px;color:var(--muted)">
-        ${label}
-      </div>
-
-      <div style="font-size:12px;margin-top:4px">
-        ${esc(value || "—")}
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-async function notificationsPage(){
-
-  await loadNotifications();
-
-  document.getElementById("content").innerHTML=`
-
-    <div class="page-head">
-
-      <div>
-        <h1>Notifications</h1>
-        <p>Your latest updates and notifications.</p>
-      </div>
-
+    <div class="row between">
+     <h2>${t.id?'Edit':'Add'} Task</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
     </div>
 
+    <div class="grid two" style="margin-top:14px">
 
-    <div class="card">
+     <div>
+      <label class="small muted">Task</label>
+      <input id="task-name" value="${esc(t.name)}">
+     </div>
 
-      ${
-        S.notifications.length
-        ?
-        S.notifications.map(n=>`
+     <div>
+      <label class="small muted">Category</label>
+      <input id="task-cat" value="${esc(t.category)}">
+     </div>
 
-          <div style="padding:16px;border-bottom:1px solid var(--border)">
+     <div>
+      <label class="small muted">Priority</label>
+      <select id="task-pri">
+       ${['High','Medium','Low'].map(x=>
+        `<option ${t.priority===x?'selected':''}>${x}</option>`
+       ).join('')}
+      </select>
+     </div>
 
-            <div style="display:flex;justify-content:space-between;gap:15px">
+     <div>
+      <label class="small muted">Status</label>
+      <select id="task-status">
+       ${['Not Started','In Progress','Completed','On Hold'].map(x=>
+        `<option ${t.status===x?'selected':''}>${x}</option>`
+       ).join('')}
+      </select>
+     </div>
 
-              <div>
+     <div>
+      <label class="small muted">Due date</label>
+      <input id="task-date" type="date" value="${t.dueDate}">
+     </div>
 
-                <div style="font-size:12px;font-weight:600">
-                  ${esc(n.title || "Notification")}
-                </div>
-
-                <div style="font-size:11px;color:#68736c;margin-top:5px;line-height:1.5">
-                  ${esc(n.message || "")}
-                </div>
-
-                <div style="font-size:9px;color:#a0aaa4;margin-top:7px">
-                  ${formatDateTime(n.created_at)}
-                </div>
-
-              </div>
-
-              ${
-                !n.is_read
-                ?
-                `<span class="badge green">New</span>`
-                :""
-              }
-
-            </div>
-
-          </div>
-
-        `).join("")
-        :
-        `<div class="empty">No notifications.</div>`
-      }
+     <div>
+      <label class="small muted">Due time</label>
+      <input id="task-time" type="time" value="${t.dueTime||''}">
+     </div>
 
     </div>
-  `;
-}
 
+    <label class="small muted">Description</label>
+    <textarea id="task-desc">${esc(t.description||'')}</textarea>
 
-/* =========================================================
-   INITIALISE
-========================================================= */
+    <label class="small muted">Notes</label>
+    <textarea id="task-notes">${esc(t.notes||'')}</textarea>
 
-async function init(){
+    <input id="task-id" type="hidden" value="${esc(t.id||'')}">
 
-  const {
-    data:{
-      session
-    }
-  }=await db.auth.getSession();
+    <div class="row" style="justify-content:flex-end">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="saveTask()">Save</button>
+    </div>
 
-  if(session?.user){
+   </div>
+  </div>`;
+ }
 
-    await startApp(session.user);
+ if(m.type==='log'){
+  const x=m.data;
 
-  }else{
+  return `
+  <div class="modalbg">
+   <div class="modal">
 
-    document
-      .getElementById("loginScreen")
-      .classList.remove("hidden");
+    <div class="row between">
+     <h2>${x.id?'Edit':'Add'} Work Log</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
 
-    document
-      .getElementById("app")
-      .classList.add("hidden");
+    <input id="log-id" type="hidden" value="${esc(x.id||'')}">
 
-  }
+    <label class="small muted">Date</label>
+    <input id="log-date" type="date" value="${x.date}">
 
-  db.auth.onAuthStateChange(
-    async(event,session)=>{
+    <label class="small muted">Activity</label>
+    <input id="log-task" value="${esc(x.task)}">
 
-      if(event==="SIGNED_IN" && session?.user){
+    <label class="small muted">Description</label>
+    <textarea id="log-desc">${esc(x.description||'')}</textarea>
 
-        if(!S.user){
-          await startApp(session.user);
-        }
+    <div class="grid two">
+     <div>
+      <label class="small muted">Start Time</label>
+      <input id="log-start" type="time" value="${x.startTime||''}">
+     </div>
 
-      }
+     <div>
+      <label class="small muted">End Time</label>
+      <input id="log-end" type="time" value="${x.endTime||''}">
+     </div>
+    </div>
 
-    }
+    <div class="row" style="justify-content:flex-end">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="saveLog()">Save</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='leave'){
+  const x=m.data;
+
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>Apply Leave</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    <label class="small muted">Leave Type</label>
+    <select id="leave-type">
+     ${[
+      'Annual Leave',
+      'Medical Leave',
+      'Emergency Leave',
+      'Unpaid Leave',
+      'Other'
+     ].map(x=>`<option>${x}</option>`).join('')}
+    </select>
+
+    <div class="grid two">
+
+     <div>
+      <label class="small muted">Start Date</label>
+      <input id="leave-start" type="date">
+     </div>
+
+     <div>
+      <label class="small muted">End Date</label>
+      <input id="leave-end" type="date">
+     </div>
+
+    </div>
+
+    <label class="small muted">Reason</label>
+    <textarea id="leave-reason" placeholder="Reason for leave"></textarea>
+
+    <div class="row" style="justify-content:flex-end">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="submitLeave()">Submit Application</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='calendar-event'){
+  const e=m.data;
+
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>${e.id?'Edit':'Add'} Calendar Event</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    <input id="cal-id" type="hidden" value="${esc(e.id||'')}">
+
+    <label class="small muted">Title</label>
+    <input id="cal-title" value="${esc(e.title||'')}">
+
+    <label class="small muted">Date</label>
+    <input id="cal-date" type="date" value="${e.event_date||''}">
+
+    <label class="small muted">Type</label>
+    <select id="cal-type">
+     ${[
+      'Public Holiday',
+      'Company Holiday',
+      'Company Event'
+     ].map(x=>
+      `<option ${e.event_type===x?'selected':''}>${x}</option>`
+     ).join('')}
+    </select>
+
+    <label class="small muted">Description</label>
+    <textarea id="cal-desc">${esc(e.description||'')}</textarea>
+
+    <div class="row" style="justify-content:flex-end">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="saveCalendarEvent()">Save</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='staff'){
+  const p=m.data;
+
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>Edit Staff Profile</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    <input id="staff-id" type="hidden" value="${esc(p.id)}">
+
+    <div class="small muted" style="margin:8px 0">
+     User ID
+    </div>
+
+    <input value="${esc(p.id)}" disabled>
+
+    <div class="grid two">
+
+     <div>
+      <label class="small muted">Full Name</label>
+      <input id="staff-name" value="${esc(p.full_name||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Profile Email</label>
+      <input id="staff-email" type="email" value="${esc(p.email||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Employee ID</label>
+      <input id="staff-employee" value="${esc(p.employee_id||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Department</label>
+      <input id="staff-department" value="${esc(p.department||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Position</label>
+      <input id="staff-position" value="${esc(p.position||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Phone</label>
+      <input id="staff-phone" value="${esc(p.phone||'')}">
+     </div>
+
+     <div>
+      <label class="small muted">Join Date</label>
+      <input id="staff-join" type="date" value="${p.join_date||''}">
+     </div>
+
+     <div>
+      <label class="small muted">Role</label>
+      <select id="staff-role">
+       <option value="staff" ${p.role==='staff'?'selected':''}>Staff</option>
+       <option value="admin" ${p.role==='admin'?'selected':''}>Admin</option>
+      </select>
+     </div>
+
+     <div>
+      <label class="small muted">Status</label>
+      <select id="staff-status">
+       ${['Active','Inactive','On Leave'].map(x=>
+        `<option ${p.status===x?'selected':''}>${x}</option>`
+       ).join('')}
+      </select>
+     </div>
+
+    </div>
+
+    <div class="small muted" style="margin-top:10px">
+     Note: changing Profile Email does not change the Supabase Auth login email.
+    </div>
+
+    <div class="row" style="justify-content:flex-end;margin-top:16px">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="saveStaff()">Save Changes</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='group-create'){
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>Create Group</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    <label class="small muted">Group Name</label>
+    <input id="group-name" placeholder="e.g. Digital Team">
+
+    <div class="small muted" style="margin:15px 0 8px">
+     Select Members
+    </div>
+
+    <div class="grid" style="max-height:330px;overflow:auto">
+
+     ${S.profiles
+      .filter(p=>p.id!==me())
+      .map(p=>`
+       <label
+        class="row"
+        style="padding:8px;border:1px solid #eee;border-radius:8px">
+
+        <input
+         class="group-member"
+         type="checkbox"
+         value="${p.id}"
+         style="width:auto">
+
+        <img class="avatar" src="${av(p)}">
+
+        <span>
+         ${esc(p.full_name)}
+         <small class="muted">${esc(p.position||'')}</small>
+        </span>
+
+       </label>
+      `).join('')}
+
+    </div>
+
+    <div class="row" style="justify-content:flex-end;margin-top:16px">
+     <button class="btn secondary" onclick="S.modal=null;render()">Cancel</button>
+     <button class="btn" onclick="saveGroup()">Create Group</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ if(m.type==='group-members'){
+  const ids=new Set(
+   S.conversationMembers.map(x=>x.profile_id)
   );
+
+  return `
+  <div class="modalbg">
+   <div class="modal">
+
+    <div class="row between">
+     <h2>Manage Members</h2>
+     <button class="btn secondary" onclick="S.modal=null;render()">×</button>
+    </div>
+
+    <div class="small muted" style="margin:8px 0">
+     Current Members
+    </div>
+
+    ${S.conversationMembers.map(x=>{
+     const p=S.profiles.find(y=>y.id===x.profile_id);
+
+     return `
+     <div
+      class="row between"
+      style="padding:8px 0;border-bottom:1px solid #eee">
+
+      <div class="row">
+       <img class="avatar" src="${av(p)}">
+
+       <div>
+        <b>${esc(p?.full_name||'User')}</b>
+        <div class="small muted">${x.role}</div>
+       </div>
+      </div>
+
+      ${x.profile_id!==me()
+       ?`<button class="btn danger small" onclick="removeMember('${x.profile_id}')">Remove</button>`
+       :'<span class="small muted">You</span>'}
+
+     </div>`;
+    }).join('')}
+
+    <div class="small muted" style="margin:16px 0 8px">
+     Add Members
+    </div>
+
+    <div class="grid" style="max-height:250px;overflow:auto">
+
+     ${S.profiles
+      .filter(p=>p.id!==me()&&!ids.has(p.id))
+      .map(p=>`
+       <label
+        class="row"
+        style="padding:8px;border:1px solid #eee;border-radius:8px">
+
+        <input
+         class="group-add-member"
+         type="checkbox"
+         value="${p.id}"
+         style="width:auto">
+
+        <img class="avatar" src="${av(p)}">
+
+        <span>${esc(p.full_name)}</span>
+
+       </label>
+      `).join('')||
+      '<div class="small muted">Everyone is already in this group.</div>'}
+
+    </div>
+
+    <div class="row" style="justify-content:flex-end;margin-top:16px">
+     <button class="btn secondary" onclick="S.modal=null;render()">Close</button>
+     <button class="btn" onclick="saveMembers()">Add Selected</button>
+    </div>
+
+   </div>
+  </div>`;
+ }
+
+ return '';
 }
 
 init();
-
 </script>
-
 </body>
 </html>
