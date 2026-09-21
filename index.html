@@ -4,66 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Nona Costex Staff Portal</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
+:root{
+  --green:#9fb873;
+  --green-dark:#7f9a58;
+  --green-light:#edf3e4;
+  --green-soft:#f6f8f1;
+  --border:#e2e8e4;
+  --text:#172019;
+  --muted:#718078;
+  --bg:#f7f9f7;
+  --white:#fff;
+  --danger:#c0392b;
+}
 body{
   margin:0;
   font-family:Helvetica,Arial,sans-serif;
-  background:#f7f9f7;
-  color:#172019
+  background:var(--bg);
+  color:var(--text)
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 input,select,textarea{
   width:100%;
-  border:1px solid #e2e8e4;
+  border:1px solid var(--border);
   border-radius:10px;
-  padding:11px 12px;
+  padding:10px 12px;
   background:#fff;
   outline:none
 }
 input:focus,select:focus,textarea:focus{
-  border-color:#9fb873;
-  box-shadow:0 0 0 3px #edf3e4
+  border-color:var(--green)
 }
-textarea{min-height:95px;resize:vertical}
+textarea{min-height:90px;resize:vertical}
 
 .app{display:flex;min-height:100vh}
 .side{
-  width:245px;
+  width:240px;
   position:fixed;
   inset:0 auto 0 0;
   background:#fff;
-  border-right:1px solid #e2e8e4;
+  border-right:1px solid var(--border);
   padding:18px 12px;
   z-index:20
 }
 .main{
-  margin-left:245px;
+  margin-left:240px;
   flex:1;
   min-width:0
 }
 .top{
-  height:68px;
+  height:64px;
   background:#fff;
-  border-bottom:1px solid #e2e8e4;
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
+  padding:0 20px;
   position:sticky;
   top:0;
   z-index:10
 }
 .content{
   padding:24px;
-  max-width:1350px;
+  max-width:1300px;
   margin:auto
 }
-
 .brand{
   font-weight:700;
   font-size:19px;
@@ -72,42 +81,40 @@ textarea{min-height:95px;resize:vertical}
 .brand small{
   display:block;
   font-size:11px;
-  color:#8a948d;
+  color:var(--muted);
   font-weight:400;
   margin-top:4px
 }
 .nav-title{
   font-size:10px;
-  color:#a0aaa4;
+  color:#a0aaa3;
   text-transform:uppercase;
-  padding:15px 10px 7px;
-  letter-spacing:.7px
+  padding:14px 10px 6px
 }
 .nav button{
   width:100%;
   background:transparent;
   border:0;
   text-align:left;
-  padding:11px 12px;
-  border-radius:10px;
-  color:#657068;
-  transition:.15s
+  padding:10px;
+  border-radius:9px;
+  color:#68736c;
+  margin-bottom:2px
 }
 .nav button:hover,
 .nav button.active{
-  background:#edf3e4;
+  background:var(--green-light);
   color:#5f7541
 }
 
 .card{
   background:#fff;
-  border:1px solid #e2e8e4;
-  border-radius:16px;
+  border:1px solid var(--border);
+  border-radius:15px;
   padding:18px
 }
-.grid{display:grid;gap:15px}
+.grid{display:grid;gap:14px}
 .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .four{grid-template-columns:repeat(4,minmax(0,1fr))}
 .row{display:flex;align-items:center;gap:10px}
 .between{justify-content:space-between}
@@ -120,51 +127,44 @@ textarea{min-height:95px;resize:vertical}
 }
 .sub{
   font-size:13px;
-  color:#758078;
+  color:var(--muted);
   margin:5px 0 0
 }
-
 .btn{
   border:0;
-  background:#9fb873;
+  background:var(--green);
   color:#fff;
-  padding:10px 15px;
-  border-radius:10px;
-  font-weight:600
+  padding:9px 14px;
+  border-radius:9px
 }
-.btn:hover{background:#7f9a58}
+.btn:hover{background:var(--green-dark)}
 .btn.secondary{
-  background:#edf3e4;
+  background:var(--green-light);
   color:#5f7541
 }
-.btn.secondary:hover{background:#e1ebd2}
 .btn.danger{
   background:#fff0ef;
-  color:#b42318
+  color:var(--danger)
 }
 .btn.small{
   padding:7px 10px;
   font-size:12px
 }
 
-.stat{
-  padding:18px;
-  min-height:110px
-}
+.stat{padding:17px}
 .stat b{
   display:block;
-  font-size:26px;
-  margin-bottom:5px
+  font-size:25px
 }
 .stat span{
   font-size:12px;
-  color:#778179
+  color:var(--muted)
 }
 
 .pill{
   display:inline-block;
   border-radius:999px;
-  padding:5px 10px;
+  padding:5px 9px;
   font-size:11px;
   font-weight:600
 }
@@ -172,39 +172,42 @@ textarea{min-height:95px;resize:vertical}
 .medium{background:#fef3c7;color:#92400e}
 .low{background:#edf3e4;color:#5f7541}
 .green{background:#edf3e4;color:#5f7541}
-.blue{background:#e8f0fb;color:#315b88}
+.blue{background:#e8f0fb;color:#42658e}
 .red{background:#fee2e2;color:#991b1b}
-.orange{background:#fff3df;color:#a65d00}
-.purple{background:#f1eafd;color:#7352a5}
 
 .progress{
-  height:9px;
-  background:#edf0eb;
+  height:8px;
+  background:#e8eee5;
   border-radius:99px;
   overflow:hidden
 }
 .progress i{
   display:block;
   height:100%;
-  background:#9fb873;
-  border-radius:99px;
-  transition:.25s
+  background:var(--green);
+  border-radius:99px
 }
+
+.small{font-size:12px}
+.muted{color:var(--muted)}
 
 .avatar{
   width:38px;
   height:38px;
   border-radius:50%;
   object-fit:cover;
-  background:#edf3e4
+  background:var(--green-light)
 }
-.small{font-size:12px}
-.muted{color:#778179}
+
+.avatar.large{
+  width:70px;
+  height:70px
+}
 
 .empty{
   text-align:center;
-  color:#99a19b;
-  padding:45px 10px
+  color:#9aa39e;
+  padding:40px 10px
 }
 
 table{
@@ -219,25 +222,23 @@ th,td{
 }
 th{
   font-size:11px;
-  color:#7b857e;
-  text-transform:uppercase;
-  letter-spacing:.4px
+  color:var(--muted);
+  font-weight:600
 }
 
 .login{
   min-height:100vh;
   display:grid;
   place-items:center;
-  background:#f1f5ee;
+  background:var(--bg);
   padding:20px
 }
 .loginbox{
   width:min(410px,100%);
   background:#fff;
   padding:30px;
-  border:1px solid #e2e8e4;
-  border-radius:20px;
-  box-shadow:0 15px 45px #78905d18
+  border:1px solid var(--border);
+  border-radius:18px
 }
 .error{
   background:#fff0ef;
@@ -251,7 +252,7 @@ th{
 .modalbg{
   position:fixed;
   inset:0;
-  background:#17201966;
+  background:#17201955;
   display:grid;
   place-items:center;
   z-index:100;
@@ -260,259 +261,263 @@ th{
 .modal{
   background:#fff;
   border-radius:18px;
-  width:min(720px,100%);
-  max-height:92vh;
+  width:min(760px,100%);
+  max-height:90vh;
   overflow:auto;
-  padding:23px;
-  box-shadow:0 25px 70px #0002
+  padding:24px
 }
 
 .toast{
   position:fixed;
   right:18px;
-  top:80px;
+  top:78px;
   z-index:200;
   background:#172019;
   color:#fff;
-  padding:12px 15px;
-  border-radius:10px;
+  padding:11px 14px;
+  border-radius:9px;
   font-size:13px
 }
 
-/* dashboard */
-.hero-card{
-  background:linear-gradient(135deg,#f2f6e9,#fff);
-  border:1px solid #dfe8d5;
+/* DASHBOARD */
+.welcome-card{
+  background:linear-gradient(135deg,#fff,#f3f7ed);
+  border:1px solid #dfe8d6;
   border-radius:18px;
   padding:22px
 }
-.mini-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
+
+.dashboard-card-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px
+}
+
+/* ATTENDANCE */
+.attendance-main{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:22px
+}
+.attendance-status{
+  background:var(--green-soft);
+  border:1px solid #dce6ca;
+  border-radius:14px;
+  padding:15px
+}
+.clock-time{
+  color:var(--green-dark);
+  font-size:25px;
+  font-weight:700
+}
+.attendance-actions{
+  display:flex;
+  gap:9px
+}
+
+/* NOTIFICATIONS */
+.notification-card{
+  display:flex;
+  gap:13px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-bottom:9px;
+  background:#fff
+}
+.notification-thumb{
+  width:46px;
+  height:46px;
+  border-radius:11px;
+  background:linear-gradient(145deg,#edf3e4,#dfe9cf);
   display:grid;
   place-items:center;
-  background:#edf3e4;
-  color:#5f7541;
-  font-size:19px
+  flex-shrink:0;
+  overflow:hidden
+}
+.notification-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+.thumb-letter{
+  font-size:14px;
+  font-weight:700;
+  color:#607641
+}
+.unread-dot{
+  width:7px;
+  height:7px;
+  background:var(--green);
+  border-radius:50%;
+  display:inline-block;
+  margin-left:5px
 }
 
-/* tasks */
-.task-card{
-  border:1px solid #e4eae5;
+/* COMMUNICATION */
+.communication-card{
+  border:1px solid var(--border);
   border-radius:14px;
-  padding:15px;
-  background:#fff
+  padding:12px;
+  background:#fff;
+  display:flex;
+  gap:12px;
+  cursor:pointer;
+  margin-bottom:8px
 }
-.task-card:hover{
-  border-color:#cfdcc1;
-  box-shadow:0 8px 25px #6f88501a
-}
-.task-actions{
-  opacity:.8
+.communication-card:hover{background:var(--green-soft)}
+.communication-thumb{
+  width:45px;
+  height:45px;
+  border-radius:12px;
+  background:#f0f4ea;
+  display:grid;
+  place-items:center;
+  color:#657b47;
+  font-weight:700;
+  flex-shrink:0
 }
 
-/* work progress */
-.progress-card{
-  padding:17px;
-  border:1px solid #e2e8e4;
-  border-radius:15px;
-  background:#fff
-}
-
-/* communication */
+/* CHAT */
 .chat{
   display:grid;
-  grid-template-columns:285px 1fr;
-  height:calc(100vh - 125px);
-  min-height:570px;
+  grid-template-columns:280px 1fr;
+  height:calc(100vh - 110px);
+  min-height:550px;
   padding:0;
   overflow:hidden
 }
 .chatlist{
-  border-right:1px solid #edf0ed;
-  overflow:auto;
-  background:#fbfcfa
+  border-right:1px solid #eee;
+  overflow:auto
 }
 .chatitem{
-  padding:12px 14px;
-  border-bottom:1px solid #edf0ed;
+  padding:12px;
+  border-bottom:1px solid #eee;
   cursor:pointer
 }
 .chatitem:hover,
 .chatitem.active{
-  background:#edf3e4
+  background:var(--green-soft)
 }
 .chatwindow{
   display:flex;
   flex-direction:column;
   min-width:0
 }
-.chat-header{
-  padding:15px;
-  border-bottom:1px solid #edf0ed;
-  background:#fff
-}
 .messages{
   flex:1;
   overflow:auto;
-  padding:18px;
-  background:#f8faf7
+  padding:16px;
+  background:#fafbf9
 }
 .bubble{
   max-width:75%;
-  padding:10px 12px;
-  border:1px solid #e4e9e5;
+  padding:9px 11px;
+  border:1px solid #e4e9e3;
   background:#fff;
-  border-radius:14px;
-  margin-bottom:10px
+  border-radius:12px;
+  margin-bottom:9px
 }
 .bubble.mine{
   margin-left:auto;
-  background:#9fb873;
+  background:#758d50;
   color:#fff;
-  border-color:#9fb873
+  border-color:#758d50
 }
 .meta{
   font-size:10px;
   opacity:.6;
-  margin-top:5px
+  margin-top:4px
 }
 
-/* communication thumbnail */
-.comm-preview{
-  width:44px;
-  height:44px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:#edf3e4;
-  color:#5f7541;
-  flex:none;
-  font-size:19px
-}
-
-/* notifications */
-.notification-card{
-  display:flex;
-  gap:12px;
-  padding:13px;
-  margin-bottom:9px;
-  border:1px solid #e4eae5;
-  border-radius:13px;
-  background:#fbfcfa
-}
-.notification-card.unread{
-  background:#f2f6ea;
-  border-color:#dbe6ce
-}
-
-/* knowledge */
-.knowledge-card{
-  display:flex;
-  gap:14px;
+/* WORK */
+.work-progress-card{
   padding:15px;
-  border:1px solid #e3e9e4;
-  border-radius:14px;
-  background:#fff
-}
-.doc-thumb{
-  width:55px;
-  height:55px;
-  border-radius:14px;
-  background:#edf3e4;
-  color:#5f7541;
-  display:grid;
-  place-items:center;
-  font-size:23px;
-  flex:none
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-bottom:10px
 }
 
-/* calendar */
-.calendar-wrap{
-  background:#fff;
-  border:1px solid #e2e8e4;
-  border-radius:18px;
-  overflow:hidden
-}
+/* CALENDAR */
 .calendar-head{
-  padding:18px;
-  border-bottom:1px solid #edf0ed
-}
-.calendar-week{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  background:#f8faf7;
-  border-bottom:1px solid #e5ebe5
-}
-.calendar-week div{
-  padding:10px;
-  text-align:center;
-  font-size:11px;
-  color:#7a847d;
-  font-weight:600
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px
 }
 .calendar-grid{
   display:grid;
-  grid-template-columns:repeat(7,1fr)
-}
-.cal-cell{
-  min-height:115px;
-  border-right:1px solid #edf0ed;
-  border-bottom:1px solid #edf0ed;
-  padding:9px;
+  grid-template-columns:repeat(7,1fr);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
   background:#fff
 }
-.cal-cell:nth-child(7n){border-right:0}
-.cal-cell.muted-day{
-  background:#fafbf9;
-  color:#aab1ac
-}
-.cal-cell.today{
-  background:#f3f7ed
-}
-.day-number{
-  width:28px;
-  height:28px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  font-size:12px;
-  margin-bottom:5px
-}
-.today .day-number{
-  background:#9fb873;
-  color:#fff;
+.calendar-weekday{
+  padding:10px;
+  background:#f5f7f3;
+  font-size:11px;
+  color:var(--muted);
   font-weight:700
 }
-.cal-event{
-  display:block;
-  padding:4px 6px;
-  border-radius:6px;
-  margin-top:4px;
+.calendar-day{
+  min-height:105px;
+  border-top:1px solid #edf0ed;
+  border-right:1px solid #edf0ed;
+  padding:8px;
+  cursor:pointer
+}
+.calendar-day:hover{background:#fafcf8}
+.calendar-day.other{background:#fafafa;color:#aaa}
+.calendar-day.today{
+  background:#f0f5e9
+}
+.day-number{
+  font-size:12px;
+  font-weight:700
+}
+.event{
   font-size:10px;
+  padding:4px 5px;
+  border-radius:5px;
+  margin-top:5px;
+  background:#edf3e4;
+  color:#5f7541;
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis
 }
-.event-public{
-  background:#edf3e4;
-  color:#5f7541
-}
-.event-company{
-  background:#e8f0fb;
-  color:#315b88
-}
-.event-other{
-  background:#f1eafd;
-  color:#7352a5
+.event.holiday{
+  background:#f5eede;
+  color:#8b7040
 }
 
-/* mobile */
+/* STAFF */
+.staff-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:#fff
+}
+.staff-card:hover{background:var(--green-soft)}
+
+.leave-box{
+  padding:12px;
+  border-radius:11px;
+  background:var(--green-soft);
+  border:1px solid #e0e8d6
+}
+
 .mobile{display:none}
-.hide{display:flex}
 
-@media(max-width:900px){
+@media(max-width:800px){
   .side{
     transform:translateX(-100%);
     transition:.2s
@@ -520,32 +525,23 @@ th{
   .side.open{transform:none}
   .main{margin-left:0}
   .mobile{display:block}
-  .hide{display:none}
-  .content{padding:15px}
+  .content{padding:14px}
   .four{grid-template-columns:1fr 1fr}
-  .three{grid-template-columns:1fr}
   .two{grid-template-columns:1fr}
   .chat{
     grid-template-columns:1fr;
     height:auto
   }
   .chatlist{
-    max-height:250px;
+    max-height:240px;
     border-right:0;
     border-bottom:1px solid #eee
   }
-  .cal-cell{
-    min-height:90px;
-    padding:5px
+  .attendance-main{
+    flex-direction:column;
+    align-items:stretch
   }
-  .calendar-week div{padding:7px 2px}
-  .cal-event{font-size:9px}
-}
-
-@media(max-width:550px){
-  .four{grid-template-columns:1fr 1fr}
-  .calendar-grid .cal-cell{min-height:72px}
-  .day-number{width:24px;height:24px}
+  .calendar-day{min-height:75px}
 }
 </style>
 </head>
@@ -555,13 +551,9 @@ th{
 <div id="toast"></div>
 
 <script>
-const SUPABASE_URL='https://jccryyxdxykomwsivtjy.supabase.co';
-const SUPABASE_KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
-
-const db=supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const URL='https://jccryyxdxykomwsivtjy.supabase.co';
+const KEY='sb_publishable_XgF6_KZZxFzxrAqM0E3bEA_Qs2f-HxM';
+const db=supabase.createClient(URL,KEY);
 
 const S={
   page:'dashboard',
@@ -574,115 +566,115 @@ const S={
   messages:[],
   notifications:[],
   docs:[],
-  conversations:[],
-  conversationMembers:[],
-  calendarEvents:[],
+  events:[],
   sidebar:false,
   modal:null,
   chatSearch:'',
   taskSearch:'',
   taskFilter:'',
   pendingFile:null,
-  calendarDate:new Date(),
-  search:''
+  conversations:[],
+  conversationMembers:[],
+  calendarDate:new Date()
 };
 
-let tasks=JSON.parse(
-  localStorage.getItem('nona_v22_tasks')||'null'
-)||[
-  {
-    id:'t1',
-    name:'Flite Product Shoot',
-    category:'Content',
-    priority:'High',
-    status:'In Progress',
-    progress:50,
-    dueDate:'2026-09-16',
-    dueTime:'17:00',
-    description:'Product shooting for Flite sandals.',
-    notes:''
-  },
-  {
-    id:'t2',
-    name:'Social Media Content',
-    category:'Content',
-    priority:'Medium',
-    status:'In Progress',
-    progress:40,
-    dueDate:'2026-09-17',
-    dueTime:'17:00',
-    description:'Shoot and edit social media content.',
-    notes:''
-  },
-  {
-    id:'t3',
-    name:'Live Setup',
-    category:'Live',
-    priority:'High',
-    status:'Not Started',
-    progress:0,
-    dueDate:'2026-09-18',
-    dueTime:'12:00',
-    description:'Prepare live setup quotation and requirements.',
-    notes:''
-  }
+let tasks=JSON.parse(localStorage.getItem('nona_v21_tasks')||'null')||[
+ {
+  id:'t1',
+  name:'Flite Product Shoot',
+  category:'Content',
+  priority:'High',
+  status:'In Progress',
+  progress:60,
+  dueDate:'2026-09-16',
+  dueTime:'17:00',
+  description:'Product shooting for Flite sandals.',
+  notes:''
+ },
+ {
+  id:'t2',
+  name:'Social Media Content',
+  category:'Content',
+  priority:'Medium',
+  status:'In Progress',
+  progress:40,
+  dueDate:'2026-09-17',
+  dueTime:'17:00',
+  description:'Shoot and edit social media content.',
+  notes:''
+ },
+ {
+  id:'t3',
+  name:'Live Setup',
+  category:'Live',
+  priority:'High',
+  status:'Not Started',
+  progress:0,
+  dueDate:'2026-09-18',
+  dueTime:'12:00',
+  description:'Prepare live setup quotation and requirements.',
+  notes:''
+ }
 ];
 
-let logs=JSON.parse(
-  localStorage.getItem('nona_v22_logs')||'null'
-)||[
-  {
-    id:'l1',
-    date:'2026-09-07',
-    task:'Budget quotation presentation + Flite product shoot',
-    description:'Presented completed budget quotation and carried out Flite product shooting.',
-    startTime:'',
-    endTime:''
-  },
-  {
-    id:'l2',
-    date:'2026-09-08',
-    task:'Product shooting + content brainstorming',
-    description:'Continued product shooting and brainstormed social media content.',
-    startTime:'',
-    endTime:''
-  },
-  {
-    id:'l3',
-    date:'2026-09-09',
-    task:'Live setup quotation + social media shooting',
-    description:'Presented live setup budget quotation and shot social media content.',
-    startTime:'',
-    endTime:''
-  },
-  {
-    id:'l4',
-    date:'2026-09-10',
-    task:'Content shooting + video editing',
-    description:'Shot content and edited social media videos.',
-    startTime:'',
-    endTime:''
-  }
+let logs=JSON.parse(localStorage.getItem('nona_v21_logs')||'null')||[
+ {
+  id:'l1',
+  date:'2026-09-07',
+  task:'Budget quotation presentation + Flite product shoot',
+  description:'Presented completed budget quotation and carried out Flite product shooting.'
+ },
+ {
+  id:'l2',
+  date:'2026-09-08',
+  task:'Product shooting + content brainstorming',
+  description:'Continued product shooting and brainstormed social media content.'
+ },
+ {
+  id:'l3',
+  date:'2026-09-09',
+  task:'Live setup quotation + social media shooting',
+  description:'Presented live setup budget quotation and shot social media content.'
+ },
+ {
+  id:'l4',
+  date:'2026-09-10',
+  task:'Content shooting + video editing',
+  description:'Shot content and edited social media videos.'
+ }
 ];
+
+let attendance=JSON.parse(localStorage.getItem('nona_attendance')||'null')||[];
 
 const esc=x=>{
   const d=document.createElement('div');
   d.textContent=x??'';
-  return d.innerHTML;
+  return d.innerHTML
 };
 
-const av=p=>
-  p?.avatar_url||
-  'https://ui-avatars.com/api/?name='+
-  encodeURIComponent(p?.full_name||'User')+
-  '&background=edf3e4&color=5f7541';
-
 const me=()=>S.profile?.id;
-const isAdmin=()=>String(S.profile?.role||'').toLowerCase()==='admin';
+const admin=()=>String(S.profile?.role||'').toLowerCase()==='admin';
 
-function saveLocal(){
-  localStorage.setItem('nona_v22_tasks',JSON.stringify(tasks));
-  localStorage.setItem('nona_v22_logs',JSON.stringify(logs));
+function av(p){
+  if(p?.avatar_url)return p.avatar_url;
+
+  const name=(p?.full_name||'User')
+    .split(' ')
+    .filter(Boolean)
+    .slice(0,2)
+    .map(x=>x[0])
+    .join('')
+    .toUpperCase();
+
+  return 'https://ui-avatars.com/api/?name='+
+    encodeURIComponent(name)+
+    '&background=edf3e4&color=5f7541&bold=true';
+}
+
+function save(){
+  localStorage.setItem('nona_v21_tasks',JSON.stringify(tasks));
+  localStorage.setItem('nona_v21_logs',JSON.stringify(logs));
+  localStorage.setItem('nona_attendance',JSON.stringify(attendance));
 }
 
 function toast(x){
@@ -693,63 +685,67 @@ function toast(x){
 }
 
 function date(x){
-  if(!x)return'';
-  return new Date(x+'T00:00:00').toLocaleDateString(
-    'en-MY',
-    {day:'numeric',month:'short',year:'numeric'}
-  );
+  return x?
+    new Date(x+'T00:00:00').toLocaleDateString('en-MY',{
+      day:'numeric',
+      month:'short',
+      year:'numeric'
+    }):''
 }
 
 function dateTime(x){
-  if(!x)return'';
-  return new Date(x).toLocaleString(
-    'en-MY',
-    {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}
-  );
+  return x?
+    new Date(x).toLocaleString('en-MY',{
+      day:'numeric',
+      month:'short',
+      hour:'2-digit',
+      minute:'2-digit'
+    }):''
+}
+
+function timeOnly(x){
+  return x?
+    new Date(x).toLocaleTimeString('en-MY',{
+      hour:'2-digit',
+      minute:'2-digit'
+    }):''
 }
 
 function pclass(x){
-  return x==='High'?'high':x==='Medium'?'medium':'low';
+  return x==='High'?'high':x==='Medium'?'medium':'low'
 }
 
 function sclass(x){
-  if(x==='Completed')return'green';
-  if(x==='In Progress')return'blue';
-  if(x==='On Hold')return'orange';
-  return'';
+  return x==='Completed'?'green':
+    x==='In Progress'?'blue':
+    x==='Overdue'?'red':''
 }
 
-function statusProgress(status){
-  if(status==='Completed')return 100;
-  if(status==='In Progress')return 50;
-  if(status==='On Hold')return 25;
-  return 0;
+function todayKey(){
+  return new Date().toISOString().slice(0,10)
+}
+
+function todayAttendance(){
+  return attendance.find(x=>x.date===todayKey()&&x.user_id===me())
 }
 
 /* AUTH */
 
 async function init(){
-  const {
-    data:{session}
-  }=await db.auth.getSession();
+  const {data:{session}}=await db.auth.getSession();
 
-  if(session){
-    await enter(session.user);
-  }else{
-    loginPage();
-  }
+  if(session) await enter(session.user);
+  else loginPage();
 
-  db.auth.onAuthStateChange(
-    async(e,s)=>{
-      if(s&&!S.user)await enter(s.user);
+  db.auth.onAuthStateChange(async(e,s)=>{
+    if(s&&!S.user)await enter(s.user);
 
-      if(!s&&S.user){
-        S.user=null;
-        S.profile=null;
-        loginPage();
-      }
+    if(!s&&S.user){
+      S.user=null;
+      S.profile=null;
+      loginPage();
     }
-  );
+  });
 }
 
 async function enter(u){
@@ -761,11 +757,9 @@ async function enter(u){
     await db.from('profiles').insert({
       id:u.id,
       staff_code:(u.email||'').includes('admin')?'ADMIN001':'NC001',
-      full_name:(u.email||'').includes('admin')?'Admin':'Atikah',
+      full_name:(u.email||'').includes('admin')?'Admin':'Staff',
       department:(u.email||'').includes('admin')?'Management':'Digital',
-      position:(u.email||'').includes('admin')?
-        'Administrator':
-        'Live Host Online & Offline',
+      position:(u.email||'').includes('admin')?'Administrator':'Staff',
       role:(u.email||'').includes('admin')?'admin':'staff',
       status:'Active'
     });
@@ -778,8 +772,8 @@ async function enter(u){
     channels(),
     notifs(),
     docs(),
-    loadConversations(),
-    loadCalendarEvents()
+    loadEvents(),
+    loadConversations()
   ]);
 
   subscribe();
@@ -834,28 +828,20 @@ async function docs(){
   if(!r.error)S.docs=r.data||[];
 }
 
-async function loadCalendarEvents(){
+async function loadEvents(){
   const r=await db
     .from('calendar_events')
     .select('*')
-    .order('event_date',{ascending:true});
+    .order('event_date');
 
-  if(!r.error){
-    S.calendarEvents=r.data||[];
-  }else{
-    S.calendarEvents=[];
-  }
+  if(!r.error)S.events=r.data||[];
 }
 
 function subscribe(){
-  db.channel('nona-portal')
+  db.channel('nona-portal-live')
     .on(
       'postgres_changes',
-      {
-        event:'*',
-        schema:'public',
-        table:'messages'
-      },
+      {event:'*',schema:'public',table:'messages'},
       async()=>{
         if(S.page==='communication'){
           await chatLoad();
@@ -865,88 +851,45 @@ function subscribe(){
     )
     .on(
       'postgres_changes',
-      {
-        event:'*',
-        schema:'public',
-        table:'communication_notifications'
-      },
+      {event:'*',schema:'public',table:'communication_notifications'},
       async()=>{
         await notifs();
         render();
       }
     )
-    .on(
-      'postgres_changes',
-      {
-        event:'*',
-        schema:'public',
-        table:'calendar_events'
-      },
-      async()=>{
-        await loadCalendarEvents();
-        if(S.page==='calendar')render();
-      }
-    )
     .subscribe();
 }
-
-/* LOGIN */
 
 function loginPage(err=''){
   document.getElementById('app').innerHTML=`
     <div class="login">
       <div class="loginbox">
-
-        <div class="mini-icon" style="margin-bottom:15px">N</div>
-
-        <b style="font-size:24px">Nona Costex</b>
-
-        <div class="small muted" style="margin:4px 0 24px">
+        <b style="font-size:23px">Nona Costex</b>
+        <div class="small muted" style="margin:4px 0 22px">
           Staff Portal
         </div>
 
-        ${
-          err?
-          `<div class="error">${esc(err)}</div>`:
-          ''
-        }
+        ${err?`<div class="error">${esc(err)}</div>`:''}
 
         <label class="small muted">Email</label>
-
-        <input
-          id="email"
+        <input id="email"
           type="email"
           placeholder="Supabase account email"
-          style="margin:5px 0 13px"
-        >
+          style="margin:5px 0 13px">
 
         <label class="small muted">Password</label>
-
-        <input
-          id="pass"
+        <input id="pass"
           type="password"
           placeholder="Password"
-          style="margin:5px 0 17px"
-        >
+          style="margin:5px 0 16px">
 
-        <button
-          class="btn"
+        <button class="btn"
           style="width:100%"
-          onclick="login()"
-        >
+          onclick="login()">
           Sign in
         </button>
-
-        <p
-          class="small muted"
-          style="text-align:center;margin-top:15px"
-        >
-          Use the account created in Supabase.
-        </p>
-
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 async function login(){
@@ -958,9 +901,7 @@ async function login(){
     password
   });
 
-  if(r.error){
-    return loginPage(r.error.message);
-  }
+  if(r.error)return loginPage(r.error.message);
 
   await enter(r.data.user);
 }
@@ -969,24 +910,15 @@ async function logout(){
   await db.auth.signOut();
 }
 
-/* NAVIGATION */
+/* NAV */
 
-function nav(id,label,icon,b=0){
-  return`
-    <button
-      class="${S.page===id?'active':''}"
-      onclick="go('${id}')"
-    >
-      ${icon}
-      &nbsp;
+function nav(id,label,b=0){
+  return `
+    <button class="${S.page===id?'active':''}"
+      onclick="go('${id}')">
       ${label}
-      ${
-        b?
-        `<span class="pill red" style="float:right">${b}</span>`:
-        ''
-      }
-    </button>
-  `;
+      ${b?`<span class="pill red" style="float:right">${b}</span>`:''}
+    </button>`;
 }
 
 function go(p){
@@ -999,20 +931,14 @@ function go(p){
   render();
 }
 
-/* RENDER */
+/* MAIN RENDER */
 
 function render(){
-  if(!S.user){
-    loginPage();
-    return;
-  }
+  if(!S.user)return loginPage();
 
-  const unread=S.notifications.filter(
-    n=>!n.is_read
-  ).length;
+  const unread=S.notifications.filter(n=>!n.is_read).length;
 
   document.getElementById('app').innerHTML=`
-
     <div class="app">
 
       <aside class="side ${S.sidebar?'open':''}">
@@ -1025,47 +951,40 @@ function render(){
         <div class="nav-title">Workspace</div>
 
         <div class="nav">
-          ${nav('dashboard','Dashboard','⌂')}
-          ${nav('tasks','Tasks','✓')}
-          ${nav('worklogs','Work Logs','▤')}
-          ${nav('communication','Communication','◌',unread)}
-          ${nav('knowledge','Knowledge Hub','▥')}
-          ${nav('calendar','Calendar','□')}
+          ${nav('dashboard','Dashboard')}
+          ${nav('tasks','Tasks')}
+          ${nav('worklogs','Work Logs')}
+          ${nav('communication','Communication',unread)}
+          ${nav('knowledge','Knowledge Hub')}
+          ${nav('calendar','Calendar')}
         </div>
 
-        ${
-          isAdmin()?
-          `
-            <div class="nav-title">Admin</div>
+        <div class="nav-title">Attendance</div>
 
-            <div class="nav">
-              ${nav('staff','Staff Management','♙')}
-              ${nav('analytics','Analytics','▥')}
-              ${nav('data','Data Management','↥')}
-            </div>
-          `:
-          ''
-        }
+        <div class="nav">
+          ${nav('attendance','Attendance')}
+        </div>
+
+        ${admin()?`
+          <div class="nav-title">Admin</div>
+          <div class="nav">
+            ${nav('staff','Staff Management')}
+            ${nav('analytics','Analytics')}
+            ${nav('data','Data Management')}
+          </div>
+        `:''}
 
         <div class="nav-title">Account</div>
 
         <div class="nav">
-          ${nav('profile','My Profile','○')}
+          ${nav('profile','My Profile')}
         </div>
 
         <div style="margin-top:18px">
           <button
-            style="
-              width:100%;
-              background:transparent;
-              border:0;
-              text-align:left;
-              padding:11px 12px;
-              color:#778179
-            "
-            onclick="logout()"
-          >
-            ↪ Log out
+            style="width:100%;background:transparent;border:0;text-align:left;padding:10px;color:#777"
+            onclick="logout()">
+            Log out
           </button>
         </div>
 
@@ -1078,9 +997,8 @@ function render(){
           <div class="row">
             <button
               class="btn secondary mobile"
-              onclick="S.sidebar=!S.sidebar;render()"
-            >
-              ☰
+              onclick="S.sidebar=!S.sidebar;render()">
+              Menu
             </button>
 
             <b>Nona Costex Staff Portal</b>
@@ -1090,24 +1008,18 @@ function render(){
 
             <button
               class="btn secondary small"
-              onclick="notifications()"
-            >
-              ♧ ${unread||''}
+              onclick="notifications()">
+              Notifications ${unread?`(${unread})`:''}
             </button>
 
             <div class="row hide">
-              <img
-                class="avatar"
-                src="${av(S.profile)}"
-              >
-
+              <img class="avatar" src="${av(S.profile)}">
               <div>
                 <b style="font-size:13px">
                   ${esc(S.profile.full_name)}
                 </b>
-
                 <div class="small muted">
-                  ${esc(S.profile.role)}
+                  ${esc(S.profile.role||'staff')}
                 </div>
               </div>
             </div>
@@ -1121,7 +1033,6 @@ function render(){
         </main>
 
       </section>
-
     </div>
 
     ${S.modal?modal():''}
@@ -1135,9 +1046,11 @@ function page(){
   if(S.page==='communication')return chatPage();
   if(S.page==='knowledge')return knowledge();
   if(S.page==='calendar')return calendar();
+  if(S.page==='attendance')return attendancePage();
   if(S.page==='staff')return staff();
   if(S.page==='analytics')return analytics();
   if(S.page==='data')return dataPage();
+
   return profilePage();
 }
 
@@ -1145,47 +1058,21 @@ function page(){
 
 function dashboard(){
 
-  const done=tasks.filter(
-    x=>x.status==='Completed'
-  ).length;
+  const done=tasks.filter(x=>x.status==='Completed').length;
+  const active=tasks.filter(x=>x.status==='In Progress').length;
+  const avg=tasks.length?
+    Math.round(tasks.reduce((a,x)=>a+(Number(x.progress)||0),0)/tasks.length):0;
 
-  const inProgress=tasks.filter(
-    x=>x.status==='In Progress'
-  ).length;
+  const att=todayAttendance();
 
-  const pending=tasks.filter(
-    x=>x.status==='Not Started'
-  ).length;
-
-  const pct=tasks.length?
-    Math.round(
-      tasks.reduce(
-        (a,b)=>a+(Number(b.progress)||0),
-        0
-      )/tasks.length
-    ):
-    0;
-
-  return`
+  return `
     <div class="grid">
 
-      <div class="hero-card">
-        <div class="row between wrap">
-          <div>
-            <h1 class="title">
-              Dashboard
-            </h1>
-
-            <p class="sub">
-              Welcome back,
-              ${esc(S.profile.full_name.split(' ')[0])}.
-            </p>
-          </div>
-
-          <div class="mini-icon">
-            ✦
-          </div>
-        </div>
+      <div class="welcome-card">
+        <h1 class="title">Dashboard</h1>
+        <p class="sub">
+          Welcome back, ${esc((S.profile.full_name||'').split(' ')[0])}.
+        </p>
       </div>
 
       <div class="grid four">
@@ -1196,18 +1083,63 @@ function dashboard(){
         </div>
 
         <div class="card stat">
-          <b>${pending}</b>
-          <span>Pending</span>
+          <b>${done}</b>
+          <span>Completed</span>
         </div>
 
         <div class="card stat">
-          <b>${inProgress}</b>
+          <b>${active}</b>
           <span>In Progress</span>
         </div>
 
         <div class="card stat">
-          <b>${done}</b>
-          <span>Completed</span>
+          <b>${avg}%</b>
+          <span>Overall Progress</span>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="row between">
+          <div>
+            <div class="dashboard-card-title">
+              Today's Attendance
+            </div>
+
+            <div class="small muted">
+              ${att?
+                att.clock_out?
+                  'Attendance completed for today.':
+                  'You are currently clocked in.':
+                'You have not clocked in yet.'
+              }
+            </div>
+          </div>
+
+          <button
+            class="btn secondary small"
+            onclick="go('attendance')">
+            Open Attendance
+          </button>
+        </div>
+
+        <div style="margin-top:14px">
+          ${att?
+            `<div class="row wrap">
+              <span class="pill ${att.clock_out?'green':'blue'}">
+                ${att.clock_out?'Completed':'Working'}
+              </span>
+              <span class="small muted">
+                In ${timeOnly(att.clock_in)}
+              </span>
+              ${att.clock_out?
+                `<span class="small muted">
+                  Out ${timeOnly(att.clock_out)}
+                </span>`:''}
+            </div>`:
+            `<span class="pill">Not Clocked In</span>`
+          }
         </div>
 
       </div>
@@ -1215,50 +1147,33 @@ function dashboard(){
       <div class="grid two">
 
         <div class="card">
-
           <div class="row between">
-            <b>Overall Work Progress</b>
-            <b>${pct}%</b>
+            <b>Task Progress</b>
+            <b>${avg}%</b>
           </div>
 
-          <div
-            class="progress"
-            style="margin-top:12px"
-          >
-            <i style="width:${pct}%"></i>
+          <div class="progress" style="margin-top:10px">
+            <i style="width:${avg}%"></i>
           </div>
 
-          <div
-            class="small muted"
-            style="margin-top:8px"
-          >
-            Based on current task progress.
+          <div class="small muted" style="margin-top:9px">
+            Based on all current tasks.
           </div>
-
         </div>
 
         <div class="card">
 
           <div class="row between">
             <b>Communication</b>
-
             <button
               class="btn secondary small"
-              onclick="go('communication')"
-            >
+              onclick="go('communication')">
               Open
             </button>
           </div>
 
-          <div
-            class="small muted"
-            style="margin-top:10px"
-          >
-            ${
-              S.notifications.filter(n=>!n.is_read).length?
-              'You have unread notifications.':
-              'Everything is up to date.'
-            }
+          <div class="small muted" style="margin-top:10px">
+            ${unreadText()}
           </div>
 
         </div>
@@ -1268,108 +1183,36 @@ function dashboard(){
       <div class="card">
 
         <div class="row between">
-          <b>Current Tasks</b>
-
+          <b>Recent Work Logs</b>
           <button
             class="btn secondary small"
-            onclick="go('tasks')"
-          >
-            View Tasks
-          </button>
-        </div>
-
-        <div
-          class="grid three"
-          style="margin-top:15px"
-        >
-
-          ${
-            tasks.slice(0,6).map(t=>`
-              <div class="task-card">
-
-                <div class="row between">
-                  <b>${esc(t.name)}</b>
-
-                  <span class="pill ${sclass(t.status)}">
-                    ${esc(t.status)}
-                  </span>
-                </div>
-
-                <div
-                  class="small muted"
-                  style="margin-top:7px"
-                >
-                  ${esc(t.category)}
-                  ·
-                  Due ${date(t.dueDate)}
-                </div>
-
-                <div
-                  class="progress"
-                  style="margin-top:12px"
-                >
-                  <i style="width:${Number(t.progress)||0}%"></i>
-                </div>
-
-                <div
-                  class="row between small muted"
-                  style="margin-top:5px"
-                >
-                  <span>Progress</span>
-                  <span>${Number(t.progress)||0}%</span>
-                </div>
-
-              </div>
-            `).join('')||
-            `<div class="empty">No tasks yet.</div>`
-          }
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="row between">
-          <b>Recent Work</b>
-
-          <button
-            class="btn secondary small"
-            onclick="go('worklogs')"
-          >
+            onclick="go('worklogs')">
             View all
           </button>
         </div>
 
-        ${
-          logs.slice(-4).reverse().map(x=>`
-            <div class="knowledge-card" style="margin-top:10px">
-
-              <div class="doc-thumb">
-                ✓
-              </div>
-
-              <div style="flex:1">
-                <b>${esc(x.task)}</b>
-
-                <div class="small muted" style="margin-top:4px">
-                  ${date(x.date)}
-                </div>
-
-                <div class="small muted" style="margin-top:4px">
-                  ${esc(x.description)}
-                </div>
-              </div>
-
+        ${logs.slice(-4).reverse().map(x=>`
+          <div class="work-progress-card" style="margin-top:10px">
+            <b style="font-size:13px">${esc(x.task)}</b>
+            <div class="small muted">
+              ${date(x.date)} · ${esc(x.description)}
             </div>
-          `).join('')||
-          `<div class="empty">No work logs yet.</div>`
-        }
+          </div>
+        `).join('')||`
+          <div class="empty">No work logs yet.</div>
+        `}
 
       </div>
 
     </div>
   `;
+}
+
+function unreadText(){
+  const n=S.notifications.filter(x=>!x.is_read).length;
+  return n?
+    `You have ${n} unread notification${n>1?'s':''}.`:
+    'Nothing unread.';
 }
 
 /* TASKS */
@@ -1378,43 +1221,33 @@ function tasksPage(){
 
   let a=[...tasks];
 
-  if(S.taskFilter){
+  if(S.taskFilter)
     a=a.filter(x=>x.status===S.taskFilter);
-  }
 
   if(S.taskSearch){
     const q=S.taskSearch.toLowerCase();
 
     a=a.filter(x=>
-      (
-        x.name+
-        x.description+
-        x.category+
-        x.status
-      ).toLowerCase().includes(q)
+      (x.name+' '+x.description+' '+x.category)
+      .toLowerCase()
+      .includes(q)
     );
   }
 
-  return`
+  return `
     <div class="grid">
 
       <div class="row between wrap">
-
         <div>
           <h1 class="title">Tasks</h1>
-
           <p class="sub">
-            Manage tasks and track work progress.
+            Track your tasks and work progress.
           </p>
         </div>
 
-        <button
-          class="btn"
-          onclick="openTask()"
-        >
+        <button class="btn" onclick="openTask()">
           + Add Task
         </button>
-
       </div>
 
       <div class="row wrap">
@@ -1423,123 +1256,73 @@ function tasksPage(){
           style="max-width:280px"
           placeholder="Search tasks..."
           value="${esc(S.taskSearch)}"
-          oninput="S.taskSearch=this.value;render()"
-        >
+          oninput="S.taskSearch=this.value;render()">
 
         <select
           style="max-width:180px"
-          onchange="S.taskFilter=this.value;render()"
-        >
-          <option value="">All Status</option>
+          onchange="S.taskFilter=this.value;render()">
 
-          ${
-            [
-              'Not Started',
-              'In Progress',
-              'Completed',
-              'On Hold'
-            ].map(x=>`
+          <option value="">All status</option>
+
+          ${['Not Started','In Progress','Completed','On Hold']
+            .map(x=>`
               <option
-                value="${x}"
-                ${S.taskFilter===x?'selected':''}
-              >
+                ${S.taskFilter===x?'selected':''}>
                 ${x}
               </option>
-            `).join('')
-          }
+            `).join('')}
 
         </select>
 
       </div>
 
-      <div class="grid two">
+      <div class="card">
 
-        ${
-          a.map(t=>`
-            <div class="task-card">
+        ${a.map(t=>`
+          <div class="work-progress-card">
 
-              <div class="row between">
+            <div class="row between wrap">
 
-                <div>
+              <div style="flex:1">
+
+                <div class="row wrap">
                   <b>${esc(t.name)}</b>
-
-                  <div
-                    class="small muted"
-                    style="margin-top:5px"
-                  >
-                    ${esc(t.category)}
-                  </div>
+                  <span class="pill ${pclass(t.priority)}">
+                    ${esc(t.priority)}
+                  </span>
+                  <span class="pill ${sclass(t.status)}">
+                    ${esc(t.status)}
+                  </span>
                 </div>
 
-                <span class="pill ${pclass(t.priority)}">
-                  ${esc(t.priority)}
-                </span>
+                <div class="small muted" style="margin-top:4px">
+                  ${esc(t.category)} · Due ${date(t.dueDate)}
+                  ${t.dueTime?' · '+esc(t.dueTime):''}
+                </div>
+
+                <div class="progress" style="margin-top:10px">
+                  <i style="width:${Number(t.progress)||0}%"></i>
+                </div>
+
+                <div class="row between small muted" style="margin-top:5px">
+                  <span>Progress</span>
+                  <span>${Number(t.progress)||0}%</span>
+                </div>
 
               </div>
 
-              <div
-                class="small muted"
-                style="margin-top:12px"
-              >
-                ${esc(t.description||'No description')}
-              </div>
-
-              <div
-                class="row between"
-                style="margin-top:15px"
-              >
-
-                <span class="pill ${sclass(t.status)}">
-                  ${esc(t.status)}
-                </span>
-
-                <span class="small muted">
-                  Due ${date(t.dueDate)}
-                  ${t.dueTime||''}
-                </span>
-
-              </div>
-
-              <div
-                class="progress"
-                style="margin-top:13px"
-              >
-                <i style="width:${Number(t.progress)||0}%"></i>
-              </div>
-
-              <div
-                class="row between small"
-                style="margin-top:5px"
-              >
-                <span class="muted">Work Progress</span>
-                <b>${Number(t.progress)||0}%</b>
-              </div>
-
-              <div
-                class="row"
-                style="justify-content:flex-end;margin-top:13px"
-              >
-
-                <button
-                  class="btn secondary small"
-                  onclick="openTask('${t.id}')"
-                >
-                  Edit
-                </button>
-
-                <button
-                  class="btn danger small"
-                  onclick="deleteTask('${t.id}')"
-                >
-                  Delete
-                </button>
-
-              </div>
+              <button
+                class="btn secondary small"
+                onclick="openTask('${t.id}')">
+                Edit
+              </button>
 
             </div>
-          `).join('')||
-          `<div class="card empty">No tasks found.</div>`
-        }
+
+          </div>
+        `).join('')||`
+          <div class="empty">No tasks found.</div>
+        `}
 
       </div>
 
@@ -1565,7 +1348,7 @@ function openTask(id){
 
   S.modal={
     type:'task',
-    data:t
+    data:{...t}
   };
 
   render();
@@ -1573,39 +1356,31 @@ function openTask(id){
 
 function saveTask(){
 
-  const g=id=>
-    document.getElementById(id).value;
+  const g=id=>document.getElementById(id).value;
+
+  const id=g('task-id');
 
   const d={
-    name:g('task-name').trim(),
+    name:g('task-name'),
     description:g('task-desc'),
     category:g('task-cat'),
     priority:g('task-pri'),
     status:g('task-status'),
-    progress:Number(g('task-progress')),
+    progress:Number(g('task-progress'))||0,
     dueDate:g('task-date'),
     dueTime:g('task-time'),
     notes:g('task-notes')
   };
 
-  const id=g('task-id');
+  if(!d.name||!d.dueDate)
+    return toast('Task name and due date are required.');
 
-  if(!d.name||!d.dueDate){
-    return toast(
-      'Task name and due date are required.'
-    );
-  }
-
-  if(d.status==='Completed'){
+  if(d.status==='Completed')
     d.progress=100;
-  }
 
   if(id){
-    const existing=tasks.find(x=>x.id===id);
-
-    if(existing){
-      Object.assign(existing,d);
-    }
+    const found=tasks.find(x=>x.id===id);
+    if(found)Object.assign(found,d);
   }else{
     tasks.push({
       ...d,
@@ -1613,7 +1388,7 @@ function saveTask(){
     });
   }
 
-  saveLocal();
+  save();
 
   S.modal=null;
 
@@ -1628,111 +1403,74 @@ function deleteTask(id){
 
   tasks=tasks.filter(x=>x.id!==id);
 
-  saveLocal();
+  save();
 
-  toast('Task deleted');
+  S.modal=null;
 
   render();
+
+  toast('Task deleted');
 }
 
 /* WORK LOGS */
 
 function logsPage(){
 
-  return`
+  return `
     <div class="grid">
 
       <div class="row between">
-
         <div>
           <h1 class="title">Work Logs</h1>
-
           <p class="sub">
-            Record and track your daily work.
+            Daily work records and progress.
           </p>
         </div>
 
-        <button
-          class="btn"
-          onclick="openLog()"
-        >
-          + Add Work Log
+        <button class="btn" onclick="openLog()">
+          + Add Log
         </button>
-
       </div>
 
       <div class="card">
 
-        ${
-          logs.map(x=>`
-            <div
-              class="knowledge-card"
-              style="margin-bottom:10px"
-            >
+        ${logs.map(x=>`
+          <div class="work-progress-card">
 
-              <div class="doc-thumb">
-                ✓
-              </div>
+            <div class="row between">
 
-              <div style="flex:1">
+              <div>
+                <b>${esc(x.task)}</b>
 
-                <div class="row between">
-                  <b>${esc(x.task)}</b>
-
-                  <span class="small muted">
-                    ${date(x.date)}
-                  </span>
+                <div class="small muted">
+                  ${date(x.date)}
                 </div>
 
-                <div
-                  class="small muted"
-                  style="margin-top:6px"
-                >
+                <div class="small" style="margin-top:7px">
                   ${esc(x.description)}
                 </div>
+              </div>
 
-                ${
-                  x.startTime||x.endTime?
-                  `
-                    <div
-                      class="small muted"
-                      style="margin-top:6px"
-                    >
-                      ${x.startTime||'--'}
-                      →
-                      ${x.endTime||'--'}
-                    </div>
-                  `:
-                  ''
-                }
+              <div class="row">
+                <button
+                  class="btn secondary small"
+                  onclick="openLog('${x.id}')">
+                  Edit
+                </button>
 
-                <div
-                  class="row"
-                  style="justify-content:flex-end;margin-top:10px"
-                >
-
-                  <button
-                    class="btn secondary small"
-                    onclick="openLog('${x.id}')"
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    class="btn danger small"
-                    onclick="delLog('${x.id}')"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
+                <button
+                  class="btn danger small"
+                  onclick="delLog('${x.id}')">
+                  Delete
+                </button>
               </div>
 
             </div>
-          `).join('')||
-          `<div class="empty">No work logs yet.</div>`
-        }
+
+          </div>
+        `).join('')||`
+          <div class="empty">No work logs yet.</div>
+        `}
 
       </div>
 
@@ -1742,19 +1480,17 @@ function logsPage(){
 
 function openLog(id){
 
-  const data=id?
+  const existing=id?
     logs.find(x=>x.id===id):
-    {
-      date:new Date().toISOString().slice(0,10),
-      task:'',
-      description:'',
-      startTime:'',
-      endTime:''
-    };
+    null;
 
   S.modal={
     type:'log',
-    data
+    data:existing||{
+      date:todayKey(),
+      task:'',
+      description:''
+    }
   };
 
   render();
@@ -1766,22 +1502,16 @@ function saveLog(){
 
   const d={
     date:document.getElementById('log-date').value,
-    task:document.getElementById('log-task').value.trim(),
-    description:document.getElementById('log-desc').value,
-    startTime:document.getElementById('log-start').value,
-    endTime:document.getElementById('log-end').value
+    task:document.getElementById('log-task').value,
+    description:document.getElementById('log-desc').value
   };
 
-  if(!d.date||!d.task){
-    return toast(
-      'Date and activity are required.'
-    );
-  }
+  if(!d.date||!d.task)
+    return toast('Date and activity are required.');
 
   if(id){
-    const existing=logs.find(x=>x.id===id);
-
-    if(existing)Object.assign(existing,d);
+    const found=logs.find(x=>x.id===id);
+    if(found)Object.assign(found,d);
   }else{
     logs.push({
       ...d,
@@ -1789,7 +1519,7 @@ function saveLog(){
     });
   }
 
-  saveLocal();
+  save();
 
   S.modal=null;
 
@@ -1804,228 +1534,328 @@ function delLog(id){
 
   logs=logs.filter(x=>x.id!==id);
 
-  saveLocal();
+  save();
 
   render();
 
   toast('Work log deleted');
 }
 
+/* ATTENDANCE */
+
+function attendancePage(){
+
+  const today=todayAttendance();
+
+  return `
+    <div class="grid">
+
+      <div>
+        <h1 class="title">Attendance</h1>
+        <p class="sub">
+          Record your daily clock in and clock out.
+        </p>
+      </div>
+
+      <div class="card attendance-main">
+
+        <div>
+
+          <div class="small muted">
+            ${new Date().toLocaleDateString('en-MY',{
+              weekday:'long',
+              day:'numeric',
+              month:'long',
+              year:'numeric'
+            })}
+          </div>
+
+          <div class="clock-time" id="live-clock">
+            ${new Date().toLocaleTimeString('en-MY',{
+              hour:'2-digit',
+              minute:'2-digit',
+              second:'2-digit'
+            })}
+          </div>
+
+          <div class="attendance-status">
+
+            <div class="small muted">
+              Today's status
+            </div>
+
+            <b>
+              ${
+                !today?
+                  'Not Clocked In':
+                today.clock_out?
+                  'Completed':
+                'Working'
+              }
+            </b>
+
+            ${
+              today?
+                `<div class="small muted" style="margin-top:5px">
+                  Clock in: ${timeOnly(today.clock_in)}
+                  ${today.clock_out?
+                    ` · Clock out: ${timeOnly(today.clock_out)}`:''}
+                </div>`:
+                ''
+            }
+
+          </div>
+
+        </div>
+
+        <div class="attendance-actions">
+
+          ${
+            !today?
+              `<button class="btn" onclick="clockIn()">
+                Clock In
+              </button>`:
+              ''
+          }
+
+          ${
+            today&&!today.clock_out?
+              `<button class="btn" onclick="clockOut()">
+                Clock Out
+              </button>`:
+              ''
+          }
+
+          ${
+            today?.clock_out?
+              `<span class="pill green">
+                Attendance Complete
+              </span>`:
+              ''
+          }
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="row between">
+          <b>Attendance History</b>
+        </div>
+
+        <div style="margin-top:12px">
+
+          ${
+            attendance
+              .filter(x=>x.user_id===me())
+              .sort((a,b)=>b.date.localeCompare(a.date))
+              .map(x=>`
+                <div class="work-progress-card">
+
+                  <div class="row between">
+
+                    <div>
+                      <b>${date(x.date)}</b>
+
+                      <div class="small muted">
+                        ${x.clock_in?
+                          'Clock in '+timeOnly(x.clock_in):
+                          'No clock in'}
+                        ${x.clock_out?
+                          ' · Clock out '+timeOnly(x.clock_out):
+                          ''}
+                      </div>
+                    </div>
+
+                    <span class="pill ${x.clock_out?'green':'blue'}">
+                      ${x.clock_out?'Completed':'Working'}
+                    </span>
+
+                  </div>
+
+                </div>
+              `).join('')||
+              `<div class="empty">
+                No attendance records yet.
+              </div>`
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function clockIn(){
+
+  const existing=todayAttendance();
+
+  if(existing)return toast('You already clocked in today.');
+
+  attendance.push({
+    id:'a'+Date.now(),
+    user_id:me(),
+    date:todayKey(),
+    clock_in:new Date().toISOString(),
+    clock_out:null
+  });
+
+  save();
+
+  render();
+
+  toast('Clock in recorded');
+}
+
+function clockOut(){
+
+  const today=todayAttendance();
+
+  if(!today)return toast('You have not clocked in today.');
+
+  if(today.clock_out)
+    return toast('You already clocked out.');
+
+  today.clock_out=new Date().toISOString();
+
+  save();
+
+  render();
+
+  toast('Clock out recorded');
+}
+
 /* CALENDAR */
 
 function calendar(){
 
-  const year=S.calendarDate.getFullYear();
-  const month=S.calendarDate.getMonth();
+  const d=new Date(
+    S.calendarDate.getFullYear(),
+    S.calendarDate.getMonth(),
+    1
+  );
 
-  const first=new Date(year,month,1);
-  const last=new Date(year,month+1,0);
+  const year=d.getFullYear();
+  const month=d.getMonth();
 
-  const startDay=first.getDay();
-  const days=last.getDate();
+  const first=new Date(year,month,1).getDay();
+  const days=new Date(year,month+1,0).getDate();
+  const prevDays=new Date(year,month,0).getDate();
 
-  const monthName=new Intl.DateTimeFormat(
-    'en-MY',
-    {month:'long',year:'numeric'}
-  ).format(first);
+  let cells='';
 
-  const cells=[];
+  for(let i=0;i<42;i++){
 
-  for(let i=0;i<startDay;i++){
-    cells.push(`
-      <div class="cal-cell muted-day"></div>
-    `);
-  }
+    const num=i-first+1;
 
-  for(let day=1;day<=days;day++){
+    let dayDate;
 
-    const dateKey=
-      `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    let other=false;
 
-    const today=
-      new Date().toISOString().slice(0,10)===dateKey;
+    if(num<1){
+      dayDate=new Date(year,month-1,prevDays+num);
+      other=true;
+    }else if(num>days){
+      dayDate=new Date(year,month+1,num-days);
+      other=true;
+    }else{
+      dayDate=new Date(year,month,num);
+    }
 
-    const events=S.calendarEvents.filter(
-      e=>e.event_date===dateKey
-    );
+    const key=dayDate.toISOString().slice(0,10);
 
-    const dayLogs=logs.filter(
-      x=>x.date===dateKey
-    );
+    const isToday=key===todayKey();
 
-    cells.push(`
+    const events=S.events.filter(e=>e.event_date===key);
+
+    cells+=`
       <div
-        class="cal-cell ${today?'today':''}"
-        onclick="${isAdmin()?`openCalendarEvent(null,'${dateKey}')`:''}"
-      >
+        class="calendar-day ${other?'other':''} ${isToday?'today':''}"
+        onclick="calendarDateClick('${key}')">
 
         <div class="day-number">
-          ${day}
+          ${dayDate.getDate()}
         </div>
 
-        ${
-          events.map(e=>`
-            <div
-              class="cal-event ${
-                e.event_type==='Public Holiday'?
-                'event-public':
-                e.event_type==='Company Holiday'?
-                'event-company':
-                'event-other'
-              }"
-              title="${esc(e.title)}"
-              onclick="event.stopPropagation();viewCalendarEvent('${e.id}')"
-            >
-              ${esc(e.title)}
-            </div>
-          `).join('')
-        }
-
-        ${
-          dayLogs.map(l=>`
-            <div
-              class="cal-event event-other"
-              title="${esc(l.task)}"
-              onclick="event.stopPropagation()"
-            >
-              Work: ${esc(l.task)}
-            </div>
-          `).join('')
-        }
+        ${events.map(e=>`
+          <div class="event ${e.event_type==='Public Holiday'?'holiday':''}">
+            ${esc(e.title)}
+          </div>
+        `).join('')}
 
       </div>
-    `);
+    `;
   }
 
-  return`
+  return `
     <div class="grid">
 
-      <div class="row between wrap">
+      <div class="calendar-head">
 
         <div>
           <h1 class="title">Calendar</h1>
-
           <p class="sub">
-            Public holidays, company holidays and work events.
+            Company events, holidays and important dates.
           </p>
         </div>
 
         ${
-          isAdmin()?
-          `
-            <button
-              class="btn"
-              onclick="openCalendarEvent()"
-            >
+          admin()?
+            `<button class="btn" onclick="openEvent()">
               + Add Event
-            </button>
-          `:
-          ''
+            </button>`:
+            ''
         }
 
       </div>
 
-      <div class="calendar-wrap">
+      <div class="card">
 
         <div class="calendar-head">
 
-          <div class="row between">
+          <button
+            class="btn secondary small"
+            onclick="changeMonth(-1)">
+            Previous
+          </button>
 
-            <button
-              class="btn secondary"
-              onclick="changeMonth(-1)"
-            >
-              ‹
-            </button>
+          <b style="font-size:17px">
+            ${d.toLocaleDateString('en-MY',{
+              month:'long',
+              year:'numeric'
+            })}
+          </b>
 
-            <div style="text-align:center">
-              <b style="font-size:18px">
-                ${monthName}
-              </b>
-
-              <div
-                class="small muted"
-                style="margin-top:3px"
-              >
-                Click a date to view events
-              </div>
-            </div>
-
-            <button
-              class="btn secondary"
-              onclick="changeMonth(1)"
-            >
-              ›
-            </button>
-
-          </div>
-
-          <div
-            class="row"
-            style="justify-content:center;margin-top:14px"
-          >
+          <div class="row">
             <button
               class="btn secondary small"
-              onclick="calendarToday()"
-            >
+              onclick="goTodayMonth()">
               Today
+            </button>
+
+            <button
+              class="btn secondary small"
+              onclick="changeMonth(1)">
+              Next
             </button>
           </div>
 
-        </div>
-
-        <div class="calendar-week">
-          <div>Sun</div>
-          <div>Mon</div>
-          <div>Tue</div>
-          <div>Wed</div>
-          <div>Thu</div>
-          <div>Fri</div>
-          <div>Sat</div>
         </div>
 
         <div class="calendar-grid">
-          ${cells.join('')}
-        </div>
 
-      </div>
-
-      <div class="grid three">
-
-        <div class="card">
-          <div class="row">
-            <span class="comm-preview">◆</span>
-            <div>
-              <b>Public Holiday</b>
-              <div class="small muted">
-                Official public holidays
+          ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+            .map(x=>`
+              <div class="calendar-weekday">
+                ${x}
               </div>
-            </div>
-          </div>
-        </div>
+            `).join('')}
 
-        <div class="card">
-          <div class="row">
-            <span class="comm-preview">●</span>
-            <div>
-              <b>Company Holiday</b>
-              <div class="small muted">
-                Nona Costex holidays
-              </div>
-            </div>
-          </div>
-        </div>
+          ${cells}
 
-        <div class="card">
-          <div class="row">
-            <span class="comm-preview">✦</span>
-            <div>
-              <b>Company Event</b>
-              <div class="small muted">
-                Internal activities
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -2040,74 +1870,52 @@ function changeMonth(n){
     S.calendarDate.getMonth()+n,
     1
   );
-
   render();
 }
 
-function calendarToday(){
+function goTodayMonth(){
   S.calendarDate=new Date();
   render();
 }
 
-function openCalendarEvent(id=null,dateKey=''){
+function calendarDateClick(key){
 
-  if(!isAdmin()){
-    return viewCalendarEvent(id);
-  }
+  const events=S.events.filter(x=>x.event_date===key);
 
-  const event=id?
-    S.calendarEvents.find(x=>x.id===id):
-    {
-      id:'',
-      title:'',
-      event_date:dateKey,
-      event_type:'Company Event',
-      description:''
+  if(admin()){
+    S.modal={
+      type:'event',
+      data:{
+        id:'',
+        title:'',
+        event_date:key,
+        event_type:'Company Event',
+        description:''
+      }
     };
-
-  S.modal={
-    type:'calendar-event',
-    data:event
-  };
-
-  render();
-}
-
-function viewCalendarEvent(id){
-
-  const e=S.calendarEvents.find(x=>x.id===id);
-
-  if(!e)return;
-
-  if(isAdmin()){
-    openCalendarEvent(id);
-    return;
+    render();
+  }else if(events.length){
+    S.modal={
+      type:'event-view',
+      data:{events}
+    };
+    render();
   }
-
-  S.modal={
-    type:'calendar-view',
-    data:e
-  };
-
-  render();
 }
 
-async function saveCalendarEvent(){
+async function saveEvent(){
 
-  const id=document.getElementById('cal-id').value;
+  const id=document.getElementById('event-id').value;
 
   const d={
-    title:document.getElementById('cal-title').value.trim(),
-    event_date:document.getElementById('cal-date').value,
-    event_type:document.getElementById('cal-type').value,
-    description:document.getElementById('cal-desc').value
+    title:document.getElementById('event-title').value.trim(),
+    event_date:document.getElementById('event-date').value,
+    event_type:document.getElementById('event-type').value,
+    description:document.getElementById('event-desc').value
   };
 
-  if(!d.title||!d.event_date){
-    return toast(
-      'Title and date are required.'
-    );
-  }
+  if(!d.title||!d.event_date)
+    return toast('Event title and date are required.');
 
   let r;
 
@@ -2128,41 +1936,173 @@ async function saveCalendarEvent(){
       });
   }
 
-  if(r.error){
+  if(r.error)
     return toast(r.error.message);
-  }
 
-  await loadCalendarEvents();
+  await loadEvents();
 
   S.modal=null;
 
-  toast('Calendar event saved');
-
   render();
+
+  toast('Calendar event saved');
 }
 
-async function deleteCalendarEvent(id){
+async function deleteEvent(id){
 
-  if(!isAdmin())return;
-
-  if(!confirm('Delete this calendar event?'))return;
+  if(!confirm('Delete this event?'))return;
 
   const r=await db
     .from('calendar_events')
     .delete()
     .eq('id',id);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
-  await loadCalendarEvents();
+  await loadEvents();
 
   S.modal=null;
 
   render();
 
-  toast('Calendar event deleted');
+  toast('Event deleted');
+}
+
+/* STAFF */
+
+function staff(){
+
+  return `
+    <div class="grid">
+
+      <div class="row between">
+        <div>
+          <h1 class="title">Staff Management</h1>
+          <p class="sub">
+            Manage staff profiles and leave balances.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid">
+
+        ${
+          S.profiles.map(p=>`
+            <div class="staff-card">
+
+              <div class="row">
+
+                <img
+                  class="avatar large"
+                  style="width:48px;height:48px"
+                  src="${av(p)}">
+
+                <div>
+
+                  <b>${esc(p.full_name||'Unnamed')}</b>
+
+                  <div class="small muted">
+                    ${esc(p.position||'No position')}
+                  </div>
+
+                  <div class="small muted">
+                    ${esc(p.department||'No department')}
+                    ${p.employee_id?' · '+esc(p.employee_id):''}
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="row wrap">
+
+                <span class="pill ${
+                  String(p.status||'Active')==='Active'
+                    ?'green'
+                    :''
+                }">
+                  ${esc(p.status||'Active')}
+                </span>
+
+                <span class="pill">
+                  ${esc(p.role||'staff')}
+                </span>
+
+                <button
+                  class="btn secondary small"
+                  onclick="openStaff('${p.id}')">
+                  Edit
+                </button>
+
+              </div>
+
+            </div>
+          `).join('')
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+function openStaff(id){
+
+  const p=S.profiles.find(x=>x.id===id);
+
+  if(!p)return;
+
+  S.modal={
+    type:'staff',
+    data:{...p}
+  };
+
+  render();
+}
+
+async function saveStaff(){
+
+  if(!admin())
+    return toast('Admin access required.');
+
+  const id=document.getElementById('staff-id').value;
+
+  const data={
+    full_name:document.getElementById('staff-name').value.trim(),
+    position:document.getElementById('staff-position').value.trim(),
+    department:document.getElementById('staff-department').value.trim(),
+    employee_id:document.getElementById('staff-employee').value.trim(),
+    phone:document.getElementById('staff-phone').value.trim(),
+    join_date:document.getElementById('staff-join').value||null,
+    role:document.getElementById('staff-role').value,
+    status:document.getElementById('staff-status').value,
+    annual_leave:Number(document.getElementById('staff-annual').value)||0,
+    medical_leave:Number(document.getElementById('staff-medical').value)||0,
+    emergency_leave:Number(document.getElementById('staff-emergency').value)||0,
+    unpaid_leave:Number(document.getElementById('staff-unpaid').value)||0
+  };
+
+  if(!data.full_name)
+    return toast('Full name is required.');
+
+  const r=await db
+    .from('profiles')
+    .update(data)
+    .eq('id',id);
+
+  if(r.error)
+    return toast(r.error.message);
+
+  await profiles();
+
+  if(id===me())
+    await profile();
+
+  S.modal=null;
+
+  render();
+
+  toast('Staff profile updated');
 }
 
 /* COMMUNICATION */
@@ -2184,9 +2124,7 @@ async function loadConversations(){
 
   const ids=[
     ...new Set(
-      S.conversationMembers.map(
-        x=>x.conversation_id
-      )
+      S.conversationMembers.map(x=>x.conversation_id)
     )
   ];
 
@@ -2201,9 +2139,7 @@ async function loadConversations(){
     .in('id',ids)
     .order('updated_at',{ascending:false});
 
-  S.conversations=c.error?
-    []:
-    (c.data||[]);
+  S.conversations=c.error?[]:(c.data||[]);
 }
 
 async function loadConversationMembers(cid){
@@ -2213,44 +2149,35 @@ async function loadConversationMembers(cid){
     .select('conversation_id,profile_id,role')
     .eq('conversation_id',cid);
 
-  S.conversationMembers=
-    r.error?
-    []:
-    (r.data||[]);
+  S.conversationMembers=r.error?[]:(r.data||[]);
 
   return S.conversationMembers;
 }
 
 function currentConversationRole(){
 
-  if(!S.conversation)return'member';
-
-  return(
-    S.conversationMembers.find(
-      x=>x.profile_id===me()
-    )||{}
-  ).role||'member';
+  return S.conversation?
+    (
+      S.conversationMembers.find(
+        x=>x.profile_id===me()
+      )||{}
+    ).role||'member':
+    'member';
 }
 
 function conversationName(c){
 
   if(!c)return'';
 
-  if(c.type==='group'){
+  if(c.type==='group')
     return c.name||'Unnamed Group';
-  }
 
   const ids=S.conversationMembers
-    .filter(
-      x=>
-        x.conversation_id===c.id&&
-        x.profile_id!==me()
-    )
-    .map(x=>x.profile_id);
+    .filter(x=>x.conversation_id===c.id)
+    .map(x=>x.profile_id)
+    .filter(x=>x!==me());
 
-  const p=S.profiles.find(
-    x=>x.id===ids[0]
-  );
+  const p=S.profiles.find(x=>x.id===ids[0]);
 
   return p?.full_name||'Direct chat';
 }
@@ -2274,16 +2201,12 @@ async function chatLoad(){
 
   const r=await q;
 
-  if(!r.error){
-    S.messages=r.data||[];
-  }
+  if(!r.error)S.messages=r.data||[];
 }
 
 async function selectConversation(cid){
 
-  const c=S.conversations.find(
-    x=>x.id===cid
-  );
+  const c=S.conversations.find(x=>x.id===cid);
 
   if(!c)return;
 
@@ -2302,33 +2225,27 @@ async function selectConversation(cid){
 
 async function createGroup(){
 
-  S.modal={
-    type:'group-create'
-  };
+  S.modal={type:'group-create'};
 
   render();
 }
 
 async function saveGroup(){
 
-  const name=
-    document.getElementById(
-      'group-name'
-    ).value.trim();
+  const name=document
+    .getElementById('group-name')
+    .value
+    .trim();
 
   const selected=[
-    ...document.querySelectorAll(
-      '.group-member:checked'
-    )
+    ...document.querySelectorAll('.group-member:checked')
   ].map(x=>x.value);
 
-  if(!name){
+  if(!name)
     return toast('Group name is required.');
-  }
 
-  if(!selected.length){
+  if(!selected.length)
     return toast('Select at least one member.');
-  }
 
   const c=await db
     .from('conversations')
@@ -2340,9 +2257,7 @@ async function saveGroup(){
     .select()
     .single();
 
-  if(c.error){
-    return toast(c.error.message);
-  }
+  if(c.error)return toast(c.error.message);
 
   const rows=[
     {
@@ -2376,33 +2291,22 @@ async function saveGroup(){
 
   S.modal=null;
 
-  await selectConversation(
-    c.data.id
-  );
+  await selectConversation(c.data.id);
 }
 
 async function renameGroup(){
 
-  if(
-    !S.conversation?.group||
-    currentConversationRole()!=='admin'
-  ){
-    return toast(
-      'Only the group admin can rename this group.'
-    );
-  }
+  if(!S.conversation?.group||
+     currentConversationRole()!=='admin')
+    return toast('Only the group admin can rename this group.');
 
-  const current=
-    conversationName(
-      S.conversations.find(
-        x=>x.id===S.conversation.id
-      )
-    );
-
-  const name=prompt(
-    'New group name',
-    current
+  const current=conversationName(
+    S.conversations.find(
+      x=>x.id===S.conversation.id
+    )
   );
+
+  const name=prompt('New group name',current);
 
   if(!name||!name.trim())return;
 
@@ -2414,9 +2318,7 @@ async function renameGroup(){
     })
     .eq('id',S.conversation.id);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   await loadConversations();
 
@@ -2425,18 +2327,11 @@ async function renameGroup(){
 
 async function addMember(){
 
-  if(
-    !S.conversation?.group||
-    currentConversationRole()!=='admin'
-  ){
-    return toast(
-      'Only the group admin can add members.'
-    );
-  }
+  if(!S.conversation?.group||
+     currentConversationRole()!=='admin')
+    return toast('Only the group admin can add members.');
 
-  S.modal={
-    type:'group-members'
-  };
+  S.modal={type:'group-members'};
 
   await loadConversationMembers(
     S.conversation.id
@@ -2448,21 +2343,14 @@ async function addMember(){
 async function saveMembers(){
 
   const selected=[
-    ...document.querySelectorAll(
-      '.group-add-member:checked'
-    )
+    ...document.querySelectorAll('.group-add-member:checked')
   ].map(x=>x.value);
 
-  if(!selected.length){
-    return toast(
-      'Select at least one member.'
-    );
-  }
+  if(!selected.length)
+    return toast('Select at least one member.');
 
   const existing=new Set(
-    S.conversationMembers.map(
-      x=>x.profile_id
-    )
+    S.conversationMembers.map(x=>x.profile_id)
   );
 
   const rows=selected
@@ -2473,19 +2361,14 @@ async function saveMembers(){
       role:'member'
     }));
 
-  if(!rows.length){
-    return toast(
-      'Those members are already in the group.'
-    );
-  }
+  if(!rows.length)
+    return toast('Those members are already in the group.');
 
   const r=await db
     .from('conversation_members')
     .insert(rows);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   await loadConversationMembers(
     S.conversation.id
@@ -2500,37 +2383,23 @@ async function saveMembers(){
 
 async function removeMember(pid){
 
-  if(
-    !S.conversation?.group||
-    currentConversationRole()!=='admin'
-  ){
-    return toast(
-      'Only the group admin can remove members.'
-    );
-  }
+  if(!S.conversation?.group||
+     currentConversationRole()!=='admin')
+    return toast('Only the group admin can remove members.');
 
-  if(pid===me()){
-    return toast(
-      'Use Leave Group to leave the group.'
-    );
-  }
+  if(pid===me())
+    return toast('Use Leave Group to leave the group.');
 
-  if(!confirm(
-    'Remove this member from the group?'
-  ))return;
+  if(!confirm('Remove this member from the group?'))
+    return;
 
   const r=await db
     .from('conversation_members')
     .delete()
-    .eq(
-      'conversation_id',
-      S.conversation.id
-    )
+    .eq('conversation_id',S.conversation.id)
     .eq('profile_id',pid);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   await loadConversationMembers(
     S.conversation.id
@@ -2548,15 +2417,10 @@ async function leaveGroup(){
   const r=await db
     .from('conversation_members')
     .delete()
-    .eq(
-      'conversation_id',
-      S.conversation.id
-    )
+    .eq('conversation_id',S.conversation.id)
     .eq('profile_id',me());
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   S.conversation=null;
   S.messages=[];
@@ -2568,37 +2432,30 @@ async function leaveGroup(){
 
 function chatPage(){
 
-  const active=
-    S.conversations.find(
-      x=>x.id===S.conversation?.id
-    );
+  const active=S.conversations.find(
+    x=>x.id===S.conversation?.id
+  );
 
   const target=
     S.channel?
       '# '+S.channel.name:
-      S.conversation?
-        (
-          active?.type==='group'?
-          (
-            active.name||
-            'Unnamed Group'
-          ):
-          conversationName(active)
-        ):
+    S.conversation?
+      active?.type==='group'?
+        (active.name||'Unnamed Group'):
+        conversationName(active):
       'Select a channel or person';
 
   const groupAdmin=
     S.conversation?.group&&
     currentConversationRole()==='admin';
 
-  return`
+  return `
     <div class="grid">
 
       <div>
         <h1 class="title">Communication</h1>
-
         <p class="sub">
-          Team communication and group chats.
+          Team communication and direct messages.
         </p>
       </div>
 
@@ -2606,173 +2463,126 @@ function chatPage(){
 
         <div class="chatlist">
 
-          <div style="padding:13px">
-
+          <div style="padding:12px">
             <input
-              placeholder="Search people or groups..."
+              placeholder="Search..."
               value="${esc(S.chatSearch)}"
-              oninput="S.chatSearch=this.value;render()"
-            >
-
+              oninput="S.chatSearch=this.value;render()">
           </div>
 
-          <div
-            class="small muted"
-            style="padding:8px 13px"
-          >
+          <div class="small muted"
+            style="padding:8px 12px">
             CHANNELS
           </div>
 
-          ${
-            S.channels
-              .filter(
-                c=>
-                  !S.chatSearch||
-                  c.name
-                    .toLowerCase()
-                    .includes(
-                      S.chatSearch.toLowerCase()
-                    )
-              )
-              .map(c=>`
-                <div
-                  class="chatitem ${
-                    S.channel?.id===c.id?
-                    'active':
-                    ''
-                  }"
-                  onclick="selectChannel('${c.id}')"
-                >
+          ${S.channels
+            .filter(c=>
+              !S.chatSearch||
+              c.name.toLowerCase()
+                .includes(S.chatSearch.toLowerCase())
+            )
+            .map(c=>`
+              <div
+                class="chatitem ${S.channel?.id===c.id?'active':''}"
+                onclick="selectChannel('${c.id}')">
 
-                  <div class="row">
-
-                    <span class="comm-preview">
-                      #
-                    </span>
-
-                    <div>
-                      <b>${esc(c.name)}</b>
-
-                      <div class="small muted">
-                        ${esc(c.description||'Team channel')}
-                      </div>
-                    </div>
-
+                <div class="row">
+                  <div class="communication-thumb">
+                    #
                   </div>
 
+                  <div>
+                    <b>${esc(c.name)}</b>
+                    <div class="small muted">
+                      ${esc(c.description||'')}
+                    </div>
+                  </div>
                 </div>
-              `).join('')
-          }
 
-          <div
-            class="row between"
-            style="padding:15px 13px 8px"
-          >
-            <div class="small muted">
-              GROUPS
-            </div>
+              </div>
+            `).join('')}
+
+          <div class="row between"
+            style="padding:14px 12px 8px">
+
+            <div class="small muted">GROUPS</div>
 
             <button
               class="btn secondary small"
-              onclick="createGroup()"
-            >
+              onclick="createGroup()">
               + Group
             </button>
+
           </div>
 
-          ${
-            S.conversations
-              .filter(c=>c.type==='group')
-              .filter(
-                c=>
-                  !S.chatSearch||
-                  String(c.name||'')
-                    .toLowerCase()
-                    .includes(
-                      S.chatSearch.toLowerCase()
-                    )
-              )
-              .map(c=>`
-                <div
-                  class="chatitem ${
-                    S.conversation?.id===c.id?
-                    'active':
-                    ''
-                  }"
-                  onclick="selectConversation('${c.id}')"
-                >
+          ${S.conversations
+            .filter(c=>c.type==='group')
+            .filter(c=>
+              !S.chatSearch||
+              String(c.name||'')
+                .toLowerCase()
+                .includes(S.chatSearch.toLowerCase())
+            )
+            .map(c=>`
+              <div
+                class="chatitem ${S.conversation?.id===c.id?'active':''}"
+                onclick="selectConversation('${c.id}')">
 
-                  <div class="row">
-
-                    <span class="comm-preview">
-                      👥
-                    </span>
-
-                    <div>
-                      <b>${esc(c.name||'Unnamed Group')}</b>
-
-                      <div class="small muted">
-                        Group chat
-                      </div>
-                    </div>
-
+                <div class="row">
+                  <div class="communication-thumb">
+                    ${esc((c.name||'G')[0].toUpperCase())}
                   </div>
 
+                  <div>
+                    <b>${esc(c.name||'Unnamed Group')}</b>
+                    <div class="small muted">
+                      Group chat
+                    </div>
+                  </div>
                 </div>
-              `).join('')
-          }
 
-          <div
-            class="small muted"
-            style="padding:15px 13px 8px"
-          >
+              </div>
+            `).join('')}
+
+          <div class="small muted"
+            style="padding:14px 12px 8px">
             DIRECT CHAT
           </div>
 
-          ${
-            S.profiles
-              .filter(p=>p.id!==me())
-              .filter(
-                p=>
-                  !S.chatSearch||
-                  p.full_name
-                    .toLowerCase()
-                    .includes(
-                      S.chatSearch.toLowerCase()
-                    )
-              )
-              .map(p=>`
-                <div
-                  class="chatitem"
-                  onclick="direct('${p.id}')"
-                >
+          ${S.profiles
+            .filter(p=>p.id!==me())
+            .filter(p=>
+              !S.chatSearch||
+              p.full_name
+                .toLowerCase()
+                .includes(S.chatSearch.toLowerCase())
+            )
+            .map(p=>`
+              <div
+                class="chatitem"
+                onclick="direct('${p.id}')">
 
-                  <div class="row">
+                <div class="row">
+                  <img
+                    class="avatar"
+                    src="${av(p)}">
 
-                    <img
-                      class="avatar"
-                      src="${av(p)}"
-                    >
-
-                    <div>
-                      <b>${esc(p.full_name)}</b>
-
-                      <div class="small muted">
-                        ${esc(p.position||'')}
-                      </div>
+                  <div>
+                    <b>${esc(p.full_name)}</b>
+                    <div class="small muted">
+                      ${esc(p.position||'')}
                     </div>
-
                   </div>
-
                 </div>
-              `).join('')
-          }
+
+              </div>
+            `).join('')}
 
         </div>
 
         <div class="chatwindow">
 
-          <div class="chat-header">
+          <div style="padding:13px;border-bottom:1px solid #eee">
 
             <div class="row between">
 
@@ -2782,52 +2592,41 @@ function chatPage(){
                 <div class="small muted">
                   ${
                     S.channel?
-                    'Team channel':
+                      'Team channel':
                     S.conversation?.group?
-                    'Group chat':
-                    'Direct message'
+                      'Group chat':
+                      'Direct message'
                   }
                 </div>
               </div>
 
               ${
                 groupAdmin?
-                `
-                  <div class="row wrap">
-
+                  `<div class="row wrap">
                     <button
                       class="btn secondary small"
-                      onclick="renameGroup()"
-                    >
+                      onclick="renameGroup()">
                       Rename
                     </button>
 
                     <button
                       class="btn secondary small"
-                      onclick="addMember()"
-                    >
+                      onclick="addMember()">
                       Members
                     </button>
 
                     <button
                       class="btn danger small"
-                      onclick="leaveGroup()"
-                    >
+                      onclick="leaveGroup()">
                       Leave
                     </button>
-
-                  </div>
-                `:
+                  </div>`:
                 S.conversation?.group?
-                `
-                  <button
+                  `<button
                     class="btn secondary small"
-                    onclick="leaveGroup()"
-                  >
+                    onclick="leaveGroup()">
                     Leave
-                  </button>
-                `:
-                ''
+                  </button>`:''
               }
 
             </div>
@@ -2839,12 +2638,7 @@ function chatPage(){
             ${
               S.messages.map(m=>`
                 <div
-                  class="bubble ${
-                    m.sender_id===me()?
-                    'mine':
-                    ''
-                  }"
-                >
+                  class="bubble ${m.sender_id===me()?'mine':''}">
 
                   <div>
                     ${esc(m.message_text||'')}
@@ -2852,27 +2646,22 @@ function chatPage(){
 
                   ${
                     m.attachment_name?
-                    `
-                      <div class="small">
-                        📎 ${esc(m.attachment_name)}
-                      </div>
-                    `:
-                    ''
+                      `<div class="small">
+                        ${esc(m.attachment_name)}
+                      </div>`:''
                   }
 
                   <div class="meta">
                     ${
                       m.sender_id===me()?
-                      'You':
-                      esc(
-                        S.profiles.find(
-                          p=>p.id===m.sender_id
-                        )?.full_name||
-                        'User'
-                      )
+                        'You':
+                        esc(
+                          S.profiles.find(
+                            p=>p.id===m.sender_id
+                          )?.full_name||'User'
+                        )
                     }
-                    ·
-                    ${dateTime(m.created_at)}
+                    · ${dateTime(m.created_at)}
                   </div>
 
                 </div>
@@ -2884,55 +2673,38 @@ function chatPage(){
 
           </div>
 
-          <div
-            style="
-              padding:12px;
-              border-top:1px solid #eee
-            "
-          >
+          <div style="padding:12px;border-top:1px solid #eee">
 
             <div class="row">
 
               <input
                 id="msg"
                 placeholder="Write a message..."
-                onkeydown="
-                  if(event.key==='Enter'){
-                    send()
-                  }
-                "
-              >
+                onkeydown="if(event.key==='Enter')send()">
 
               <button
                 class="btn"
-                onclick="send()"
-              >
+                onclick="send()">
                 Send
               </button>
 
               <label class="btn secondary">
-                📎
+                Attach
                 <input
                   type="file"
                   hidden
-                  onchange="fileAttach(this)"
-                >
+                  onchange="fileAttach(this)">
               </label>
 
             </div>
 
             ${
               S.pendingFile?
-              `
-                <div
-                  class="small muted"
-                  style="margin-top:5px"
-                >
+                `<div class="small muted"
+                  style="margin-top:5px">
                   Attached:
                   ${esc(S.pendingFile.name)}
-                </div>
-              `:
-              ''
+                </div>`:''
             }
 
           </div>
@@ -2947,8 +2719,7 @@ function chatPage(){
 
 async function selectChannel(id){
 
-  S.channel=
-    S.channels.find(x=>x.id===id);
+  S.channel=S.channels.find(x=>x.id===id);
 
   S.conversation=null;
 
@@ -2970,13 +2741,9 @@ async function direct(target){
     const mm=await db
       .from('conversation_members')
       .select('profile_id')
-      .eq(
-        'conversation_id',
-        c.id
-      );
+      .eq('conversation_id',c.id);
 
-    const ids=(mm.data||[])
-      .map(x=>x.profile_id);
+    const ids=(mm.data||[]).map(x=>x.profile_id);
 
     if(
       ids.includes(me())&&
@@ -2996,9 +2763,7 @@ async function direct(target){
       .select()
       .single();
 
-    if(c.error){
-      return toast(c.error.message);
-    }
+    if(c.error)return toast(c.error.message);
 
     cid=c.data.id;
 
@@ -3015,9 +2780,7 @@ async function direct(target){
         }
       ]);
 
-    if(ins.error){
-      return toast(ins.error.message);
-    }
+    if(ins.error)return toast(ins.error.message);
   }
 
   S.conversation={
@@ -3036,49 +2799,40 @@ async function direct(target){
 async function send(){
 
   const i=document.getElementById('msg');
+
   const text=i.value.trim();
 
   if(!text&&!S.pendingFile)return;
 
-  if(!S.channel&&!S.conversation){
-    return toast(
-      'Select a channel or person first.'
-    );
-  }
+  if(!S.channel&&!S.conversation)
+    return toast('Select a channel or person first.');
 
   const row={
     sender_id:me(),
     message_text:text||null
   };
 
-  if(S.channel){
+  if(S.channel)
     row.channel_id=S.channel.id;
-  }else{
-    row.conversation_id=
-      S.conversation.id;
-  }
+  else
+    row.conversation_id=S.conversation.id;
 
   if(S.pendingFile){
 
-    row.attachment_name=
-      S.pendingFile.name;
+    row.attachment_name=S.pendingFile.name;
+    row.attachment_url=S.pendingFile.url;
+    row.attachment_type=S.pendingFile.type;
 
-    row.attachment_url=
-      S.pendingFile.url;
-
-    row.attachment_type=
-      S.pendingFile.type;
   }
 
   const r=await db
     .from('messages')
     .insert(row);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   i.value='';
+
   S.pendingFile=null;
 
   await chatLoad();
@@ -3092,18 +2846,13 @@ async function fileAttach(inp){
 
   if(!f)return;
 
-  if(f.size>10*1024*1024){
-    return toast(
-      'File must be under 10 MB.'
-    );
-  }
+  if(f.size>10*1024*1024)
+    return toast('File must be under 10 MB.');
 
   const path=
     'chat/'+
-    me()+
-    '/'+
-    Date.now()+
-    '-'+
+    me()+'/'+
+    Date.now()+'-'+
     f.name.replace(
       /[^a-zA-Z0-9._-]/g,
       '_'
@@ -3114,9 +2863,7 @@ async function fileAttach(inp){
     .from('nona-files')
     .upload(path,f);
 
-  if(r.error){
-    return toast(r.error.message);
-  }
+  if(r.error)return toast(r.error.message);
 
   const u=
     db.storage
@@ -3137,46 +2884,23 @@ async function fileAttach(inp){
 
 function knowledge(){
 
-  const filtered=
-    S.docs.filter(
-      d=>
-        (
-          d.title+
-          ' '+
-          (d.category||'')
-        )
-        .toLowerCase()
-        .includes(
-          (S.search||'').toLowerCase()
-        )
-    );
-
-  return`
+  return `
     <div class="grid">
 
       <div class="row between">
 
         <div>
-          <h1 class="title">
-            Knowledge Hub
-          </h1>
-
+          <h1 class="title">Knowledge Hub</h1>
           <p class="sub">
             SOPs, guidelines and shared documents.
           </p>
         </div>
 
         ${
-          isAdmin()?
-          `
-            <button
-              class="btn"
-              onclick="uploadDoc()"
-            >
+          admin()?
+            `<button class="btn" onclick="uploadDoc()">
               + Upload
-            </button>
-          `:
-          ''
+            </button>`:''
         }
 
       </div>
@@ -3185,73 +2909,58 @@ function knowledge(){
 
         <input
           placeholder="Search documents..."
-          value="${esc(S.search||'')}"
-          oninput="S.search=this.value;render()"
-        >
+          oninput="S.search=this.value;render()">
 
-      </div>
+        <div style="margin-top:12px">
 
-      <div class="grid two">
+          ${
+            S.docs
+              .filter(d=>
+                (d.title+' '+(d.category||''))
+                .toLowerCase()
+                .includes(
+                  (S.search||'').toLowerCase()
+                )
+              )
+              .map(d=>`
+                <div class="communication-card">
 
-        ${
-          filtered.map(d=>`
-            <div class="knowledge-card">
+                  <div class="communication-thumb">
+                    DOC
+                  </div>
 
-              <div class="doc-thumb">
-                ${
-                  d.file_type?.includes('image')?
-                  '▧':
-                  d.file_type?.includes('pdf')?
-                  'PDF':
-                  '▤'
-                }
-              </div>
+                  <div style="flex:1">
 
-              <div style="flex:1">
+                    <b>${esc(d.title)}</b>
 
-                <b>${esc(d.title)}</b>
+                    <div class="small muted">
+                      ${esc(d.category||'General')}
+                    </div>
 
-                <div
-                  class="small muted"
-                  style="margin-top:5px"
-                >
-                  ${esc(d.category||'General')}
+                    <div class="small muted">
+                      ${esc(d.description||'')}
+                    </div>
+
+                  </div>
+
+                  ${
+                    d.file_url?
+                      `<a
+                        class="btn secondary small"
+                        href="${esc(d.file_url)}"
+                        target="_blank">
+                        Open
+                      </a>`:''
+                  }
+
                 </div>
+              `).join('')||
+              `<div class="empty">
+                No documents yet.
+              </div>`
+          }
 
-                <div
-                  class="small muted"
-                  style="margin-top:5px"
-                >
-                  ${esc(d.description||'Shared document')}
-                </div>
-
-                ${
-                  d.file_url?
-                  `
-                    <a
-                      class="btn secondary small"
-                      href="${esc(d.file_url)}"
-                      target="_blank"
-                      style="
-                        display:inline-block;
-                        margin-top:10px;
-                        text-decoration:none
-                      "
-                    >
-                      Open
-                    </a>
-                  `:
-                  ''
-                }
-
-              </div>
-
-            </div>
-          `).join('')||
-          `<div class="card empty">
-            No documents yet.
-          </div>`
-        }
+        </div>
 
       </div>
 
@@ -3280,10 +2989,8 @@ async function uploadDoc(){
 
     const path=
       'knowledge/'+
-      me()+
-      '/'+
-      Date.now()+
-      '-'+
+      me()+'/'+
+      Date.now()+'-'+
       f.name.replace(
         /[^a-zA-Z0-9._-]/g,
         '_'
@@ -3294,9 +3001,7 @@ async function uploadDoc(){
       .from('nona-files')
       .upload(path,f);
 
-    if(u.error){
-      return toast(u.error.message);
-    }
+    if(u.error)return toast(u.error.message);
 
     const url=
       db.storage
@@ -3315,9 +3020,7 @@ async function uploadDoc(){
         uploaded_by:me()
       });
 
-    if(r.error){
-      return toast(r.error.message);
-    }
+    if(r.error)return toast(r.error.message);
 
     await docs();
 
@@ -3325,392 +3028,6 @@ async function uploadDoc(){
   };
 
   i.click();
-}
-
-/* STAFF */
-
-function staff(){
-
-  return`
-    <div class="grid">
-
-      <div>
-        <h1 class="title">
-          Staff Management
-        </h1>
-
-        <p class="sub">
-          Staff profiles connected to Supabase.
-        </p>
-      </div>
-
-      <div class="card" style="overflow:auto">
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Employee ID</th>
-              <th>Department</th>
-              <th>Position</th>
-              <th>Role</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            ${
-              S.profiles.map(p=>`
-                <tr>
-
-                  <td>
-                    <div class="row">
-
-                      <img
-                        class="avatar"
-                        src="${av(p)}"
-                      >
-
-                      <b>
-                        ${esc(p.full_name)}
-                      </b>
-
-                    </div>
-                  </td>
-
-                  <td>
-                    ${esc(p.employee_id||p.staff_code||'')}
-                  </td>
-
-                  <td>
-                    ${esc(p.department||'')}
-                  </td>
-
-                  <td>
-                    ${esc(p.position||'')}
-                  </td>
-
-                  <td>
-                    <span class="pill">
-                      ${esc(p.role)}
-                    </span>
-                  </td>
-
-                  <td>
-                    <span class="pill green">
-                      ${esc(p.status||'Active')}
-                    </span>
-                  </td>
-
-                </tr>
-              `).join('')
-            }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  `;
-}
-
-/* ANALYTICS */
-
-function analytics(){
-
-  const done=
-    tasks.filter(
-      x=>x.status==='Completed'
-    ).length;
-
-  const progress=
-    tasks.length?
-    Math.round(
-      tasks.reduce(
-        (a,b)=>a+(Number(b.progress)||0),
-        0
-      )/tasks.length
-    ):
-    0;
-
-  return`
-    <div class="grid">
-
-      <h1 class="title">
-        Analytics
-      </h1>
-
-      <div class="grid four">
-
-        <div class="card stat">
-          <b>${tasks.length}</b>
-          <span>Total Tasks</span>
-        </div>
-
-        <div class="card stat">
-          <b>${done}</b>
-          <span>Completed</span>
-        </div>
-
-        <div class="card stat">
-          <b>${progress}%</b>
-          <span>Overall Progress</span>
-        </div>
-
-        <div class="card stat">
-          <b>${logs.length}</b>
-          <span>Work Logs</span>
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="row between">
-          <b>Task Progress</b>
-          <span>${progress}%</span>
-        </div>
-
-        <div
-          class="progress"
-          style="margin-top:12px"
-        >
-          <i style="width:${progress}%"></i>
-        </div>
-
-      </div>
-
-      <div class="card">
-        <button
-          class="btn"
-          onclick="window.print()"
-        >
-          Print / Report
-        </button>
-      </div>
-
-    </div>
-  `;
-}
-
-/* DATA */
-
-function dataPage(){
-
-  return`
-    <div class="grid">
-
-      <h1 class="title">
-        Data Management
-      </h1>
-
-      <div class="card">
-
-        <b>Local Task & Work Log Backup</b>
-
-        <p class="small muted">
-          Tasks and work logs are currently stored
-          in this browser. Use backup before clearing
-          browser data.
-        </p>
-
-        <div class="row wrap">
-
-          <button
-            class="btn secondary"
-            onclick="backup()"
-          >
-            Backup JSON
-          </button>
-
-          <label class="btn secondary">
-            Restore
-
-            <input
-              type="file"
-              hidden
-              accept="application/json"
-              onchange="restore(this)"
-            >
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-}
-
-function backup(){
-
-  const a=document.createElement('a');
-
-  a.href=URL.createObjectURL(
-    new Blob(
-      [
-        JSON.stringify(
-          {tasks,logs},
-          null,
-          2
-        )
-      ],
-      {type:'application/json'}
-    )
-  );
-
-  a.download=
-    'nona-costex-portal-backup.json';
-
-  a.click();
-}
-
-function restore(i){
-
-  const r=new FileReader();
-
-  r.onload=()=>{
-
-    try{
-
-      const x=JSON.parse(r.result);
-
-      tasks=x.tasks||tasks;
-      logs=x.logs||logs;
-
-      saveLocal();
-
-      render();
-
-      toast('Backup restored');
-
-    }catch(e){
-
-      toast('Invalid backup file');
-
-    }
-
-  };
-
-  r.readAsText(i.files[0]);
-}
-
-/* PROFILE */
-
-function profilePage(){
-
-  return`
-    <div
-      class="grid"
-      style="max-width:760px"
-    >
-
-      <h1 class="title">
-        My Profile
-      </h1>
-
-      <div class="card">
-
-        <div class="row">
-
-          <img
-            class="avatar"
-            style="
-              width:72px;
-              height:72px
-            "
-            src="${av(S.profile)}"
-          >
-
-          <div>
-
-            <h2 style="margin:0">
-              ${esc(S.profile.full_name)}
-            </h2>
-
-            <div class="muted">
-              ${esc(S.profile.position||'')}
-            </div>
-
-          </div>
-
-        </div>
-
-        <div
-          class="grid two"
-          style="margin-top:22px"
-        >
-
-          <div>
-            <label class="small muted">
-              Staff Code
-            </label>
-
-            <div>
-              ${esc(S.profile.staff_code||'')}
-            </div>
-          </div>
-
-          <div>
-            <label class="small muted">
-              Role
-            </label>
-
-            <div>
-              ${esc(S.profile.role||'')}
-            </div>
-          </div>
-
-          <div>
-            <label class="small muted">
-              Department
-            </label>
-
-            <div>
-              ${esc(S.profile.department||'')}
-            </div>
-          </div>
-
-          <div>
-            <label class="small muted">
-              Email
-            </label>
-
-            <div>
-              ${esc(S.user.email||'')}
-            </div>
-          </div>
-
-          <div>
-            <label class="small muted">
-              Employee ID
-            </label>
-
-            <div>
-              ${esc(S.profile.employee_id||'')}
-            </div>
-          </div>
-
-          <div>
-            <label class="small muted">
-              Phone
-            </label>
-
-            <div>
-              ${esc(S.profile.phone||'')}
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
 }
 
 /* NOTIFICATIONS */
@@ -3738,6 +3055,249 @@ async function markRead(){
   render();
 }
 
+/* PROFILE */
+
+function profilePage(){
+
+  return `
+    <div class="grid" style="max-width:760px">
+
+      <h1 class="title">My Profile</h1>
+
+      <div class="card">
+
+        <div class="row">
+
+          <img
+            class="avatar large"
+            src="${av(S.profile)}">
+
+          <div>
+
+            <h2 style="margin:0">
+              ${esc(S.profile.full_name)}
+            </h2>
+
+            <div class="muted">
+              ${esc(S.profile.position||'')}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+          class="grid two"
+          style="margin-top:20px">
+
+          <div>
+            <label class="small muted">
+              Staff Code
+            </label>
+            <div>
+              ${esc(S.profile.staff_code||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Role
+            </label>
+            <div>
+              ${esc(S.profile.role||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Department
+            </label>
+            <div>
+              ${esc(S.profile.department||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Email
+            </label>
+            <div>
+              ${esc(S.user.email||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Phone
+            </label>
+            <div>
+              ${esc(S.profile.phone||'')}
+            </div>
+          </div>
+
+          <div>
+            <label class="small muted">
+              Employee ID
+            </label>
+            <div>
+              ${esc(S.profile.employee_id||'')}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* ANALYTICS */
+
+function analytics(){
+
+  const done=tasks.filter(
+    x=>x.status==='Completed'
+  ).length;
+
+  const progress=tasks.length?
+    Math.round(
+      tasks.reduce(
+        (a,x)=>a+(Number(x.progress)||0),
+        0
+      )/tasks.length
+    ):0;
+
+  return `
+    <div class="grid">
+
+      <h1 class="title">Analytics</h1>
+
+      <div class="grid four">
+
+        <div class="card stat">
+          <b>${tasks.length}</b>
+          <span>Tasks</span>
+        </div>
+
+        <div class="card stat">
+          <b>${done}</b>
+          <span>Completed</span>
+        </div>
+
+        <div class="card stat">
+          <b>${progress}%</b>
+          <span>Progress</span>
+        </div>
+
+        <div class="card stat">
+          <b>${logs.length}</b>
+          <span>Work Logs</span>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* DATA */
+
+function dataPage(){
+
+  return `
+    <div class="grid">
+
+      <h1 class="title">Data Management</h1>
+
+      <div class="card">
+
+        <b>Local portal backup</b>
+
+        <p class="small muted">
+          Tasks, work logs and attendance can be backed up
+          from this browser.
+        </p>
+
+        <div class="row">
+
+          <button
+            class="btn secondary"
+            onclick="backup()">
+            Backup JSON
+          </button>
+
+          <label class="btn secondary">
+            Restore
+
+            <input
+              type="file"
+              hidden
+              accept="application/json"
+              onchange="restore(this)">
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function backup(){
+
+  const a=document.createElement('a');
+
+  a.href=URL.createObjectURL(
+    new Blob(
+      [
+        JSON.stringify(
+          {tasks,logs,attendance},
+          null,
+          2
+        )
+      ],
+      {type:'application/json'}
+    )
+  );
+
+  a.download='nona-staff-portal-backup.json';
+
+  a.click();
+}
+
+function restore(i){
+
+  const r=new FileReader();
+
+  r.onload=()=>{
+
+    try{
+
+      const x=JSON.parse(r.result);
+
+      tasks=x.tasks||tasks;
+      logs=x.logs||logs;
+      attendance=x.attendance||attendance;
+
+      save();
+
+      render();
+
+      toast('Backup restored');
+
+    }catch(e){
+
+      toast('Invalid backup file');
+
+    }
+
+  };
+
+  r.readAsText(i.files[0]);
+}
+
 /* MODALS */
 
 function modal(){
@@ -3746,64 +3306,55 @@ function modal(){
 
   if(m.type==='notifications'){
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
 
           <div class="row between">
 
-            <div>
-              <h2 style="margin:0">
-                Notifications
-              </h2>
-
-              <div
-                class="small muted"
-                style="margin-top:4px"
-              >
-                Updates and communication alerts
-              </div>
-            </div>
+            <h2 style="margin:0">
+              Notifications
+            </h2>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
-          <div style="margin-top:18px">
+          <div style="margin-top:16px">
 
             ${
               S.notifications.map(n=>`
-                <div
-                  class="notification-card ${
-                    n.is_read?'':'unread'
-                  }"
-                >
+                <div class="notification-card">
 
-                  <div class="comm-preview">
-                    ${n.is_read?'✓':'●'}
+                  <div class="notification-thumb">
+                    ${
+                      n.image_url?
+                        `<img src="${esc(n.image_url)}">`:
+                        `<span class="thumb-letter">
+                          ${(n.title||'N')[0].toUpperCase()}
+                        </span>`
+                    }
                   </div>
 
                   <div style="flex:1">
 
-                    <b>${esc(n.title)}</b>
+                    <div class="row">
+                      <b>${esc(n.title||'Notification')}</b>
+                      ${!n.is_read?
+                        `<span class="unread-dot"></span>`:''}
+                    </div>
 
-                    <div
-                      class="small muted"
-                      style="margin-top:5px"
-                    >
+                    <div class="small muted">
                       ${esc(n.message||'')}
                     </div>
 
-                    <div
-                      class="small muted"
-                      style="margin-top:5px"
-                    >
+                    <div class="small muted"
+                      style="margin-top:5px">
                       ${dateTime(n.created_at)}
                     </div>
 
@@ -3811,19 +3362,16 @@ function modal(){
 
                 </div>
               `).join('')||
-              `
-                <div class="empty">
-                  No notifications.
-                </div>
-              `
+              `<div class="empty">
+                No notifications.
+              </div>`
             }
 
           </div>
 
           <button
             class="btn secondary small"
-            onclick="markRead()"
-          >
+            onclick="markRead()">
             Mark all as read
           </button>
 
@@ -3837,60 +3385,45 @@ function modal(){
 
     const t=m.data;
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
 
           <div class="row between">
 
-            <div>
-              <h2 style="margin:0">
-                ${t.id?'Edit':'Add'} Task
-              </h2>
-
-              <div
-                class="small muted"
-                style="margin-top:4px"
-              >
-                Update task details and progress.
-              </div>
-            </div>
+            <h2 style="margin:0">
+              ${t.id?'Edit':'Add'} Task
+            </h2>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
           <div
             class="grid two"
-            style="margin-top:18px"
-          >
+            style="margin-top:16px">
 
             <div>
               <label class="small muted">
                 Task
               </label>
-
               <input
                 id="task-name"
-                value="${esc(t.name)}"
-              >
+                value="${esc(t.name)}">
             </div>
 
             <div>
               <label class="small muted">
                 Category
               </label>
-
               <input
                 id="task-cat"
-                value="${esc(t.category)}"
-              >
+                value="${esc(t.category)}">
             </div>
 
             <div>
@@ -3899,17 +3432,15 @@ function modal(){
               </label>
 
               <select id="task-pri">
-                ${
-                  ['High','Medium','Low']
-                    .map(x=>`
-                      <option
-                        ${t.priority===x?'selected':''}
-                      >
-                        ${x}
-                      </option>
-                    `).join('')
-                }
+                ${['High','Medium','Low']
+                  .map(x=>`
+                    <option
+                      ${t.priority===x?'selected':''}>
+                      ${x}
+                    </option>
+                  `).join('')}
               </select>
+
             </div>
 
             <div>
@@ -3917,29 +3448,20 @@ function modal(){
                 Status
               </label>
 
-              <select
-                id="task-status"
-                onchange="
-                  if(this.value==='Completed'){
-                    document.getElementById('task-progress').value=100
-                  }
-                "
-              >
-                ${
-                  [
-                    'Not Started',
-                    'In Progress',
-                    'Completed',
-                    'On Hold'
-                  ].map(x=>`
-                    <option
-                      ${t.status===x?'selected':''}
-                    >
-                      ${x}
-                    </option>
-                  `).join('')
-                }
+              <select id="task-status">
+                ${[
+                  'Not Started',
+                  'In Progress',
+                  'Completed',
+                  'On Hold'
+                ].map(x=>`
+                  <option
+                    ${t.status===x?'selected':''}>
+                    ${x}
+                  </option>
+                `).join('')}
               </select>
+
             </div>
 
             <div>
@@ -3952,8 +3474,7 @@ function modal(){
                 type="number"
                 min="0"
                 max="100"
-                value="${Number(t.progress)||0}"
-              >
+                value="${Number(t.progress)||0}">
             </div>
 
             <div>
@@ -3964,8 +3485,7 @@ function modal(){
               <input
                 id="task-date"
                 type="date"
-                value="${t.dueDate||''}"
-              >
+                value="${t.dueDate||''}">
             </div>
 
             <div>
@@ -3976,79 +3496,59 @@ function modal(){
               <input
                 id="task-time"
                 type="time"
-                value="${t.dueTime||''}"
-              >
+                value="${t.dueTime||''}">
             </div>
 
           </div>
 
-          <div style="margin-top:13px">
+          <label class="small muted">
+            Description
+          </label>
 
-            <label class="small muted">
-              Description
-            </label>
+          <textarea id="task-desc">${esc(t.description||'')}</textarea>
 
-            <textarea id="task-desc">${esc(
-              t.description||''
-            )}</textarea>
+          <label class="small muted">
+            Notes
+          </label>
 
-          </div>
-
-          <div style="margin-top:13px">
-
-            <label class="small muted">
-              Notes
-            </label>
-
-            <textarea id="task-notes">${esc(
-              t.notes||''
-            )}</textarea>
-
-          </div>
+          <textarea id="task-notes">${esc(t.notes||'')}</textarea>
 
           <input
             id="task-id"
             type="hidden"
-            value="${esc(t.id||'')}"
-          >
+            value="${esc(t.id||'')}">
 
-          <div
-            class="row"
-            style="
-              justify-content:flex-end;
-              margin-top:17px
-            "
-          >
+          <div class="row between"
+            style="margin-top:14px">
 
-            <button
-              class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              Cancel
-            </button>
+            <div>
 
-            ${
-              t.id?
-              `
-                <button
-                  class="btn danger"
-                  onclick="
-                    S.modal=null;
-                    deleteTask('${t.id}')
-                  "
-                >
-                  Delete
-                </button>
-              `:
-              ''
-            }
+              ${
+                t.id?
+                  `<button
+                    class="btn danger small"
+                    onclick="deleteTask('${t.id}')">
+                    Delete Task
+                  </button>`:''
+              }
 
-            <button
-              class="btn"
-              onclick="saveTask()"
-            >
-              Save Task
-            </button>
+            </div>
+
+            <div class="row">
+
+              <button
+                class="btn secondary"
+                onclick="S.modal=null;render()">
+                Cancel
+              </button>
+
+              <button
+                class="btn"
+                onclick="saveTask()">
+                Save
+              </button>
+
+            </div>
 
           </div>
 
@@ -4060,9 +3560,9 @@ function modal(){
 
   if(m.type==='log'){
 
-    const x=m.data;
+    const d=m.data;
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
@@ -4070,111 +3570,75 @@ function modal(){
           <div class="row between">
 
             <h2 style="margin:0">
-              ${x.id?'Edit':'Add'} Work Log
+              ${d.id?'Edit':'Add'} Work Log
             </h2>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
-          <div
-            class="grid two"
-            style="margin-top:18px"
-          >
+          <label class="small muted">
+            Date
+          </label>
 
-            <div>
-              <label class="small muted">
-                Date
-              </label>
+          <input
+            id="log-date"
+            type="date"
+            value="${d.date||''}">
 
-              <input
-                id="log-date"
-                type="date"
-                value="${x.date||''}"
-              >
-            </div>
+          <label class="small muted">
+            Activity
+          </label>
 
-            <div>
-              <label class="small muted">
-                Activity
-              </label>
+          <input
+            id="log-task"
+            value="${esc(d.task||'')}">
 
-              <input
-                id="log-task"
-                value="${esc(x.task||'')}"
-              >
-            </div>
+          <label class="small muted">
+            Description
+          </label>
 
-            <div>
-              <label class="small muted">
-                Start Time
-              </label>
-
-              <input
-                id="log-start"
-                type="time"
-                value="${x.startTime||''}"
-              >
-            </div>
-
-            <div>
-              <label class="small muted">
-                End Time
-              </label>
-
-              <input
-                id="log-end"
-                type="time"
-                value="${x.endTime||''}"
-              >
-            </div>
-
-          </div>
-
-          <div style="margin-top:13px">
-
-            <label class="small muted">
-              Description
-            </label>
-
-            <textarea id="log-desc">${esc(
-              x.description||''
-            )}</textarea>
-
-          </div>
+          <textarea
+            id="log-desc">${esc(d.description||'')}</textarea>
 
           <input
             id="log-id"
             type="hidden"
-            value="${esc(x.id||'')}"
-          >
+            value="${esc(d.id||'')}">
 
-          <div
-            class="row"
-            style="
-              justify-content:flex-end;
-              margin-top:17px
-            "
-          >
+          <div class="row between"
+            style="margin-top:14px">
 
-            <button
-              class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              Cancel
-            </button>
+            <div>
+              ${
+                d.id?
+                  `<button
+                    class="btn danger small"
+                    onclick="delLog('${d.id}');S.modal=null;render()">
+                    Delete
+                  </button>`:''
+              }
+            </div>
 
-            <button
-              class="btn"
-              onclick="saveLog()"
-            >
-              Save Work Log
-            </button>
+            <div class="row">
+
+              <button
+                class="btn secondary"
+                onclick="S.modal=null;render()">
+                Cancel
+              </button>
+
+              <button
+                class="btn"
+                onclick="saveLog()">
+                Save
+              </button>
+
+            </div>
 
           </div>
 
@@ -4184,11 +3648,11 @@ function modal(){
     `;
   }
 
-  if(m.type==='calendar-event'){
+  if(m.type==='staff'){
 
-    const e=m.data;
+    const p=m.data;
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
@@ -4197,133 +3661,222 @@ function modal(){
 
             <div>
               <h2 style="margin:0">
-                ${e.id?'Edit':'Add'} Calendar Event
+                Edit Staff
               </h2>
 
-              <div
-                class="small muted"
-                style="margin-top:4px"
-              >
-                This event will be visible to all staff.
+              <div class="small muted">
+                Update profile information and leave balance.
               </div>
             </div>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
           <div
             class="grid two"
-            style="margin-top:18px"
-          >
+            style="margin-top:18px">
 
             <div>
               <label class="small muted">
-                Event Title
+                User ID
               </label>
 
               <input
-                id="cal-title"
-                value="${esc(e.title||'')}"
-                placeholder="e.g. Malaysia Day"
-              >
+                value="${esc(p.id)}"
+                disabled>
             </div>
 
             <div>
               <label class="small muted">
-                Date
+                Staff Code
               </label>
 
               <input
-                id="cal-date"
+                value="${esc(p.staff_code||'')}"
+                disabled>
+            </div>
+
+            <div>
+              <label class="small muted">
+                Full Name
+              </label>
+
+              <input
+                id="staff-name"
+                value="${esc(p.full_name||'')}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Employee ID
+              </label>
+
+              <input
+                id="staff-employee"
+                value="${esc(p.employee_id||'')}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Position
+              </label>
+
+              <input
+                id="staff-position"
+                value="${esc(p.position||'')}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Department
+              </label>
+
+              <input
+                id="staff-department"
+                value="${esc(p.department||'')}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Phone
+              </label>
+
+              <input
+                id="staff-phone"
+                value="${esc(p.phone||'')}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Join Date
+              </label>
+
+              <input
+                id="staff-join"
                 type="date"
-                value="${e.event_date||''}"
-              >
+                value="${p.join_date||''}">
             </div>
 
             <div>
               <label class="small muted">
-                Event Type
+                Role
               </label>
 
-              <select id="cal-type">
+              <select id="staff-role">
+                <option
+                  value="staff"
+                  ${p.role==='staff'?'selected':''}>
+                  Staff
+                </option>
 
-                ${
-                  [
-                    'Public Holiday',
-                    'Company Holiday',
-                    'Company Event'
-                  ].map(x=>`
+                <option
+                  value="admin"
+                  ${p.role==='admin'?'selected':''}>
+                  Admin
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label class="small muted">
+                Status
+              </label>
+
+              <select id="staff-status">
+                ${['Active','Inactive','On Leave']
+                  .map(x=>`
                     <option
-                      ${e.event_type===x?'selected':''}
-                    >
+                      ${p.status===x?'selected':''}>
                       ${x}
                     </option>
-                  `).join('')
-                }
-
+                  `).join('')}
               </select>
             </div>
 
           </div>
 
-          <div style="margin-top:13px">
+          <div style="margin-top:20px">
+            <b>Leave Balance</b>
+          </div>
 
-            <label class="small muted">
-              Description
-            </label>
+          <div
+            class="grid four"
+            style="margin-top:10px">
 
-            <textarea
-              id="cal-desc"
-              placeholder="Optional description"
-            >${esc(e.description||'')}</textarea>
+            <div class="leave-box">
+              <label class="small muted">
+                Annual
+              </label>
+
+              <input
+                id="staff-annual"
+                type="number"
+                min="0"
+                value="${Number(p.annual_leave)||0}">
+            </div>
+
+            <div class="leave-box">
+              <label class="small muted">
+                Medical
+              </label>
+
+              <input
+                id="staff-medical"
+                type="number"
+                min="0"
+                value="${Number(p.medical_leave)||0}">
+            </div>
+
+            <div class="leave-box">
+              <label class="small muted">
+                Emergency
+              </label>
+
+              <input
+                id="staff-emergency"
+                type="number"
+                min="0"
+                value="${Number(p.emergency_leave)||0}">
+            </div>
+
+            <div class="leave-box">
+              <label class="small muted">
+                Unpaid
+              </label>
+
+              <input
+                id="staff-unpaid"
+                type="number"
+                min="0"
+                value="${Number(p.unpaid_leave)||0}">
+            </div>
 
           </div>
 
           <input
-            id="cal-id"
+            id="staff-id"
             type="hidden"
-            value="${esc(e.id||'')}"
-          >
+            value="${esc(p.id)}">
 
           <div
             class="row"
-            style="
-              justify-content:flex-end;
-              margin-top:17px
-            "
-          >
+            style="justify-content:flex-end;margin-top:20px">
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
+              onclick="S.modal=null;render()">
               Cancel
             </button>
 
-            ${
-              e.id?
-              `
-                <button
-                  class="btn danger"
-                  onclick="deleteCalendarEvent('${e.id}')"
-                >
-                  Delete
-                </button>
-              `:
-              ''
-            }
-
             <button
               class="btn"
-              onclick="saveCalendarEvent()"
-            >
-              Save Event
+              onclick="saveStaff()">
+              Save Changes
             </button>
 
           </div>
@@ -4334,61 +3887,164 @@ function modal(){
     `;
   }
 
-  if(m.type==='calendar-view'){
+  if(m.type==='event'){
 
     const e=m.data;
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
 
           <div class="row between">
 
-            <div class="row">
-
-              <span class="comm-preview">
-                ✦
-              </span>
-
-              <div>
-
-                <h2 style="margin:0">
-                  ${esc(e.title)}
-                </h2>
-
-                <div
-                  class="small muted"
-                  style="margin-top:4px"
-                >
-                  ${esc(e.event_type)}
-                </div>
-
-              </div>
-
-            </div>
+            <h2 style="margin:0">
+              ${e.id?'Edit':'Add'} Calendar Event
+            </h2>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
-          <div
-            class="card"
-            style="margin-top:18px;background:#f8faf7"
-          >
+          <label class="small muted">
+            Event Title
+          </label>
 
-            <b>
-              ${date(e.event_date)}
-            </b>
+          <input
+            id="event-title"
+            value="${esc(e.title||'')}">
 
-            <p class="small muted">
-              ${esc(e.description||'No description.')}
-            </p>
+          <div class="grid two">
+
+            <div>
+              <label class="small muted">
+                Date
+              </label>
+
+              <input
+                id="event-date"
+                type="date"
+                value="${e.event_date||''}">
+            </div>
+
+            <div>
+              <label class="small muted">
+                Type
+              </label>
+
+              <select id="event-type">
+                ${[
+                  'Public Holiday',
+                  'Company Holiday',
+                  'Company Event'
+                ].map(x=>`
+                  <option
+                    ${e.event_type===x?'selected':''}>
+                    ${x}
+                  </option>
+                `).join('')}
+              </select>
+            </div>
+
+          </div>
+
+          <label class="small muted">
+            Description
+          </label>
+
+          <textarea id="event-desc">${esc(e.description||'')}</textarea>
+
+          <input
+            id="event-id"
+            type="hidden"
+            value="${esc(e.id||'')}">
+
+          <div class="row between"
+            style="margin-top:15px">
+
+            <div>
+              ${
+                e.id?
+                  `<button
+                    class="btn danger small"
+                    onclick="deleteEvent('${e.id}')">
+                    Delete
+                  </button>`:''
+              }
+            </div>
+
+            <div class="row">
+
+              <button
+                class="btn secondary"
+                onclick="S.modal=null;render()">
+                Cancel
+              </button>
+
+              <button
+                class="btn"
+                onclick="saveEvent()">
+                Save
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(m.type==='event-view'){
+
+    return `
+      <div class="modalbg">
+
+        <div class="modal">
+
+          <div class="row between">
+            <h2 style="margin:0">
+              Calendar Events
+            </h2>
+
+            <button
+              class="btn secondary"
+              onclick="S.modal=null;render()">
+              Close
+            </button>
+          </div>
+
+          <div style="margin-top:15px">
+
+            ${m.data.events.map(e=>`
+              <div class="notification-card">
+
+                <div class="notification-thumb">
+                  <span class="thumb-letter">
+                    ${e.event_type==='Public Holiday'?'PH':'EV'}
+                  </span>
+                </div>
+
+                <div>
+                  <b>${esc(e.title)}</b>
+
+                  <div class="small muted">
+                    ${esc(e.event_type)}
+                  </div>
+
+                  <div class="small muted">
+                    ${esc(e.description||'')}
+                  </div>
+                </div>
+
+              </div>
+            `).join('')}
 
           </div>
 
@@ -4400,115 +4056,82 @@ function modal(){
 
   if(m.type==='group-create'){
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
 
           <div class="row between">
-
             <h2 style="margin:0">
               Create Group
             </h2>
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
-
           </div>
 
-          <label
-            class="small muted"
-            style="display:block;margin-top:18px"
-          >
+          <label class="small muted">
             Group Name
           </label>
 
           <input
             id="group-name"
             placeholder="e.g. Digital Team"
-            style="margin-top:5px"
-          >
+            style="margin:5px 0 14px">
 
-          <div
-            class="small muted"
-            style="margin:17px 0 8px"
-          >
+          <div class="small muted">
             Select members
           </div>
 
           <div
             class="grid"
-            style="
-              max-height:330px;
-              overflow:auto
-            "
-          >
+            style="max-height:330px;overflow:auto;margin-top:10px">
 
-            ${
-              S.profiles
-                .filter(p=>p.id!==me())
-                .map(p=>`
-                  <label
-                    class="row"
-                    style="
-                      padding:9px;
-                      border:1px solid #e5ebe5;
-                      border-radius:10px
-                    "
-                  >
+            ${S.profiles
+              .filter(p=>p.id!==me())
+              .map(p=>`
+                <label
+                  class="row"
+                  style="padding:9px;border:1px solid #eee;border-radius:9px">
 
-                    <input
-                      class="group-member"
-                      type="checkbox"
-                      value="${p.id}"
-                      style="width:auto"
-                    >
+                  <input
+                    class="group-member"
+                    type="checkbox"
+                    value="${p.id}"
+                    style="width:auto">
 
-                    <img
-                      class="avatar"
-                      src="${av(p)}"
-                    >
+                  <img
+                    class="avatar"
+                    src="${av(p)}">
 
-                    <span>
-                      <b>${esc(p.full_name)}</b>
+                  <span>
+                    <b>${esc(p.full_name)}</b>
+                    <small class="muted">
+                      ${esc(p.position||'')}
+                    </small>
+                  </span>
 
-                      <small
-                        class="muted"
-                        style="display:block"
-                      >
-                        ${esc(p.position||'')}
-                      </small>
-                    </span>
-
-                  </label>
-                `).join('')
-            }
+                </label>
+              `).join('')}
 
           </div>
 
           <div
             class="row"
-            style="
-              justify-content:flex-end;
-              margin-top:17px
-            "
-          >
+            style="justify-content:flex-end;margin-top:16px">
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
+              onclick="S.modal=null;render()">
               Cancel
             </button>
 
             <button
               class="btn"
-              onclick="saveGroup()"
-            >
+              onclick="saveGroup()">
               Create Group
             </button>
 
@@ -4523,12 +4146,10 @@ function modal(){
   if(m.type==='group-members'){
 
     const ids=new Set(
-      S.conversationMembers.map(
-        x=>x.profile_id
-      )
+      S.conversationMembers.map(x=>x.profile_id)
     );
 
-    return`
+    return `
       <div class="modalbg">
 
         <div class="modal">
@@ -4541,151 +4162,117 @@ function modal(){
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
-              ×
+              onclick="S.modal=null;render()">
+              Close
             </button>
 
           </div>
 
           <div
             class="small muted"
-            style="margin:16px 0 8px"
-          >
-            Current Members
+            style="margin:15px 0 8px">
+            Current members
           </div>
 
-          ${
-            S.conversationMembers.map(x=>{
+          ${S.conversationMembers.map(x=>{
 
-              const p=S.profiles.find(
-                y=>y.id===x.profile_id
-              );
+            const p=S.profiles.find(
+              y=>y.id===x.profile_id
+            );
 
-              return`
-                <div
-                  class="row between"
-                  style="
-                    padding:9px 0;
-                    border-bottom:1px solid #eee
-                  "
-                >
+            return `
+              <div
+                class="row between"
+                style="padding:9px 0;border-bottom:1px solid #eee">
 
-                  <div class="row">
+                <div class="row">
 
-                    <img
-                      class="avatar"
-                      src="${av(p)}"
-                    >
+                  <img
+                    class="avatar"
+                    src="${av(p)}">
 
-                    <div>
-                      <b>
-                        ${esc(p?.full_name||'User')}
-                      </b>
+                  <div>
+                    <b>${esc(p?.full_name||'User')}</b>
 
-                      <div class="small muted">
-                        ${x.role}
-                      </div>
+                    <div class="small muted">
+                      ${esc(x.role)}
                     </div>
-
                   </div>
 
-                  ${
-                    x.profile_id!==me()?
-                    `
-                      <button
-                        class="btn danger small"
-                        onclick="removeMember('${x.profile_id}')"
-                      >
-                        Remove
-                      </button>
-                    `:
-                    `<span class="small muted">You</span>`
-                  }
-
                 </div>
-              `;
-            }).join('')
-          }
+
+                ${
+                  x.profile_id!==me()?
+                    `<button
+                      class="btn danger small"
+                      onclick="removeMember('${x.profile_id}')">
+                      Remove
+                    </button>`:
+                    `<span class="small muted">
+                      You
+                    </span>`
+                }
+
+              </div>
+            `;
+
+          }).join('')}
 
           <div
             class="small muted"
-            style="margin:17px 0 8px"
-          >
-            Add Members
+            style="margin:16px 0 8px">
+            Add members
           </div>
 
           <div
             class="grid"
-            style="
-              max-height:250px;
-              overflow:auto
-            "
-          >
+            style="max-height:250px;overflow:auto">
 
-            ${
-              S.profiles
-                .filter(
-                  p=>
-                    p.id!==me()&&
-                    !ids.has(p.id)
-                )
-                .map(p=>`
-                  <label
-                    class="row"
-                    style="
-                      padding:9px;
-                      border:1px solid #eee;
-                      border-radius:10px
-                    "
-                  >
+            ${S.profiles
+              .filter(
+                p=>p.id!==me()&&!ids.has(p.id)
+              )
+              .map(p=>`
+                <label
+                  class="row"
+                  style="padding:8px;border:1px solid #eee;border-radius:8px">
 
-                    <input
-                      class="group-add-member"
-                      type="checkbox"
-                      value="${p.id}"
-                      style="width:auto"
-                    >
+                  <input
+                    class="group-add-member"
+                    type="checkbox"
+                    value="${p.id}"
+                    style="width:auto">
 
-                    <img
-                      class="avatar"
-                      src="${av(p)}"
-                    >
+                  <img
+                    class="avatar"
+                    src="${av(p)}">
 
-                    <span>
-                      ${esc(p.full_name)}
-                    </span>
+                  <span>
+                    ${esc(p.full_name)}
+                  </span>
 
-                  </label>
-                `).join('')||
-                `
-                  <div class="small muted">
-                    Everyone is already in this group.
-                  </div>
-                `
+                </label>
+              `).join('')||
+              `<div class="small muted">
+                Everyone is already in this group.
+              </div>`
             }
 
           </div>
 
           <div
             class="row"
-            style="
-              justify-content:flex-end;
-              margin-top:17px
-            "
-          >
+            style="justify-content:flex-end;margin-top:16px">
 
             <button
               class="btn secondary"
-              onclick="S.modal=null;render()"
-            >
+              onclick="S.modal=null;render()">
               Close
             </button>
 
             <button
               class="btn"
-              onclick="saveMembers()"
-            >
+              onclick="saveMembers()">
               Add Selected
             </button>
 
@@ -4699,6 +4286,21 @@ function modal(){
 
   return '';
 }
+
+setInterval(()=>{
+  const el=document.getElementById('live-clock');
+
+  if(el){
+    el.textContent=new Date().toLocaleTimeString(
+      'en-MY',
+      {
+        hour:'2-digit',
+        minute:'2-digit',
+        second:'2-digit'
+      }
+    );
+  }
+},1000);
 
 init();
 </script>
